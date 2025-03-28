@@ -6,9 +6,13 @@ A modern, responsive personal portfolio website built with HTML, CSS, and JavaSc
 
 - Responsive design that works on all devices
 - Modern and clean user interface
+- Dark/Light theme toggle
 - Smooth scrolling navigation
+- Animated section and card reveals
+- Company logos for all experience entries
+- Institution logos for education entries
 - Interactive sections for:
-  - About
+  - About (with highlighted key phrases)
   - Experience
   - Education
   - Honors
@@ -16,6 +20,8 @@ A modern, responsive personal portfolio website built with HTML, CSS, and JavaSc
   - Contact
 - Social media integration (LinkedIn)
 - Contact functionality
+- Progressive Web App (PWA) support
+- Cross-platform favicon support
 
 ## Technologies Used
 
@@ -29,12 +35,47 @@ A modern, responsive personal portfolio website built with HTML, CSS, and JavaSc
 
 ```
 cv/
-├── index.html          # Main HTML file
-├── css/               # CSS stylesheets
-├── js/                # JavaScript files
-├── images/            # Image assets
-└── README.md          # Project documentation
+├── index.html                    # Main HTML file
+├── css/                         # CSS stylesheets
+├── js/                          # JavaScript files
+├── images/                      # Image assets
+│   ├── company-logos/          # Company and institution logos
+│   └── pfp.jpg                 # Profile picture
+├── site.webmanifest            # PWA manifest file
+├── favicon.ico                 # Default favicon
+├── favicon-16x16.png           # Small favicon
+├── favicon-32x32.png           # Medium favicon
+├── apple-touch-icon.png        # iOS icon
+├── android-chrome-192x192.png  # Android icon (small)
+├── android-chrome-512x512.png  # Android icon (large)
+├── LICENSE                     # License file
+└── README.md                   # Project documentation
 ```
+
+## Features Detail
+
+### Theme Toggle
+- Supports both light and dark themes
+- Persists user preference
+- Smooth transition between themes
+
+### Company Logos
+- Professional logos for all work experiences
+- Educational institution logos
+- Responsive sizing and positioning
+- Optimized image loading
+
+### Progressive Web App
+- Full PWA support with web manifest
+- Cross-platform favicon support
+- Installable on mobile devices
+- Offline capability
+
+### Animations
+- Smooth section reveal on scroll
+- Staggered card animations
+- Interactive hover effects
+- Smooth transitions
 
 ## Getting Started
 
