@@ -440,6 +440,36 @@
                 navLinks.classList.remove('active');
             }
         });
+
+        // Counter.dev visitor display
+        function getOrdinal(n) {
+            let ord = 'th';
+            if (n % 10 === 1 && n % 100 !== 11) ord = 'st';
+            else if (n % 10 === 2 && n % 100 !== 12) ord = 'nd';
+            else if (n % 10 === 3 && n % 100 !== 13) ord = 'rd';
+            return ord;
+        }
+
+        function updateVisitorCount() {
+            const visitorTextElement = document.getElementById('visitor-text');
+            
+            // Check every second for 10 seconds if Counter.dev has loaded
+            let attempts = 0;
+            const checkInterval = setInterval(() => {
+                if (window._counter && window._counter.visitors !== undefined) {
+                    const count = window._counter.visitors;
+                    visitorTextElement.textContent = `You are my ${count}${getOrdinal(count)} visitor!`;
+                    clearInterval(checkInterval);
+                } else if (attempts >= 10) {
+                    visitorTextElement.textContent = "Welcome!";
+                    clearInterval(checkInterval);
+                }
+                attempts++;
+            }, 1000);
+        }
+
+        // Initialize counter when DOM is loaded
+        document.addEventListener('DOMContentLoaded', updateVisitorCount);
     </script>
 </body>
 </html> 
