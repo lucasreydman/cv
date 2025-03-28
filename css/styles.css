@@ -659,14 +659,76 @@ section > .container {
 }
 
 /* Education Section */
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    perspective: 1000px;
+}
+
 .education-card {
+    background-color: var(--card-bg);
     padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0;
+    transform: translateY(30px) rotateX(10deg);
+    transform-origin: top;
+    backface-visibility: hidden;
+}
+
+.education-card.revealed {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+.education-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
 }
 
 .education-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     margin-bottom: 1.5rem;
+    position: relative;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
+}
+
+.education-header .company-logo {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.education-header .company-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.5rem;
+}
+
+.education-title {
+    flex-grow: 1;
+    padding-right: 100px;
+}
+
+.education-title h3 {
+    margin-bottom: 0.5rem;
 }
 
 .education-school {
@@ -745,22 +807,54 @@ section > .container {
 }
 
 .experience-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
+    position: relative;
+}
+
+.company-logo {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.company-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.5rem;
+}
+
+.experience-title {
+    flex-grow: 1;
+    padding-right: 100px;
+}
+
+.experience-title h3 {
+    margin-bottom: 0.5rem;
 }
 
 .experience-company {
-    font-size: 1.2rem;
-    font-weight: 600;
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
 }
 
 .experience-period {
-    font-size: 0.95rem;
     color: var(--light-text);
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .experience-description {
@@ -797,6 +891,26 @@ section > .container {
 @media (max-width: 900px) {
     .experience-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .experience-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .company-logo {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+
+    .experience-title {
+        padding-right: 0;
     }
 }
 
@@ -970,4 +1084,64 @@ section > .container {
 /* Preserve white background for profile image in dark mode */
 [data-theme="dark"] .hero-image {
     background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .education-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .education-header .company-logo {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+
+    .education-title {
+        padding-right: 0;
+    }
+}
+
+.about-text .highlight {
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    padding: 0 0.2rem;
+}
+
+.about-text .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: var(--primary-color);
+    opacity: 0.15;
+    border-radius: 3px;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.about-text .highlight:hover::after {
+    height: 8px;
+    opacity: 0.2;
+}
+
+[data-theme="dark"] .about-text .highlight {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .about-text .highlight::after {
+    background-color: var(--primary-color);
+    opacity: 0.2;
+}
+
+[data-theme="dark"] .about-text .highlight:hover::after {
+    opacity: 0.3;
 } 
