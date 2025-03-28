@@ -54,7 +54,13 @@ body {
 .container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 5rem;
+    padding: 0 2rem;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 0 5rem;
+    }
 }
 
 /* Typography */
@@ -249,12 +255,18 @@ h3 {
 
 /* Hero Section */
 .hero {
-    padding: clamp(6rem, 12vh, 8rem) 0 clamp(2rem, 4vh, 3rem);
+    min-height: 100vh;
+    padding: 6rem 0 3rem;
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, var(--background) 0%, var(--section-bg) 100%);
     width: 100%;
-    min-height: auto;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        padding: 8rem 0 4rem;
+    }
 }
 
 .hero-content {
@@ -451,16 +463,13 @@ h3 {
         right: -100%;
         height: 100vh;
         width: 100%;
-        max-width: 300px;
         background-color: var(--navbar-bg);
         flex-direction: column;
         justify-content: center;
-        gap: 2rem;
+        align-items: center;
         transition: right 0.3s ease;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
         padding: 2rem;
+        gap: 2rem;
     }
 
     .nav-links.active {
@@ -484,6 +493,53 @@ h3 {
     .hamburger {
         margin-left: 1.5rem;
     }
+
+    .experience-card,
+    .education-card {
+        padding: 1.5rem;
+    }
+
+    .experience-header,
+    .education-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .company-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .experience-title,
+    .education-title {
+        width: 100%;
+    }
+
+    .experience-details ul,
+    .education-details ul {
+        padding-left: 1.5rem;
+    }
+
+    .experience-details li,
+    .education-details li {
+        margin-bottom: 0.75rem;
+    }
+
+    .skills-grid,
+    .honors-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .contact-divider {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -504,11 +560,24 @@ h3 {
     }
 
     .hero-image-container {
-        width: 90vw;
+        width: 250px;
+        height: 250px;
     }
 
     .hero-content {
         padding: 0.5rem 0;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .hero-text .subtitle {
+        font-size: 1.1rem;
     }
 }
 
