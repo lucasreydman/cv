@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
 :root {
     /* Light theme variables */
     --primary-color: #2563eb;
@@ -397,11 +403,15 @@ h3 {
 @media (max-width: 768px) {
     .container {
         padding: 0 1.5rem;
+        max-width: 100%;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     .hero {
         padding-top: max(5rem, 10vh);
         padding-bottom: 2rem;
+        width: 100%;
     }
 
     .hero-content {
@@ -409,22 +419,45 @@ h3 {
         gap: clamp(3rem, 6vh, 4rem);
         text-align: center;
         padding: 1rem 0;
+        width: 100%;
     }
     
     .hero-text {
         max-width: 100%;
+        width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2rem, 6vw, 2.8rem);
+        width: 100%;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
     }
 
     .hero-image-container {
         width: min(250px, 70vw);
         margin: 0 auto;
+        max-width: 100%;
     }
 
-    .hero-image-container::before {
-        top: 15px;
-        left: 15px;
-        right: -15px;
-        bottom: -15px;
+    .experience-grid,
+    .education-grid,
+    .honors-grid,
+    .skills-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 2rem 0;
+    }
+
+    .experience-card,
+    .education-card,
+    .honor-card,
+    .skill-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
     }
 
     .hamburger {
@@ -466,10 +499,6 @@ h3 {
 
     .nav-links.active {
         right: 0;
-    }
-
-    .hero-text h1 {
-        font-size: clamp(2rem, 6vw, 2.8rem);
     }
 
     .social-links {
@@ -520,6 +549,8 @@ h3 {
 @media (max-width: 480px) {
     .container {
         padding: 0 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     .hero {
@@ -528,6 +559,7 @@ h3 {
 
     .hero-text h1 {
         font-size: 2rem;
+        width: 100%;
     }
 
     .hero-text .subtitle {
@@ -535,7 +567,8 @@ h3 {
     }
 
     .hero-image-container {
-        width: 90vw;
+        width: min(250px, 90vw);
+        max-width: 100%;
     }
 
     .hero-content {
