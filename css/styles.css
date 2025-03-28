@@ -1238,53 +1238,10 @@ section > .container {
     opacity: 0.3;
 }
 
-/* Visitor Counter */
-.visitor-counter {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    margin-left: 1rem;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%);
-    border-radius: 20px;
-    font-size: 0.9rem;
-    color: var(--text-color);
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.visitor-counter i {
-    color: var(--primary-color);
-    font-size: 1rem;
-}
-
-#visitor-text {
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.visitor-counter:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(30, 64, 175, 0.15) 100%);
-}
-
-@keyframes countUp {
-    0% {
-        transform: translateY(10px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
+/* Remove all these visitor counter styles */
+.visitor-counter,
+.visitor-counter i,
+#visitor-text,
 .count-animation {
-    animation: countUp 0.5s ease-out;
-}
-
-@media (max-width: 768px) {
-    .visitor-counter {
-        display: none;
-    }
+    display: none;
 } 

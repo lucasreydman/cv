@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Counter.dev - Simple Analytics -->
-    <script async src="https://cdn.counter.dev/script.js" data-id="a6a3610e-2412-448f-8617-4971cfac6d34" data-utcoffset="-3"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -24,10 +22,6 @@
                 <a href="mailto:lucas.reydman@dal.ca" aria-label="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
-                <div class="visitor-counter">
-                    <i class="fas fa-eye"></i>
-                    <span id="visitor-text">Loading visitors...</span>
-                </div>
             </div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
@@ -440,39 +434,6 @@
                 navLinks.classList.remove('active');
             }
         });
-
-        // Counter.dev visitor display
-        function getOrdinal(n) {
-            let ord = 'th';
-            if (n % 10 === 1 && n % 100 !== 11) ord = 'st';
-            else if (n % 10 === 2 && n % 100 !== 12) ord = 'nd';
-            else if (n % 10 === 3 && n % 100 !== 13) ord = 'rd';
-            return ord;
-        }
-
-        function updateVisitorCount() {
-            const visitorTextElement = document.getElementById('visitor-text');
-            
-            // Try to get the counter data every 500ms for up to 20 seconds
-            let attempts = 0;
-            const maxAttempts = 40; // 20 seconds total
-            
-            const checkInterval = setInterval(() => {
-                if (window._counter && typeof window._counter.visitors === 'number') {
-                    const count = window._counter.visitors;
-                    visitorTextElement.textContent = `You are my ${count}${getOrdinal(count)} visitor!`;
-                    visitorTextElement.classList.add('count-animation');
-                    clearInterval(checkInterval);
-                } else if (attempts >= maxAttempts) {
-                    visitorTextElement.textContent = "Welcome!";
-                    clearInterval(checkInterval);
-                }
-                attempts++;
-            }, 500);
-        }
-
-        // Initialize counter when the window loads completely
-        window.addEventListener('load', updateVisitorCount);
     </script>
 </body>
 </html> 
