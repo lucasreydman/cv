@@ -260,7 +260,7 @@ h3 {
     align-items: center;
     background: linear-gradient(135deg, var(--background) 0%, var(--section-bg) 100%);
     width: 100%;
-    min-height: auto;
+    min-height: 0;
 }
 
 .hero-content {
@@ -290,6 +290,87 @@ h3 {
     display: inline-block;
     letter-spacing: -0.02em;
     white-space: nowrap;
+}
+
+/* Animated glistening effect for the name */
+.hero-text h1 .highlight {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    animation: gradientShift 4s ease infinite;
+    text-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+}
+
+.hero-text h1 .highlight::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        transparent 100%
+    );
+    animation: glistening 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    z-index: 1;
+}
+
+.hero-text h1 .highlight::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(59, 130, 246, 0.1) 50%,
+        transparent 100%
+    );
+    animation: pulse 3s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes glistening {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+[data-theme="dark"] .hero-text h1 .highlight {
+    text-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
 }
 
 .hero-text .subtitle {
@@ -942,6 +1023,43 @@ section > .container {
     padding: 0.5rem;
     border-radius: 16px;
     transition: transform 0.3s ease;
+}
+
+/* Company link styles */
+.company-link {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.company-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.company-link:hover {
+    color: var(--primary-color);
+}
+
+.company-link:hover::after {
+    width: 100%;
+}
+
+.company-logo .company-link {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.company-logo .company-link:hover img {
+    transform: scale(1.1);
 }
 
 .experience-title {
