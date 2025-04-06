@@ -6,9 +6,10 @@ A modern, responsive personal portfolio website built with HTML, CSS, and JavaSc
 
 - Responsive design that works on all devices
 - Modern and clean user interface
-- Dark/Light theme toggle
+- Dark/Light theme toggle with smooth transitions
 - Smooth scrolling navigation
 - Animated section and card reveals
+- Custom cursor with animations
 - Company logos for all experience entries
 - Institution logos for education entries
 - Interactive sections for:
@@ -22,34 +23,42 @@ A modern, responsive personal portfolio website built with HTML, CSS, and JavaSc
 - Contact functionality
 - Progressive Web App (PWA) support
 - Cross-platform favicon support
+- Scroll-to-top button
+- Animated UI elements with hover effects
+- Subtle background patterns and gradients
 
 ## Technologies Used
 
 - HTML5
-- CSS3
-- JavaScript
+- CSS3 (with CSS variables for theming)
+- JavaScript (ES6+)
 - Font Awesome Icons
 - Google Fonts (Inter)
+- Intersection Observer API for animations
+- CSS Animations and Transitions
+- CSS Grid and Flexbox for layouts
 
 ## Project Structure
 
 ```
 cv/
 ├── index.html                    # Main HTML file
-├── css/                         # CSS stylesheets
-├── js/                          # JavaScript files
-├── images/                      # Image assets
-│   ├── logos/                  # Company and institution logos
-│   └── pfp.jpg                 # Profile picture
-├── site.webmanifest            # PWA manifest file
-├── favicon.ico                 # Default favicon
-├── favicon-16x16.png           # Small favicon
-├── favicon-32x32.png           # Medium favicon
-├── apple-touch-icon.png        # iOS icon
-├── android-chrome-192x192.png  # Android icon (small)
-├── android-chrome-512x512.png  # Android icon (large)
-├── LICENSE                     # License file
-└── README.md                   # Project documentation
+├── css/                          # CSS stylesheets
+│   └── styles.css                # Main stylesheet with theming support
+├── js/                           # JavaScript files
+│   └── main.js                   # Main script file with animations and interactions
+├── images/                       # Image assets
+│   ├── logos/                    # Company and institution logos
+│   └── hero.jpg                  # Hero image
+├── site.webmanifest              # PWA manifest file
+├── favicon.ico                   # Default favicon
+├── favicon-16x16.png             # Small favicon
+├── favicon-32x32.png             # Medium favicon
+├── apple-touch-icon.png          # iOS icon
+├── android-chrome-192x192.png    # Android icon (small)
+├── android-chrome-512x512.png    # Android icon (large)
+├── LICENSE                       # License file
+└── README.md                     # Project documentation
 ```
 
 ## Features Detail
@@ -58,24 +67,42 @@ cv/
 - Supports both light and dark themes
 - Persists user preference
 - Smooth transition between themes
+- Contextual color adaptation in UI elements
+
+### Custom Cursor
+- Custom cursor implementation
+- Interactive cursor effects
+- Dash trail animation following cursor movement
+- Cursor animations on interactive elements
 
 ### Company Logos
 - Professional logos for all work experiences
 - Educational institution logos
 - Responsive sizing and positioning
 - Optimized image loading
+- Interactive hover effects
+
+### Responsive Design
+- Mobile-first approach
+- Adapts to all screen sizes
+- Optimized layout for desktop, tablet, and mobile
+- Responsive typography with clamp() functions
+- Accessible on all devices
 
 ### Progressive Web App
 - Full PWA support with web manifest
 - Cross-platform favicon support
 - Installable on mobile devices
 - Offline capability
+- Customized theme colors
 
 ### Animations
-- Smooth section reveal on scroll
+- Smooth section reveal on scroll using Intersection Observer API
 - Staggered card animations
 - Interactive hover effects
-- Smooth transitions
+- Smooth transitions between elements
+- Subtle background animations
+- Text highlight effects
 
 ## Getting Started
 
@@ -85,6 +112,15 @@ cv/
    ```
 
 2. Open `index.html` in your web browser to view the website.
+
+## Development
+
+To make changes to the website:
+
+1. Edit the HTML in `index.html` to update content
+2. Modify styles in `css/styles.css` to change appearance
+3. Update scripts in `js/main.js` to adjust animations and interactions
+4. Add or replace images in the `images` directory as needed
 
 ## Contact
 

@@ -13,6 +13,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="scroll-indicator" id="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    <div class="custom-cursor"></div>
+    <div class="cursor-dash-trail"></div>
+    
     <nav class="navbar">
         <div class="container">
             <div class="social-links">
@@ -398,6 +404,104 @@
         // Always start with light theme
         document.documentElement.setAttribute('data-theme', 'light');
         
+        // Dash trail cursor functionality
+        function setupCustomCursor() {
+            const cursor = document.querySelector('.custom-cursor');
+            const dashTrail = document.querySelector('.cursor-dash-trail');
+            
+            let mouseX = -100;
+            let mouseY = -100;
+            const cursorPositions = [];
+            const maxTrailLength = 10; // Number of dashes in the trail
+            const dashUpdateDelay = 50; // Milliseconds between trail updates
+            
+            // Main cursor positioning - instant follow
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                cursor.style.left = `${mouseX}px`;
+                cursor.style.top = `${mouseY}px`;
+                
+                // Add position to history with timestamp
+                cursorPositions.push({
+                    x: mouseX,
+                    y: mouseY,
+                    timestamp: Date.now()
+                });
+                
+                // Limit array size
+                if (cursorPositions.length > maxTrailLength) {
+                    cursorPositions.shift();
+                }
+            });
+            
+            // Create trail dashes
+            function createDashes() {
+                // Remove all existing dashes
+                while (dashTrail.firstChild) {
+                    dashTrail.removeChild(dashTrail.firstChild);
+                }
+                
+                // Create new dashes for each stored position
+                cursorPositions.forEach((pos, index) => {
+                    if (index === 0) return; // Skip the newest position (main cursor is there)
+                    
+                    const dash = document.createElement('div');
+                    dash.className = 'cursor-dash';
+                    
+                    // Smaller size and more transparent the older it is
+                    const age = maxTrailLength - index;
+                    const sizeRatio = age / maxTrailLength;
+                    const size = 3 + (sizeRatio * 3); // Size between 3-6px
+                    const opacity = 0.2 + (sizeRatio * 0.4); // Opacity between 0.2-0.6
+                    
+                    dash.style.width = `${size}px`;
+                    dash.style.height = `${size}px`;
+                    dash.style.opacity = opacity;
+                    dash.style.left = `${pos.x}px`;
+                    dash.style.top = `${pos.y}px`;
+                    
+                    dashTrail.appendChild(dash);
+                });
+                
+                // Call again after delay
+                setTimeout(createDashes, dashUpdateDelay);
+            }
+            
+            // Start the dash creation loop
+            createDashes();
+            
+            // Add expanding effect on interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .experience-card, .education-card, .honor-card, .skill-card, .nav-links li');
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('expanded');
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('expanded');
+                });
+            });
+            
+            // Handle cursor visibility when leaving/entering window
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+            });
+            
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+            });
+            
+            // Fix for touch devices
+            if ('ontouchstart' in window) {
+                document.body.style.cursor = 'auto';
+                cursor.style.display = 'none';
+                dashTrail.style.display = 'none';
+            }
+        }
+        
         // Navbar scroll effect
         const navbar = document.querySelector('.navbar');
         
@@ -461,6 +565,32 @@
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
             }
+        });
+        
+        // Scroll to top button
+        function setupScrollToTop() {
+            const scrollBtn = document.getElementById('scroll-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    scrollBtn.classList.add('visible');
+                } else {
+                    scrollBtn.classList.remove('visible');
+                }
+            });
+            
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            setupScrollToTop();
+            setupCustomCursor();
         });
     </script>
 </body>
