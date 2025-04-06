@@ -39,7 +39,7 @@ cv/
 ├── css/                         # CSS stylesheets
 ├── js/                          # JavaScript files
 ├── images/                      # Image assets
-│   ├── company-logos/          # Company and institution logos
+│   ├── logos/                  # Company and institution logos
 │   └── pfp.jpg                 # Profile picture
 ├── site.webmanifest            # PWA manifest file
 ├── favicon.ico                 # Default favicon
