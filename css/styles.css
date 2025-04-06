@@ -433,6 +433,7 @@ h3 {
         white-space: normal;
         overflow-wrap: break-word;
         word-wrap: break-word;
+        -webkit-hyphens: auto;
         hyphens: auto;
     }
 
@@ -586,6 +587,9 @@ h3 {
     .honor-card,
     .skill-card {
         padding: 1.25rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .company-logo,
@@ -596,7 +600,18 @@ h3 {
 
     .experience-title,
     .education-title {
-        padding-right: 60px;
+        padding-right: 0;
+        width: 100%;
+    }
+    
+    .education-school,
+    .experience-company {
+        font-size: 1rem;
+    }
+    
+    .education-period,
+    .experience-period {
+        font-size: 0.85rem;
     }
 }
 
@@ -749,7 +764,7 @@ section > .container {
 /* Education Section */
 .education-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
     perspective: 1000px;
@@ -975,34 +990,44 @@ section > .container {
 }
 
 @media (max-width: 1400px) {
-    .experience-grid {
+    .experience-grid, 
+    .education-grid {
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     }
 }
 
 @media (max-width: 900px) {
-    .experience-grid {
+    .experience-grid,
+    .education-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
-    .experience-header {
+    .experience-header,
+    .education-header {
         flex-direction: column;
         align-items: center;
         text-align: center;
         gap: 1rem;
+        padding-bottom: 1rem;
     }
 
-    .company-logo {
+    .company-logo,
+    .education-header .company-logo {
         position: relative;
         width: 60px;
         height: 60px;
         margin-bottom: 1rem;
+        top: unset;
+        right: unset;
     }
 
-    .experience-title {
+    .experience-title,
+    .education-title {
         padding-right: 0;
+        text-align: center;
+        width: 100%;
     }
 }
 
