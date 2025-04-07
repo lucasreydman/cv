@@ -67,15 +67,85 @@ document.querySelectorAll('section').forEach(section => {
     });
 });
 
+// Custom cursor functionality
+function setupCustomCursor() {
+    const cursor = document.querySelector('.custom-cursor');
+    
+    // Main cursor positioning - instant follow
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+    });
+    
+    // Add expanding effect on interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .experience-card, .education-card, .honor-card, .skill-card, .nav-links li');
+    
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('expanded');
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('expanded');
+        });
+    });
+    
+    // Handle cursor visibility when leaving/entering window
+    document.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '1';
+    });
+    
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+    });
+    
+    // Fix for touch devices
+    if ('ontouchstart' in window) {
+        document.body.style.cursor = 'auto';
+        cursor.style.display = 'none';
+    }
+}
+
+// Hamburger menu functionality
+function setupHamburgerMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+}
+
 // Scroll to top button functionality
 function setupScrollToTop() {
     const scrollBtn = document.getElementById('scroll-top');
+    const githubBtn = document.querySelector('.github-link');
     
     window.addEventListener('scroll', () => {
         if (window.scrollY > 500) {
             scrollBtn.classList.add('visible');
+            githubBtn.classList.add('visible');
         } else {
             scrollBtn.classList.remove('visible');
+            githubBtn.classList.remove('visible');
         }
     });
     
@@ -87,8 +157,10 @@ function setupScrollToTop() {
     });
 }
 
-// Initialize scroll-to-top on DOM loaded
+// Initialize all functionality on DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
+    setupHamburgerMenu();
     setupScrollToTop();
+    setupCustomCursor();
 });
 
