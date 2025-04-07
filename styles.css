@@ -342,8 +342,7 @@ h3 {
     height: 100%;
     background: radial-gradient(
         circle at 70% 30%, 
-        rgba(37, 99, 235, 0.12) 0%, 
-        rgba(30, 64, 175, 0.05) 40%,
+        rgba(59, 130, 246, 0.15) 0%, 
         transparent 70%
     );
     z-index: -1;
@@ -486,12 +485,23 @@ h3 {
     height: auto;
     border-radius: clamp(16px, 2vw, 24px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-    transition: transform 0.6s var(--ease-bounce), box-shadow 0.6s var(--ease-smooth);
+    transition: transform 0.6s var(--ease-bounce), box-shadow 0.6s var(--ease-smooth), filter 0.5s ease;
     position: relative;
     z-index: 1;
-    background-color: var(--background);
     aspect-ratio: 1/1;
-    object-fit: cover;
+    object-fit: contain;
+    background: transparent;
+}
+
+/* Dark mode adjustments for transparent hero image */
+[data-theme="dark"] .hero-image {
+    filter: brightness(1.1) contrast(1.05);
+    background: transparent;
+    mix-blend-mode: normal;
+}
+
+[data-theme="dark"] .hero-image-container {
+    background: transparent;
 }
 
 .hero-image-container::before {
@@ -519,6 +529,12 @@ h3 {
 .hero-image-container:hover .hero-image {
     transform: translateY(-8px) rotate(2deg);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .hero-image-container:hover .hero-image {
+    transform: translateY(-8px) rotate(2deg);
+    filter: brightness(1.2) contrast(1.05);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes fadeInLeft {
@@ -2145,4 +2161,157 @@ a, button, input, textarea, select, .experience-card, .education-card, .honor-ca
 
 [data-theme="dark"] .hero-text h1 .highlight::after {
     background: linear-gradient(to right, rgba(96, 165, 250, 0.12), rgba(59, 130, 246, 0.18));
+}
+
+/* Speech Bubble */
+.speech-bubble {
+    position: absolute;
+    top: 30px;
+    right: -120px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+    transform-origin: bottom left;
+    transition: all 0.4s var(--ease-bounce);
+    pointer-events: none;
+    z-index: 2;
+    text-align: center;
+    border: 3px solid var(--primary-color);
+    outline: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.speech-bubble p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Speech Bubble Arrow */
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    left: -12px;
+    width: 22px;
+    height: 22px;
+    background-color: white;
+    transform: rotate(45deg);
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.05);
+    z-index: -1;
+    border-left: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+/* Show Speech Bubble on Hover */
+.hero-image-container:hover .speech-bubble {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 0 0 5px rgba(37, 99, 235, 0.1);
+}
+
+/* Dark Mode Speech Bubble */
+[data-theme="dark"] .speech-bubble {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--primary-color);
+    outline: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .speech-bubble::before {
+    background-color: var(--card-bg);
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+[data-theme="dark"] .hero-image-container:hover .speech-bubble {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 0 5px rgba(96, 165, 250, 0.15);
+}
+
+/* Responsive Speech Bubble */
+@media (max-width: 1200px) {
+    .speech-bubble {
+        right: -80px;
+        max-width: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .speech-bubble {
+        top: -80px;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8) translateY(10px);
+    }
+    
+    .speech-bubble::before {
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%) rotate(45deg);
+    }
+    
+    .hero-image-container:hover .speech-bubble {
+        transform: translateX(-50%) scale(1) translateY(0);
+    }
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-5px);
+}
+
+[data-theme="dark"] .scroll-to-top {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .scroll-to-top:hover {
+    background-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
 } 
