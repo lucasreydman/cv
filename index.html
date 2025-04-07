@@ -2,44 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lucas Reydman | Portfolio</title>
-    
-    <!-- Favicon links -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
-    
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <!-- Scroll to top button -->
-    <div class="scroll-indicator" id="scroll-top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
     <!-- Custom cursor element -->
     <div class="custom-cursor"></div>
     
-    <!-- Navigation bar -->
     <nav class="navbar">
         <div class="container">
-            <!-- Social media links -->
             <div class="social-links">
-                <a href="mailto:lucas.reydman@dal.ca" aria-label="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
                 <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener" aria-label="LinkedIn Profile">
                     <i class="fab fa-linkedin"></i>
                 </a>
+                <a href="mailto:lucas.reydman@dal.ca" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-
-            <!-- Navigation menu -->
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -47,15 +33,13 @@
                 <li><a href="#honors">Honors</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
             </ul>
-
-            <!-- Theme toggle button -->
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                <i class="fas fa-sun"></i>
-                <i class="fas fa-moon"></i>
-            </button>
-
-            <!-- Mobile menu button -->
             <button class="hamburger" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -64,7 +48,6 @@
         </div>
     </nav>
 
-    <!-- Hero section -->
     <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -73,42 +56,39 @@
                     <p class="subtitle">Applied Computer Science & Management Student</p>
                 </div>
                 <div class="hero-image-container">
-                    <img src="assets/images/hero/hero.jpg" alt="Lucas Reydman" class="hero-image" />
+                    <img src="assets/images/hero/hero-removebg-preview.png" alt="Lucas Reydman" class="hero-image" />
+                    <!-- Speech bubble element -->
+                    <div class="speech-bubble">
+                        <p>Welcome to my portfolio!</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About section -->
     <section id="about" class="about">
         <div class="container">
             <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am an <span class="highlight">enthusiastic and driven</span> individual with a passion for the evolving world of technology. In my academic journey, I've strived for <span class="highlight">excellence</span>, earning distinction throughout all years of high school and university. Currently, I am attending <span class="highlight">Dalhousie University</span> as an Applied Computer Science student, complemented by various certifications under the Faculty of Management. My professional experiences as both an <span class="highlight">entrepreneur</span> and an employee have provided me with a robust foundation in both technology and business. Working in various roles, I have leveraged technology to drive business success and enhance customer experiences. I am a <span class="highlight">creative</span> and <span class="highlight">comfortable leader</span>, as well as conscious listener and team player, and I thrive when working in agile, adaptive, and <span class="highlight">diverse teams</span>. I am genuinely fascinated by the potential of technology to transform lives and businesses. My desire is to make a positive impact by crafting <span class="highlight">innovative solutions</span> that address real-world challenges. With a strong dedication to learning, adaptability, and a collaborative mindset, I am <span class="highlight">eager to contribute</span> to the tech community and embrace the opportunities that lie ahead. Let's connect! I am open to engaging with fellow students, tech enthusiasts, industry experts, and anyone passionate about making a difference through technology. Feel free to reach out, and let's explore how we can create a <span class="highlight">brighter digital future</span> together.</p>
+                    <p>I am an <span class="highlight">enthusiastic and driven</span> individual with a passion for the evolving world of technology. In my academic journey, I've strived for <span class="highlight">excellence</span>, earning distinction throughout all years of high school and university. Currently, I am attending <span class="highlight">Dalhousie University</span> as an Applied Computer Science student, complemented by various certifications under the Faculty of Management. My professional experiences as both an <span class="highlight">entrepreneur</span> and an employee have provided me with a robust foundation in both technology and business. Working in various roles, I have leveraged technology to drive business success and enhance customer experiences. I am a <span class="highlight">comfortable and enthusiastic leader</span>, as well as conscious listener and team player, and I thrive when working in <span class="highlight">agile, adaptive, and diverse teams</span>. I am genuinely fascinated by the potential of technology to transform lives and businesses. My desire is to make a positive impact by crafting <span class="highlight">innovative solutions</span> that address real-world challenges. With a strong dedication to learning, adaptability, and a collaborative mindset, I am <span class="highlight">eager to contribute</span> to the tech community and embrace the opportunities that lie ahead. Let's connect! I am open to engaging with fellow students, tech enthusiasts, industry experts, and anyone passionate about making a difference through technology. Feel free to reach out, and let's explore how we can create a <span class="highlight">brighter digital future</span> together.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience section -->
     <section id="experience" class="experience">
         <div class="container">
             <h2>Work Experience</h2>
             <div class="experience-grid">
-                <!-- Torinit Technologies Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
-                            <a href="https://www.torinit.com/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Torinit Technologies Inc. website">
-                                <img src="assets/images/company-logos/torinit_technologies_inc_logo.jpg" alt="Torinit Technologies Inc. Logo">
-                            </a>
+                            <img src="assets/images/company-logos/torinit_technologies_inc_logo.jpg" alt="Torinit Technologies Inc. Logo">
                         </div>
                         <div class="experience-title">
                             <h3>Digital Solutions Intern</h3>
-                            <p class="experience-company">
-                                <a href="https://www.torinit.com/" target="_blank" rel="noopener" class="company-link">Torinit Technologies Inc.</a>
-                            </p>
+                            <p class="experience-company">Torinit Technologies Inc.</p>
                             <p class="experience-period">May 2024 - Aug 2024</p>
                         </div>
                     </div>
@@ -122,19 +102,14 @@
                     </div>
                 </div>
 
-                <!-- Mirabella Development Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
-                            <a href="https://mirabellacorp.com/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Mirabella Development Corporation website">
-                                <img src="assets/images/company-logos/mirabella_development_corporation_logo.jpg" alt="Mirabella Development Corporation Logo">
-                            </a>
+                            <img src="assets/images/company-logos/mirabella_development_corporation_logo.jpg" alt="Mirabella Development Corporation Logo">
                         </div>
                         <div class="experience-title">
                             <h3>Research & Development Intern</h3>
-                            <p class="experience-company">
-                                <a href="https://mirabellacorp.com/" target="_blank" rel="noopener" class="company-link">Mirabella Development Corporation</a>
-                            </p>
+                            <p class="experience-company">Mirabella Development Corporation</p>
                             <p class="experience-period">Jun 2023 - Aug 2023</p>
                         </div>
                     </div>
@@ -148,19 +123,14 @@
                     </div>
                 </div>
 
-                <!-- Panther Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
-                            <a href="https://www.instagram.com/pantherstudentevents/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Panther Student Events Instagram page">
-                                <img src="assets/images/company-logos/panther_student_events_logo.jpg" alt="Panther Logo">
-                            </a>
+                            <img src="assets/images/company-logos/panther_student_events_logo.jpg" alt="Panther Logo">
                         </div>
                         <div class="experience-title">
                             <h3>Founder & Head of Operations</h3>
-                            <p class="experience-company">
-                                <a href="https://www.instagram.com/pantherstudentevents/" target="_blank" rel="noopener" class="company-link">Panther</a>
-                            </p>
+                            <p class="experience-company">Panther</p>
                             <p class="experience-period">Sep 2021 - Aug 2023</p>
                         </div>
                     </div>
@@ -174,19 +144,14 @@
                     </div>
                 </div>
 
-                <!-- Scale Hospitality Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
-                            <a href="https://scalehospitality.com/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Scale Hospitality website">
-                                <img src="assets/images/company-logos/scale_hospitality.jpg" alt="Scale Hospitality Logo">
-                            </a>
+                            <img src="assets/images/company-logos/scale_hospitality.jpg" alt="Scale Hospitality Logo">
                         </div>
                         <div class="experience-title">
                             <h3>Hospitality Assistant</h3>
-                            <p class="experience-company">
-                                <a href="https://scalehospitality.com/" target="_blank" rel="noopener" class="company-link">Scale Hospitality</a>
-                            </p>
+                            <p class="experience-company">Scale Hospitality</p>
                             <p class="experience-period">Jun 2022 - Aug 2022</p>
                         </div>
                     </div>
@@ -200,19 +165,14 @@
                     </div>
                 </div>
 
-                <!-- Over the Rainbow Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
-                            <a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Over the Rainbow website">
-                                <img src="assets/images/company-logos/over_the_rainbow_ltd_logo.jpg" alt="Over the Rainbow Ltd. Logo">
-                            </a>
+                            <img src="assets/images/company-logos/over_the_rainbow_ltd_logo.jpg" alt="Over the Rainbow Ltd. Logo">
                         </div>
                         <div class="experience-title">
                             <h3>Sales Associate</h3>
-                            <p class="experience-company">
-                                <a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener" class="company-link">Over the Rainbow Ltd.</a>
-                            </p>
+                            <p class="experience-company">Over the Rainbow Ltd.</p>
                             <p class="experience-period">Jun 2021 - Aug 2021</p>
                         </div>
                     </div>
@@ -226,7 +186,6 @@
                     </div>
                 </div>
 
-                <!-- S&L Sports Camp Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
@@ -251,52 +210,40 @@
         </div>
     </section>
 
-    <!-- Education section -->
     <section id="education" class="education">
         <div class="container">
             <h2>Education</h2>
             <div class="education-grid">
-                <!-- Dalhousie University Education -->
                 <div class="education-card">
                     <div class="education-header">
                         <div class="company-logo">
-                            <a href="https://www.dal.ca/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Dalhousie University website">
-                                <img src="assets/images/education-logos/dalhousie_university_logo.jpg" alt="Dalhousie University Logo">
-                            </a>
+                            <img src="assets/images/education-logos/dalhousie_university_logo.jpg" alt="Dalhousie University Logo">
                         </div>
                         <div class="education-title">
                             <h3>Bachelor of Applied Computer Science</h3>
-                            <p class="education-school">
-                                <a href="https://www.dal.ca/" target="_blank" rel="noopener" class="company-link">Dalhousie University</a>
-                            </p>
-                            <p class="education-period">Sep 2023 - Present</p>
+                            <p class="education-school">Dalhousie University</p>
+                            <p class="education-period">Sep 2023 - May 2027</p>
                             <p class="education-grade">GPA: 3.80 (Dean's List)</p>
                         </div>
                     </div>
                     <div class="education-details">
                         <p class="education-subtitle">Currently pursuing:</p>
                         <ul>
-                            <li>Bachelor of Applied Computer Science</li>
-                            <li>Certificate in Managing Data and Information</li>
+                            <li>Major in Applied Computer Science</li>
                             <li>Certificate in Entrepreneurship and Innovation</li>
-                            <li>Expected Graduation: <strong>May 2027</strong></li>
+                            <li>Certificate in Managing Data and Information</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Lawrence Park CI Education -->
                 <div class="education-card">
                     <div class="education-header">
                         <div class="company-logo">
-                            <a href="https://www.lawrenceparkcollegiateinstitute.ca/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Lawrence Park Collegiate Institute website">
-                                <img src="assets/images/education-logos/lawrence_park_collegiate_instituteto_logo.jpg" alt="Lawrence Park CI Logo">
-                            </a>
+                            <img src="assets/images/education-logos/lawrence_park_collegiate_instituteto_logo.jpg" alt="Lawrence Park CI Logo">
                         </div>
                         <div class="education-title">
                             <h3>Ontario Secondary School Diploma</h3>
-                            <p class="education-school">
-                                <a href="https://www.lawrenceparkcollegiateinstitute.ca/" target="_blank" rel="noopener" class="company-link">Lawrence Park Collegiate Institute</a>
-                            </p>
+                            <p class="education-school">Lawrence Park Collegiate Institute</p>
                             <p class="education-period">Sep 2019 - Jun 2023</p>
                             <p class="education-grade">Average: 94% (Honor Roll)</p>
                         </div>
@@ -315,36 +262,28 @@
         </div>
     </section>
 
-    <!-- Honors section -->
     <section id="honors" class="honors">
         <div class="container">
             <h2>Honors & Awards</h2>
             <div class="honors-grid">
-                <!-- Dean's List Honor -->
                 <div class="honor-card">
                     <i class="fas fa-award"></i>
                     <h3>Dean's List</h3>
                     <p class="honor-source">Dalhousie University, 2025</p>
                     <p class="honor-description">Awarded to students that achieved a cumulative GPA of 3.70 or higher.</p>
                 </div>
-
-                <!-- Community Leader Scholarship -->
                 <div class="honor-card">
                     <i class="fas fa-star"></i>
                     <h3>Community Leader Scholarship</h3>
                     <p class="honor-source">Dalhousie University, 2023</p>
                     <p class="honor-description">Awarded to students that demonstrated exemplary community leadership and engagement.</p>
                 </div>
-
-                <!-- Ontario Scholar Honor -->
                 <div class="honor-card">
                     <i class="fas fa-graduation-cap"></i>
                     <h3>Ontario Scholar Designation</h3>
                     <p class="honor-source">Ontario Ministry of Education, 2023</p>
                     <p class="honor-description">Awarded to students that achieved an average of 80% or higher in their top six grade 12 courses.</p>
                 </div>
-
-                <!-- Bilingual Studies Honor -->
                 <div class="honor-card">
                     <i class="fas fa-medal"></i>
                     <h3>Honours Certificate of Bilingual Studies</h3>
@@ -355,12 +294,10 @@
         </div>
     </section>
 
-    <!-- Skills section -->
     <section id="skills" class="skills">
         <div class="container">
             <h2>Skills & Expertise</h2>
             <div class="skills-grid">
-                <!-- Technical Skills -->
                 <div class="skill-card">
                     <i class="fas fa-code"></i>
                     <h3>Technical Skills</h3>
@@ -373,8 +310,6 @@
                         <li>Generative AI Prompt Engineering</li>
                     </ul>
                 </div>
-
-                <!-- Business & Leadership Skills -->
                 <div class="skill-card">
                     <i class="fas fa-chart-line"></i>
                     <h3>Business & Leadership</h3>
@@ -384,11 +319,10 @@
                         <li>Team Leadership</li>
                         <li>Customer Relationship Management</li>
                         <li>Market Research</li>
-                        <li>Strategic Planning, Budgeting, and Forecasting</li>
+                        <li>Strategic Planning</li>
+                        <li>Budgeting and Forecasting</li>
                     </ul>
                 </div>
-
-                <!-- Digital Tools Skills -->
                 <div class="skill-card">
                     <i class="fas fa-tools"></i>
                     <h3>Digital Tools</h3>
@@ -403,7 +337,6 @@
         </div>
     </section>
 
-    <!-- Contact section -->
     <section id="contact" class="contact">
         <div class="container">
             <h2>Get in Touch</h2>
@@ -423,19 +356,22 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Lucas Reydman. All rights reserved.</p>
+            <p>&copy; 2024 Lucas Reydman. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- GitHub source code link -->
-    <a href="https://github.com/lucasreydman/cv" class="github-link" target="_blank" rel="noopener" aria-label="View source code on GitHub">
+    <!-- Scroll to top button -->
+    <button id="scroll-top" class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- GitHub link -->
+    <a href="https://github.com/lucasreydman" target="_blank" rel="noopener" class="github-link" aria-label="GitHub Profile">
         <i class="fab fa-github"></i>
     </a>
 
-    <!-- JavaScript -->
     <script src="scripts.js"></script>
 </body>
-</html>
+</html> 
