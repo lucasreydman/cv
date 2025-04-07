@@ -386,7 +386,11 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <a href="https://github.com/lucasreydman/cv" class="github-link" target="_blank" rel="noopener" aria-label="View source code on GitHub">
+        <i class="fab fa-github"></i>
+    </a>
+
+    <script src="js/scripts.js"></script>
     <script>
         // Custom cursor functionality
         function setupCustomCursor() {
@@ -456,12 +460,15 @@
         // Scroll to top button
         function setupScrollToTop() {
             const scrollBtn = document.getElementById('scroll-top');
+            const githubBtn = document.querySelector('.github-link');
             
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 500) {
                     scrollBtn.classList.add('visible');
+                    githubBtn.classList.add('visible');
                 } else {
                     scrollBtn.classList.remove('visible');
+                    githubBtn.classList.remove('visible');
                 }
             });
             

@@ -46,7 +46,7 @@ cv/
 ├── css/                          # CSS stylesheets
 │   └── styles.css                # Main stylesheet with theming support
 ├── js/                           # JavaScript files
-│   └── main.js                   # Main script file with animations and interactions
+│   └── scripts.js                # Main script file with animations and interactions
 ├── images/                       # Image assets
 │   ├── logos/                    # Company and institution logos
 │   └── hero.jpg                  # Hero image
@@ -120,7 +120,7 @@ To make changes to the website:
 
 1. Edit the HTML in `index.html` to update content
 2. Modify styles in `css/styles.css` to change appearance
-3. Update scripts in `js/main.js` to adjust animations and interactions
+3. Update scripts in `js/scripts.js` to adjust animations and interactions
 4. Add or replace images in the `images` directory as needed
 
 ## Contact
