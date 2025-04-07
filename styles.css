@@ -496,12 +496,12 @@ h3 {
 /* Dark mode adjustments for transparent hero image */
 [data-theme="dark"] .hero-image {
     filter: brightness(1.1) contrast(1.05);
-    background: transparent;
+    background: transparent !important;
     mix-blend-mode: normal;
 }
 
 [data-theme="dark"] .hero-image-container {
-    background: transparent;
+    background: transparent !important;
 }
 
 .hero-image-container::before {
