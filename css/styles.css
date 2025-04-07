@@ -325,7 +325,7 @@ h3 {
     padding: clamp(6rem, 12vh, 8rem) 0 clamp(2rem, 4vh, 3rem);
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--background) 0%, var(--section-bg) 100%);
+    background: linear-gradient(165deg, var(--background) 0%, var(--section-bg) 100%);
     width: 100%;
     min-height: 0;
     position: relative;
@@ -342,7 +342,8 @@ h3 {
     height: 100%;
     background: radial-gradient(
         circle at 70% 30%, 
-        rgba(37, 99, 235, 0.1) 0%, 
+        rgba(37, 99, 235, 0.12) 0%, 
+        rgba(30, 64, 175, 0.05) 40%,
         transparent 70%
     );
     z-index: -1;
@@ -379,51 +380,56 @@ h3 {
     display: inline-block;
     letter-spacing: -0.02em;
     white-space: nowrap;
-    color: var(--text-color);
     position: relative;
     z-index: 1;
     overflow: hidden;
-}
-
-/* Add a subtle glistening effect */
-.hero-text h1::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.08) 20%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(255, 255, 255, 0.08) 80%,
-        transparent 100%
-    );
-    animation: subtle-glisten 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    z-index: 2;
-    pointer-events: none;
-    filter: blur(5px);
+    color: var(--text-color);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    transition: color 0.3s ease;
 }
 
 /* Simple highlight for the name */
 .hero-text h1 .highlight {
-    color: var(--primary-color);
+    background: linear-gradient(to right, #1a1a1a 5%, var(--primary-color) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     font-weight: 700;
     position: relative;
+    text-shadow: 0 2px 10px rgba(37, 99, 235, 0.08);
+}
+
+/* Create a subtle glow effect behind the text */
+.hero-text h1 .highlight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(37, 99, 235, 0.08), rgba(37, 99, 235, 0.12));
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.hero-text h1 .highlight:hover::after {
+    opacity: 1;
 }
 
 /* Dark mode adjustments */
-[data-theme="dark"] .hero-text h1::before {
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.02) 20%,
-        rgba(255, 255, 255, 0.1) 50%,
-        rgba(255, 255, 255, 0.02) 80%,
-        transparent 100%
-    );
+[data-theme="dark"] .hero-text h1 {
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .hero-text .subtitle {
+    color: var(--light-text);
+}
+
+[data-theme="dark"] .hero-text .subtitle::after {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    opacity: 0.8;
 }
 
 /* Smooth, gentle glistening animation */
@@ -439,7 +445,7 @@ h3 {
     }
 }
 
-/* Subtitle styling without underline */
+/* Update subtitle styling for consistency */
 .hero-text .subtitle {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     color: var(--light-text);
@@ -450,11 +456,25 @@ h3 {
     display: inline-block;
     padding-bottom: 4px;
     overflow: hidden;
+    transition: color 0.3s ease, transform 0.4s var(--ease-bounce);
 }
 
-/* Remove the after pseudo-element completely */
 .hero-text .subtitle::after {
-    display: none;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--ease-smooth);
+    opacity: 0.7;
+}
+
+.hero-text:hover .subtitle::after {
+    transform: scaleX(1);
 }
 
 .hero-text .description {
@@ -964,6 +984,7 @@ section {
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     position: relative;
     overflow: visible;
+    background-color: var(--background);
 }
 
 section.revealed {
@@ -971,7 +992,7 @@ section.revealed {
     transform: translateY(0);
 }
 
-/* Section background animations */
+/* Section background animations and gradients */
 section::before {
     content: '';
     position: absolute;
@@ -979,19 +1000,78 @@ section::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(30, 64, 175, 0.03) 100%);
+    background: radial-gradient(
+        circle at 20% 30%,
+        rgba(37, 99, 235, 0.07) 0%,
+        rgba(30, 64, 175, 0.03) 50%,
+        transparent 70%
+    );
     transform: translateY(20px);
     transition: transform 0.8s ease-out;
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.7;
+}
+
+/* Add subtle diagonal gradient to alternate sections */
+section:nth-child(even) {
+    background: linear-gradient(170deg, var(--background) 0%, var(--section-bg) 100%);
 }
 
 section:nth-child(even)::before {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(30, 64, 175, 0.05) 100%);
+    background: radial-gradient(
+        circle at 80% 70%,
+        rgba(37, 99, 235, 0.08) 0%,
+        rgba(30, 64, 175, 0.04) 50%,
+        transparent 70%
+    );
+}
+
+/* Add a mesh-like subtle pattern to odd sections */
+section:nth-child(odd)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(var(--primary-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--primary-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+    opacity: 0.03;
+    z-index: -1;
 }
 
 section.revealed::before {
     transform: translateY(0);
+}
+
+/* Dark mode section styles */
+[data-theme="dark"] section::before {
+    background: radial-gradient(
+        circle at 20% 30%,
+        rgba(59, 130, 246, 0.15) 0%,
+        rgba(37, 99, 235, 0.05) 50%,
+        transparent 70%
+    );
+}
+
+[data-theme="dark"] section:nth-child(even) {
+    background: linear-gradient(170deg, var(--background) 0%, var(--section-bg) 100%);
+}
+
+[data-theme="dark"] section:nth-child(even)::before {
+    background: radial-gradient(
+        circle at 80% 70%,
+        rgba(59, 130, 246, 0.15) 0%,
+        rgba(96, 165, 250, 0.05) 50%,
+        transparent 70%
+    );
+}
+
+[data-theme="dark"] section:nth-child(odd)::after {
+    opacity: 0.05;
 }
 
 /* Section heading animations */
@@ -1463,6 +1543,9 @@ section.revealed h2::after {
 .contact-item a {
     position: relative;
     overflow: hidden;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
 }
 
 .contact-item a::after {
@@ -1483,6 +1566,21 @@ section.revealed h2::after {
     transform-origin: left;
 }
 
+/* Dark mode contact section styling */
+[data-theme="dark"] .contact-item a {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .contact-item i {
+    color: var(--primary-color);
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.3);
+}
+
+[data-theme="dark"] .contact-divider {
+    color: #ffffff;
+}
+
 /* Footer */
 .footer {
     background-color: var(--section-bg);
@@ -1491,6 +1589,39 @@ section.revealed h2::after {
     color: var(--light-text);
     position: relative;
     overflow: hidden;
+    background: linear-gradient(170deg, var(--background) 0%, var(--section-bg) 100%);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 30% 50%,
+        rgba(37, 99, 235, 0.08) 0%,
+        rgba(30, 64, 175, 0.03) 50%,
+        transparent 70%
+    );
+    z-index: -1;
+    transform: translateY(100%);
+    animation: footerReveal 1s var(--ease-smooth) forwards 0.5s;
+}
+
+/* Dark mode footer styling */
+[data-theme="dark"] .footer {
+    background: linear-gradient(170deg, var(--background) 0%, var(--section-bg) 100%);
+}
+
+[data-theme="dark"] .footer::before {
+    background: radial-gradient(
+        circle at 30% 50%,
+        rgba(59, 130, 246, 0.15) 0%,
+        rgba(96, 165, 250, 0.05) 50%,
+        transparent 70%
+    );
 }
 
 .footer .container {
@@ -1549,23 +1680,6 @@ section.revealed h2::after {
 
 [data-theme="dark"] .github-link:hover {
     background-color: #6cc644; /* GitHub signature green for hover in dark mode */
-}
-
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(30, 64, 175, 0.05) 100%);
-    z-index: -1;
-    transform: translateY(100%);
-    animation: footerReveal 1s var(--ease-smooth) forwards 0.5s;
-}
-
-@keyframes footerReveal {
-    to { transform: translateY(0); }
 }
 
 .mt-4 {
@@ -1650,7 +1764,7 @@ section.revealed h2::after {
 }
 
 .theme-toggle .fa-moon {
-    color: #8A9CC2;
+    color: #FFD700;
     opacity: 1;
     transform: translateY(0);
 }
@@ -1662,24 +1776,28 @@ section.revealed h2::after {
 }
 
 [data-theme="dark"] .theme-toggle .fa-moon {
-    color: #8A9CC2;
+    color: #FFD700;
     opacity: 0;
     transform: translateY(-100%);
 }
 
 /* Dark mode specific adjustments */
 [data-theme="dark"] .hero {
-    background: linear-gradient(135deg, var(--background) 0%, var(--section-bg) 100%);
+    background: linear-gradient(165deg, var(--background) 0%, var(--section-bg) 100%);
 }
 
+[data-theme="dark"] .hero::before {
+    background: radial-gradient(
+        circle at 70% 30%, 
+        rgba(59, 130, 246, 0.18) 0%,
+        rgba(96, 165, 250, 0.08) 40%, 
+        transparent 70%
+    );
+}
+
+/* Hero text gradient in dark mode */
 [data-theme="dark"] .hero-text h1 {
-    background: linear-gradient(135deg, var(--text-color) 0%, var(--primary-color) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-
-[data-theme="dark"] section:nth-child(even)::before {
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+    color: var(--text-color);
 }
 
 [data-theme="dark"] .skill-card:hover,
@@ -1863,7 +1981,7 @@ section.revealed h2::after {
 }
 
 .theme-toggle .fa-moon {
-    color: #8A9CC2;
+    color: #FFD700;
 }
 
 [data-theme="dark"] .theme-toggle .fa-sun {
@@ -1903,20 +2021,7 @@ section.revealed h2::after {
 }
 
 .hero-text h1 {
-    background-size: 200% 200%;
-    animation: gradientFlow 8s ease infinite;
-}
-
-@keyframes gradientFlow {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    /* No animation for now */
 }
 
 .hero-text .subtitle {
@@ -1925,6 +2030,7 @@ section.revealed h2::after {
     overflow: hidden;
 }
 
+/* Remove conflicting animation reference */
 .hero-text .subtitle::after {
     content: '';
     position: absolute;
@@ -1935,7 +2041,7 @@ section.revealed h2::after {
     background-color: var(--primary-color);
     transform: scaleX(0);
     transform-origin: left;
-    animation: subtitleReveal 5s ease-out forwards 0.8s;
+    transition: transform 0.6s var(--ease-smooth);
     opacity: 0.7;
 }
 
@@ -2056,4 +2162,26 @@ a, button, input, textarea, select, .experience-card, .education-card, .honor-ca
 
 .placeholder-right {
     display: none;
+}
+
+@keyframes footerReveal {
+    to { transform: translateY(0); }
+}
+
+/* Remove conflicting animation */
+@keyframes subtitleReveal {
+    to { transform: scaleX(1); }
+}
+
+/* Dark mode adjustments for the highlight */
+[data-theme="dark"] .hero-text h1 .highlight {
+    background: linear-gradient(to right, #ffffff 5%, var(--primary-color) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(96, 165, 250, 0.2);
+}
+
+[data-theme="dark"] .hero-text h1 .highlight::after {
+    background: linear-gradient(to right, rgba(96, 165, 250, 0.12), rgba(59, 130, 246, 0.18));
 } 
