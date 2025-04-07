@@ -9,7 +9,7 @@ html, body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    overscroll-behavior: none;
+    touch-action: manipulation;
 }
 
 :root {
@@ -69,7 +69,7 @@ body {
     z-index: 1;
     min-height: 100vh;
     cursor: none; /* Hide the default cursor */
-    overscroll-behavior-y: contain;
+    touch-action: pan-y;
 }
 
 .container {
