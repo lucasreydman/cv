@@ -50,13 +50,14 @@ cv/
 ├── images/                       # Image assets
 │   ├── logos/                    # Company and institution logos
 │   └── hero.jpg                  # Hero image
+├── favicon/                      # Favicon directory
+│   ├── favicon.ico               # Default favicon
+│   ├── favicon-16x16.png         # Small favicon
+│   ├── favicon-32x32.png         # Medium favicon
+│   ├── apple-touch-icon.png      # iOS icon
+│   ├── android-chrome-192x192.png # Android icon (small)
+│   └── android-chrome-512x512.png # Android icon (large)
 ├── site.webmanifest              # PWA manifest file
-├── favicon.ico                   # Default favicon
-├── favicon-16x16.png             # Small favicon
-├── favicon-32x32.png             # Medium favicon
-├── apple-touch-icon.png          # iOS icon
-├── android-chrome-192x192.png    # Android icon (small)
-├── android-chrome-512x512.png    # Android icon (large)
 ├── LICENSE                       # License file
 └── README.md                     # Project documentation
 ```
