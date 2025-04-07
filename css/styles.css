@@ -440,7 +440,7 @@ h3 {
     );
 }
 
-/* Subtitle with permanent underline effect */
+/* Subtitle styling without underline */
 .hero-text .subtitle {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     color: var(--light-text);
@@ -450,33 +450,12 @@ h3 {
     position: relative;
     display: inline-block;
     padding-bottom: 4px;
+    overflow: hidden;
 }
 
-/* Underline animation that appears once and stays */
+/* Remove the after pseudo-element completely */
 .hero-text .subtitle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--primary-color);
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: subtitleReveal 5s ease-out forwards 0.8s;
-    opacity: 0.7;
-}
-
-/* Animation to reveal and keep the underline */
-@keyframes subtitleReveal {
-    0% {
-        transform: scaleX(0);
-        opacity: 0.3;
-    }
-    100% {
-        transform: scaleX(1);
-        opacity: 0.7;
-    }
+    display: none;
 }
 
 .hero-text .description {
@@ -733,12 +712,27 @@ h3 {
         display: none;
     }
 
+    .about {
+        width: 100%;
+        overflow: visible;
+    }
+    
+    .about-content {
+        width: 100%;
+        overflow: visible;
+    }
+    
     .about-text {
         font-size: 0.95rem;
+        width: 100%;
+        overflow: visible;
     }
-
-    .about-text .highlight {
-        padding: 0.2rem 0.4rem;
+    
+    .about-text p {
+        width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        overflow: visible;
     }
 
     /* Adjust hamburger spacing on mobile */
@@ -761,10 +755,6 @@ h3 {
         display: inline-block;
     }
     
-    .hero-text .subtitle::after {
-        display: none; /* Remove underline animation on mobile */
-    }
-
     .navbar .container {
         justify-content: flex-start;
     }
@@ -1607,98 +1597,9 @@ section.revealed h2::after {
     opacity: 0.3;
 }
 
-/* Remove all these visitor counter styles */
-.visitor-counter,
-.visitor-counter i,
-#visitor-text,
-.count-animation {
-    display: none;
-}
-
-/* Smooth scroll behavior */
-html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-}
-
-/* Page loading animation */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--background);
-    z-index: 9999;
-    pointer-events: none;
-    animation: pageLoad 1.2s var(--ease-smooth) forwards;
-}
-
-@keyframes pageLoad {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-/* Animated background gradient */
-body::after {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-        circle at center,
-        rgba(37, 99, 235, 0.03) 0%,
-        rgba(37, 99, 235, 0.01) 25%,
-        rgba(0, 0, 0, 0) 70%
-    );
-    z-index: -1;
-    opacity: 0.5;
-    animation: gradientMove 30s infinite alternate var(--ease-smooth);
-    pointer-events: none;
-}
-
-[data-theme="dark"] body::after {
-    background: radial-gradient(
-        circle at center,
-        rgba(37, 99, 235, 0.08) 0%,
-        rgba(37, 99, 235, 0.03) 25%,
-        rgba(0, 0, 0, 0) 70%
-    );
-}
-
-@keyframes gradientMove {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(10%, 10%);
-    }
-}
-
-/* Enhanced link styles */
-a {
-    text-decoration: none;
-    color: var(--primary-color);
-    position: relative;
-    transition: color var(--animation-short) var(--ease-smooth);
-}
-
-a:focus {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
 /* Remove cursor trail container and dashes */
 .cursor-dash-trail, .cursor-dash {
-    display: none !important;
+    display: none;
 }
 
 /* Enhanced sleek custom cursor - kept as the only cursor effect */
@@ -1955,4 +1856,37 @@ a:focus {
 /* Cursor scale effect on hoverable elements */
 a, button, input, textarea, select, .experience-card, .education-card, .honor-card, .skill-card, .nav-links li {
     cursor: none;
+}
+
+/* About Section */
+.about {
+    width: 100%;
+    overflow: hidden;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+.about-text {
+    width: 100%;
+    overflow: hidden;
+}
+
+.about-text p {
+    width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+/* Remove visitor counter styles completely */
+.visitor-counter,
+.visitor-counter i,
+#visitor-text,
+.count-animation {
+    display: none;
 } 

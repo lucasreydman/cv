@@ -17,7 +17,6 @@
         <i class="fas fa-arrow-up"></i>
     </div>
     <div class="custom-cursor"></div>
-    <div class="cursor-dash-trail"></div>
     
     <nav class="navbar">
         <div class="container">
@@ -68,7 +67,7 @@
             <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am an <span class="highlight">enthusiastic and driven</span> individual with a passion for the evolving world of technology. In my academic journey, I've strived for <span class="highlight">excellence</span>, earning distinction throughout all years of high school and university. Currently, I am attending <span class="highlight">Dalhousie University</span> as an Applied Computer Science student, complemented by various certifications under the Faculty of Management. My professional experiences as both an <span class="highlight">entrepreneur</span> and an employee have provided me with a robust foundation in both technology and business. Working in various roles, I have leveraged technology to drive business success and enhance customer experiences. I am a <span class="highlight">comfortable and enthusiastic leader</span>, as well as conscious listener and team player, and I thrive when working in <span class="highlight">agile, adaptive, and diverse teams</span>. I am genuinely fascinated by the potential of technology to transform lives and businesses. My desire is to make a positive impact by crafting <span class="highlight">innovative solutions</span> that address real-world challenges. With a strong dedication to learning, adaptability, and a collaborative mindset, I am <span class="highlight">eager to contribute</span> to the tech community and embrace the opportunities that lie ahead. Let's connect! I am open to engaging with fellow students, tech enthusiasts, industry experts, and anyone passionate about making a difference through technology. Feel free to reach out, and let's explore how we can create a <span class="highlight">brighter digital future</span> together.</p>
+                    <p>I am an <span class="highlight">enthusiastic and driven</span> individual with a passion for the evolving world of technology. In my academic journey, I've strived for <span class="highlight">excellence</span>, earning distinction throughout all years of high school and university. Currently, I am attending <span class="highlight">Dalhousie University</span> as an Applied Computer Science student, complemented by various certifications under the Faculty of Management. My professional experiences as both an <span class="highlight">entrepreneur</span> and an employee have provided me with a robust foundation in both technology and business. Working in various roles, I have leveraged technology to drive business success and enhance customer experiences. I am a <span class="highlight">creative</span> and <span class="highlight">comfortable leader</span>, as well as conscious listener and team player, and I thrive when working in agile, adaptive, and <span class="highlight">diverse teams</span>. I am genuinely fascinated by the potential of technology to transform lives and businesses. My desire is to make a positive impact by crafting <span class="highlight">innovative solutions</span> that address real-world challenges. With a strong dedication to learning, adaptability, and a collaborative mindset, I am <span class="highlight">eager to contribute</span> to the tech community and embrace the opportunities that lie ahead. Let's connect! I am open to engaging with fellow students, tech enthusiasts, industry experts, and anyone passionate about making a difference through technology. Feel free to reach out, and let's explore how we can create a <span class="highlight">brighter digital future</span> together.</p>
                 </div>
             </div>
         </div>
@@ -387,88 +386,17 @@
         </div>
     </footer>
 
+    <script src="js/main.js"></script>
     <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        
-        function toggleTheme() {
-            document.documentElement.setAttribute('data-theme', 
-                document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
-            );
-        }
-        
-        themeToggle.addEventListener('click', toggleTheme);
-        
-        // Always start with light theme
-        document.documentElement.setAttribute('data-theme', 'light');
-        
-        // Dash trail cursor functionality
+        // Custom cursor functionality
         function setupCustomCursor() {
             const cursor = document.querySelector('.custom-cursor');
-            const dashTrail = document.querySelector('.cursor-dash-trail');
-            
-            let mouseX = -100;
-            let mouseY = -100;
-            const cursorPositions = [];
-            const maxTrailLength = 10; // Number of dashes in the trail
-            const dashUpdateDelay = 50; // Milliseconds between trail updates
             
             // Main cursor positioning - instant follow
             document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                
-                cursor.style.left = `${mouseX}px`;
-                cursor.style.top = `${mouseY}px`;
-                
-                // Add position to history with timestamp
-                cursorPositions.push({
-                    x: mouseX,
-                    y: mouseY,
-                    timestamp: Date.now()
-                });
-                
-                // Limit array size
-                if (cursorPositions.length > maxTrailLength) {
-                    cursorPositions.shift();
-                }
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
             });
-            
-            // Create trail dashes
-            function createDashes() {
-                // Remove all existing dashes
-                while (dashTrail.firstChild) {
-                    dashTrail.removeChild(dashTrail.firstChild);
-                }
-                
-                // Create new dashes for each stored position
-                cursorPositions.forEach((pos, index) => {
-                    if (index === 0) return; // Skip the newest position (main cursor is there)
-                    
-                    const dash = document.createElement('div');
-                    dash.className = 'cursor-dash';
-                    
-                    // Smaller size and more transparent the older it is
-                    const age = maxTrailLength - index;
-                    const sizeRatio = age / maxTrailLength;
-                    const size = 3 + (sizeRatio * 3); // Size between 3-6px
-                    const opacity = 0.2 + (sizeRatio * 0.4); // Opacity between 0.2-0.6
-                    
-                    dash.style.width = `${size}px`;
-                    dash.style.height = `${size}px`;
-                    dash.style.opacity = opacity;
-                    dash.style.left = `${pos.x}px`;
-                    dash.style.top = `${pos.y}px`;
-                    
-                    dashTrail.appendChild(dash);
-                });
-                
-                // Call again after delay
-                setTimeout(createDashes, dashUpdateDelay);
-            }
-            
-            // Start the dash creation loop
-            createDashes();
             
             // Add expanding effect on interactive elements
             const interactiveElements = document.querySelectorAll('a, button, .experience-card, .education-card, .honor-card, .skill-card, .nav-links li');
@@ -496,49 +424,9 @@
             if ('ontouchstart' in window) {
                 document.body.style.cursor = 'auto';
                 cursor.style.display = 'none';
-                dashTrail.style.display = 'none';
             }
         }
         
-        // Navbar scroll effect
-        const navbar = document.querySelector('.navbar');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Section reveal on scroll
-        const sections = document.querySelectorAll('section');
-        const cards = document.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card');
-
-        function revealSection(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    if (entry.target.tagName === 'SECTION') {
-                        const cards = entry.target.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card');
-                        cards.forEach((card, index) => {
-                            setTimeout(() => {
-                                card.classList.add('revealed');
-                            }, index * 100);
-                        });
-                    }
-                }
-            });
-        }
-
-        const sectionObserver = new IntersectionObserver(revealSection, {
-            threshold: 0.1
-        });
-
-        sections.forEach(section => {
-            sectionObserver.observe(section);
-        });
-
         // Hamburger menu functionality
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
@@ -585,7 +473,7 @@
             });
         }
         
-        // Initialize animations
+        // Initialize functionality
         document.addEventListener('DOMContentLoaded', () => {
             setupScrollToTop();
             setupCustomCursor();
