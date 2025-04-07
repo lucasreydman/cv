@@ -391,17 +391,20 @@ h3 {
     position: absolute;
     top: 0;
     left: -100%;
-    width: 40%;
+    width: 60%;
     height: 100%;
     background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0.08) 20%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.08) 80%,
         transparent 100%
     );
-    animation: subtle-glisten 6s ease-in-out infinite;
+    animation: subtle-glisten 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     z-index: 2;
     pointer-events: none;
+    filter: blur(5px);
 }
 
 /* Simple highlight for the name */
@@ -411,33 +414,29 @@ h3 {
     position: relative;
 }
 
-/* Glistening animation with more frequent repetition */
-@keyframes subtle-glisten {
-    0%, 100% {
-        left: -40%;
-    }
-    30% {
-        left: 120%;
-    }
-    31% {
-        left: -40%;
-    }
-    60% {
-        left: 120%;
-    }
-    61% {
-        left: -40%;
-    }
-}
-
 /* Dark mode adjustments */
 [data-theme="dark"] .hero-text h1::before {
     background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.02) 20%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.02) 80%,
         transparent 100%
     );
+}
+
+/* Smooth, gentle glistening animation */
+@keyframes subtle-glisten {
+    0% {
+        left: -60%;
+    }
+    45% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
 }
 
 /* Subtitle styling without underline */
@@ -567,7 +566,7 @@ h3 {
     }
 
     .hero {
-        padding-top: max(5rem, 10vh);
+        padding-top: max(7rem, 15vh);
         padding-bottom: 2rem;
         width: 100%;
         overflow: visible;
@@ -766,6 +765,51 @@ h3 {
     .hamburger, .theme-toggle {
         flex-shrink: 0;
     }
+
+    /* Mobile footer adjustments */
+    .footer .container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 1rem;
+        position: relative;
+        min-height: 60px;
+    }
+    
+    .footer p {
+        width: 100%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+
+    /* Mobile-friendly fixed elements */
+    .github-link {
+        bottom: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    .scroll-indicator {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    /* Ensure transitions are consistent */
+    .github-link.visible,
+    .scroll-indicator.visible {
+        transform: translateY(0);
+    }
+    
+    .github-link:hover,
+    .scroll-indicator:hover {
+        transform: translateY(-5px);
+    }
 }
 
 @media (max-width: 480px) {
@@ -776,7 +820,7 @@ h3 {
     }
 
     .hero {
-        padding-top: max(4.5rem, 8vh);
+        padding-top: max(6.5rem, 12vh);
     }
 
     .hero-text h1 {
@@ -795,6 +839,28 @@ h3 {
 
     .hero-content {
         padding: 0.5rem 0;
+    }
+
+    /* Footer adjustments for very small screens */
+    .footer p {
+        font-size: 0.9rem;
+        width: 70%;
+    }
+    
+    .github-link {
+        bottom: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .scroll-indicator {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
     }
 
     /* Additional small screen styles */
@@ -833,6 +899,39 @@ h3 {
     .education-period,
     .experience-period {
         font-size: 0.85rem;
+    }
+
+    .placeholder-right {
+        width: 45px;
+    }
+
+    /* Very small screen fixed elements */
+    .github-link {
+        bottom: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .scroll-indicator {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    /* Consistent transitions on very small screens */
+    .github-link.visible,
+    .scroll-indicator.visible {
+        transform: translateY(0);
+    }
+    
+    .github-link:hover,
+    .scroll-indicator:hover {
+        transform: translateY(-3px);
+        /* Colors will inherit from the main declarations */
     }
 }
 
@@ -1394,6 +1493,64 @@ section.revealed h2::after {
     overflow: hidden;
 }
 
+.footer .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.footer p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+/* GitHub link (positioned to mirror scroll indicator) */
+.github-link {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s var(--ease-bounce);
+    background-color: #333333; /* GitHub signature dark gray */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.github-link.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.github-link:hover {
+    transform: translateY(-5px);
+    background-color: #4183c4; /* GitHub signature blue */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode GitHub button */
+[data-theme="dark"] .github-link {
+    background-color: #4183c4; /* GitHub signature blue for dark mode */
+}
+
+[data-theme="dark"] .github-link:hover {
+    background-color: #6cc644; /* GitHub signature green for hover in dark mode */
+}
+
 .footer::before {
     content: '';
     position: absolute;
@@ -1651,7 +1808,7 @@ section.revealed h2::after {
     right: 30px;
     width: 50px;
     height: 50px;
-    background-color: var(--primary-color);
+    background-color: #333333; /* GitHub signature dark gray - same as GitHub button */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -1673,7 +1830,18 @@ section.revealed h2::after {
 
 .scroll-indicator:hover {
     transform: translateY(-5px);
-    background-color: var(--secondary-color);
+    background-color: #4183c4; /* GitHub signature blue - same as GitHub button hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode scroll indicator */
+[data-theme="dark"] .scroll-indicator {
+    background-color: #4183c4; /* GitHub signature blue - same as GitHub button in dark mode */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .scroll-indicator:hover {
+    background-color: #6cc644; /* GitHub signature green - same as GitHub button hover in dark mode */
 }
 
 /* Enhanced theme toggle animation */
@@ -1824,11 +1992,6 @@ section.revealed h2::after {
     mix-blend-mode: lighten;
 }
 
-[data-theme="dark"] .scroll-indicator {
-    background-color: var(--primary-color);
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-}
-
 [data-theme="dark"] .hero::before {
     background: radial-gradient(
         circle at 70% 30%, 
@@ -1888,5 +2051,9 @@ a, button, input, textarea, select, .experience-card, .education-card, .honor-ca
 .visitor-counter i,
 #visitor-text,
 .count-animation {
+    display: none;
+}
+
+.placeholder-right {
     display: none;
 } 
