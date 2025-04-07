@@ -67,48 +67,28 @@ document.querySelectorAll('section').forEach(section => {
     });
 });
 
-// Visitor Counter with Counter.dev
-function getOrdinal(n) {
-    let ord = 'th';
+// Scroll to top button functionality
+function setupScrollToTop() {
+    const scrollBtn = document.getElementById('scroll-top');
     
-    if (n % 10 === 1 && n % 100 !== 11) {
-        ord = 'st';
-    } else if (n % 10 === 2 && n % 100 !== 12) {
-        ord = 'nd';
-    } else if (n % 10 === 3 && n % 100 !== 13) {
-        ord = 'rd';
-    }
-    
-    return ord;
-}
-
-function updateVisitorCount() {
-    const visitorTextElement = document.getElementById('visitor-text');
-    
-    // Function to format the count with animation
-    function displayCount(count) {
-        const ordinal = getOrdinal(count);
-        visitorTextElement.textContent = `You're visitor #${count}${ordinal}!`;
-        visitorTextElement.classList.add('count-animation');
-        setTimeout(() => {
-            visitorTextElement.classList.remove('count-animation');
-        }, 500);
-    }
-
-    // Check every second for 10 seconds if Counter.dev has loaded
-    let attempts = 0;
-    const checkInterval = setInterval(() => {
-        if (window._counter && window._counter.visitors !== undefined) {
-            displayCount(window._counter.visitors);
-            clearInterval(checkInterval);
-        } else if (attempts >= 10) {
-            visitorTextElement.textContent = "Thanks for visiting!";
-            clearInterval(checkInterval);
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
         }
-        attempts++;
-    }, 1000);
+    });
+    
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 }
 
-// Initialize counter when DOM is loaded
-document.addEventListener('DOMContentLoaded', updateVisitorCount);
+// Initialize scroll-to-top on DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+    setupScrollToTop();
+});
 
