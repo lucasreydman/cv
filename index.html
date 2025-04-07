@@ -4,22 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucas Reydman | Portfolio</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon links -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
+    <!-- Scroll to top button -->
     <div class="scroll-indicator" id="scroll-top">
         <i class="fas fa-arrow-up"></i>
     </div>
+
+    <!-- Custom cursor element -->
     <div class="custom-cursor"></div>
     
+    <!-- Navigation bar -->
     <nav class="navbar">
         <div class="container">
+            <!-- Social media links -->
             <div class="social-links">
                 <a href="mailto:lucas.reydman@dal.ca" aria-label="Email">
                     <i class="fas fa-envelope"></i>
@@ -28,6 +38,8 @@
                     <i class="fab fa-linkedin"></i>
                 </a>
             </div>
+
+            <!-- Navigation menu -->
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -36,10 +48,14 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+
+            <!-- Theme toggle button -->
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
                 <i class="fas fa-sun"></i>
                 <i class="fas fa-moon"></i>
             </button>
+
+            <!-- Mobile menu button -->
             <button class="hamburger" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -48,6 +64,7 @@
         </div>
     </nav>
 
+    <!-- Hero section -->
     <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -56,12 +73,13 @@
                     <p class="subtitle">Applied Computer Science & Management Student</p>
                 </div>
                 <div class="hero-image-container">
-                    <img src="images/hero.jpg" alt="Lucas Reydman" class="hero-image" />
+                    <img src="assets/images/hero/hero.jpg" alt="Lucas Reydman" class="hero-image" />
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- About section -->
     <section id="about" class="about">
         <div class="container">
             <h2>About Me</h2>
@@ -73,15 +91,17 @@
         </div>
     </section>
 
+    <!-- Experience section -->
     <section id="experience" class="experience">
         <div class="container">
             <h2>Work Experience</h2>
             <div class="experience-grid">
+                <!-- Torinit Technologies Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
                             <a href="https://www.torinit.com/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Torinit Technologies Inc. website">
-                                <img src="images/logos/torinit_technologies_inc_logo.jpg" alt="Torinit Technologies Inc. Logo">
+                                <img src="assets/images/company-logos/torinit_technologies_inc_logo.jpg" alt="Torinit Technologies Inc. Logo">
                             </a>
                         </div>
                         <div class="experience-title">
@@ -102,11 +122,12 @@
                     </div>
                 </div>
 
+                <!-- Mirabella Development Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
                             <a href="https://mirabellacorp.com/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Mirabella Development Corporation website">
-                                <img src="images/logos/mirabella_development_corporation_logo.jpg" alt="Mirabella Development Corporation Logo">
+                                <img src="assets/images/company-logos/mirabella_development_corporation_logo.jpg" alt="Mirabella Development Corporation Logo">
                             </a>
                         </div>
                         <div class="experience-title">
@@ -127,11 +148,12 @@
                     </div>
                 </div>
 
+                <!-- Panther Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
                             <a href="https://www.instagram.com/pantherstudentevents/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Panther Student Events Instagram page">
-                                <img src="images/logos/panther_student_events_logo.jpg" alt="Panther Logo">
+                                <img src="assets/images/company-logos/panther_student_events_logo.jpg" alt="Panther Logo">
                             </a>
                         </div>
                         <div class="experience-title">
@@ -152,11 +174,12 @@
                     </div>
                 </div>
 
+                <!-- Scale Hospitality Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
                             <a href="https://scalehospitality.com/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Scale Hospitality website">
-                                <img src="images/logos/scale_hospitality.jpg" alt="Scale Hospitality Logo">
+                                <img src="assets/images/company-logos/scale_hospitality.jpg" alt="Scale Hospitality Logo">
                             </a>
                         </div>
                         <div class="experience-title">
@@ -177,11 +200,12 @@
                     </div>
                 </div>
 
+                <!-- Over the Rainbow Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
                             <a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Over the Rainbow website">
-                                <img src="images/logos/over_the_rainbow_ltd_logo.jpg" alt="Over the Rainbow Ltd. Logo">
+                                <img src="assets/images/company-logos/over_the_rainbow_ltd_logo.jpg" alt="Over the Rainbow Ltd. Logo">
                             </a>
                         </div>
                         <div class="experience-title">
@@ -202,10 +226,11 @@
                     </div>
                 </div>
 
+                <!-- S&L Sports Camp Experience -->
                 <div class="experience-card">
                     <div class="experience-header">
                         <div class="company-logo">
-                            <img src="images/logos/s_l_sports_camp_logo.jpg" alt="S&L Sports Camp Logo">
+                            <img src="assets/images/company-logos/s_l_sports_camp_logo.jpg" alt="S&L Sports Camp Logo">
                         </div>
                         <div class="experience-title">
                             <h3>Co-Founder & Lead Director</h3>
@@ -226,15 +251,17 @@
         </div>
     </section>
 
+    <!-- Education section -->
     <section id="education" class="education">
         <div class="container">
             <h2>Education</h2>
             <div class="education-grid">
+                <!-- Dalhousie University Education -->
                 <div class="education-card">
                     <div class="education-header">
                         <div class="company-logo">
                             <a href="https://www.dal.ca/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Dalhousie University website">
-                                <img src="images/logos/dalhousie_university_logo.jpg" alt="Dalhousie University Logo">
+                                <img src="assets/images/education-logos/dalhousie_university_logo.jpg" alt="Dalhousie University Logo">
                             </a>
                         </div>
                         <div class="education-title">
@@ -257,11 +284,12 @@
                     </div>
                 </div>
 
+                <!-- Lawrence Park CI Education -->
                 <div class="education-card">
                     <div class="education-header">
                         <div class="company-logo">
                             <a href="https://www.lawrenceparkcollegiateinstitute.ca/" target="_blank" rel="noopener" class="company-link" aria-label="Visit Lawrence Park Collegiate Institute website">
-                                <img src="images/logos/lawrence_park_collegiate_instituteto_logo.jpg" alt="Lawrence Park CI Logo">
+                                <img src="assets/images/education-logos/lawrence_park_collegiate_instituteto_logo.jpg" alt="Lawrence Park CI Logo">
                             </a>
                         </div>
                         <div class="education-title">
@@ -287,28 +315,36 @@
         </div>
     </section>
 
+    <!-- Honors section -->
     <section id="honors" class="honors">
         <div class="container">
             <h2>Honors & Awards</h2>
             <div class="honors-grid">
+                <!-- Dean's List Honor -->
                 <div class="honor-card">
                     <i class="fas fa-award"></i>
                     <h3>Dean's List</h3>
                     <p class="honor-source">Dalhousie University, 2025</p>
                     <p class="honor-description">Awarded to students that achieved a cumulative GPA of 3.70 or higher.</p>
                 </div>
+
+                <!-- Community Leader Scholarship -->
                 <div class="honor-card">
                     <i class="fas fa-star"></i>
                     <h3>Community Leader Scholarship</h3>
                     <p class="honor-source">Dalhousie University, 2023</p>
                     <p class="honor-description">Awarded to students that demonstrated exemplary community leadership and engagement.</p>
                 </div>
+
+                <!-- Ontario Scholar Honor -->
                 <div class="honor-card">
                     <i class="fas fa-graduation-cap"></i>
                     <h3>Ontario Scholar Designation</h3>
                     <p class="honor-source">Ontario Ministry of Education, 2023</p>
                     <p class="honor-description">Awarded to students that achieved an average of 80% or higher in their top six grade 12 courses.</p>
                 </div>
+
+                <!-- Bilingual Studies Honor -->
                 <div class="honor-card">
                     <i class="fas fa-medal"></i>
                     <h3>Honours Certificate of Bilingual Studies</h3>
@@ -319,10 +355,12 @@
         </div>
     </section>
 
+    <!-- Skills section -->
     <section id="skills" class="skills">
         <div class="container">
             <h2>Skills & Expertise</h2>
             <div class="skills-grid">
+                <!-- Technical Skills -->
                 <div class="skill-card">
                     <i class="fas fa-code"></i>
                     <h3>Technical Skills</h3>
@@ -335,6 +373,8 @@
                         <li>Generative AI Prompt Engineering</li>
                     </ul>
                 </div>
+
+                <!-- Business & Leadership Skills -->
                 <div class="skill-card">
                     <i class="fas fa-chart-line"></i>
                     <h3>Business & Leadership</h3>
@@ -347,6 +387,8 @@
                         <li>Strategic Planning, Budgeting, and Forecasting</li>
                     </ul>
                 </div>
+
+                <!-- Digital Tools Skills -->
                 <div class="skill-card">
                     <i class="fas fa-tools"></i>
                     <h3>Digital Tools</h3>
@@ -361,6 +403,7 @@
         </div>
     </section>
 
+    <!-- Contact section -->
     <section id="contact" class="contact">
         <div class="container">
             <h2>Get in Touch</h2>
@@ -380,16 +423,19 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Lucas Reydman. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- GitHub source code link -->
     <a href="https://github.com/lucasreydman/cv" class="github-link" target="_blank" rel="noopener" aria-label="View source code on GitHub">
         <i class="fab fa-github"></i>
     </a>
 
-    <script src="js/scripts.js"></script>
+    <!-- JavaScript -->
+    <script src="scripts.js"></script>
 </body>
-</html> 
+</html>

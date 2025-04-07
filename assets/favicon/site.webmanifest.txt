@@ -1,0 +1,23 @@
+FILE: site.webmanifest.txt
+AUTHOR: Lucas Reydman
+DESCRIPTION: Documentation for the Web App Manifest file used in Lucas Reydman's portfolio website.
+This file explains the purpose and structure of the site.webmanifest file located in the favicon folder.
+
+----------------------------------------
+
+File: assets/favicon/site.webmanifest
+Description: Web App Manifest file for Lucas Reydman's portfolio website.
+This file provides metadata used when the website is installed as a
+Progressive Web App (PWA) on mobile devices or desktops.
+It includes app name, icons, theme colors, and display settings.
+
+The site.webmanifest file is a JSON file that follows the W3C Web App Manifest specification.
+It enables visitors to install the website as an app on their devices.
+
+Key components:
+- name: The full name of the application ("Lucas Reydman")
+- short_name: A shorter name for app icons ("LR Portfolio")
+- icons: Different sized icons for various device displays (android-192x192.png and android-512x512.png)
+- theme_color: Primary color for the application UI
+- background_color: Background color for the splash screen
+- display: How the application should display (standalone removes browser UI) 
