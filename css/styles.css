@@ -432,19 +432,6 @@ h3 {
     opacity: 0.8;
 }
 
-/* Smooth, gentle glistening animation */
-@keyframes subtle-glisten {
-    0% {
-        left: -60%;
-    }
-    45% {
-        left: 100%;
-    }
-    100% {
-        left: 100%;
-    }
-}
-
 /* Update subtitle styling for consistency */
 .hero-text .subtitle {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
@@ -805,19 +792,19 @@ h3 {
 
     /* Mobile-friendly fixed elements */
     .github-link {
-        bottom: 20px;
-        left: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
+        bottom: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
     }
     
     .scroll-indicator {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
     }
 
     /* Ensure transitions are consistent */
@@ -829,6 +816,15 @@ h3 {
     .github-link:hover,
     .scroll-indicator:hover {
         transform: translateY(-5px);
+    }
+
+    /* Mobile-friendly adjustments */
+    body::after {
+        opacity: 0.3; /* Reduce background animation intensity */
+    }
+    
+    .hero-image-container:hover .hero-image {
+        transform: translateY(-5px) rotate(1deg); /* Less intense animation */
     }
 }
 
@@ -925,23 +921,6 @@ h3 {
         width: 45px;
     }
 
-    /* Very small screen fixed elements */
-    .github-link {
-        bottom: 15px;
-        left: 15px;
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-    
-    .scroll-indicator {
-        bottom: 15px;
-        right: 15px;
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
-    }
-    
     /* Consistent transitions on very small screens */
     .github-link.visible,
     .scroll-indicator.visible {
@@ -1757,28 +1736,10 @@ section.revealed h2::after {
     justify-content: center;
 }
 
-.theme-toggle .fa-sun {
-    color: #FFD700;
-    opacity: 0;
-    transform: translateY(100%);
-}
-
-.theme-toggle .fa-moon {
-    color: #FFD700;
-    opacity: 1;
-    transform: translateY(0);
-}
-
+.theme-toggle .fa-sun,
+.theme-toggle .fa-moon,
 [data-theme="dark"] .theme-toggle .fa-sun {
     color: #FFD700;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-[data-theme="dark"] .theme-toggle .fa-moon {
-    color: #FFD700;
-    opacity: 0;
-    transform: translateY(-100%);
 }
 
 /* Dark mode specific adjustments */
@@ -1789,8 +1750,7 @@ section.revealed h2::after {
 [data-theme="dark"] .hero::before {
     background: radial-gradient(
         circle at 70% 30%, 
-        rgba(59, 130, 246, 0.18) 0%,
-        rgba(96, 165, 250, 0.08) 40%, 
+        rgba(59, 130, 246, 0.15) 0%, 
         transparent 70%
     );
 }
@@ -1976,16 +1936,31 @@ section.revealed h2::after {
     transition: transform 0.6s var(--ease-bounce), opacity 0.3s ease;
 }
 
-.theme-toggle .fa-sun {
+/* Theme icons */
+.theme-toggle .fa-sun,
+.theme-toggle .fa-moon,
+[data-theme="dark"] .theme-toggle .fa-sun {
     color: #FFD700;
+}
+
+.theme-toggle .fa-sun {
+    opacity: 0;
+    transform: translateY(100%);
 }
 
 .theme-toggle .fa-moon {
-    color: #FFD700;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 [data-theme="dark"] .theme-toggle .fa-sun {
-    color: #FFD700;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-theme="dark"] .theme-toggle .fa-moon {
+    opacity: 0;
+    transform: translateY(-100%);
 }
 
 /* Skill icon animations */
@@ -2018,16 +1993,6 @@ section.revealed h2::after {
 .hero-text {
     position: relative;
     z-index: 2;
-}
-
-.hero-text h1 {
-    /* No animation for now */
-}
-
-.hero-text .subtitle {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
 }
 
 /* Remove conflicting animation reference */
@@ -2116,8 +2081,7 @@ section.revealed h2::after {
     }
     
     body::before, 
-    body::after,
-    .cursor-dash {
+    body::after {
         display: none !important;
     }
 }
@@ -2156,10 +2120,7 @@ a, button, input, textarea, select, .experience-card, .education-card, .honor-ca
 .visitor-counter,
 .visitor-counter i,
 #visitor-text,
-.count-animation {
-    display: none;
-}
-
+.count-animation,
 .placeholder-right {
     display: none;
 }
