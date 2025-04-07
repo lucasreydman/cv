@@ -26,6 +26,7 @@ A modern, responsive personal portfolio website built with HTML, CSS, and JavaSc
 - Scroll-to-top button
 - Animated UI elements with hover effects
 - Subtle background patterns and gradients
+- Comprehensive documentation for favicon and PWA implementation
 
 ## Technologies Used
 
@@ -43,21 +44,23 @@ A modern, responsive personal portfolio website built with HTML, CSS, and JavaSc
 ```
 cv/
 ├── index.html                    # Main HTML file
-├── css/                          # CSS stylesheets
-│   └── styles.css                # Main stylesheet with theming support
-├── js/                           # JavaScript files
-│   └── scripts.js                # Main script file with animations and interactions
-├── images/                       # Image assets
-│   ├── logos/                    # Company and institution logos
-│   └── hero.jpg                  # Hero image
-├── favicon/                      # Favicon directory
-│   ├── favicon.ico               # Default favicon
-│   ├── favicon-16x16.png         # Small favicon
-│   ├── favicon-32x32.png         # Medium favicon
-│   ├── apple-touch-icon.png      # iOS icon
-│   ├── android-chrome-192x192.png # Android icon (small)
-│   └── android-chrome-512x512.png # Android icon (large)
-├── site.webmanifest              # PWA manifest file
+├── styles.css                    # Main stylesheet with theming support
+├── scripts.js                    # Main script file with animations and interactions
+├── assets/                       # All static assets
+│   ├── images/                   # Image assets
+│   │   ├── company-logos/        # Company logos for work experiences
+│   │   ├── education-logos/      # Educational institution logos
+│   │   └── hero/                 # Hero image for the header section
+│   └── favicon/                  # Favicon directory
+│       ├── favicon.ico           # Default favicon
+│       ├── favicon-16x16.png     # Small favicon
+│       ├── favicon-32x32.png     # Large favicon
+│       ├── apple-touch-icon.png  # iOS icon
+│       ├── android-192x192.png   # Small android icon
+│       ├── android-512x512.png   # Large android icon
+│       ├── site.webmanifest      # PWA manifest file
+│       ├── site.webmanifest.txt  # Documentation for the webmanifest
+│       └── favicon.txt           # Documentation for the favicon system
 ├── LICENSE                       # License file
 └── README.md                     # Project documentation
 ```
@@ -91,7 +94,7 @@ cv/
 - Accessible on all devices
 
 ### Progressive Web App
-- Full PWA support with web manifest
+- Full PWA support with web manifest (located in the assets/favicon folder)
 - Cross-platform favicon support
 - Installable on mobile devices
 - Offline capability
@@ -119,9 +122,10 @@ cv/
 To make changes to the website:
 
 1. Edit the HTML in `index.html` to update content
-2. Modify styles in `css/styles.css` to change appearance
-3. Update scripts in `js/scripts.js` to adjust animations and interactions
-4. Add or replace images in the `images` directory as needed
+2. Modify styles in `styles.css` to change appearance
+3. Update scripts in `scripts.js` to adjust animations and interactions
+4. Add or replace images in the `assets/images` directory as needed
+5. Refer to `assets/favicon/favicon.txt` and `assets/favicon/site.webmanifest.txt` for documentation on the favicon system and PWA implementation
 
 ## Contact
 

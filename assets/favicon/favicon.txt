@@ -1,0 +1,84 @@
+FILE: favicon.txt
+AUTHOR: Lucas Reydman
+DESCRIPTION: Documentation for the favicon system used in Lucas Reydman's portfolio website.
+This file explains the purpose and usage of different favicon files for cross-platform
+icon support, including web browsers, iOS, and Android devices.
+
+----------------------------------------
+
+FAVICON INFORMATION
+
+This folder contains all the favicon files required for cross-platform support of your website icon.
+
+FILES OVERVIEW
+
+- favicon.ico: Traditional favicon used by older browsers and as a fallback
+- favicon-16x16.png: 16x16 pixel favicon for standard usage
+- favicon-32x32.png: 32x32 pixel favicon for standard usage
+- apple-touch-icon.png: 180x180 pixel icon for iOS home screen bookmarks
+- android-192x192.png: 192x192 pixel icon for Android devices
+- android-512x512.png: 512x512 pixel icon for Android devices (high-res)
+
+HOW IT WORKS
+
+The different sizes and formats ensure your site icon displays correctly across all browsers and devices:
+
+1. Traditional browsers use the .ico file or the PNG files
+2. Apple devices use the apple-touch-icon.png when added to home screen
+3. Android devices use the android-chrome files when added to home screen
+4. The site.webmanifest file (in this folder) provides metadata for Progressive Web App (PWA) functionality
+
+HOW THESE FILES WERE GENERATED
+
+These favicon files were likely generated using a tool like https://realfavicongenerator.net/ or https://favicon.io/, which takes a single high-resolution image and:
+
+1. Creates multiple sizes of your favicon
+2. Optimizes them for different platforms
+3. Generates the necessary HTML code to include in your website
+
+IMPLEMENTATION
+
+The following code is already included in the head section of your HTML:
+
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="assets/favicon/site.webmanifest">
+
+The site.webmanifest file contains:
+{
+    "name": "Lucas Reydman",
+    "short_name": "LR Portfolio",
+    "icons": [
+        {
+            "src": "android-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "android-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#2563eb",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
+
+CREATING YOUR OWN FAVICONS
+
+If you want to update the favicon, you should:
+
+1. Create a high-resolution square image (at least 512x512 pixels)
+2. Go to https://realfavicongenerator.net/ or https://favicon.io/
+3. Upload your image and generate a new favicon package
+4. Replace the files in this folder with the newly generated ones
+5. Update the site.webmanifest file if necessary
+
+BEST PRACTICES
+
+- Keep your favicon simple and recognizable even at small sizes
+- Use a transparent background for .png files when possible
+- Make sure the icon has adequate contrast with browser chrome
+- Test your favicon on multiple browsers and devices 

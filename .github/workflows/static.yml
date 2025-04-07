@@ -1,3 +1,14 @@
+# File: .github/workflows/static.yml
+# Author: Lucas Reydman
+# Description: GitHub Actions workflow for automatically deploying the portfolio website to GitHub Pages.
+# This workflow runs on pushes to the main branch and can be triggered manually.
+# It handles the complete deployment process including:
+# - Repository checkout
+# - GitHub Pages configuration
+# - Artifact upload
+# - Final deployment
+# The workflow ensures secure deployment using appropriate permissions and concurrency settings.
+
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 

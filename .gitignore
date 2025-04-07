@@ -1,3 +1,13 @@
+# File: .gitignore
+# Author: Lucas Reydman
+# Description: Configuration file specifying which files and directories should be ignored by Git version control.
+# This file prevents unnecessary files from being tracked, including:
+# - Node.js related files (logs, dependencies, caches)
+# - Environment and configuration files
+# - Build outputs and temporary files
+# - IDE and editor specific files
+# - Package manager related files
+
 # Logs
 logs
 *.log
