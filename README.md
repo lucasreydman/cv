@@ -75,8 +75,6 @@ cv/
 
 ### Custom Cursor
 - Custom cursor implementation
-- Interactive cursor effects
-- Dash trail animation following cursor movement
 - Cursor animations on interactive elements
 
 ### Company Logos
