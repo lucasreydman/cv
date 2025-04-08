@@ -42,13 +42,17 @@ portfolio/
 │       ├── education-logos/
 │       └── hero/
 ├── css/                # CSS files (modular organization)
+│   ├── minified/       # Minified CSS files for production
+│   │   └── main.min.css
 │   ├── base.css        # Base styles and variables
 │   ├── components.css  # Reusable component styles
 │   ├── layout.css      # Layout and structure styles
 │   ├── main.css        # Imports all CSS modules
 │   └── sections.css    # Section-specific styles
+├── js/                 # JavaScript files
+│   ├── main.js         # Main JavaScript functionality
+│   └── main.min.js     # Minified JavaScript for production
 ├── index.html          # Main HTML file
-├── scripts.js          # JavaScript functionality
 ├── LICENSE             # License information
 └── README.md           # This file
 ```

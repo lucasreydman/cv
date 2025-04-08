@@ -1,6 +1,6 @@
 /**
  * Portfolio Website JavaScript
- * Handles theme switching, animations, scroll effects, and interactive elements
+ * Main script file for handling interactive functionality
  * 
  * @author Lucas Reydman
  * @version 1.0.0
