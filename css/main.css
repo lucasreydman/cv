@@ -1,0 +1,20 @@
+/**
+ * Main CSS File
+ * Imports all modular CSS files for the portfolio website
+ * 
+ * @author Lucas Reydman
+ * @version 1.0.0
+ * @license MIT
+ */
+
+/* Import base styles and variables */
+@import url('./base.css');
+
+/* Import layout styles */
+@import url('./layout.css');
+
+/* Import component styles */
+@import url('./components.css');
+
+/* Import section-specific styles */
+@import url('./sections.css'); 

@@ -1635,7 +1635,7 @@ section.revealed h2::after {
     text-align: center;
 }
 
-/* GitHub link (positioned to mirror scroll indicator) */
+/* GitHub Button and its Tooltip */
 .github-link {
     position: fixed;
     bottom: 30px;
@@ -1665,10 +1665,141 @@ section.revealed h2::after {
 .github-link:hover {
     transform: translateY(-5px);
     background-color: #4183c4; /* GitHub signature blue */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Dark mode GitHub button */
+.github-link::after {
+    content: 'View the source code!';
+    position: absolute;
+    left: calc(100% + 20px);
+    top: 50%;
+    transform: translateY(-50%) scale(0.8);
+    background-color: #333333; /* Match GitHub button color */
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s var(--ease-smooth);
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    z-index: 1001;
+}
+
+.github-link::before {
+    content: '';
+    position: absolute;
+    left: calc(100% + 16px);
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #333333; /* Match GitHub button color */
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: all 0.3s var(--ease-smooth);
+    transform: translateY(-50%) rotate(45deg);
+    z-index: 1001;
+}
+
+.github-link:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    background-color: #4183c4; /* Match GitHub button hover color */
+}
+
+.github-link:hover::before {
+    opacity: 1;
+    background-color: #4183c4; /* Match GitHub button hover color */
+}
+
+/* Scroll to Top Button and its Tooltip */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-5px);
+}
+
+.scroll-to-top::after {
+    content: 'Go back to the top!';
+    position: absolute;
+    right: calc(100% + 20px);
+    top: 50%;
+    transform: translateY(-50%) scale(0.8);
+    background-color: var(--primary-color); /* Match scroll-to-top button color */
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s var(--ease-smooth);
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    z-index: 1001;
+}
+
+.scroll-to-top::before {
+    content: '';
+    position: absolute;
+    right: calc(100% + 16px);
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color); /* Match scroll-to-top button color */
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: all 0.3s var(--ease-smooth);
+    transform: translateY(-50%) rotate(45deg);
+    z-index: 1001;
+}
+
+.scroll-to-top:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    background-color: var(--secondary-color); /* Match scroll-to-top button hover color */
+}
+
+.scroll-to-top:hover::before {
+    opacity: 1;
+    background-color: var(--secondary-color); /* Match scroll-to-top button hover color */
+}
+
+/* Dark Mode Adjustments */
 [data-theme="dark"] .github-link {
     background-color: #4183c4; /* GitHub signature blue for dark mode */
 }
@@ -1677,42 +1808,84 @@ section.revealed h2::after {
     background-color: #6cc644; /* GitHub signature green for hover in dark mode */
 }
 
-.mt-4 {
-    margin-top: 2rem;
+[data-theme="dark"] .github-link::after {
+    background-color: #4183c4; /* Match GitHub button dark mode color */
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.certification-item {
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--border-color);
+[data-theme="dark"] .github-link::before {
+    background-color: #4183c4; /* Match GitHub button dark mode color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.certification-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+[data-theme="dark"] .github-link:hover::after {
+    background-color: #6cc644; /* Match GitHub button hover dark mode color */
 }
 
-.certification-title {
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
+[data-theme="dark"] .github-link:hover::before {
+    background-color: #6cc644; /* Match GitHub button hover dark mode color */
 }
 
-.certification-issuer {
-    color: var(--primary-color);
-    font-weight: 500;
-    margin-bottom: 0.25rem;
+[data-theme="dark"] .scroll-to-top {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.certification-date {
-    color: var(--light-text);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+[data-theme="dark"] .scroll-to-top:hover {
+    background-color: var(--secondary-color);
 }
 
-.certification-skills {
-    color: var(--light-text);
-    font-size: 0.9rem;
-    font-style: italic;
+[data-theme="dark"] .scroll-to-top::after {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .scroll-to-top::before {
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .scroll-to-top:hover::after {
+    background-color: var(--secondary-color);
+}
+
+[data-theme="dark"] .scroll-to-top:hover::before {
+    background-color: var(--secondary-color);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .github-link::after,
+    .scroll-to-top::after {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    .github-link::after {
+        left: calc(100% + 15px);
+    }
+
+    .scroll-to-top::after {
+        right: calc(100% + 15px);
+    }
+
+    .github-link::before,
+    .scroll-to-top::before {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* Hide tooltips on very small screens */
+@media (max-width: 480px) {
+    .github-link::after,
+    .github-link::before,
+    .scroll-to-top::after,
+    .scroll-to-top::before {
+        display: none;
+    }
 }
 
 /* Theme toggle button */
@@ -2313,5 +2486,153 @@ a, button, input, textarea, select, .experience-card, .education-card, .honor-ca
         width: 40px;
         height: 40px;
         font-size: 16px;
+    }
+}
+
+/* Tooltip Base Styles */
+.tooltip-container {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+    transition: all 0.4s var(--ease-bounce);
+    pointer-events: none;
+    z-index: 1000;
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+}
+
+.tooltip::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    transform: rotate(45deg);
+    z-index: -1;
+    border: inherit;
+}
+
+/* Shared Tooltip Styles */
+.github-link::after,
+.scroll-to-top::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scale(0.8);
+    background-color: var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s var(--ease-smooth);
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    z-index: 1001;
+}
+
+.github-link::after {
+    content: 'View the source code!';
+    left: calc(100% + 20px);
+}
+
+.scroll-to-top::after {
+    content: 'Go back to the top!';
+    right: calc(100% + 20px);
+}
+
+.github-link::before,
+.scroll-to-top::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: all 0.3s var(--ease-smooth);
+    transform: translateY(-50%) rotate(45deg);
+    z-index: 1001;
+}
+
+.github-link::before {
+    left: calc(100% + 16px);
+}
+
+.scroll-to-top::before {
+    right: calc(100% + 16px);
+}
+
+.github-link:hover::after,
+.scroll-to-top:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+.github-link:hover::before,
+.scroll-to-top:hover::before {
+    opacity: 1;
+}
+
+/* Dark Mode Tooltips */
+[data-theme="dark"] .github-link::after,
+[data-theme="dark"] .scroll-to-top::after {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .github-link::before,
+[data-theme="dark"] .scroll-to-top::before {
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .github-link::after,
+    .scroll-to-top::after {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    .github-link::after {
+        left: calc(100% + 15px);
+    }
+
+    .scroll-to-top::after {
+        right: calc(100% + 15px);
+    }
+
+    .github-link::before,
+    .scroll-to-top::before {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* Hide tooltips on very small screens */
+@media (max-width: 480px) {
+    .github-link::after,
+    .github-link::before,
+    .scroll-to-top::after,
+    .scroll-to-top::before {
+        display: none;
     }
 } 

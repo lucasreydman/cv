@@ -1,7 +1,22 @@
-// Theme switching functionality
+/**
+ * Portfolio Website JavaScript
+ * Handles theme switching, animations, scroll effects, and interactive elements
+ * 
+ * @author Lucas Reydman
+ * @version 1.0.0
+ * @license MIT
+ */
+
+// =================================
+// Theme Management
+// =================================
+
 const themeToggle = document.getElementById('theme-toggle');
 
-// Function to set theme
+/**
+ * Sets the theme and updates relevant elements
+ * @param {string} theme - The theme to set ('light' or 'dark')
+ */
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     
@@ -9,7 +24,10 @@ function setTheme(theme) {
     updateHeroImageForTheme(theme);
 }
 
-// Function to update hero image based on theme
+/**
+ * Updates the hero image based on current theme
+ * @param {string} theme - Current theme ('light' or 'dark')
+ */
 function updateHeroImageForTheme(theme) {
     const heroImage = document.querySelector('.hero-image');
     if (heroImage) {
@@ -24,7 +42,9 @@ function updateHeroImageForTheme(theme) {
     }
 }
 
-// Check for preferred color scheme and initialize accordingly
+/**
+ * Initializes theme based on user preference or system setting
+ */
 function initializeTheme() {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -52,59 +72,103 @@ themeToggle.addEventListener('click', () => {
     setTheme(newTheme);
 });
 
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+// =================================
+// Scroll Effects
+// =================================
+
+/**
+ * Sets up smooth scrolling for navigation links
+ */
+function setupSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
-});
+}
 
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// Reveal animations for sections
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-};
-
-const observerCallback = (entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            observer.unobserve(entry.target);
+/**
+ * Sets up navbar scroll effect (background change on scroll)
+ */
+function setupNavbarScroll() {
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
         }
     });
-};
+}
 
-const observer = new IntersectionObserver(observerCallback, observerOptions);
+// =================================
+// Reveal Animations
+// =================================
 
-// Observe all main sections and their children
-document.querySelectorAll('section').forEach(section => {
-    section.classList.add('reveal-section');
-    observer.observe(section);
-    
-    // Observe grid items within sections
-    section.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card').forEach((item, index) => {
-        item.classList.add('reveal-item');
-        item.style.transitionDelay = `${index * 0.1}s`;
-        observer.observe(item);
+/**
+ * Sets up reveal animations for sections and cards using Intersection Observer
+ */
+function setupRevealAnimations() {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all main sections and their children
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('reveal-section');
+        observer.observe(section);
+        
+        // Observe grid items within sections with staggered delay
+        section.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card').forEach((item, index) => {
+            item.classList.add('reveal-item');
+            item.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(item);
+        });
     });
-});
+}
 
-// Speech bubble animation enhancement
+// =================================
+// Interactive Elements
+// =================================
+
+/**
+ * Detects if the current device is a mobile device
+ * @returns {boolean} True if the device is a mobile device
+ */
+function isMobileDevice() {
+    return (window.innerWidth <= 768) || 
+           ('ontouchstart' in window) || 
+           (navigator.maxTouchPoints > 0) ||
+           (navigator.msMaxTouchPoints > 0);
+}
+
+/**
+ * Sets up speech bubble animation and interaction
+ * Only activates on non-mobile devices
+ */
 function setupSpeechBubble() {
+    // Skip on mobile devices
+    if (isMobileDevice()) return;
+    
     const heroImage = document.querySelector('.hero-image-container');
     const speechBubble = document.querySelector('.speech-bubble');
     
@@ -117,56 +181,40 @@ function setupSpeechBubble() {
             // Hide after 3 seconds
             setTimeout(() => {
                 speechBubble.style.opacity = '0';
-                if (window.innerWidth <= 768) {
-                    speechBubble.style.transform = 'translateX(-50%) scale(0.8) translateY(10px)';
-                } else {
-                    speechBubble.style.transform = 'scale(0.8) translateY(10px)';
-                }
+                speechBubble.style.transform = 'scale(0.8) translateY(10px)';
             }, 3000);
         }, 1500);
         
         // Show on mouse enter
         heroImage.addEventListener('mouseenter', () => {
-            if (window.innerWidth <= 768) {
-                speechBubble.style.transform = 'translateX(-50%) scale(1) translateY(0)';
-            } else {
-                speechBubble.style.transform = 'scale(1) translateY(0)';
-            }
+            speechBubble.style.transform = 'scale(1) translateY(0)';
             speechBubble.style.opacity = '1';
         });
         
         // Hide on mouse leave
         heroImage.addEventListener('mouseleave', () => {
             speechBubble.style.opacity = '0';
-            if (window.innerWidth <= 768) {
-                speechBubble.style.transform = 'translateX(-50%) scale(0.8) translateY(10px)';
-            } else {
-                speechBubble.style.transform = 'scale(0.8) translateY(10px)';
-            }
-        });
-        
-        // Update on window resize to handle mobile/desktop differences
-        window.addEventListener('resize', () => {
-            if (window.innerWidth <= 768) {
-                if (parseFloat(speechBubble.style.opacity) > 0) {
-                    speechBubble.style.transform = 'translateX(-50%) scale(1) translateY(0)';
-                } else {
-                    speechBubble.style.transform = 'translateX(-50%) scale(0.8) translateY(10px)';
-                }
-            } else {
-                if (parseFloat(speechBubble.style.opacity) > 0) {
-                    speechBubble.style.transform = 'scale(1) translateY(0)';
-                } else {
-                    speechBubble.style.transform = 'scale(0.8) translateY(10px)';
-                }
-            }
+            speechBubble.style.transform = 'scale(0.8) translateY(10px)';
         });
     }
 }
 
-// Custom cursor functionality
+/**
+ * Sets up custom cursor functionality
+ * Only activates on non-mobile devices
+ */
 function setupCustomCursor() {
+    // Skip on mobile devices
+    if (isMobileDevice()) {
+        document.body.style.cursor = 'auto';
+        const cursor = document.querySelector('.custom-cursor');
+        if (cursor) cursor.style.display = 'none';
+        return;
+    }
+    
     const cursor = document.querySelector('.custom-cursor');
+    
+    if (!cursor) return;
     
     // Main cursor positioning - instant follow
     document.addEventListener('mousemove', (e) => {
@@ -195,21 +243,20 @@ function setupCustomCursor() {
     document.addEventListener('mouseleave', () => {
         cursor.style.opacity = '0';
     });
-    
-    // Fix for touch devices
-    if ('ontouchstart' in window) {
-        document.body.style.cursor = 'auto';
-        cursor.style.display = 'none';
-    }
 }
 
-// Hamburger menu functionality
+/**
+ * Sets up hamburger menu functionality for mobile
+ */
 function setupHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const navLinksItems = document.querySelectorAll('.nav-links a');
 
-    hamburger.addEventListener('click', () => {
+    if (!hamburger || !navLinks) return;
+
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
     });
@@ -231,18 +278,22 @@ function setupHamburgerMenu() {
     });
 }
 
-// Scroll to top button functionality
+/**
+ * Sets up scroll-to-top button functionality
+ */
 function setupScrollToTop() {
     const scrollBtn = document.getElementById('scroll-top');
     const githubBtn = document.querySelector('.github-link');
     
+    if (!scrollBtn) return;
+    
     window.addEventListener('scroll', () => {
         if (window.scrollY > 500) {
             scrollBtn.classList.add('visible');
-            githubBtn.classList.add('visible');
+            if (githubBtn) githubBtn.classList.add('visible');
         } else {
             scrollBtn.classList.remove('visible');
-            githubBtn.classList.remove('visible');
+            if (githubBtn) githubBtn.classList.remove('visible');
         }
     });
     
@@ -254,8 +305,17 @@ function setupScrollToTop() {
     });
 }
 
-// Initialize all functionality when DOM is loaded
+// =================================
+// Initialization
+// =================================
+
+/**
+ * Initializes all functionality when DOM is loaded
+ */
 document.addEventListener('DOMContentLoaded', () => {
+    setupSmoothScroll();
+    setupNavbarScroll();
+    setupRevealAnimations();
     setupHamburgerMenu();
     setupScrollToTop();
     setupCustomCursor();
