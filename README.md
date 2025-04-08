@@ -1,135 +1,132 @@
-# Lucas Reydman - Personal Portfolio Website
+# Portfolio Website
 
-A modern, responsive personal portfolio website built with HTML, CSS, and JavaScript. This website showcases Lucas Reydman's professional experience, education, skills, and achievements.
+A modern, responsive portfolio website with smooth animations, light/dark theme toggle, and high-quality visual components.
 
 ## Features
 
-- Responsive design that works on all devices
-- Modern and clean user interface
-- Dark/Light theme toggle with smooth transitions
-- Smooth scrolling navigation
-- Animated section and card reveals
-- Custom cursor with animations
-- Company logos for all experience entries
-- Institution logos for education entries
-- Interactive sections for:
-  - About (with highlighted key phrases)
-  - Experience
-  - Education
-  - Honors
-  - Skills
-  - Contact
-- Social media integration (LinkedIn)
-- Contact functionality
-- Progressive Web App (PWA) support
-- Cross-platform favicon support
-- Scroll-to-top button
-- Animated UI elements with hover effects
-- Subtle background patterns and gradients
-- Comprehensive documentation for favicon and PWA implementation
+- **Responsive Design**: Looks great on all devices from mobile to desktop
+- **Light/Dark Theme**: Toggle between themes with persistent user preference
+- **Interactive UI Elements**: 
+  - Custom cursor effects
+  - Speech bubble animations
+  - Smooth scroll navigation
+  - Reveal animations on scroll
+- **Section Organization**:
+  - Hero section with animated elements
+  - About section with highlight effects
+  - Experience & Education sections with card layouts
+  - Skills & Honors sections
+  - Contact section
 
 ## Technologies Used
 
-- HTML5
-- CSS3 (with CSS variables for theming)
-- JavaScript (ES6+)
-- Font Awesome Icons
-- Google Fonts (Inter)
-- Intersection Observer API for animations
-- CSS Animations and Transitions
-- CSS Grid and Flexbox for layouts
+- **HTML5**: Semantic markup for better accessibility and SEO
+- **CSS3**: 
+  - CSS variables for theming
+  - Flexbox and CSS Grid for layouts
+  - CSS animations and transitions
+  - Media queries for responsive design
+- **JavaScript**: 
+  - Intersection Observer API for scroll animations
+  - Local Storage for theme persistence
+  - DOM manipulation for dynamic elements
 
-## Project Structure
+## File Structure
 
 ```
-cv/
-├── index.html                    # Main HTML file
-├── styles.css                    # Main stylesheet with theming support
-├── scripts.js                    # Main script file with animations and interactions
-├── assets/                       # All static assets
-│   ├── images/                   # Image assets
-│   │   ├── company-logos/        # Company logos for work experiences
-│   │   ├── education-logos/      # Educational institution logos
-│   │   └── hero/                 # Hero image for the header section
-│   └── favicon/                  # Favicon directory
-│       ├── favicon.ico           # Default favicon
-│       ├── favicon-16x16.png     # Small favicon
-│       ├── favicon-32x32.png     # Large favicon
-│       ├── apple-touch-icon.png  # iOS icon
-│       ├── android-192x192.png   # Small android icon
-│       ├── android-512x512.png   # Large android icon
-│       ├── site.webmanifest      # PWA manifest file
-│       ├── site.webmanifest.txt  # Documentation for the webmanifest
-│       └── favicon.txt           # Documentation for the favicon system
-├── LICENSE                       # License file
-└── README.md                     # Project documentation
+portfolio/
+├── assets/
+│   ├── favicon/        # Favicon files
+│   └── images/         # Image assets
+│       ├── company-logos/
+│       ├── education-logos/
+│       └── hero/
+├── css/                # CSS files (modular organization)
+│   ├── base.css        # Base styles and variables
+│   ├── components.css  # Reusable component styles
+│   ├── layout.css      # Layout and structure styles
+│   ├── main.css        # Imports all CSS modules
+│   └── sections.css    # Section-specific styles
+├── index.html          # Main HTML file
+├── scripts.js          # JavaScript functionality
+├── LICENSE             # License information
+└── README.md           # This file
 ```
 
-## Features Detail
+## CSS Organization
 
-### Theme Toggle
-- Supports both light and dark themes
-- Persists user preference
-- Smooth transition between themes
-- Contextual color adaptation in UI elements
+The CSS is organized in a modular fashion to improve maintainability:
 
-### Custom Cursor
-- Custom cursor implementation
-- Cursor animations on interactive elements
+- **base.css**: Reset styles, variables, typography, and basic elements
+- **layout.css**: Page structure, grid systems, navbar, and footer
+- **components.css**: Reusable components like cards, buttons, and tooltips
+- **sections.css**: Specific styles for each section of the portfolio
+- **main.css**: Central file that imports all other CSS modules
 
-### Company Logos
-- Professional logos for all work experiences
-- Educational institution logos
-- Responsive sizing and positioning
-- Optimized image loading
-- Interactive hover effects
+## JavaScript Features
 
-### Responsive Design
-- Mobile-first approach
-- Adapts to all screen sizes
-- Optimized layout for desktop, tablet, and mobile
-- Responsive typography with clamp() functions
-- Accessible on all devices
+- **Theme switching**: Toggle between light and dark themes with persistence
+- **Smooth scrolling**: Navigate between sections smoothly
+- **Reveal animations**: Elements animate in as they enter the viewport
+- **Custom cursor**: Interactive cursor that responds to hoverable elements
+- **Speech bubble**: Interactive speech bubble in the hero section
+- **Mobile menu**: Hamburger menu for mobile navigation
+- **Scroll to top**: Button to smoothly scroll back to the top of the page
 
-### Progressive Web App
-- Full PWA support with web manifest (located in the assets/favicon folder)
-- Cross-platform favicon support
-- Installable on mobile devices
-- Offline capability
-- Customized theme colors
+## Customization
 
-### Animations
-- Smooth section reveal on scroll using Intersection Observer API
-- Staggered card animations
-- Interactive hover effects
-- Smooth transitions between elements
-- Subtle background animations
-- Text highlight effects
+### Changing Colors
 
-## Getting Started
+Edit the CSS variables in `css/base.css`:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/cv.git
-   ```
+```css
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    /* other color variables */
+}
 
-2. Open `index.html` in your web browser to view the website.
+[data-theme="dark"] {
+    --primary-color: #60a5fa;
+    --secondary-color: #3b82f6;
+    /* other dark theme color variables */
+}
+```
 
-## Development
+### Adding New Sections
 
-To make changes to the website:
+1. Add the HTML markup in `index.html`
+2. Add section-specific styles in `css/sections.css`
+3. If needed, add JavaScript functionality in `scripts.js`
 
-1. Edit the HTML in `index.html` to update content
-2. Modify styles in `styles.css` to change appearance
-3. Update scripts in `scripts.js` to adjust animations and interactions
-4. Add or replace images in the `assets/images` directory as needed
-5. Refer to `assets/favicon/favicon.txt` and `assets/favicon/site.webmanifest.txt` for documentation on the favicon system and PWA implementation
+### Modifying Animations
 
-## Contact
+Animation settings are in the CSS variables:
 
-- LinkedIn: [Lucas Reydman](https://www.linkedin.com/in/lucasreydman)
-- Email: lucas.reydman@dal.ca
+```css
+:root {
+    --animation-short: 0.3s;
+    --animation-medium: 0.6s;
+    --animation-long: 1s;
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+}
+```
+
+## Browser Support
+
+The portfolio website is compatible with:
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers (iOS Safari, Android Chrome)
 
 ## License
 
-This project is licensed under the terms specified in the LICENSE file.
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Author
+
+Lucas Reydman
