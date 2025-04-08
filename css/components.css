@@ -207,7 +207,7 @@
 }
 
 .github-link::after {
-    content: 'View the source code!';
+    content: 'View the CV repository!';
     position: absolute;
     left: calc(100% + 20px);
     top: 50%;
