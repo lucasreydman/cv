@@ -7,7 +7,6 @@ A modern, responsive portfolio website with smooth animations, light/dark theme 
 - **Responsive Design**: Looks great on all devices from mobile to desktop
 - **Light/Dark Theme**: Toggle between themes with persistent user preference
 - **Interactive UI Elements**: 
-  - Custom cursor effects
   - Speech bubble animations
   - Smooth scroll navigation
   - Reveal animations on scroll
@@ -72,7 +71,6 @@ The CSS is organized in a modular fashion to improve maintainability:
 - **Theme switching**: Toggle between light and dark themes with persistence
 - **Smooth scrolling**: Navigate between sections smoothly
 - **Reveal animations**: Elements animate in as they enter the viewport
-- **Custom cursor**: Interactive cursor that responds to hoverable elements
 - **Speech bubble**: Interactive speech bubble in the hero section
 - **Mobile menu**: Hamburger menu for mobile navigation
 - **Scroll to top**: Button to smoothly scroll back to the top of the page
@@ -101,7 +99,7 @@ Edit the CSS variables in `css/base.css`:
 
 1. Add the HTML markup in `index.html`
 2. Add section-specific styles in `css/sections.css`
-3. If needed, add JavaScript functionality in `scripts.js`
+3. If needed, add JavaScript functionality in `js/main.js`
 
 ### Modifying Animations
 

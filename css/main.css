@@ -17,16 +17,4 @@
 @import url('./components.css');
 
 /* Import section-specific styles */
-@import url('./sections.css');
-
-.navbar-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-@media (max-width: 900px) {
-    .navbar-controls {
-        margin-left: 1rem;
-    }
-} 
+@import url('./sections.css'); 
