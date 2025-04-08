@@ -173,54 +173,6 @@
     transform: translateY(-100%);
 }
 
-/* Enhanced sleek custom cursor */
-.custom-cursor {
-    position: fixed;
-    width: 24px;
-    height: 24px;
-    border: 1.5px solid var(--primary-color);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 10000;
-    mix-blend-mode: exclusion;
-    opacity: 1;
-    transition: 
-        width 0.3s var(--ease-smooth),
-        height 0.3s var(--ease-smooth),
-        background-color 0.3s var(--ease-smooth),
-        border-color 0.3s var(--ease-smooth),
-        transform 0.1s ease-out;
-}
-
-/* Inner dot of the cursor */
-.custom-cursor::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 4px;
-    height: 4px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    transition: width 0.2s ease, height 0.2s ease;
-}
-
-/* Expanded state for custom cursor */
-.custom-cursor.expanded {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(37, 99, 235, 0.1);
-    mix-blend-mode: normal;
-}
-
-/* Set cursor to none on interactive elements for custom cursor */
-a, button, input, textarea, select, 
-.experience-card, .education-card, .honor-card, .skill-card, .nav-links li {
-    cursor: none;
-}
-
 /* GitHub Button and its Tooltip */
 .github-link {
     position: fixed;
@@ -523,20 +475,6 @@ a, button, input, textarea, select,
         display: none !important;
     }
     
-    /* Disable custom cursor on mobile to improve performance */
-    .custom-cursor {
-        display: none !important;
-    }
-    
-    body {
-        cursor: auto !important;
-    }
-    
-    a, button, input, textarea, select, 
-    .experience-card, .education-card, .honor-card, .skill-card, .nav-links li {
-        cursor: auto !important;
-    }
-    
     /* Adjust fixed buttons for better mobile experience */
     .github-link,
     .scroll-to-top {
@@ -580,13 +518,6 @@ a, button, input, textarea, select,
         text-align: center;
         width: 100%;
     }
-
-    .theme-toggle {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        margin-left: 0.5rem;
-    }
 }
 
 /* Even smaller mobile screens */
@@ -596,4 +527,17 @@ a, button, input, textarea, select,
         width: 50px;
         height: 50px;
     }
+}
+
+/* Set all interactive elements to have appropriate cursors */
+a, button, .theme-toggle, .hamburger, .scroll-to-top, .github-link {
+    cursor: pointer;
+}
+
+input, textarea, select {
+    cursor: text;
+}
+
+.experience-card, .education-card, .honor-card, .skill-card {
+    cursor: default;
 } 

@@ -16,18 +16,15 @@ html, body {
     position: relative;
     touch-action: manipulation;
     
-    /* Hide scrollbars while allowing scrolling */
-    scrollbar-width: none; /* Firefox */
+    /* Hide scrollbars cross-browser */
     -ms-overflow-style: none; /* IE and Edge */
 }
 
-/* Hide WebKit scrollbars (Chrome, Safari, newer versions of Opera) */
-body::-webkit-scrollbar,
+/* Hide WebKit scrollbars (Chrome, Safari, Opera) */
 html::-webkit-scrollbar,
-*::-webkit-scrollbar {
+body::-webkit-scrollbar {
     display: none;
     width: 0;
-    height: 0;
 }
 
 :root {
@@ -89,7 +86,6 @@ body {
     position: relative;
     z-index: 1;
     min-height: 100vh;
-    cursor: none; /* Hide the default cursor */
     touch-action: pan-y;
 }
 

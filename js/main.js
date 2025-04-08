@@ -200,52 +200,6 @@ function setupSpeechBubble() {
 }
 
 /**
- * Sets up custom cursor functionality
- * Only activates on non-mobile devices
- */
-function setupCustomCursor() {
-    // Skip on mobile devices
-    if (isMobileDevice()) {
-        document.body.style.cursor = 'auto';
-        const cursor = document.querySelector('.custom-cursor');
-        if (cursor) cursor.style.display = 'none';
-        return;
-    }
-    
-    const cursor = document.querySelector('.custom-cursor');
-    
-    if (!cursor) return;
-    
-    // Main cursor positioning - instant follow
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
-    });
-    
-    // Add expanding effect on interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .experience-card, .education-card, .honor-card, .skill-card, .nav-links li, .hero-image-container');
-    
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('expanded');
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('expanded');
-        });
-    });
-    
-    // Handle cursor visibility when leaving/entering window
-    document.addEventListener('mouseenter', () => {
-        cursor.style.opacity = '1';
-    });
-    
-    document.addEventListener('mouseleave', () => {
-        cursor.style.opacity = '0';
-    });
-}
-
-/**
  * Sets up hamburger menu functionality for mobile
  */
 function setupHamburgerMenu() {
@@ -318,7 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupRevealAnimations();
     setupHamburgerMenu();
     setupScrollToTop();
-    setupCustomCursor();
     setupSpeechBubble();
     
     // Force apply the correct transparent image in the current theme
