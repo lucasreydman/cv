@@ -3,3 +3,5 @@
 /* Navbar Controls */
 .navbar-controls{display:flex;align-items:center;gap:.75rem;}
 @media (max-width:900px){.navbar-controls{margin-left:1rem;}} 
+
+.social-links a{font-size:1.4rem;width:45px;height:45px;min-width:45px;background-color:rgba(37,99,235,0.05);}.social-links a:hover{transform:scale(1.1) translateY(-5px);background-color:var(--primary-color);}.theme-toggle{width:45px;height:45px;min-width:45px;margin-left:1rem;}@media (max-width:768px){.social-links a{width:40px;height:40px;min-width:40px;font-size:1.3rem;}.theme-toggle{width:40px;height:40px;min-width:40px;margin-left:0.5rem;}} 
