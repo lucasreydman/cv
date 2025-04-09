@@ -2265,6 +2265,43 @@ input, textarea, select {
     margin-bottom: 0.5rem;
 }
 
+.project-link {
+    color: var(--text-color);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.project-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s var(--ease-smooth);
+}
+
+.project-link:hover {
+    color: var(--primary-color);
+}
+
+.project-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+[data-theme="dark"] .project-link {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .project-link:hover {
+    color: var(--primary-color);
+}
+
 .project-description {
     color: var(--text-color);
     margin-bottom: 1.5rem;
@@ -2275,9 +2312,9 @@ input, textarea, select {
 .project-skills {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.75rem;
     margin-top: 1rem;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .skill-tag {
@@ -2289,13 +2326,14 @@ input, textarea, select {
     font-weight: 500;
     transition: all 0.3s ease;
     text-align: center;
-    flex: 1 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: calc(12.5% - 0.5rem);
     position: relative;
     cursor: pointer;
+    margin-right: 0;
+    flex-grow: 0;
+    flex-basis: calc(25% - 0.75rem);
 }
 
 .skill-tag:hover {
@@ -2369,18 +2407,13 @@ input, textarea, select {
 
 @media (max-width: 992px) {
     .skill-tag {
-        max-width: calc(25% - 0.5rem);
-        margin-bottom: 0.5rem;
-    }
-    
-    .project-skills {
-        justify-content: center;
+        flex-basis: calc(33.333% - 0.75rem);
     }
 }
 
 @media (max-width: 576px) {
     .skill-tag {
-        max-width: calc(33.333% - 0.5rem);
+        flex-basis: calc(50% - 0.75rem);
     }
 }
 
