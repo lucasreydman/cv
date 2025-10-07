@@ -145,15 +145,23 @@ function setupRevealAnimations() {
         });
     });
 
-    // Fallback for mobile devices - ensure all cards are visible after a delay
+    // Universal fallback - ensure all cards are visible after a delay
+    // This works for all devices, not just mobile
+    setTimeout(() => {
+        document.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card').forEach(card => {
+            if (!card.classList.contains('revealed')) {
+                card.classList.add('revealed');
+            }
+        });
+    }, 2000);
+    
+    // Additional fallback for mobile devices with shorter delay
     if (isMobileDevice()) {
         setTimeout(() => {
             document.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card').forEach(card => {
-                if (!card.classList.contains('revealed')) {
-                    card.classList.add('revealed');
-                }
+                card.classList.add('revealed');
             });
-        }, 1000);
+        }, 500);
     }
 }
 
@@ -288,5 +296,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Force apply the correct transparent image in the current theme
     const currentTheme = document.documentElement.getAttribute('data-theme');
     updateHeroImageForTheme(currentTheme);
+    
+    // Emergency fallback - force show all cards immediately on mobile
+    if (isMobileDevice()) {
+        setTimeout(() => {
+            document.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card').forEach(card => {
+                card.classList.add('revealed');
+            });
+        }, 100);
+    }
 });
 
