@@ -636,6 +636,12 @@
     .education-details ul {
         padding-left: 1rem;
     }
+    
+    /* Force experience cards to be visible on mobile */
+    .experience-card {
+        opacity: 1 !important;
+        transform: translateY(0) rotateX(0) !important;
+    }
 
     .contact-info {
         flex-direction: column;
