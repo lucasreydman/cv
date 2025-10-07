@@ -144,6 +144,17 @@ function setupRevealAnimations() {
             observer.observe(item);
         });
     });
+
+    // Fallback for mobile devices - ensure all cards are visible after a delay
+    if (isMobileDevice()) {
+        setTimeout(() => {
+            document.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card').forEach(card => {
+                if (!card.classList.contains('revealed')) {
+                    card.classList.add('revealed');
+                }
+            });
+        }, 1000);
+    }
 }
 
 // =================================
