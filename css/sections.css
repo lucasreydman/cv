@@ -621,6 +621,7 @@
         grid-template-columns: 1fr;
         width: 100%;
         margin: 2rem 0;
+        gap: 1.5rem;
     }
 
     .experience-card,
@@ -630,17 +631,33 @@
         width: 100%;
         max-width: 100%;
         margin: 0;
+        box-sizing: border-box;
     }
     
     .experience-details ul,
     .education-details ul {
-        padding-left: 1rem;
+        padding-left: 0;
+        width: 100%;
+    }
+    
+    .experience-details li,
+    .education-details li {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding-right: 0.5rem;
     }
     
     /* Force experience cards to be visible on mobile */
     .experience-card {
         opacity: 1 !important;
         transform: translateY(0) rotateX(0) !important;
+    }
+    
+    .experience-card .experience-details,
+    .education-card .education-details {
+        width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 
     .contact-info {
@@ -725,5 +742,17 @@
     .education-period,
     .experience-period {
         font-size: 0.85rem;
+    }
+    
+    .experience-details li,
+    .education-details li {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+    }
+    
+    .experience-title h3,
+    .education-title h3 {
+        font-size: 1.25rem;
     }
 } 
