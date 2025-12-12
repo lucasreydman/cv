@@ -227,6 +227,8 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
     overflow: hidden;
+    font-size: 1.05rem;
+    line-height: 1.75;
 }
 
 .about-text .highlight {
@@ -345,6 +347,92 @@
     position: absolute;
     left: 0;
     color: var(--primary-color);
+}
+
+/* Education expandable items */
+.education-details .pursuing-list {
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+.education-details .pursuing-item {
+    margin-bottom: 0.75rem;
+    padding-left: 0;
+    position: relative;
+    list-style: none !important;
+}
+
+.education-details .pursuing-item:before {
+    content: none;
+}
+
+.education-details details {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 12px;
+    padding: 0.4rem 0.75rem 0.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+[data-theme="dark"] .education-details details {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+.education-details summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--text-color);
+    list-style: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.education-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.education-details summary::before {
+    content: "▸";
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+    display: inline-block;
+    background: rgba(37, 99, 235, 0.12);
+    padding: 0.25rem 0.35rem;
+    border-radius: 8px;
+}
+
+.education-details details[open] summary::before {
+    transform: rotate(90deg);
+    background: rgba(37, 99, 235, 0.2);
+}
+
+.education-details details p {
+    margin: 0.5rem 0 0.25rem;
+    color: var(--light-text);
+}
+
+.education-details summary:hover {
+    color: var(--primary-color);
+    transform: translateX(2px);
+}
+
+.education-details summary:hover::before {
+    color: var(--secondary-color);
+    transform: translateX(3px);
+    background: rgba(37, 99, 235, 0.18);
+}
+
+.education-details details:focus-within {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
 /* Skills Section */
