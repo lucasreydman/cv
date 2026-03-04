@@ -307,58 +307,6 @@ function setupTypewriter() {
     tick();
 }
 
-// =================================
-// Animated Stats Counter
-// =================================
-
-/**
- * Animates a stat number counting up from 0 to its target value
- * @param {HTMLElement} el - The element containing data-target attribute
- */
-function animateCounter(el) {
-    const target = parseFloat(el.dataset.target);
-    const isDecimal = el.dataset.decimal === 'true';
-    const prefix = el.dataset.prefix || '';
-    const suffix = el.dataset.suffix || '';
-    const duration = 1600;
-    const startTime = performance.now();
-
-    function update(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = target * eased;
-
-        el.textContent = prefix + (isDecimal ? current.toFixed(2) : Math.floor(current)) + suffix;
-
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        } else {
-            el.textContent = prefix + (isDecimal ? target.toFixed(2) : target) + suffix;
-        }
-    }
-
-    requestAnimationFrame(update);
-}
-
-/**
- * Sets up counter animations for stat numbers using Intersection Observer
- */
-function setupStatsCounter() {
-    const counters = document.querySelectorAll('.stat-number');
-    if (!counters.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.dataset.counted) {
-                entry.target.dataset.counted = 'true';
-                animateCounter(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    counters.forEach(counter => observer.observe(counter));
-}
 
 // =================================
 // Scroll Progress Bar
@@ -381,6 +329,39 @@ function setupScrollProgress() {
 }
 
 // =================================
+// Cursor Spotlight
+// =================================
+
+/**
+ * Creates a subtle radial spotlight that follows the cursor on desktop
+ */
+function setupCursorSpotlight() {
+    if (window.innerWidth <= 768) return;
+
+    const spotlight = document.createElement('div');
+    spotlight.className = 'cursor-spotlight';
+    document.body.appendChild(spotlight);
+
+    let mouseX = -9999, mouseY = -9999;
+    let currentX = -9999, currentY = -9999;
+    let raf;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animate() {
+        currentX += (mouseX - currentX) * 0.08;
+        currentY += (mouseY - currentY) * 0.08;
+        spotlight.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+        raf = requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
+// =================================
 // Initialization
 // =================================
 
@@ -395,8 +376,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupScrollToTop();
     setupSpeechBubble();
     setupTypewriter();
-    setupStatsCounter();
     setupScrollProgress();
+    setupCursorSpotlight();
 
     // Force apply the correct transparent image in the current theme
     const currentTheme = document.documentElement.getAttribute('data-theme');
