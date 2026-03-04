@@ -529,6 +529,96 @@
     }
 }
 
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    z-index: 9999;
+    transition: width 0.1s linear;
+    pointer-events: none;
+}
+
+/* Resume Download Button */
+.btn-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s var(--ease-bounce);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    margin-top: 1.5rem;
+}
+
+.btn-resume:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45);
+    color: white;
+}
+
+[data-theme="dark"] .btn-resume {
+    box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+}
+
+[data-theme="dark"] .btn-resume:hover {
+    box-shadow: 0 8px 25px rgba(96, 165, 250, 0.45);
+}
+
+/* Project Live Demo Button */
+.project-links {
+    margin-top: 1.25rem;
+}
+
+.project-demo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.25rem;
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s var(--ease-smooth);
+}
+
+.project-demo-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+}
+
+[data-theme="dark"] .project-demo-btn:hover {
+    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.3);
+}
+
+/* Typewriter cursor blink */
+.typewriter-cursor {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: 300;
+    animation: blink 0.75s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 /* Set all interactive elements to have appropriate cursors */
 a, button, .theme-toggle, .hamburger, .scroll-to-top, .github-link {
     cursor: pointer;

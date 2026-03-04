@@ -20,13 +20,12 @@
     <link rel="manifest" href="assets/favicon/site.webmanifest">
     
     <!-- Preload critical assets -->
-    <link rel="preload" href="css/minified/main.min.css?v=2" as="style">
-    <link rel="preload" href="js/main.min.js" as="script">
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
     <link rel="preload" href="assets/images/hero/hero-removebg-preview.png" as="image">
     
     <!-- Stylesheets -->
-    <!-- Use non-minified CSS for development: <link rel="stylesheet" href="css/main.css"> -->
-    <link rel="stylesheet" href="css/minified/main.min.css?v=2">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
@@ -35,6 +34,7 @@
     </noscript>
 </head>
 <body>
+    <div class="scroll-progress" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     <nav class="navbar" aria-label="Main navigation">
         <div class="container">
             <div class="social-links">
@@ -74,7 +74,10 @@
                 <div class="hero-content">
                     <div class="hero-text">
                         <h1>Hi, I'm <span class="highlight">Lucas Reydman</span></h1>
-                        <p class="subtitle">Computer Science & Management Student</p>
+                        <p class="subtitle"><span id="typewriter">Computer Science & Management Student</span><span class="typewriter-cursor" aria-hidden="true">|</span></p>
+                        <a href="assets/resume.pdf" download class="btn-resume">
+                            <i class="fas fa-download" aria-hidden="true"></i> Download Resume
+                        </a>
                     </div>
                     <div class="hero-image-container">
                         <img src="assets/images/hero/hero-removebg-preview.png" alt="Lucas Reydman" class="hero-image" />
@@ -98,147 +101,189 @@
             </div>
         </section>
 
+        <section class="stats-bar" aria-label="Key highlights">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="3.91" data-decimal="true">3.91</span>
+                        <span class="stat-label">Cumulative GPA</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="40" data-prefix="$" data-suffix="K+">$40K+</span>
+                        <span class="stat-label">Revenue Generated</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="4" data-suffix="×">4×</span>
+                        <span class="stat-label">Dean's List</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="4" data-suffix="+">4+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="experience" class="experience">
             <div class="container">
                 <h2>Work Experience</h2>
-                <div class="experience-grid">
-                    <article class="experience-card">
-                        <header class="experience-header">
-                            <div class="company-logo">
-                                <a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">
-                                    <img src="assets/images/company-logos/rbc_logo.jpg" alt="RBC Logo">
-                                </a>
-                            </div>
-                            <div class="experience-title">
-                                <h3>Operations Analyst</h3>
-                                <p class="experience-company"><a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">RBC</a></p>
-                                <p class="experience-period">May 2025 - Aug 2025</p>
-                            </div>
-                        </header>
-                        <div class="experience-details">
-                            <ul>
-                                <li>Supported the FSS team by managing operational tasks and overseeing the invoice lifecycle for RBC's U.S. business units</li>
-                                <li>Used SAP to cross-reference vendor information, validate purchase orders, and monitor payment statuses</li>
-                                <li>Leveraged Pega to route and track invoices through automated workflows, ensuring accuracy and timely approvals</li>
-                                <li>Utilized Microsoft Excel to index and stamp verified invoices, organize documentation, and streamline workflow management</li>
-                            </ul>
-                        </div>
-                    </article>
+                <div class="timeline">
 
-                    <article class="experience-card">
-                        <header class="experience-header">
-                            <div class="company-logo">
-                                <a href="https://www.torinit.com/" target="_blank" rel="noopener">
-                                    <img src="assets/images/company-logos/torinit_technologies_inc_logo.jpg" alt="Torinit Technologies Inc. Logo">
-                                </a>
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-dot"></div>
+                        <article class="experience-card">
+                            <header class="experience-header">
+                                <div class="company-logo">
+                                    <a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">
+                                        <img src="assets/images/company-logos/rbc_logo.jpg" alt="RBC Logo">
+                                    </a>
+                                </div>
+                                <div class="experience-title">
+                                    <h3>Operations Analyst</h3>
+                                    <p class="experience-company"><a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">RBC</a></p>
+                                    <p class="experience-period">May 2025 - Aug 2025</p>
+                                </div>
+                            </header>
+                            <div class="experience-details">
+                                <ul>
+                                    <li>Supported the FSS team by managing operational tasks and overseeing the invoice lifecycle for RBC's U.S. business units</li>
+                                    <li>Used SAP to cross-reference vendor information, validate purchase orders, and monitor payment statuses</li>
+                                    <li>Leveraged Pega to route and track invoices through automated workflows, ensuring accuracy and timely approvals</li>
+                                    <li>Utilized Microsoft Excel to index and stamp verified invoices, organize documentation, and streamline workflow management</li>
+                                </ul>
                             </div>
-                            <div class="experience-title">
-                                <h3>Digital Solutions Intern</h3>
-                                <p class="experience-company"><a href="https://www.torinit.com/" target="_blank" rel="noopener">Torinit Technologies Inc.</a></p>
-                                <p class="experience-period">May 2024 - Aug 2024</p>
-                            </div>
-                        </header>
-                        <div class="experience-details">
-                            <ul>
-                                <li>Utilized tools such as ZoomInfo, HubSpot, and LinkedIn Sales Navigator to drive client growth and engagement, contributing to tailored digital solutions</li>
-                                <li>Created digital content for LinkedIn using Canva, developing social media schedules and strategies to enhance online presence</li>
-                                <li>Applied design thinking strategies to create proof of concept (POC) for digital solutions, addressing client needs and fostering innovation</li>
-                                <li>Streamlined team collaboration through Microsoft Teams and Excel, ensuring efficient project management and data-driven decision-making</li>
-                            </ul>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
 
-                    <article class="experience-card">
-                        <header class="experience-header">
-                            <div class="company-logo">
-                                <a href="https://mirabellacorp.com/" target="_blank" rel="noopener">
-                                    <img src="assets/images/company-logos/mirabella_development_corporation_logo.jpg?v=2" alt="Mirabella Development Corporation Logo">
-                                </a>
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-dot"></div>
+                        <article class="experience-card">
+                            <header class="experience-header">
+                                <div class="company-logo">
+                                    <a href="https://www.torinit.com/" target="_blank" rel="noopener">
+                                        <img src="assets/images/company-logos/torinit_technologies_inc_logo.jpg" alt="Torinit Technologies Inc. Logo">
+                                    </a>
+                                </div>
+                                <div class="experience-title">
+                                    <h3>Digital Solutions Intern</h3>
+                                    <p class="experience-company"><a href="https://www.torinit.com/" target="_blank" rel="noopener">Torinit Technologies Inc.</a></p>
+                                    <p class="experience-period">May 2024 - Aug 2024</p>
+                                </div>
+                            </header>
+                            <div class="experience-details">
+                                <ul>
+                                    <li>Utilized tools such as ZoomInfo, HubSpot, and LinkedIn Sales Navigator to drive client growth and engagement, contributing to tailored digital solutions</li>
+                                    <li>Created digital content for LinkedIn using Canva, developing social media schedules and strategies to enhance online presence</li>
+                                    <li>Applied design thinking strategies to create proof of concept (POC) for digital solutions, addressing client needs and fostering innovation</li>
+                                    <li>Streamlined team collaboration through Microsoft Teams and Excel, ensuring efficient project management and data-driven decision-making</li>
+                                </ul>
                             </div>
-                            <div class="experience-title">
-                                <h3>Research & Development Intern</h3>
-                                <p class="experience-company"><a href="https://mirabellacorp.com/" target="_blank" rel="noopener">Mirabella Development Corporation</a></p>
-                                <p class="experience-period">Jun 2023 - Aug 2023</p>
-                            </div>
-                        </header>
-                        <div class="experience-details">
-                            <ul>
-                                <li>Conducted market research on industry trends and consumer preferences</li>
-                                <li>Organized team meetings, facilitating discussions and ensuring effective communication</li>
-                                <li>Networked with industry professionals to gain insights into real estate and development</li>
-                                <li>Managed project tasks, resource allocation, and progress tracking</li>
-                            </ul>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
 
-                    <article class="experience-card">
-                        <header class="experience-header">
-                            <div class="company-logo">
-                                <a href="#" target="_blank" rel="noopener">
-                                    <img src="assets/images/company-logos/panther_student_events_logo.jpg" alt="Panther Logo">
-                                </a>
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-dot"></div>
+                        <article class="experience-card">
+                            <header class="experience-header">
+                                <div class="company-logo">
+                                    <a href="https://mirabellacorp.com/" target="_blank" rel="noopener">
+                                        <img src="assets/images/company-logos/mirabella_development_corporation_logo.jpg?v=2" alt="Mirabella Development Corporation Logo">
+                                    </a>
+                                </div>
+                                <div class="experience-title">
+                                    <h3>Research & Development Intern</h3>
+                                    <p class="experience-company"><a href="https://mirabellacorp.com/" target="_blank" rel="noopener">Mirabella Development Corporation</a></p>
+                                    <p class="experience-period">Jun 2023 - Aug 2023</p>
+                                </div>
+                            </header>
+                            <div class="experience-details">
+                                <ul>
+                                    <li>Conducted market research on industry trends and consumer preferences</li>
+                                    <li>Organized team meetings, facilitating discussions and ensuring effective communication</li>
+                                    <li>Networked with industry professionals to gain insights into real estate and development</li>
+                                    <li>Managed project tasks, resource allocation, and progress tracking</li>
+                                </ul>
                             </div>
-                            <div class="experience-title">
-                                <h3>Founder & Head of Operations</h3>
-                                <p class="experience-company"><a href="#" target="_blank" rel="noopener">Panther</a></p>
-                                <p class="experience-period">Sep 2021 - Aug 2023</p>
-                            </div>
-                        </header>
-                        <div class="experience-details">
-                            <ul>
-                                <li>Generated $40,000+ in revenue through innovative sales strategies and business process optimization</li>
-                                <li>Directed a sales team, managing strategic execution and personnel training to meet revenue targets</li>
-                                <li>Led social media marketing campaigns to boost visibility and engagement for our student events</li>
-                                <li>Coordinated event logistics, venue bookings, contract negotiations, and budget adherence</li>
-                            </ul>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
 
-                    <article class="experience-card">
-                        <header class="experience-header">
-                            <div class="company-logo">
-                                <a href="https://scalehospitality.com/" target="_blank" rel="noopener">
-                                    <img src="assets/images/company-logos/scale_hospitality.jpg" alt="Scale Hospitality Logo">
-                                </a>
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-dot"></div>
+                        <article class="experience-card">
+                            <header class="experience-header">
+                                <div class="company-logo">
+                                    <a href="#" target="_blank" rel="noopener">
+                                        <img src="assets/images/company-logos/panther_student_events_logo.jpg" alt="Panther Logo">
+                                    </a>
+                                </div>
+                                <div class="experience-title">
+                                    <h3>Founder & Head of Operations</h3>
+                                    <p class="experience-company"><a href="#" target="_blank" rel="noopener">Panther</a></p>
+                                    <p class="experience-period">Sep 2021 - Aug 2023</p>
+                                </div>
+                            </header>
+                            <div class="experience-details">
+                                <ul>
+                                    <li>Generated $40,000+ in revenue through innovative sales strategies and business process optimization</li>
+                                    <li>Directed a sales team, managing strategic execution and personnel training to meet revenue targets</li>
+                                    <li>Led social media marketing campaigns to boost visibility and engagement for our student events</li>
+                                    <li>Coordinated event logistics, venue bookings, contract negotiations, and budget adherence</li>
+                                </ul>
                             </div>
-                            <div class="experience-title">
-                                <h3>Hospitality Assistant</h3>
-                                <p class="experience-company"><a href="https://scalehospitality.com/" target="_blank" rel="noopener">Scale Hospitality</a></p>
-                                <p class="experience-period">Jun 2022 - Aug 2022</p>
-                            </div>
-                        </header>
-                        <div class="experience-details">
-                            <ul>
-                                <li>Collaborated with waitstaff and bartenders for seamless dining experiences</li>
-                                <li>Maintained high standards of cleanliness and presentation</li>
-                                <li>Delivered top-tier customer service in an upscale environment</li>
-                                <li>Supported smooth restaurant operations during high-volume periods</li>
-                            </ul>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
 
-                    <article class="experience-card">
-                        <header class="experience-header">
-                            <div class="company-logo">
-                                <a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener">
-                                    <img src="assets/images/company-logos/over_the_rainbow_ltd_logo.jpg" alt="Over the Rainbow Ltd. Logo">
-                                </a>
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-dot"></div>
+                        <article class="experience-card">
+                            <header class="experience-header">
+                                <div class="company-logo">
+                                    <a href="https://scalehospitality.com/" target="_blank" rel="noopener">
+                                        <img src="assets/images/company-logos/scale_hospitality.jpg" alt="Scale Hospitality Logo">
+                                    </a>
+                                </div>
+                                <div class="experience-title">
+                                    <h3>Hospitality Assistant</h3>
+                                    <p class="experience-company"><a href="https://scalehospitality.com/" target="_blank" rel="noopener">Scale Hospitality</a></p>
+                                    <p class="experience-period">Jun 2022 - Aug 2022</p>
+                                </div>
+                            </header>
+                            <div class="experience-details">
+                                <ul>
+                                    <li>Collaborated with waitstaff and bartenders for seamless dining experiences</li>
+                                    <li>Maintained high standards of cleanliness and presentation</li>
+                                    <li>Delivered top-tier customer service in an upscale environment</li>
+                                    <li>Supported smooth restaurant operations during high-volume periods</li>
+                                </ul>
                             </div>
-                            <div class="experience-title">
-                                <h3>Sales Associate</h3>
-                                <p class="experience-company"><a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener">Over the Rainbow Ltd.</a></p>
-                                <p class="experience-period">Jun 2021 - Aug 2021</p>
+                        </article>
+                    </div>
+
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-dot"></div>
+                        <article class="experience-card">
+                            <header class="experience-header">
+                                <div class="company-logo">
+                                    <a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener">
+                                        <img src="assets/images/company-logos/over_the_rainbow_ltd_logo.jpg" alt="Over the Rainbow Ltd. Logo">
+                                    </a>
+                                </div>
+                                <div class="experience-title">
+                                    <h3>Sales Associate</h3>
+                                    <p class="experience-company"><a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener">Over the Rainbow Ltd.</a></p>
+                                    <p class="experience-period">Jun 2021 - Aug 2021</p>
+                                </div>
+                            </header>
+                            <div class="experience-details">
+                                <ul>
+                                    <li>Managed and restocked inventory efficiently</li>
+                                    <li>Assisted clients with product information</li>
+                                    <li>Fulfilled online and in-store orders promptly</li>
+                                    <li>Provided excellent customer service, servicing high-profile clients</li>
+                                </ul>
                             </div>
-                        </header>
-                        <div class="experience-details">
-                            <ul>
-                                <li>Managed and restocked inventory efficiently</li>
-                                <li>Assisted clients with product information</li>
-                                <li>Fulfilled online and in-store orders promptly</li>
-                                <li>Provided excellent customer service, servicing high-profile clients</li>
-                            </ul>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
 
                 </div>
             </div>
@@ -477,6 +522,11 @@
                                 <span class="skill-tag" title="Programming language for interactive web functionality">JavaScript</span>
                                 <span class="skill-tag" title="Browser API for storing data locally in the user's browser">Local Storage API</span>
                             </div>
+                            <div class="project-links">
+                                <a href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener" class="project-demo-btn">
+                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                </a>
+                            </div>
                         </div>
                     </article>
 
@@ -500,6 +550,11 @@
                                 <span class="skill-tag" title="Cascading Style Sheets for styling web pages">CSS3</span>
                                 <span class="skill-tag" title="Programming language for interactive web functionality">JavaScript</span>
                                 <span class="skill-tag" title="Browser API for storing data locally in the user's browser">Local Storage API</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://lucasreydman.github.io/fantasy-draft-lottery/" target="_blank" rel="noopener" class="project-demo-btn">
+                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -544,7 +599,6 @@
     </a>
 
     <!-- JavaScript -->
-    <!-- Use non-minified JavaScript for development: <script src="js/main.js"></script> -->
-    <script src="js/main.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html> 
