@@ -99,6 +99,12 @@
     transition: transform 0.3s ease;
 }
 
+.company-logo a:hover,
+.education-header .company-logo a:hover {
+    transform: translateY(-4px);
+    display: block;
+}
+
 .experience-title,
 .education-title {
     flex-grow: 1;

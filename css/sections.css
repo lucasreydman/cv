@@ -785,10 +785,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.25s var(--ease-bounce);
+}
+
+.project-logo a:hover {
+    transform: translateY(-4px);
+    display: block;
 }
 
 .project-logo a:hover img {
-    transform: scale(1.12);
+    transform: scale(1.08);
 }
 
 .project-title {
@@ -1016,7 +1022,7 @@
     text-decoration: none;
     position: relative;
     display: inline-block;
-    transition: color 0.25s ease;
+    transition: color 0.25s ease, transform 0.25s ease;
 }
 
 /* Gradient underline that slides from right → left on hover */
@@ -1040,6 +1046,7 @@
 .education-school a:hover,
 .education-title h3 a:hover {
     color: var(--secondary-color);
+    transform: translateY(-2px);
 }
 
 .experience-company a:hover::after,
