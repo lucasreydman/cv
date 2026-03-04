@@ -362,6 +362,43 @@ function setupCursorSpotlight() {
 }
 
 // =================================
+// Custom Cursor
+// =================================
+
+function setupCustomCursor() {
+    if (window.innerWidth <= 768 || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    const ring = document.createElement('div');
+    ring.className = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+
+    let mouseX = -9999, mouseY = -9999;
+    let ringX = -9999, ringY = -9999;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    });
+
+    (function animateRing() {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateRing);
+    })();
+
+    const hoverTargets = 'a, button, [role="button"], label, input, textarea, select, .skill-tag, .scroll-to-top, .theme-toggle';
+    document.querySelectorAll(hoverTargets).forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+}
+
+// =================================
 // Initialization
 // =================================
 
@@ -378,6 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupTypewriter();
     setupScrollProgress();
     setupCursorSpotlight();
+    setupCustomCursor();
 
     // Force apply the correct transparent image in the current theme
     const currentTheme = document.documentElement.getAttribute('data-theme');
