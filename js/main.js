@@ -173,29 +173,25 @@ function setupSpeechBubble() {
     const speechBubble = document.querySelector('.speech-bubble');
     
     if (heroImage && speechBubble) {
+        const showBubble = () => {
+            speechBubble.style.opacity = '1';
+            speechBubble.style.transform = 'scale(1) translateY(0)';
+            speechBubble.classList.add('is-visible');
+        };
+        const hideBubble = () => {
+            speechBubble.style.opacity = '0';
+            speechBubble.style.transform = 'scale(0.85) translateY(12px)';
+            speechBubble.classList.remove('is-visible');
+        };
+
         // Initial show on page load
         setTimeout(() => {
-            speechBubble.style.opacity = '1';
-            speechBubble.style.transform = 'scale(1) translateY(0)';
-            
-            // Hide after 3 seconds
-            setTimeout(() => {
-                speechBubble.style.opacity = '0';
-                speechBubble.style.transform = 'scale(0.8) translateY(10px)';
-            }, 3000);
+            showBubble();
+            setTimeout(hideBubble, 3000);
         }, 1500);
-        
-        // Show on mouse enter
-        heroImage.addEventListener('mouseenter', () => {
-            speechBubble.style.transform = 'scale(1) translateY(0)';
-            speechBubble.style.opacity = '1';
-        });
-        
-        // Hide on mouse leave
-        heroImage.addEventListener('mouseleave', () => {
-            speechBubble.style.opacity = '0';
-            speechBubble.style.transform = 'scale(0.8) translateY(10px)';
-        });
+
+        heroImage.addEventListener('mouseenter', showBubble);
+        heroImage.addEventListener('mouseleave', hideBubble);
     }
 }
 
