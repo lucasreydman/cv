@@ -260,6 +260,127 @@ function setupScrollToTop() {
 }
 
 // =================================
+// Typewriter Effect
+// =================================
+
+/**
+ * Cycles through identity phrases with a typewriter animation in the hero subtitle
+ */
+function setupTypewriter() {
+    const el = document.getElementById('typewriter');
+    if (!el) return;
+
+    const phrases = [
+        'Computer Science & Management Student',
+        'Aspiring Software Developer',
+        "Dean's List @ Dalhousie University",
+        'Builder. Leader. Problem Solver.'
+    ];
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function tick() {
+        const current = phrases[phraseIndex];
+        if (isDeleting) {
+            charIndex--;
+            el.textContent = current.slice(0, charIndex);
+        } else {
+            charIndex++;
+            el.textContent = current.slice(0, charIndex);
+        }
+
+        let delay = isDeleting ? 40 : 80;
+        if (!isDeleting && charIndex === current.length) {
+            delay = 2200;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            delay = 400;
+        }
+
+        setTimeout(tick, delay);
+    }
+
+    tick();
+}
+
+// =================================
+// Animated Stats Counter
+// =================================
+
+/**
+ * Animates a stat number counting up from 0 to its target value
+ * @param {HTMLElement} el - The element containing data-target attribute
+ */
+function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const isDecimal = el.dataset.decimal === 'true';
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1600;
+    const startTime = performance.now();
+
+    function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = target * eased;
+
+        el.textContent = prefix + (isDecimal ? current.toFixed(2) : Math.floor(current)) + suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            el.textContent = prefix + (isDecimal ? target.toFixed(2) : target) + suffix;
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+/**
+ * Sets up counter animations for stat numbers using Intersection Observer
+ */
+function setupStatsCounter() {
+    const counters = document.querySelectorAll('.stat-number');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.counted) {
+                entry.target.dataset.counted = 'true';
+                animateCounter(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// =================================
+// Scroll Progress Bar
+// =================================
+
+/**
+ * Updates a fixed progress bar at the top of the page based on scroll position
+ */
+function setupScrollProgress() {
+    const bar = document.querySelector('.scroll-progress');
+    if (!bar) return;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+        bar.setAttribute('aria-valuenow', Math.round(pct));
+    }, { passive: true });
+}
+
+// =================================
 // Initialization
 // =================================
 
@@ -273,7 +394,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setupHamburgerMenu();
     setupScrollToTop();
     setupSpeechBubble();
-    
+    setupTypewriter();
+    setupStatsCounter();
+    setupScrollProgress();
+
     // Force apply the correct transparent image in the current theme
     const currentTheme = document.documentElement.getAttribute('data-theme');
     updateHeroImageForTheme(currentTheme);
