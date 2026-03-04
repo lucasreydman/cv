@@ -735,7 +735,7 @@
     padding: 2rem;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .project-card:hover {
