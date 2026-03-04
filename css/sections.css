@@ -263,6 +263,40 @@
     opacity: 0.07;
 }
 
+/* Incoming role badge */
+.incoming-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-bottom: 0.4rem;
+}
+
+[data-theme="dark"] .incoming-badge {
+    background: rgba(96, 165, 250, 0.12);
+    border-color: rgba(96, 165, 250, 0.35);
+}
+
+.experience-card--incoming {
+    border: 1px dashed rgba(37, 99, 235, 0.3);
+}
+
+[data-theme="dark"] .experience-card--incoming {
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.coming-soon-text {
+    color: var(--light-text);
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
 /* Stats Bar */
 .stats-bar {
     background: var(--primary-color);
