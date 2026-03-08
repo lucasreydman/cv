@@ -152,6 +152,7 @@
     height: 100%;
     object-fit: contain;
     padding: 5px;
+    border-radius: 11px;
 }
 
 .experience-title,
