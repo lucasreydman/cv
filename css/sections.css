@@ -516,8 +516,8 @@
     align-items: center;
 }
 
-/* Icon circle */
-.honor-card i {
+/* Icon circle — targets only the direct decorative icon, not link icons */
+.honor-card > i {
     font-size: 1.6rem;
     color: var(--accent-2);
     width: 56px;
@@ -533,10 +533,16 @@
     flex-shrink: 0;
 }
 
-.honor-card:hover i {
+.honor-card:hover > i {
     transform: rotate(-8deg) scale(1.15);
     background: rgba(109, 90, 237, 0.18);
     box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+/* Arrow icon inside honor links — must be small */
+.honor-card .honor-link i {
+    font-size: 0.55rem;
+    line-height: 1;
 }
 
 .honor-card h3 {
@@ -646,6 +652,14 @@
 .project-logo a:hover {
     transform: translateY(-4px) scale(1.06);
     box-shadow: 0 8px 22px var(--accent-glow);
+}
+
+.project-logo a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-logo img {
