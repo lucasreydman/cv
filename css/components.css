@@ -121,7 +121,7 @@
     flex-shrink: 0;
     width: 52px;
     height: 52px;
-    border-radius: 10px;
+    border-radius: 16px;
     overflow: hidden;
     background: var(--surface-2);
     border: 1px solid var(--border);
@@ -143,7 +143,7 @@
     height: 100%;
     object-fit: contain;
     padding: 6px;
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 .experience-title,
@@ -299,6 +299,11 @@
     background: rgba(109, 90, 237, 0.08);
     border: 1px solid var(--border-accent);
     transition: all 0.3s var(--ease-bounce);
+}
+
+.honor-link i,
+.project-demo-btn i {
+    font-size: 0.65rem;
 }
 
 .honor-link:hover {

@@ -107,13 +107,14 @@
 
 /* Main heading */
 .hero-text h1 {
-    font-size: clamp(2.6rem, 5.5vw, 5.2rem);
+    font-size: clamp(2.4rem, 4vw, 4rem);
     font-weight: 800;
     line-height: 1.05;
     letter-spacing: -0.03em;
     margin-bottom: 0.35rem;
     color: var(--text);
     opacity: 0;
+    overflow-wrap: break-word;
 }
 
 /* Name gradient */
@@ -631,7 +632,7 @@
 .project-logo {
     flex-shrink: 0;
     width: 54px; height: 54px;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     background: var(--surface-2);
     border: 1px solid var(--border);
@@ -652,7 +653,7 @@
     height: 100%;
     object-fit: contain;
     padding: 7px;
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
 .project-title { flex: 1; min-width: 0; }
