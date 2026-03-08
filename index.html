@@ -1,51 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lucas Reydman - Applied Computer Science & Management Student Portfolio">
+    <meta name="description" content="Lucas Reydman — Applied Computer Science & Management. Portfolio of projects, experience, and achievements.">
     <meta name="keywords" content="portfolio, web development, computer science, Lucas Reydman">
     <meta name="author" content="Lucas Reydman">
     <title>Lucas Reydman | Portfolio</title>
-    
-    <!-- Preconnect to external domains for faster loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Favicon links -->
+
+    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="css/main.css" as="style">
-    <link rel="preload" href="js/main.js" as="script">
-    <link rel="preload" href="assets/images/hero/hero-removebg-preview.png" as="image">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     </noscript>
+
+    <!-- Styles -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Prevent theme flash -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme');
+            if (t) document.documentElement.setAttribute('data-theme', t);
+            else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+                document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
 </head>
 <body>
+
+    <!-- Scroll progress -->
     <div class="scroll-progress" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <!-- Navigation -->
     <nav class="navbar" aria-label="Main navigation">
         <div class="container">
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener" aria-label="Visit LinkedIn Profile">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="mailto:lucas.reydman@dal.ca" aria-label="Send email">
-                    <i class="fas fa-envelope" aria-hidden="true"></i>
-                </a>
-            </div>
-            <ul class="nav-links">
+            <a href="#hero" class="nav-brand">LR<span>.</span></a>
+
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
@@ -54,9 +58,18 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+
             <div class="navbar-controls">
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <a href="mailto:lucas.reydman@dal.ca" aria-label="Email">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark theme">
-                    <i class="fas fa-sun" aria-hidden="true"></i>
+                    <i class="fas fa-sun"  aria-hidden="true"></i>
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
                 <button class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-links">
@@ -69,45 +82,58 @@
     </nav>
 
     <main>
+
+        <!-- ═══ HERO ═══════════════════════════════════════════════ -->
         <section id="hero" class="hero">
-            <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
-            <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
-            <div class="hero-blob hero-blob--3" aria-hidden="true"></div>
             <div class="container">
                 <div class="hero-content">
+
                     <div class="hero-text">
-                        <h1>Hi, I'm <span class="highlight">Lucas Reydman</span></h1>
-                        <p class="subtitle"><span id="typewriter">Computer Science & Management Student</span><span class="typewriter-cursor" aria-hidden="true">|</span></p>
-                        <a href="assets/resume.pdf" download="Lucas_Reydman_Resume_2026.pdf" class="btn-resume">
-                            <i class="fas fa-download" aria-hidden="true"></i> Download Resume
-                        </a>
-                    </div>
-                    <div class="hero-image-container">
-                        <img src="assets/images/hero/hero-removebg-preview.png" alt="Lucas Reydman" class="hero-image" />
-                        <!-- Speech bubble element -->
-                        <div class="speech-bubble" aria-hidden="true">
-                            <p>Welcome to my personal website. Take a look around and get to know me better!</p>
+                        <span class="hero-eyebrow">Hello, world</span>
+                        <h1>Hi, I'm <span class="highlight">Lucas&nbsp;Reydman</span></h1>
+                        <p class="subtitle">
+                            <span id="typewriter">Computer Science &amp; Management Student</span><span class="typewriter-cursor" aria-hidden="true">|</span>
+                        </p>
+                        <div class="hero-cta">
+                            <a href="assets/resume.pdf" download="Lucas_Reydman_Resume_2026.pdf" class="btn-resume">
+                                <i class="fas fa-download" aria-hidden="true"></i> Download Resume
+                            </a>
                         </div>
                     </div>
+
+                    <div class="hero-image-container">
+                        <img src="assets/images/hero/hero-removebg-preview.png" alt="Lucas Reydman" class="hero-image" width="300" height="300">
+                        <div class="speech-bubble" aria-hidden="true">
+                            <p>Welcome! Take a look around and get to know me better.</p>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="hero-scroll" aria-hidden="true">
+                <span>Scroll</span>
+                <div class="hero-scroll-line"></div>
             </div>
         </section>
 
+        <!-- ═══ ABOUT ════════════════════════════════════════════════ -->
         <section id="about" class="about">
             <div class="container">
-                <h2>About Me</h2>
+                <h2><span>About Me</span></h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>I am a <span class="highlight">motivated and driven</span> individual with a strong interest in the evolving field of technology. Throughout my academic journey, I have consistently worked toward <span class="highlight">excellence</span>, earning distinction across my years in high school and university. I am currently studying <span class="highlight">Applied Computer Science at Dalhousie University</span>, while also completing coursework and applied learning opportunities through the <span class="highlight">Faculty of Management</span> to strengthen my understanding of business, data, and organizational problem solving. Through my experiences as both an <span class="highlight">entrepreneur</span> and an <span class="highlight">employee</span>, I have developed a strong foundation in technology and business—using technology to support <span class="highlight">business growth</span>, improve processes, and enhance customer experiences. I am a <span class="highlight">confident and engaged leader</span>, a thoughtful listener, and a dependable team player who thrives in <span class="highlight">agile, adaptive, and diverse teams</span>. I am deeply interested in how technology can create <span class="highlight">meaningful impact</span> for individuals, organizations, and communities. My goal is to contribute to solutions that address real world challenges through practical, well designed technology. With a strong commitment to <span class="highlight">learning</span>, <span class="highlight">adaptability</span>, and <span class="highlight">collaboration</span>, I am eager to continue growing within the tech community and to take on new opportunities ahead. I am always open to connecting with fellow students, professionals, and anyone passionate about technology and innovation. Feel free to reach out, and let’s explore how we can create <span class="highlight">positive change</span> through technology.</p>
+                        <p>I am a <span class="highlight">motivated and driven</span> individual with a strong interest in the evolving field of technology. Throughout my academic journey, I have consistently worked toward <span class="highlight">excellence</span>, earning distinction across my years in high school and university. I am currently studying <span class="highlight">Applied Computer Science at Dalhousie University</span>, while also completing coursework and applied learning opportunities through the <span class="highlight">Faculty of Management</span> to strengthen my understanding of business, data, and organizational problem solving. Through my experiences as both an <span class="highlight">entrepreneur</span> and an <span class="highlight">employee</span>, I have developed a strong foundation in technology and business—using technology to support <span class="highlight">business growth</span>, improve processes, and enhance customer experiences. I am a <span class="highlight">confident and engaged leader</span>, a thoughtful listener, and a dependable team player who thrives in <span class="highlight">agile, adaptive, and diverse teams</span>. I am deeply interested in how technology can create <span class="highlight">meaningful impact</span> for individuals, organizations, and communities. My goal is to contribute to solutions that address real world challenges through practical, well designed technology. With a strong commitment to <span class="highlight">learning</span>, <span class="highlight">adaptability</span>, and <span class="highlight">collaboration</span>, I am eager to continue growing within the tech community and to take on new opportunities ahead.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-
+        <!-- ═══ EXPERIENCE ═══════════════════════════════════════════ -->
         <section id="experience" class="experience">
             <div class="container">
-                <h2>Work Experience</h2>
+                <h2><span>Work Experience</span></h2>
                 <div class="timeline">
 
                     <div class="timeline-item timeline-left">
@@ -115,8 +141,8 @@
                         <article class="experience-card experience-card--incoming">
                             <header class="experience-header">
                                 <div class="company-logo">
-                                    <a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">
-                                        <img src="assets/images/company-logos/rbc_logo.jpg" alt="RBC Logo">
+                                    <a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener" aria-label="RBC Tech">
+                                        <img src="assets/images/company-logos/rbc_logo.jpg" alt="RBC Logo" width="52" height="52">
                                     </a>
                                 </div>
                                 <div class="experience-title">
@@ -137,14 +163,14 @@
                         <article class="experience-card">
                             <header class="experience-header">
                                 <div class="company-logo">
-                                    <a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">
-                                        <img src="assets/images/company-logos/rbc_logo.jpg" alt="RBC Logo">
+                                    <a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener" aria-label="RBC Tech">
+                                        <img src="assets/images/company-logos/rbc_logo.jpg" alt="RBC Logo" width="52" height="52">
                                     </a>
                                 </div>
                                 <div class="experience-title">
                                     <h3>Analyst – Financial Shared Services</h3>
                                     <p class="experience-company"><a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">RBC · Co-op</a></p>
-                                    <p class="experience-period">May 2025 - Aug 2025</p>
+                                    <p class="experience-period">May 2025 – Aug 2025</p>
                                 </div>
                             </header>
                             <div class="experience-details">
@@ -163,22 +189,22 @@
                         <article class="experience-card">
                             <header class="experience-header">
                                 <div class="company-logo">
-                                    <a href="https://www.torinit.com/" target="_blank" rel="noopener">
-                                        <img src="assets/images/company-logos/torinit_technologies_inc_logo.jpg" alt="Torinit Technologies Inc. Logo">
+                                    <a href="https://www.torinit.com/" target="_blank" rel="noopener" aria-label="Torinit Technologies">
+                                        <img src="assets/images/company-logos/torinit_technologies_inc_logo.jpg" alt="Torinit Technologies Logo" width="52" height="52">
                                     </a>
                                 </div>
                                 <div class="experience-title">
                                     <h3>Digital Solutions Intern</h3>
                                     <p class="experience-company"><a href="https://www.torinit.com/" target="_blank" rel="noopener">Torinit Technologies Inc.</a></p>
-                                    <p class="experience-period">May 2024 - Aug 2024</p>
+                                    <p class="experience-period">May 2024 – Aug 2024</p>
                                 </div>
                             </header>
                             <div class="experience-details">
                                 <ul>
-                                    <li>Utilized tools such as ZoomInfo, HubSpot, and LinkedIn Sales Navigator to drive client growth and engagement, contributing to tailored digital solutions</li>
-                                    <li>Created digital content for LinkedIn using Canva, developing social media schedules and strategies to enhance online presence</li>
-                                    <li>Applied design thinking strategies to create proof of concept (POC) for digital solutions, addressing client needs and fostering innovation</li>
-                                    <li>Streamlined team collaboration through Microsoft Teams and Excel, ensuring efficient project management and data-driven decision-making</li>
+                                    <li>Utilized tools such as ZoomInfo, HubSpot, and LinkedIn Sales Navigator to drive client growth and engagement</li>
+                                    <li>Created digital content for LinkedIn using Canva, developing social media schedules and strategies</li>
+                                    <li>Applied design thinking strategies to create proof of concept (POC) for digital solutions</li>
+                                    <li>Streamlined team collaboration through Microsoft Teams and Excel for data-driven decision-making</li>
                                 </ul>
                             </div>
                         </article>
@@ -189,14 +215,14 @@
                         <article class="experience-card">
                             <header class="experience-header">
                                 <div class="company-logo">
-                                    <a href="https://mirabellacorp.com/" target="_blank" rel="noopener">
-                                        <img src="assets/images/company-logos/mirabella_development_corporation_logo.jpg?v=2" alt="Mirabella Development Corporation Logo">
+                                    <a href="https://mirabellacorp.com/" target="_blank" rel="noopener" aria-label="Mirabella Development Corporation">
+                                        <img src="assets/images/company-logos/mirabella_development_corporation_logo.jpg" alt="Mirabella Development Corporation Logo" width="52" height="52">
                                     </a>
                                 </div>
                                 <div class="experience-title">
-                                    <h3>Research & Development Intern</h3>
+                                    <h3>Research &amp; Development Intern</h3>
                                     <p class="experience-company"><a href="https://mirabellacorp.com/" target="_blank" rel="noopener">Mirabella Development Corporation</a></p>
-                                    <p class="experience-period">Jun 2023 - Aug 2023</p>
+                                    <p class="experience-period">Jun 2023 – Aug 2023</p>
                                 </div>
                             </header>
                             <div class="experience-details">
@@ -215,21 +241,21 @@
                         <article class="experience-card">
                             <header class="experience-header">
                                 <div class="company-logo">
-                                    <a href="#" target="_blank" rel="noopener">
-                                        <img src="assets/images/company-logos/panther_student_events_logo.jpg" alt="Panther Logo">
+                                    <a href="#" target="_blank" rel="noopener" aria-label="Panther Student Events">
+                                        <img src="assets/images/company-logos/panther_student_events_logo.jpg" alt="Panther Student Events Logo" width="52" height="52">
                                     </a>
                                 </div>
                                 <div class="experience-title">
-                                    <h3>Founder & Head of Operations</h3>
+                                    <h3>Founder &amp; Head of Operations</h3>
                                     <p class="experience-company"><a href="#" target="_blank" rel="noopener">Panther</a></p>
-                                    <p class="experience-period">Sep 2021 - Aug 2023</p>
+                                    <p class="experience-period">Sep 2021 – Aug 2023</p>
                                 </div>
                             </header>
                             <div class="experience-details">
                                 <ul>
                                     <li>Generated $40,000+ in revenue through innovative sales strategies and business process optimization</li>
                                     <li>Directed a sales team, managing strategic execution and personnel training to meet revenue targets</li>
-                                    <li>Led social media marketing campaigns to boost visibility and engagement for our student events</li>
+                                    <li>Led social media marketing campaigns to boost visibility and engagement for student events</li>
                                     <li>Coordinated event logistics, venue bookings, contract negotiations, and budget adherence</li>
                                 </ul>
                             </div>
@@ -241,14 +267,14 @@
                         <article class="experience-card">
                             <header class="experience-header">
                                 <div class="company-logo">
-                                    <a href="https://scalehospitality.com/" target="_blank" rel="noopener">
-                                        <img src="assets/images/company-logos/scale_hospitality.jpg" alt="Scale Hospitality Logo">
+                                    <a href="https://scalehospitality.com/" target="_blank" rel="noopener" aria-label="Scale Hospitality">
+                                        <img src="assets/images/company-logos/scale_hospitality.jpg" alt="Scale Hospitality Logo" width="52" height="52">
                                     </a>
                                 </div>
                                 <div class="experience-title">
                                     <h3>Hospitality Assistant</h3>
                                     <p class="experience-company"><a href="https://scalehospitality.com/" target="_blank" rel="noopener">Scale Hospitality</a></p>
-                                    <p class="experience-period">Jun 2022 - Aug 2022</p>
+                                    <p class="experience-period">Jun 2022 – Aug 2022</p>
                                 </div>
                             </header>
                             <div class="experience-details">
@@ -267,14 +293,14 @@
                         <article class="experience-card">
                             <header class="experience-header">
                                 <div class="company-logo">
-                                    <a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener">
-                                        <img src="assets/images/company-logos/over_the_rainbow_ltd_logo.jpg" alt="Over the Rainbow Ltd. Logo">
+                                    <a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener" aria-label="Over the Rainbow Ltd.">
+                                        <img src="assets/images/company-logos/over_the_rainbow_ltd_logo.jpg" alt="Over the Rainbow Ltd. Logo" width="52" height="52">
                                     </a>
                                 </div>
                                 <div class="experience-title">
                                     <h3>Sales Associate</h3>
                                     <p class="experience-company"><a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener">Over the Rainbow Ltd.</a></p>
-                                    <p class="experience-period">Jun 2021 - Aug 2021</p>
+                                    <p class="experience-period">Jun 2021 – Aug 2021</p>
                                 </div>
                             </header>
                             <div class="experience-details">
@@ -292,21 +318,23 @@
             </div>
         </section>
 
+        <!-- ═══ EDUCATION ════════════════════════════════════════════ -->
         <section id="education" class="education">
             <div class="container">
-                <h2>Education</h2>
+                <h2><span>Education</span></h2>
                 <div class="education-grid">
+
                     <article class="education-card">
                         <header class="education-header">
                             <div class="company-logo">
-                                <a href="https://www.dal.ca/" target="_blank" rel="noopener">
-                                    <img src="assets/images/education-logos/dalhousie_university_logo.jpg" alt="Dalhousie University Logo">
+                                <a href="https://www.dal.ca/" target="_blank" rel="noopener" aria-label="Dalhousie University">
+                                    <img src="assets/images/education-logos/dalhousie_university_logo.jpg" alt="Dalhousie University Logo" width="52" height="52">
                                 </a>
                             </div>
                             <div class="education-title">
                                 <h3><a href="https://www.dal.ca/faculty/computerscience/undergraduate-programs/study-applied-computer-science.html" target="_blank" rel="noopener">Bachelor of Applied Computer Science</a></h3>
                                 <p class="education-school"><a href="https://www.dal.ca/" target="_blank" rel="noopener">Dalhousie University</a></p>
-                                <p class="education-period">Sep 2023 - <strong>May 2027 (Expected)</strong></p>
+                                <p class="education-period">Sep 2023 – <strong>May 2027 (Expected)</strong></p>
                                 <p class="education-grade">GPA: 3.91 (Cumulative)</p>
                             </div>
                         </header>
@@ -316,15 +344,14 @@
                                 <li class="pursuing-item">
                                     <details>
                                         <summary><strong>Bachelor of Applied Computer Science</strong></summary>
-                                        <p>The Bachelor of Applied Computer Science at Dalhousie University is a four year undergraduate program focused on applying computing knowledge to real world organizational problems. The program combines technical skills in computing with communication, project management, and problem solving to prepare students to develop and implement effective technology solutions.</p>
-                                        <p>Students build a strong foundation in software development, web centric computing, database systems, user interface design, privacy, security, and information systems. Learning is reinforced through applied, team based projects, including opportunities to work with real clients in the non profit sector. The program emphasizes collaboration, leadership, and practical application, preparing graduates to contribute to and lead technology driven initiatives across a wide range of industries.</p>
+                                        <p>A four-year undergraduate program focused on applying computing knowledge to real-world organizational problems. The program combines technical skills with communication, project management, and problem solving to develop and implement effective technology solutions.</p>
+                                        <p>Students build a strong foundation in software development, web-centric computing, database systems, UI design, privacy, security, and information systems — reinforced through applied, team-based projects with real clients.</p>
                                     </details>
                                 </li>
                                 <li class="pursuing-item">
                                     <details>
                                         <summary><strong>Certificate in Managing Data and Information</strong></summary>
-                                        <p>The Certificate in Managing Data and Information provides students with a practical understanding of how data and information can be used to address real world problems across multiple sectors and disciplines. The certificate focuses on developing the ability to use data to support evidence based decision making and to understand modern trends in information production and use.</p>
-                                        <p>Students gain insight into the role of information management in organizational decision making and learn how to effectively leverage information systems to meet business and operational needs. The certificate complements technical and applied programs by strengthening data literacy, analytical thinking, and the ability to translate information into meaningful insights.</p>
+                                        <p>Provides a practical understanding of how data and information can be used to address real-world problems across multiple sectors. Focuses on evidence-based decision making and modern trends in information production and use.</p>
                                     </details>
                                 </li>
                             </ul>
@@ -334,81 +361,92 @@
                     <article class="education-card">
                         <header class="education-header">
                             <div class="company-logo">
-                                <a href="https://www.lawrenceparkcollegiateinstitute.ca/" target="_blank" rel="noopener">
-                                    <img src="assets/images/education-logos/lawrence_park_collegiate_instituteto_logo.jpg" alt="Lawrence Park CI Logo">
+                                <a href="https://www.lawrenceparkcollegiateinstitute.ca/" target="_blank" rel="noopener" aria-label="Lawrence Park CI">
+                                    <img src="assets/images/education-logos/lawrence_park_collegiate_instituteto_logo.jpg" alt="Lawrence Park CI Logo" width="52" height="52">
                                 </a>
                             </div>
                             <div class="education-title">
                                 <h3><a href="https://www.ossd-requirements.ca/" target="_blank" rel="noopener">Ontario Secondary School Diploma</a></h3>
                                 <p class="education-school"><a href="https://www.lawrenceparkcollegiateinstitute.ca/" target="_blank" rel="noopener">Lawrence Park Collegiate Institute</a></p>
-                                <p class="education-period">Sep 2019 - Jun 2023</p>
+                                <p class="education-period">Sep 2019 – Jun 2023</p>
                                 <p class="education-grade">Average: 94% (Honor Roll)</p>
                             </div>
                         </header>
                         <div class="education-details">
-                            <p class="education-subtitle">Activities and Societies:</p>
+                            <p class="education-subtitle">Activities &amp; Societies:</p>
                             <ul>
-                                <li>Varsity Basketball & Volleyball</li>
+                                <li>Varsity Basketball &amp; Volleyball</li>
                                 <li>LPCI Buddies Program</li>
                                 <li>Giving Back Association</li>
                                 <li>Sports Management Club</li>
                             </ul>
                         </div>
                     </article>
+
                 </div>
             </div>
         </section>
 
+        <!-- ═══ HONORS ═══════════════════════════════════════════════ -->
         <section id="honors" class="honors">
             <div class="container">
-                <h2>Honors & Awards</h2>
+                <h2><span>Honors &amp; Awards</span></h2>
                 <div class="honors-grid">
+
                     <article class="honor-card">
                         <i class="fas fa-project-diagram" aria-hidden="true"></i>
-                        <h3>The Complete Agile & Scrum Project Management Course</h3>
-                        <p class="honor-source">365 Careers & Udemy, May 2025</p>
+                        <h3>The Complete Agile &amp; Scrum Project Management Course</h3>
+                        <p class="honor-source">365 Careers &amp; Udemy, May 2025</p>
                         <p class="honor-description">Certification in Agile methodologies and Scrum frameworks, enhancing skills in software project management, team collaboration, and efficient project delivery.</p>
-                        <a href="https://www.udemy.com/certificate/UC-2674b903-f212-4f1a-95d0-1a44c21bb7a4/" target="_blank" rel="noopener" class="honor-link">View Certificate</a>
+                        <a href="https://www.udemy.com/certificate/UC-2674b903-f212-4f1a-95d0-1a44c21bb7a4/" target="_blank" rel="noopener" class="honor-link">View Certificate <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
                     </article>
+
                     <article class="honor-card">
                         <i class="fas fa-brain" aria-hidden="true"></i>
                         <h3>ChatGPT Prompt Engineering for Developers</h3>
                         <p class="honor-source">DeepLearning.AI, May 2024</p>
                         <p class="honor-description">Certification in prompt engineering techniques including summarizing, inferring, transforming, and expanding content with large language models.</p>
-                        <a href="https://learn.deeplearning.ai/accomplishments/19b773e3-6ff0-40f2-8915-dbe1a045f6b0?usp=sharing" target="_blank" rel="noopener" class="honor-link">View Certificate</a>
+                        <a href="https://learn.deeplearning.ai/accomplishments/19b773e3-6ff0-40f2-8915-dbe1a045f6b0?usp=sharing" target="_blank" rel="noopener" class="honor-link">View Certificate <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
                     </article>
+
                     <article class="honor-card">
                         <i class="fas fa-trophy" aria-hidden="true"></i>
-                        <h3>Dean's List (4x)</h3>
+                        <h3>Dean's List (4×)</h3>
                         <p class="honor-source">Dalhousie University, 2025</p>
                         <p class="honor-description">Awarded to students that achieved a GPA of 3.70 or higher in a given term.</p>
                     </article>
+
                     <article class="honor-card">
                         <i class="fas fa-hands-helping" aria-hidden="true"></i>
                         <h3>Community Leadership Scholarship</h3>
                         <p class="honor-source">Dalhousie University, 2023</p>
                         <p class="honor-description">Awarded to students that demonstrated exemplary community leadership and engagement.</p>
                     </article>
+
                     <article class="honor-card">
                         <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                         <h3>Ontario Scholar Designation</h3>
                         <p class="honor-source">Ontario Ministry of Education, 2023</p>
                         <p class="honor-description">Awarded to students that achieved an average of 80% or higher in their top six grade 12 courses.</p>
                     </article>
+
                     <article class="honor-card">
                         <i class="fas fa-flag" aria-hidden="true"></i>
                         <h3>Honours Certificate of Bilingual Studies</h3>
                         <p class="honor-source">Lawrence Park C.I., 2023</p>
-                        <p class="honor-description">Awarded to students that completed the French Immersion program, with an extra credit.</p>
+                        <p class="honor-description">Awarded to students that completed the French Immersion program with an extra credit.</p>
                     </article>
+
                 </div>
             </div>
         </section>
 
+        <!-- ═══ SKILLS ═══════════════════════════════════════════════ -->
         <section id="skills" class="skills">
             <div class="container">
-                <h2>Skills & Expertise</h2>
+                <h2><span>Skills &amp; Expertise</span></h2>
                 <div class="skills-grid">
+
                     <article class="skill-card">
                         <i class="fas fa-code" aria-hidden="true"></i>
                         <h3>Technical Skills</h3>
@@ -421,9 +459,10 @@
                             <li>Generative AI Prompt Engineering</li>
                         </ul>
                     </article>
+
                     <article class="skill-card">
                         <i class="fas fa-chart-line" aria-hidden="true"></i>
-                        <h3>Business & Leadership</h3>
+                        <h3>Business &amp; Leadership</h3>
                         <ul>
                             <li>Entrepreneurship</li>
                             <li>Business Management</li>
@@ -434,29 +473,33 @@
                             <li>Budgeting and Forecasting</li>
                         </ul>
                     </article>
+
                     <article class="skill-card">
                         <i class="fas fa-tools" aria-hidden="true"></i>
                         <h3>Digital Tools</h3>
                         <ul>
                             <li>CRM (HubSpot, ZoomInfo, LinkedIn Sales Navigator)</li>
-                            <li>Productivity (Microsoft 365, Google Workspace, Apple iOS)</li>
-                            <li>Development IDEs (VS Code, IntelliJ, Cursor, Eclipse, Sublime)</li>
-                            <li>Design Tools (Figma, Canva, Photoshop)</li>
+                            <li>Productivity (Microsoft 365, Google Workspace)</li>
+                            <li>IDEs (VS Code, IntelliJ, Cursor, Eclipse)</li>
+                            <li>Design (Figma, Canva, Photoshop)</li>
                         </ul>
                     </article>
+
                 </div>
             </div>
         </section>
 
+        <!-- ═══ PROJECTS ══════════════════════════════════════════════ -->
         <section id="projects" class="projects">
             <div class="container">
-                <h2>Projects</h2>
+                <h2><span>Projects</span></h2>
                 <div class="projects-grid">
+
                     <article class="project-card">
                         <header class="project-header">
                             <div class="project-logo">
-                                <a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener">
-                                    <img src="assets/images/education-logos/pride_stem_logo.jpg" alt="Pride STEM Canada Logo">
+                                <a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener" aria-label="Pride STEM Canada">
+                                    <img src="assets/images/education-logos/pride_stem_logo.jpg" alt="Pride STEM Canada Logo" width="54" height="54">
                                 </a>
                             </div>
                             <div class="project-title">
@@ -466,11 +509,11 @@
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">Full-stack conference website for Pride STEM Canada, a national nonprofit celebrating 2SLGBTQ+ voices in STEM across Canada. As senior developer, I led architectural decisions and drove implementation of the site's most complex features. The platform was built with Next.js App Router, enabling server-side rendering and a modular, scalable page structure. I integrated Stripe to power a complete conference registration flow with four payment tiers — Student, Postdoc, Faculty, and Inclusive Faculty — plus optional event add-ons, all handled through secure server-side API routes. Firebase was used for authentication and real-time data storage, while Resend handled transactional email delivery for contact forms and confirmations. The site features polished UI animations via Framer Motion, responsive React Bootstrap layouts, and scoped CSS Modules for maintainable styling. A GitLab CI/CD pipeline was configured to automate linting and builds on every push, keeping the team aligned throughout development. The result is a production-deployed site used by real conference attendees, showcasing end-to-end ownership of a live, full-stack application.</p>
+                            <p class="project-description">Full-stack conference website for Pride STEM Canada, a national nonprofit celebrating 2SLGBTQ+ voices in STEM. As senior developer, I led architectural decisions and implemented the site's most complex features. Built with Next.js App Router, integrated Stripe for conference registration with four payment tiers, Firebase for authentication and real-time data, and Resend for transactional email delivery. Features Framer Motion animations, React Bootstrap layouts, CSS Modules, and a GitLab CI/CD pipeline.</p>
                             <div class="project-skills">
                                 <span class="skill-tag" title="React framework with App Router for full-stack server and client components">Next.js</span>
                                 <span class="skill-tag" title="JavaScript library for building component-driven user interfaces">React</span>
-                                <span class="skill-tag" title="Payment processing platform for secure online transactions and checkout flows">Stripe</span>
+                                <span class="skill-tag" title="Payment processing platform for secure online transactions">Stripe</span>
                                 <span class="skill-tag" title="Google platform for authentication, real-time database, and cloud storage">Firebase</span>
                                 <span class="skill-tag" title="Email delivery API for transactional and notification emails">Resend</span>
                                 <span class="skill-tag" title="Animation library for React enabling smooth, declarative UI transitions">Framer Motion</span>
@@ -489,25 +532,25 @@
                     <article class="project-card">
                         <header class="project-header">
                             <div class="project-logo">
-                                <img src="assets/images/education-logos/quickcash_logo.png" alt="QuickCash Logo">
+                                <img src="assets/images/education-logos/quickcash_logo.png" alt="QuickCash Logo" width="54" height="54">
                             </div>
                             <div class="project-title">
                                 <h3>QuickCash</h3>
-                                <p class="project-affiliation">CSCI 3130 - Software Engineering</p>
-                                <p class="project-period">Sep 2025 - Dec 2025</p>
+                                <p class="project-affiliation">CSCI 3130 — Software Engineering</p>
+                                <p class="project-period">Sep 2025 – Dec 2025</p>
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">QuickCash is a mobile application built in Android Studio that streamlines how students and part-time workers find short-term jobs. The project focuses on solving common issues in casual employment, such as scattered job listings, unclear requirements, and slow application processes. QuickCash uses Firebase for authentication and data storage, allowing users to register securely, browse job postings, view full job details, and submit applications with a cover letter. The app was developed using Agile and XP practices, including user stories, acceptance tests, pair programming, and continuous integration through GitLab. Features like role-based dashboards, clean UI flows, and instant confirmation messages were designed to make the experience simple and reliable for both employees and employers. QuickCash showcases real-world development skills in Android, Firebase, collaboration, and building production-quality features from scratch.</p>
+                            <p class="project-description">Mobile application built in Android Studio that streamlines how students and part-time workers find short-term jobs. Uses Firebase for authentication and data storage, allowing users to register, browse job postings, and submit applications with a cover letter. Developed using Agile and XP practices including user stories, acceptance tests, pair programming, and continuous integration through GitLab.</p>
                             <div class="project-skills">
-                                <span class="skill-tag" title="Integrated development environment for Android app development">Android Studio</span>
-                                <span class="skill-tag" title="Build automation tool widely used in Android development">Gradle</span>
-                                <span class="skill-tag" title="Google's platform for building mobile and web applications with backend services">Firebase</span>
-                                <span class="skill-tag" title="High-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible.">Java</span>
-                                <span class="skill-tag" title="DevOps platform for version control and collaborative software development">GitLab</span>
-                                <span class="skill-tag" title="Agile software development methodology emphasizing iterative development">Agile</span>
-                                <span class="skill-tag" title="UI/UX design and prototyping tool for collaborative interface design">Figma</span>
-                                <span class="skill-tag" title="Extreme Programming methodology emphasizing pair programming and test-driven development">XP</span>
+                                <span class="skill-tag" title="IDE for Android app development">Android Studio</span>
+                                <span class="skill-tag" title="Build automation tool for Android development">Gradle</span>
+                                <span class="skill-tag" title="Google's platform for mobile and web apps with backend services">Firebase</span>
+                                <span class="skill-tag" title="Object-oriented programming language">Java</span>
+                                <span class="skill-tag" title="DevOps platform for version control and CI/CD">GitLab</span>
+                                <span class="skill-tag" title="Iterative software development methodology">Agile</span>
+                                <span class="skill-tag" title="UI/UX design and prototyping tool">Figma</span>
+                                <span class="skill-tag" title="Extreme Programming methodology emphasizing pair programming">XP</span>
                             </div>
                         </div>
                     </article>
@@ -515,25 +558,25 @@
                     <article class="project-card">
                         <header class="project-header">
                             <div class="project-logo">
-                                <img src="assets/images/education-logos/tictectoe_logo.png" alt="Tic Tec Toe Logo">
+                                <img src="assets/images/education-logos/tictectoe_logo.png" alt="Tic Tec Toe Logo" width="54" height="54">
                             </div>
                             <div class="project-title">
                                 <h3>Tic Tec Toe – Connecting the Dots in Tech</h3>
-                                <p class="project-affiliation">CSCI 2691 - Introductory Project</p>
-                                <p class="project-period">Jan 2025 - Apr 2025</p>
+                                <p class="project-affiliation">CSCI 2691 — Introductory Project</p>
+                                <p class="project-period">Jan 2025 – Apr 2025</p>
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">Tic Tec Toe is an innovative social media platform specifically designed for researchers. It seeks to revolutionize how scholars discover, consume, and engage with academic content by addressing several critical challenges in the research community. Researchers today face information overload due to the vast number of publications across various disciplines. Time constraints make it difficult for them to read and analyze every relevant paper, especially when juggling responsibilities like experiments, grant writing, and teaching. Research papers are scattered across multiple databases and repositories, leading to a fragmented discovery process. Existing platforms also lack robust features for meaningful collaboration and engagement among peers. Tic Tec Toe aims to solve these issues by providing a centralized hub where researchers can access personalized feeds of relevant papers, interact with peers through likes, comments, and shares, and utilize unique features like audio playback of papers for on-the-go learning. The platform's ultimate goal is to foster collaboration, accelerate knowledge dissemination, and become the go-to platform for researchers to stay updated and make significant contributions to their fields.</p>
+                            <p class="project-description">Innovative social media platform designed for researchers, addressing information overload, fragmented discovery, and limited collaboration in academia. Provides a centralized hub for personalized research feeds, peer interaction, and audio playback of papers for on-the-go learning. Built to accelerate knowledge dissemination and foster meaningful academic engagement.</p>
                             <div class="project-skills">
-                                <span class="skill-tag" title="A framework for building native apps using React">React Native</span>
-                                <span class="skill-tag" title="A JavaScript runtime for building server-side applications">Node.js</span>
-                                <span class="skill-tag" title="An open source Firebase alternative with PostgreSQL database">Supabase</span>
-                                <span class="skill-tag" title="DevOps platform for version control and collaborative software development">GitLab</span>
-                                <span class="skill-tag" title="Project management tool for agile software development teams">Jira</span>
-                                <span class="skill-tag" title="UI/UX design and prototyping tool for collaborative interface design">Figma</span>
+                                <span class="skill-tag" title="Framework for building native apps using React">React Native</span>
+                                <span class="skill-tag" title="JavaScript runtime for server-side applications">Node.js</span>
+                                <span class="skill-tag" title="Open source Firebase alternative with PostgreSQL database">Supabase</span>
+                                <span class="skill-tag" title="DevOps platform for version control and CI/CD">GitLab</span>
+                                <span class="skill-tag" title="Project management tool for agile teams">Jira</span>
+                                <span class="skill-tag" title="UI/UX design and prototyping tool">Figma</span>
                                 <span class="skill-tag" title="Document preparation system for high-quality typesetting">LaTeX</span>
-                                <span class="skill-tag" title="Tool for running React Native apps on your phone during development">Expo Go</span>
+                                <span class="skill-tag" title="Tool for running React Native apps during development">Expo Go</span>
                             </div>
                         </div>
                     </article>
@@ -541,8 +584,8 @@
                     <article class="project-card">
                         <header class="project-header">
                             <div class="project-logo">
-                                <a href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener">
-                                    <img src="assets/images/education-logos/wdinomf_logo.png" alt="Final Grade Calculator Logo">
+                                <a href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener" aria-label="wdinomf?">
+                                    <img src="assets/images/education-logos/wdinomf_logo.png" alt="Final Grade Calculator Logo" width="54" height="54">
                                 </a>
                             </div>
                             <div class="project-title">
@@ -552,12 +595,12 @@
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">A web-based calculator that helps students determine what grade they need on their final exam to achieve their target course grade. The calculator features an easy-to-use interface for entering final exam weight and target grade, along with the ability to add multiple assessments to accurately calculate current standing. It automatically saves inputs using local storage, provides guidance when target grades are impossible to reach, and offers a mobile-responsive design for on-the-go calculations.</p>
+                            <p class="project-description">A web-based calculator that helps students determine what grade they need on their final exam to achieve their target course grade. Features an easy-to-use interface for entering exam weight and target grade, supports multiple assessments, auto-saves via local storage, and offers a mobile-responsive design.</p>
                             <div class="project-skills">
                                 <span class="skill-tag" title="HyperText Markup Language for structuring web content">HTML5</span>
                                 <span class="skill-tag" title="Cascading Style Sheets for styling web pages">CSS3</span>
                                 <span class="skill-tag" title="Programming language for interactive web functionality">JavaScript</span>
-                                <span class="skill-tag" title="Browser API for storing data locally in the user's browser">Local Storage API</span>
+                                <span class="skill-tag" title="Browser API for storing data locally">Local Storage API</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener" class="project-demo-btn">
@@ -570,8 +613,8 @@
                     <article class="project-card">
                         <header class="project-header">
                             <div class="project-logo">
-                                <a href="https://lucasreydman.github.io/fantasy-draft-lottery/" target="_blank" rel="noopener">
-                                    <img src="assets/images/education-logos/fdl_logo.png" alt="Fantasy Draft Lottery Logo">
+                                <a href="https://lucasreydman.github.io/fantasy-draft-lottery/" target="_blank" rel="noopener" aria-label="Fantasy Draft Lottery">
+                                    <img src="assets/images/education-logos/fdl_logo.png" alt="Fantasy Draft Lottery Logo" width="54" height="54">
                                 </a>
                             </div>
                             <div class="project-title">
@@ -581,12 +624,12 @@
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">A dynamic web-based lottery simulator for fantasy sports draft order determination, featuring customizable team names, pick trading, and an engaging visual lottery reveal process. The simulator includes weighted lottery odds for the top 8 teams, a magic number feature for running multiple simulations, and a complete pick ownership management system for tracking trades across all 4 rounds. The application features dramatic reveal animations, podium displays, and automatically saves all data using local storage.</p>
+                            <p class="project-description">Dynamic web-based lottery simulator for fantasy sports draft order determination. Features customizable team names, pick trading, weighted lottery odds, a magic number feature, and a complete pick ownership management system across 4 rounds. Includes dramatic reveal animations, podium displays, and local storage persistence.</p>
                             <div class="project-skills">
-                                <span class="skill-tag" title="HyperText Markup Language for structuring web content">HTML5</span>
-                                <span class="skill-tag" title="Cascading Style Sheets for styling web pages">CSS3</span>
+                                <span class="skill-tag" title="HyperText Markup Language">HTML5</span>
+                                <span class="skill-tag" title="Cascading Style Sheets">CSS3</span>
                                 <span class="skill-tag" title="Programming language for interactive web functionality">JavaScript</span>
-                                <span class="skill-tag" title="Browser API for storing data locally in the user's browser">Local Storage API</span>
+                                <span class="skill-tag" title="Browser API for storing data locally">Local Storage API</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://lucasreydman.github.io/fantasy-draft-lottery/" target="_blank" rel="noopener" class="project-demo-btn">
@@ -595,47 +638,58 @@
                             </div>
                         </div>
                     </article>
+
                 </div>
             </div>
         </section>
 
+        <!-- ═══ CONTACT ═══════════════════════════════════════════════ -->
         <section id="contact" class="contact">
             <div class="container">
-                <h2>Get in Touch</h2>
+                <h2><span>Get in Touch</span></h2>
                 <div class="contact-content">
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-envelope" aria-hidden="true"></i>
-                            <a href="mailto:lucas.reydman@dal.ca">Email me</a>
+                            <a href="mailto:lucas.reydman@dal.ca">lucas.reydman@dal.ca</a>
                         </div>
-                        <span class="contact-divider">or...</span>
+                        <span class="contact-divider">·</span>
                         <div class="contact-item">
                             <i class="fab fa-linkedin" aria-hidden="true"></i>
-                            <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener">Let's connect!</a>
+                            <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener">linkedin.com/in/lucasreydman</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Lucas Reydman. All rights reserved.</p>
+            <p>&copy; 2026 Lucas Reydman. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://github.com/lucasreydman" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
         </div>
     </footer>
 
-    <!-- Scroll to top button -->
+    <!-- Fixed UI -->
     <button id="scroll-top" class="scroll-to-top" aria-label="Scroll to top">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
-
-    <!-- GitHub link -->
-    <a href="https://github.com/lucasreydman/cv" target="_blank" rel="noopener" class="github-link" aria-label="View GitHub Repository">
+    <a href="https://github.com/lucasreydman/cv" target="_blank" rel="noopener" class="github-link" aria-label="View source on GitHub">
         <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
-    <!-- JavaScript -->
-    <script src="js/main.js"></script>
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+
+    <!-- Main script -->
+    <script src="js/main.js" defer></script>
+
 </body>
-</html> 
+</html>
