@@ -34,8 +34,6 @@
         (function(){
             var t = localStorage.getItem('theme');
             if (t) document.documentElement.setAttribute('data-theme', t);
-            else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
-                document.documentElement.setAttribute('data-theme', 'light');
         })();
     </script>
 </head>
@@ -509,17 +507,17 @@
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">Full-stack conference website for Pride STEM Canada, a national nonprofit celebrating 2SLGBTQ+ voices in STEM. As senior developer, I led architectural decisions and implemented the site's most complex features. Built with Next.js App Router, integrated Stripe for conference registration with four payment tiers, Firebase for authentication and real-time data, and Resend for transactional email delivery. Features Framer Motion animations, React Bootstrap layouts, CSS Modules, and a GitLab CI/CD pipeline.</p>
+                            <p class="project-description">Full-stack conference website for Pride STEM Canada, a national nonprofit dedicated to celebrating and advancing the contributions of the 2SLGBTQ+ community in STEM. The organization hosts an annual nationwide conference — now in its sixth year — bringing together 250+ delegates from across Canada for keynote speakers, research presentations, networking events, and career development sessions. As senior developer on a team course project, I led core architectural decisions and owned implementation of the site's most complex features. Built on Next.js with the App Router for full-stack server and client rendering, with React and React Bootstrap powering the component-driven UI and Framer Motion handling smooth page and section animations. Conference registration is fully integrated with Stripe, supporting multiple delegate tiers with secure payment processing. Firebase handles user authentication and real-time data storage, enabling dynamic content management across the site. Resend powers the transactional email pipeline — sending confirmation and notification emails to registered delegates. CSS Modules enforce scoped, collision-free styling across components. The entire codebase is version controlled and deployed through a GitLab CI/CD pipeline. The site serves as the public-facing home for the conference, covering registration, the event schedule, presentation submissions, sponsorship and partnership opportunities, governance documentation, and organizational information — all designed to reflect the mission of building a more inclusive and representative STEM community across Canada.</p>
                             <div class="project-skills">
-                                <span class="skill-tag" title="React framework with App Router for full-stack server and client components">Next.js</span>
-                                <span class="skill-tag" title="JavaScript library for building component-driven user interfaces">React</span>
-                                <span class="skill-tag" title="Payment processing platform for secure online transactions">Stripe</span>
-                                <span class="skill-tag" title="Google platform for authentication, real-time database, and cloud storage">Firebase</span>
-                                <span class="skill-tag" title="Email delivery API for transactional and notification emails">Resend</span>
-                                <span class="skill-tag" title="Animation library for React enabling smooth, declarative UI transitions">Framer Motion</span>
-                                <span class="skill-tag" title="React component library built on Bootstrap for responsive layouts">React Bootstrap</span>
-                                <span class="skill-tag" title="CSS scoping pattern for component-level styles without class name collisions">CSS Modules</span>
-                                <span class="skill-tag" title="DevOps platform for version control, CI/CD pipelines, and team collaboration">GitLab</span>
+                                <span class="skill-tag" data-tooltip="React framework with App Router for full-stack server and client components">Next.js</span>
+                                <span class="skill-tag" data-tooltip="JavaScript library for building component-driven user interfaces">React</span>
+                                <span class="skill-tag" data-tooltip="Animation library for React enabling smooth, declarative UI transitions">Framer Motion</span>
+                                <span class="skill-tag" data-tooltip="React component library built on Bootstrap for responsive layouts">React Bootstrap</span>
+                                <span class="skill-tag" data-tooltip="CSS scoping pattern for component-level styles without class name collisions">CSS Modules</span>
+                                <span class="skill-tag" data-tooltip="Google platform for authentication, real-time database, and cloud storage">Firebase</span>
+                                <span class="skill-tag" data-tooltip="Payment processing platform for secure online transactions">Stripe</span>
+                                <span class="skill-tag" data-tooltip="Email delivery API for transactional and notification emails">Resend</span>
+                                <span class="skill-tag" data-tooltip="DevOps platform for version control, CI/CD pipelines, and team collaboration">GitLab</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener" class="project-demo-btn">
@@ -536,21 +534,23 @@
                             </div>
                             <div class="project-title">
                                 <h3>QuickCash</h3>
-                                <p class="project-affiliation">CSCI 3130 — Software Engineering</p>
+                                <p class="project-affiliation">CSCI 3130 — Software Engineering · Developer</p>
                                 <p class="project-period">Sep 2025 – Dec 2025</p>
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">Mobile application built in Android Studio that streamlines how students and part-time workers find short-term jobs. Uses Firebase for authentication and data storage, allowing users to register, browse job postings, and submit applications with a cover letter. Developed using Agile and XP practices including user stories, acceptance tests, pair programming, and continuous integration through GitLab.</p>
+                            <p class="project-description">Full-stack Android mobile application connecting students and part-time workers with short-term job opportunities. Built across two Agile iterations with a team of 8 using strict test-driven development, pair programming, and continuous integration through GitLab. Features role-based access for two user types — employees and employers — each with a tailored dashboard and feature set. Employees can search and filter jobs by salary range, job type, and location (with Google Maps integration), apply with a custom cover letter, track their submission statuses, and receive push notifications for nearby opportunities. Employers can create detailed job postings with requirements, location, employment type, and salary range, review incoming applicants, and accept or decline applications. Both dashboards surface performance insights and application statistics. Also integrates PayPal for payment processing. Firebase powers authentication, real-time data, and Firestore CRUD operations throughout. Code quality enforced through SonarQube refactoring across both iterations, reducing issues from 119 to zero. Architecture follows SOLID principles and applies Singleton, Facade, and Observer design patterns to keep the UI layer cleanly separated from data and auth logic.</p>
                             <div class="project-skills">
-                                <span class="skill-tag" title="IDE for Android app development">Android Studio</span>
-                                <span class="skill-tag" title="Build automation tool for Android development">Gradle</span>
-                                <span class="skill-tag" title="Google's platform for mobile and web apps with backend services">Firebase</span>
-                                <span class="skill-tag" title="Object-oriented programming language">Java</span>
-                                <span class="skill-tag" title="DevOps platform for version control and CI/CD">GitLab</span>
-                                <span class="skill-tag" title="Iterative software development methodology">Agile</span>
-                                <span class="skill-tag" title="UI/UX design and prototyping tool">Figma</span>
-                                <span class="skill-tag" title="Extreme Programming methodology emphasizing pair programming">XP</span>
+                                <span class="skill-tag" data-tooltip="Object-oriented programming language">Java</span>
+                                <span class="skill-tag" data-tooltip="IDE for Android app development">Android Studio</span>
+                                <span class="skill-tag" data-tooltip="Build automation tool for Android development">Gradle</span>
+                                <span class="skill-tag" data-tooltip="Google's platform for mobile and web apps with backend services">Firebase</span>
+                                <span class="skill-tag" data-tooltip="Payment processing integration for in-app transactions">PayPal</span>
+                                <span class="skill-tag" data-tooltip="Maps SDK for location-based job search">Google Maps</span>
+                                <span class="skill-tag" data-tooltip="DevOps platform for version control and CI/CD">GitLab</span>
+                                <span class="skill-tag" data-tooltip="UI/UX design and prototyping tool">Figma</span>
+                                <span class="skill-tag" data-tooltip="Iterative software development methodology">Agile</span>
+                                <span class="skill-tag" data-tooltip="Extreme Programming methodology emphasizing pair programming">XP</span>
                             </div>
                         </div>
                     </article>
@@ -562,21 +562,21 @@
                             </div>
                             <div class="project-title">
                                 <h3>Tic Tec Toe – Connecting the Dots in Tech</h3>
-                                <p class="project-affiliation">CSCI 2691 — Introductory Project</p>
+                                <p class="project-affiliation">CSCI 2691 — Introductory Project · Junior Developer</p>
                                 <p class="project-period">Jan 2025 – Apr 2025</p>
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">Innovative social media platform designed for researchers, addressing information overload, fragmented discovery, and limited collaboration in academia. Provides a centralized hub for personalized research feeds, peer interaction, and audio playback of papers for on-the-go learning. Built to accelerate knowledge dissemination and foster meaningful academic engagement.</p>
+                            <p class="project-description">Cross-platform mobile application built for the academic research community, addressing the core challenges researchers face today — information overload from the sheer volume of publications, time constraints that make reading every relevant paper impossible, fragmented discovery across scattered databases and repositories, and a lack of meaningful tools for peer collaboration on existing platforms. Built as a team introductory project over a full semester using React Native and Expo Go, with Supabase providing the backend database, Node.js handling server-side logic, and GitLab managing version control and CI/CD. The platform provides researchers with a centralized, personalized feed of relevant papers tailored to their fields and interests, allowing them to interact with content and peers through likes, comments, and shares. A standout feature is audio playback of research papers, enabling on-the-go consumption for researchers juggling experiments, grant writing, and teaching. The interface was designed iteratively in Figma, with documentation and project proposals written in LaTeX. Project coordination tracked through Jira across the full development lifecycle. The platform's overarching goal is to foster meaningful academic collaboration, accelerate knowledge dissemination across disciplines, and become the go-to space for researchers to stay current, engage with peers, and make significant contributions to their fields.</p>
                             <div class="project-skills">
-                                <span class="skill-tag" title="Framework for building native apps using React">React Native</span>
-                                <span class="skill-tag" title="JavaScript runtime for server-side applications">Node.js</span>
-                                <span class="skill-tag" title="Open source Firebase alternative with PostgreSQL database">Supabase</span>
-                                <span class="skill-tag" title="DevOps platform for version control and CI/CD">GitLab</span>
-                                <span class="skill-tag" title="Project management tool for agile teams">Jira</span>
-                                <span class="skill-tag" title="UI/UX design and prototyping tool">Figma</span>
-                                <span class="skill-tag" title="Document preparation system for high-quality typesetting">LaTeX</span>
-                                <span class="skill-tag" title="Tool for running React Native apps during development">Expo Go</span>
+                                <span class="skill-tag" data-tooltip="Framework for building native apps using React">React Native</span>
+                                <span class="skill-tag" data-tooltip="Tool for running React Native apps during development">Expo Go</span>
+                                <span class="skill-tag" data-tooltip="JavaScript runtime for server-side applications">Node.js</span>
+                                <span class="skill-tag" data-tooltip="Open source Firebase alternative with PostgreSQL database">Supabase</span>
+                                <span class="skill-tag" data-tooltip="DevOps platform for version control and CI/CD">GitLab</span>
+                                <span class="skill-tag" data-tooltip="Project management tool for agile teams">Jira</span>
+                                <span class="skill-tag" data-tooltip="UI/UX design and prototyping tool">Figma</span>
+                                <span class="skill-tag" data-tooltip="Document preparation system for high-quality typesetting">LaTeX</span>
                             </div>
                         </div>
                     </article>
@@ -595,44 +595,16 @@
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">A web-based calculator that helps students determine what grade they need on their final exam to achieve their target course grade. Features an easy-to-use interface for entering exam weight and target grade, supports multiple assessments, auto-saves via local storage, and offers a mobile-responsive design.</p>
+                            <p class="project-description">Vanilla web app that answers the question every student asks at the end of term — what do I need on my final? Enter your course name, final exam weight, and target grade, then log each completed assessment (midterms, quizzes, labs, assignments, essays, and more) with its weight and grade received. The app calculates your current overall grade, remaining course completion percentage, best possible final grade, and the exact score needed on your final to hit your goal. All entries auto-save to local storage so nothing is lost on page refresh, and the layout is fully responsive across desktop and mobile.</p>
                             <div class="project-skills">
-                                <span class="skill-tag" title="HyperText Markup Language for structuring web content">HTML5</span>
-                                <span class="skill-tag" title="Cascading Style Sheets for styling web pages">CSS3</span>
-                                <span class="skill-tag" title="Programming language for interactive web functionality">JavaScript</span>
-                                <span class="skill-tag" title="Browser API for storing data locally">Local Storage API</span>
+                                <span class="skill-tag" data-tooltip="HyperText Markup Language for structuring web content">HTML5</span>
+                                <span class="skill-tag" data-tooltip="Cascading Style Sheets for styling web pages">CSS3</span>
+                                <span class="skill-tag" data-tooltip="Programming language for interactive web functionality">JavaScript</span>
+                                <span class="skill-tag" data-tooltip="Browser API for storing data locally">Local Storage API</span>
+                                <span class="skill-tag" data-tooltip="Static site hosting and deployment via GitHub">GitHub Pages</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                <a href="https://lucasreydman.github.io/fantasy-draft-lottery/" target="_blank" rel="noopener" aria-label="Fantasy Draft Lottery">
-                                    <img src="assets/images/education-logos/fdl_logo.png" alt="Fantasy Draft Lottery Logo" width="54" height="54">
-                                </a>
-                            </div>
-                            <div class="project-title">
-                                <h3><a href="https://lucasreydman.github.io/fantasy-draft-lottery/" target="_blank" rel="noopener" class="project-link">Fantasy Basketball Draft Lottery Simulator</a></h3>
-                                <p class="project-affiliation">Personal Project</p>
-                                <p class="project-period">Mar 2025</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">Dynamic web-based lottery simulator for fantasy sports draft order determination. Features customizable team names, pick trading, weighted lottery odds, a magic number feature, and a complete pick ownership management system across 4 rounds. Includes dramatic reveal animations, podium displays, and local storage persistence.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" title="HyperText Markup Language">HTML5</span>
-                                <span class="skill-tag" title="Cascading Style Sheets">CSS3</span>
-                                <span class="skill-tag" title="Programming language for interactive web functionality">JavaScript</span>
-                                <span class="skill-tag" title="Browser API for storing data locally">Local Storage API</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://lucasreydman.github.io/fantasy-draft-lottery/" target="_blank" rel="noopener" class="project-demo-btn">
                                     Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                                 </a>
                             </div>

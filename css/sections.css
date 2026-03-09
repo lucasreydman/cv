@@ -263,8 +263,6 @@
 .about-text .highlight {
     color: var(--accent-2);
     font-weight: 600;
-    position: relative;
-    display: inline-block;
 }
 
 /* ═══════════════════════════════════════════════════════════

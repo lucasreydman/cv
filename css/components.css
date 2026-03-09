@@ -197,8 +197,8 @@
 }
 
 /* Tooltip */
-.skill-tag[title]::after {
-    content: attr(title);
+.skill-tag[data-tooltip]::after {
+    content: attr(data-tooltip);
     position: absolute;
     bottom: calc(100% + 8px);
     left: 50%;
@@ -210,9 +210,9 @@
     font-weight: 400;
     padding: 0.4rem 0.7rem;
     border-radius: 8px;
-    white-space: nowrap;
-    max-width: 220px;
     white-space: normal;
+    width: max-content;
+    max-width: 260px;
     text-align: center;
     pointer-events: none;
     opacity: 0;
@@ -221,7 +221,7 @@
     box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
-.skill-tag:hover[title]::after {
+.skill-tag:hover[data-tooltip]::after {
     opacity: 1;
     transform: translateX(-50%) scale(1);
 }
