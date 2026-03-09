@@ -647,7 +647,7 @@
 }
 
 .project-logo:hover,
-.project-logo a:hover {
+.project-logo:has(a:hover) {
     transform: translateY(-4px) scale(1.06);
     box-shadow: 0 8px 22px var(--accent-glow);
 }
