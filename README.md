@@ -34,9 +34,16 @@ A premium, animated personal portfolio website. Dark-first design with cinematic
 cv/
 ├── assets/
 │   ├── favicon/
+│   │   ├── logo-1024x1024.png   # Source logo
+│   │   ├── favicon.ico          # 16/32/48 multi-size
+│   │   ├── favicon-16x16.png
+│   │   ├── favicon-32x32.png
+│   │   ├── apple-touch-icon.png # 180x180
+│   │   ├── android-192x192.png
+│   │   ├── android-512x512.png
+│   │   └── site.webmanifest
 │   ├── images/
-│   │   ├── company-logos/
-│   │   ├── education-logos/
+│   │   ├── logos/               # Company + education logos
 │   │   └── hero/
 │   └── resume.pdf
 ├── css/
@@ -71,9 +78,9 @@ Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
 - **About** — personal summary with highlighted keywords
 - **Experience** — 7 positions in alternating timeline (RBC incoming, RBC FSS, Torinit, Mirabella, Panther, Scale Hospitality, Over the Rainbow)
 - **Education** — Dalhousie University + Lawrence Park CI
-- **Honors & Awards** — 6 cards (Agile cert, GPT cert, Dean's List ×4, Community Leadership, Ontario Scholar, Bilingual)
+- **Honors & Awards** — 6 cards (Agile cert, GPT cert, Dean's List ×6, Community Leadership, Ontario Scholar, Bilingual)
 - **Skills** — Technical, Business & Leadership, Digital Tools
-- **Projects** — 5 cards (Pride STEM Canada, QuickCash, Tic Tec Toe, wdinomf?, Fantasy Draft Lottery)
+- **Projects** — 4 cards (Pride STEM Canada, QuickCash, Tic Tec Toe, wdinomf?)
 - **Contact** — email + LinkedIn
 
 ## Responsiveness
