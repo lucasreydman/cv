@@ -725,65 +725,63 @@
 /* ═══════════════════════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════════════════════ */
-.contact-content {
-    max-width: 560px;
+.contact .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-.contact-info {
+.contact .section-header {
+    text-align: center;
+}
+
+.contact-tagline {
+    color: var(--text-2);
+    font-size: 1.05rem;
+    margin-top: -0.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.contact-cards {
     display: flex;
-    align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
-.contact-divider {
-    color: var(--text-3);
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.contact-item {
+.contact-card {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    transition: transform 0.35s var(--ease-bounce);
-}
-
-.contact-item:hover { transform: translateY(-4px); }
-
-.contact-item i {
-    font-size: 1.1rem;
-    color: var(--accent);
-    transition: transform 0.35s var(--ease-bounce), color 0.25s ease;
-}
-
-.contact-item:hover i {
-    transform: scale(1.25) rotate(10deg);
-    color: var(--accent-2);
-}
-
-.contact-item a {
+    gap: 0.75rem;
+    padding: 0.9rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
     color: var(--text);
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.95rem;
+    transition: transform 0.3s var(--ease-bounce), border-color 0.25s ease,
+                background 0.25s ease, box-shadow 0.3s ease;
+}
+
+.contact-card i {
     font-size: 1rem;
-    position: relative;
+    color: var(--accent);
+    transition: transform 0.3s var(--ease-bounce), color 0.25s ease;
 }
 
-.contact-item a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0;
-    width: 100%; height: 1px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.35s var(--ease-smooth);
+.contact-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    background: var(--card-bg-hover);
+    box-shadow: 0 8px 24px var(--accent-glow);
 }
 
-.contact-item a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+.contact-card:hover i {
+    transform: scale(1.2) rotate(8deg);
+    color: var(--accent-2);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -821,8 +819,7 @@
 
     .hero-scroll { display: none; }
 
-    .contact-info { flex-direction: column; gap: 1rem; }
-    .contact-divider { display: none; }
+    .contact-cards { flex-direction: column; align-items: center; }
 
     .project-header { flex-direction: column; align-items: center; text-align: center; }
     .project-title  { text-align: center; }

@@ -268,30 +268,14 @@ section .section-inner.revealed {
 }
 
 .footer .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    justify-content: center;
+    text-align: center;
 }
 
 .footer p {
     font-size: 0.875rem;
     color: var(--text-3);
 }
-
-.footer-links {
-    display: flex;
-    gap: 1.25rem;
-}
-
-.footer-links a {
-    font-size: 0.875rem;
-    color: var(--text-3);
-    text-decoration: none;
-    transition: color 0.25s ease;
-}
-
-.footer-links a:hover { color: var(--text-2); }
 
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -330,11 +314,6 @@ section .section-inner.revealed {
         color: var(--text);
     }
 
-    .footer .container {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.75rem;
-    }
 }
 
 @media (max-width: 480px) {
