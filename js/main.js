@@ -187,11 +187,11 @@ function initTypewriter() {
     if (!el) return;
 
     const phrases = [
-        'Computer Science & Management Student',
+        'Computer Science & Management Student.',
         'Builder. Leader. Problem Solver.',
-        'Bridging Business & Technology',
-        'Shipping Faster with AI',
-        'Aspiring Software Developer',
+        'Bridging Business & Technology.',
+        'Shipping Faster with AI.',
+        'Aspiring Software Developer.',
     ];
 
     let phraseIdx = 0, charIdx = 0, deleting = false;
