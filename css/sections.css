@@ -628,6 +628,10 @@
     width: 56px; height: 4px;
     border-radius: 2px;
     background: rgba(255,255,255,0.12);
+}
+
+[data-theme="light"] .skills-dot {
+    background: rgba(0,0,0,0.1);
     cursor: pointer;
     overflow: hidden;
     position: relative;
