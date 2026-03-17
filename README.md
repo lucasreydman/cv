@@ -1,4 +1,4 @@
-# Lucas Reydman — Portfolio
+# Lucas Reydman. Portfolio
 
 A premium, animated personal portfolio website. Dark-first design with cinematic motion, GSAP-powered scroll choreography, and Lenis smooth scroll.
 
@@ -20,7 +20,7 @@ A premium, animated personal portfolio website. Dark-first design with cinematic
 - Glass-morphism cards with mouse-position spotlight effect
 - Custom cursor (dot + lagging ring) and cursor spotlight
 - Floating glass navbar — transparent → frosted on scroll, active section indicator
-- Typewriter subtitle cycling 4 phrases
+- Typewriter subtitle cycling 5 phrases
 - Experience alternating timeline with glowing pulsing dots
 - Scroll progress bar, scroll-to-top button, GitHub link
 - Speech bubble on hero photo hover (desktop only)
@@ -79,7 +79,7 @@ Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
 - **Experience** — 7 positions in alternating timeline (RBC incoming, RBC FSS, Torinit, Mirabella, Panther, Scale Hospitality, Over the Rainbow)
 - **Education** — Dalhousie University + Lawrence Park CI
 - **Honors & Awards** — 6 cards (Agile cert, GPT cert, Dean's List ×6, Community Leadership, Ontario Scholar, Bilingual)
-- **Skills** — Technical, Business & Leadership, Digital Tools
+- **Skills** — carousel with 4 cards (Technical, AI & Productivity, Business & Leadership, Tools & Platforms), 10 items each, auto-advances every 3.6s with progress bar indicators
 - **Projects** — 4 cards (Pride STEM Canada, QuickCash, Tic Tec Toe, wdinomf?)
 - **Contact** — email + LinkedIn
 
@@ -99,7 +99,7 @@ Chrome 121+, Firefox, Safari, Edge, iOS Safari, Android Chrome.
 
 ## Author
 
-**Lucas Reydman** — Applied Computer Science & Management, Dalhousie University
+**Lucas Reydman** | Applied Computer Science & Management, Dalhousie University
 [lucas.reydman@dal.ca](mailto:lucas.reydman@dal.ca) · [LinkedIn](https://www.linkedin.com/in/lucasreydman) · [GitHub](https://github.com/lucasreydman)
 
 ## License

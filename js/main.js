@@ -188,9 +188,10 @@ function initTypewriter() {
 
     const phrases = [
         'Computer Science & Management Student',
-        'Aspiring Software Developer',
-        "Dean's List @ Dalhousie University",
         'Builder. Leader. Problem Solver.',
+        'Bridging Business & Technology',
+        'Shipping Faster with AI',
+        'Aspiring Software Developer',
     ];
 
     let phraseIdx = 0, charIdx = 0, deleting = false;
@@ -225,20 +226,36 @@ function initSpeechBubble() {
     const bubble    = document.querySelector('.speech-bubble');
     if (!container || !bubble) return;
 
+    let floatTimer = null;
+    let hovered = false;
+
     const show = () => {
-        bubble.style.opacity = '1';
-        bubble.style.transform = 'scale(1) translateY(0)';
-        bubble.classList.add('is-visible');
-    };
-    const hide = () => {
-        bubble.style.opacity = '0';
-        bubble.style.transform = 'scale(0.88) translateY(10px)';
-        bubble.classList.remove('is-visible');
+        clearTimeout(floatTimer);
+        bubble.classList.remove('leaving', 'floating');
+        void bubble.offsetWidth;
+        bubble.classList.add('entering');
+        floatTimer = setTimeout(() => {
+            bubble.classList.remove('entering');
+            bubble.classList.add('floating');
+        }, 550);
     };
 
-    setTimeout(() => { show(); setTimeout(hide, 3200); }, 1800);
-    container.addEventListener('mouseenter', show);
-    container.addEventListener('mouseleave', hide);
+    const hide = () => {
+        clearTimeout(floatTimer);
+        bubble.classList.remove('entering', 'floating');
+        void bubble.offsetWidth;
+        bubble.classList.add('leaving');
+        setTimeout(() => bubble.classList.remove('leaving'), 350);
+    };
+
+    // Auto show on load, then hide only if not hovered
+    setTimeout(() => {
+        show();
+        setTimeout(() => { if (!hovered) hide(); }, 3400);
+    }, 1800);
+
+    container.addEventListener('mouseenter', () => { hovered = true;  show(); });
+    container.addEventListener('mouseleave', () => { hovered = false; hide(); });
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -451,6 +468,171 @@ function initFallbackReveal() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// DETAILS ANIMATION (smooth height for pursuing dropdowns)
+// ═══════════════════════════════════════════════════════════════
+
+function initDetailsAnimation() {
+    document.querySelectorAll('.education-details details').forEach(el => {
+        const summary = el.querySelector('summary');
+
+        summary.addEventListener('click', e => {
+            e.preventDefault();
+
+            if (el.open) {
+                // Closing
+                const start = el.scrollHeight;
+                el.style.height = start + 'px';
+                el.offsetHeight; // reflow
+                el.style.transition = 'height 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease';
+                el.style.height = summary.scrollHeight + 8 + 'px';
+                el.addEventListener('transitionend', function handler(ev) {
+                    if (ev.propertyName !== 'height') return;
+                    el.open = false;
+                    el.style.height = '';
+                    el.style.transition = '';
+                    el.removeEventListener('transitionend', handler);
+                });
+            } else {
+                // Opening
+                el.open = true;
+                const end = el.scrollHeight;
+                el.style.height = summary.scrollHeight + 8 + 'px';
+                el.offsetHeight; // reflow
+                el.style.transition = 'height 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease';
+                el.style.height = end + 'px';
+                el.addEventListener('transitionend', function handler(ev) {
+                    if (ev.propertyName !== 'height') return;
+                    el.style.height = '';
+                    el.style.transition = '';
+                    el.removeEventListener('transitionend', handler);
+                });
+            }
+        });
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SKILLS CAROUSEL
+// ═══════════════════════════════════════════════════════════════
+
+function initSkillsCarousel() {
+    const wrapper = document.querySelector('.skills-carousel-wrapper');
+    if (!wrapper) return;
+
+    const track   = wrapper.querySelector('.skills-track');
+    const cards   = [...track.querySelectorAll('.skill-card')];
+    const dots    = [...wrapper.querySelectorAll('.skills-dot')];
+    const total   = cards.length; // 4
+    let current   = 0;
+    let autoTimer = null;
+
+    // Reveal cards immediately — bypass GSAP entrance for carousel cards
+    cards.forEach(c => { c.style.opacity = '0'; c.style.transform = ''; });
+
+    function layout() {
+        const ww       = track.offsetWidth;
+        const cardW    = Math.round(ww * 0.36);
+        const gap      = Math.round(ww * 0.02);
+        const step     = cardW + gap;
+        const centerX  = Math.round((ww - cardW) / 2);
+        let maxH = 0;
+
+        cards.forEach(c => {
+            c.style.width = cardW + 'px';
+            c.style.left  = centerX + 'px';
+            maxH = Math.max(maxH, c.offsetHeight);
+        });
+        track.style.height = maxH + 'px';
+
+        cards.forEach((card, i) => {
+            let offset = i - current;
+            // Wrap for infinite feel
+            if (offset > total / 2)  offset -= total;
+            if (offset < -total / 2) offset += total;
+
+            const x        = offset * step;
+            const isCenter = offset === 0;
+            const isSide   = Math.abs(offset) === 1;
+            const scale    = isCenter ? 1 : isSide ? 0.88 : 0.76;
+            const opacity  = isCenter ? 1 : isSide ? 0.5 : 0;
+            const rotateY  = isCenter ? 0 : offset * -12;
+            const zIndex   = isCenter ? 3 : isSide ? 2 : 0;
+            const shadow   = isCenter ? '0 20px 60px rgba(0,0,0,0.4)' : 'none';
+
+            card.style.transform    = `translateX(${x}px) scale(${scale}) rotateY(${rotateY}deg)`;
+            card.style.opacity      = opacity;
+            card.style.zIndex       = zIndex;
+            card.style.boxShadow    = shadow;
+            card.style.pointerEvents = (isCenter || isSide) ? 'auto' : 'none';
+        });
+    }
+
+    function updateDots() {
+        dots.forEach((d, i) => {
+            // Force restart CSS animation by removing/re-adding active
+            d.classList.remove('active');
+            if (i === current) {
+                void d.offsetWidth; // reflow to restart transition
+                d.classList.add('active');
+            }
+        });
+    }
+
+    function go(dir) {
+        current = (current + dir + total) % total;
+        layout();
+        updateDots();
+        resetAuto();
+    }
+
+    function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => go(1), 3600);
+    }
+
+    // Click dot to jump to card
+    dots.forEach((dot, i) => dot.addEventListener('click', () => {
+        current = i; layout(); updateDots(); resetAuto();
+    }));
+
+    // Click side cards to advance
+    cards.forEach((card, i) => card.addEventListener('click', () => {
+        if (i === current) return;
+        let offset = i - current;
+        if (offset > total / 2)  offset -= total;
+        if (offset < -total / 2) offset += total;
+        go(offset > 0 ? 1 : -1);
+    }));
+
+    // Touch / drag swipe
+    let startX = 0, dragging = false;
+    wrapper.addEventListener('pointerdown',  e => { startX = e.clientX; dragging = true; });
+    wrapper.addEventListener('pointerup',    e => {
+        if (!dragging) return;
+        dragging = false;
+        const diff = startX - e.clientX;
+        if (Math.abs(diff) > 40) go(diff > 0 ? 1 : -1);
+    });
+    wrapper.addEventListener('pointerleave', () => { dragging = false; });
+
+    // Pause bar + auto on hover, resume on leave
+    wrapper.addEventListener('mouseenter', () => {
+        clearInterval(autoTimer);
+        dots.forEach(d => d.style.setProperty('--bar-state', 'paused'));
+    });
+    wrapper.addEventListener('mouseleave', () => {
+        dots.forEach(d => d.style.removeProperty('--bar-state'));
+        resetAuto();
+    });
+
+    window.addEventListener('resize', layout);
+
+    layout();
+    updateDots();
+    resetAuto();
+}
+
+// ═══════════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════════
 
@@ -469,6 +651,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initCursor();
     initSpotlight();
     initCardSpotlight();
+    initDetailsAnimation();
+    initSkillsCarousel();
 
     // GSAP runs after libraries load (they are deferred)
     // We use a small rAF loop until GSAP is ready

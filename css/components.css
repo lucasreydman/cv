@@ -3,11 +3,16 @@
  */
 
 /* ─── Card Grid Layouts ──────────────────────────────────── */
-.skills-grid,
 .honors-grid,
 .education-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.25rem;
 }
 
@@ -131,10 +136,14 @@
     transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
 }
 
-.company-logo:hover,
-.education-header .company-logo:hover {
+.company-logo:not(.no-link):hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 20px var(--accent-glow);
+}
+
+.company-logo.no-link {
+    cursor: default;
+    pointer-events: none;
 }
 
 .company-logo a,
@@ -514,54 +523,81 @@ body.cursor-hover .cursor-dot {
 @media (max-width: 768px) { .cursor-spotlight { display: none; } }
 
 /* ─── Speech Bubble ──────────────────────────────────────── */
-.speech-bubble {
-    position: absolute;
-    top: 0;
-    right: -165px;
-    background: var(--surface-2);
-    border: 1px solid var(--border-hover);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    padding: 14px 18px;
-    border-radius: 16px;
-    max-width: 200px;
-    opacity: 0;
-    transform: scale(0.88) translateY(10px);
-    transform-origin: bottom left;
-    transition: opacity 0.4s var(--ease-smooth), transform 0.45s var(--ease-bounce);
-    pointer-events: none;
-    z-index: 10;
-    text-align: center;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px var(--border);
+@keyframes bubbleIn {
+    0%   { opacity: 0; transform: scale(0.72) translateY(16px); filter: blur(4px); }
+    60%  { opacity: 1; transform: scale(1.04) translateY(-3px); filter: blur(0); }
+    100% { opacity: 1; transform: scale(1) translateY(0);       filter: blur(0); }
 }
 
-.speech-bubble.is-visible {
-    animation: bubbleFloat 3.5s ease-in-out infinite;
+@keyframes bubbleOut {
+    0%   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    100% { opacity: 0; transform: scale(0.82) translateY(10px); filter: blur(3px); }
 }
 
 @keyframes bubbleFloat {
-    0%, 100% { transform: scale(1) translateY(0); }
-    50%       { transform: scale(1) translateY(-6px); }
+    0%, 100% { transform: scale(1) translateY(0px); }
+    50%       { transform: scale(1) translateY(-7px); }
+}
+
+@keyframes bubblePulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(109,90,237,0.25), 0 0 0 0px rgba(109,90,237,0); }
+    50%       { box-shadow: 0 12px 40px rgba(0,0,0,0.4),  0 0 0 1px rgba(109,90,237,0.5),  0 0 18px 4px rgba(109,90,237,0.12); }
+}
+
+.speech-bubble {
+    position: absolute;
+    top: 0;
+    right: -180px;
+    background: linear-gradient(135deg, rgba(30,27,60,0.92), rgba(20,18,48,0.96));
+    border: 1px solid rgba(109,90,237,0.3);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    padding: 14px 20px;
+    border-radius: 18px;
+    max-width: 210px;
+    opacity: 0;
+    transform: scale(0.82) translateY(10px);
+    transform-origin: bottom left;
+    pointer-events: none;
+    z-index: 10;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(109,90,237,0.2);
+    transition: none;
+}
+
+.speech-bubble.entering {
+    animation: bubbleIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.speech-bubble.floating {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    animation: bubbleFloat 3.2s ease-in-out infinite, bubblePulse 3.2s ease-in-out infinite;
+}
+
+.speech-bubble.leaving {
+    animation: bubbleOut 0.35s ease-in forwards;
 }
 
 .speech-bubble p {
     margin: 0;
     font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--text-2);
+    line-height: 1.55;
+    color: var(--text);
     font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 /* Arrow */
 .speech-bubble::before {
     content: '';
     position: absolute;
-    bottom: 16px;
-    left: -8px;
-    width: 14px; height: 14px;
-    background: var(--surface-2);
-    border-left: 1px solid var(--border-hover);
-    border-bottom: 1px solid var(--border-hover);
+    bottom: 18px;
+    left: -7px;
+    width: 13px; height: 13px;
+    background: rgba(25,22,55,0.95);
+    border-left: 1px solid rgba(109,90,237,0.3);
+    border-bottom: 1px solid rgba(109,90,237,0.3);
     transform: rotate(45deg);
     z-index: -1;
 }
