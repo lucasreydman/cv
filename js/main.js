@@ -1,281 +1,671 @@
 /**
- * Portfolio Website JavaScript
- * Main script file for handling interactive functionality
- * 
- * @author Lucas Reydman
- * @version 1.0.0
- * @license MIT
+ * Portfolio — main.js
+ * Lenis smooth scroll + GSAP animations + interactive polish
  */
 
-// =================================
-// Theme Management
-// =================================
+// ═══════════════════════════════════════════════════════════════
+// THEME
+// ═══════════════════════════════════════════════════════════════
 
-const themeToggle = document.getElementById('theme-toggle');
+function initTheme() {
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
 
-/**
- * Sets the theme and updates relevant elements
- * @param {string} theme - The theme to set ('light' or 'dark')
- */
-function setTheme(theme) {
+    toggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateHeroImage(next);
+    });
+
+    // Apply saved/system theme (HTML default is dark; inline script handles flash prevention)
+    const saved = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const theme = saved || (prefersLight ? 'light' : 'dark');
     document.documentElement.setAttribute('data-theme', theme);
-    
-    // Update hero image for dark mode if needed
-    updateHeroImageForTheme(theme);
+    updateHeroImage(theme);
 }
 
-/**
- * Updates the hero image based on current theme
- * @param {string} theme - Current theme ('light' or 'dark')
- */
-function updateHeroImageForTheme(theme) {
-    const heroImage = document.querySelector('.hero-image');
-    if (heroImage) {
-        // Always ensure we're using the transparent image
-        heroImage.src = 'assets/images/hero/hero-removebg-preview.png';
-        
-        if (theme === 'dark') {
-            heroImage.style.filter = 'brightness(1.2) drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3))';
-        } else {
-            heroImage.style.filter = '';
-        }
-    }
+function updateHeroImage(theme) {
+    const img = document.querySelector('.hero-image');
+    if (!img) return;
+    img.style.filter = theme === 'dark'
+        ? 'drop-shadow(0 20px 40px rgba(109, 90, 237, 0.25)) brightness(1.05)'
+        : 'drop-shadow(0 16px 32px rgba(91, 77, 214, 0.18))';
 }
 
-/**
- * Initializes theme based on user preference or system setting
- */
-function initializeTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else if (prefersDark) {
-        setTheme('dark');
+// ═══════════════════════════════════════════════════════════════
+// LENIS — smooth scroll
+// ═══════════════════════════════════════════════════════════════
+
+function initLenis() {
+    if (typeof Lenis === 'undefined') return null;
+
+    const lenis = new Lenis({
+        lerp: 0.08,
+        smoothWheel: true,
+        syncTouch: false,
+    });
+
+    // Tie into GSAP ticker if available
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
     } else {
-        setTheme('light');
+        // Fallback RAF loop
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
     }
+
+    return lenis;
 }
 
-// Initialize theme
-initializeTheme();
+// ═══════════════════════════════════════════════════════════════
+// SMOOTH ANCHOR SCROLL
+// ═══════════════════════════════════════════════════════════════
 
-// Theme toggle click handler
-themeToggle.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    // Save theme preference
-    localStorage.setItem('theme', newTheme);
-    
-    setTheme(newTheme);
-});
-
-// =================================
-// Scroll Effects
-// =================================
-
-/**
- * Sets up smooth scrolling for navigation links
- */
-function setupSmoothScroll() {
+function initSmoothScroll(lenis) {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', (e) => {
+            const id = anchor.getAttribute('href');
+            if (id === '#') return;
+            const target = document.querySelector(id);
+            if (!target) return;
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
+            if (lenis) {
+                lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+            } else {
+                target.scrollIntoView({ behavior: 'smooth' });
             }
         });
     });
 }
 
-/**
- * Sets up navbar scroll effect (background change on scroll)
- */
-function setupNavbarScroll() {
+// ═══════════════════════════════════════════════════════════════
+// NAVBAR
+// ═══════════════════════════════════════════════════════════════
+
+function initNavbar() {
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('main section[id]');
+
+    // Scrolled class
     window.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+        navbar.classList.toggle('scrolled', window.scrollY > 60);
+        updateActiveNavLink();
+    }, { passive: true });
+
+    // Active link highlight
+    function updateActiveNavLink() {
+        let current = '';
+        sections.forEach(sec => {
+            if (window.scrollY >= sec.offsetTop - 140) {
+                current = sec.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+        });
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HAMBURGER MENU
+// ═══════════════════════════════════════════════════════════════
+
+function initHamburger() {
+    const btn   = document.querySelector('.hamburger');
+    const nav   = document.querySelector('.nav-links');
+    if (!btn || !nav) return;
+
+    const close = () => {
+        btn.classList.remove('active');
+        nav.classList.remove('active');
+        btn.setAttribute('aria-expanded', 'false');
+    };
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = nav.classList.toggle('active');
+        btn.classList.toggle('active', open);
+        btn.setAttribute('aria-expanded', String(open));
+    });
+
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !nav.contains(e.target)) close();
     });
 }
 
-// =================================
-// Reveal Animations
-// =================================
+// ═══════════════════════════════════════════════════════════════
+// SCROLL PROGRESS BAR
+// ═══════════════════════════════════════════════════════════════
 
-/**
- * Sets up reveal animations for sections and cards using Intersection Observer
- */
-function setupRevealAnimations() {
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
+function initScrollProgress() {
+    const bar = document.querySelector('.scroll-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', () => {
+        const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+        bar.style.width = Math.min(pct, 100) + '%';
+        bar.setAttribute('aria-valuenow', Math.round(pct));
+    }, { passive: true });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SCROLL-TO-TOP & GITHUB BUTTON
+// ═══════════════════════════════════════════════════════════════
+
+function initScrollTop(lenis) {
+    const btn    = document.getElementById('scroll-top');
+    const ghLink = document.querySelector('.github-link');
+    if (!btn) return;
+
+    window.addEventListener('scroll', () => {
+        const show = window.scrollY > 500;
+        btn.classList.toggle('visible', show);
+        if (ghLink) ghLink.classList.toggle('visible', show);
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+        if (lenis) lenis.scrollTo(0, { duration: 1.6 });
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TYPEWRITER
+// ═══════════════════════════════════════════════════════════════
+
+function initTypewriter() {
+    const el = document.getElementById('typewriter');
+    if (!el) return;
+
+    const phrases = [
+        'Computer Science & Management Student.',
+        'Builder. Leader. Problem Solver.',
+        'Bridging Business & Technology.',
+        'Shipping Faster with AI.',
+        'Aspiring Software Developer.',
+    ];
+
+    let phraseIdx = 0, charIdx = 0, deleting = false;
+
+    function tick() {
+        const phrase = phrases[phraseIdx];
+        charIdx += deleting ? -1 : 1;
+        el.textContent = phrase.slice(0, charIdx);
+
+        let delay = deleting ? 38 : 75;
+        if (!deleting && charIdx === phrase.length) {
+            delay = 2400; deleting = true;
+        } else if (deleting && charIdx === 0) {
+            deleting = false;
+            phraseIdx = (phraseIdx + 1) % phrases.length;
+            delay = 350;
+        }
+        setTimeout(tick, delay);
+    }
+
+    tick();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SPEECH BUBBLE
+// ═══════════════════════════════════════════════════════════════
+
+function initSpeechBubble() {
+    if (window.innerWidth <= 768) return;
+
+    const container = document.querySelector('.hero-image-container');
+    const bubble    = document.querySelector('.speech-bubble');
+    if (!container || !bubble) return;
+
+    let floatTimer = null;
+    let hovered = false;
+
+    const show = () => {
+        clearTimeout(floatTimer);
+        bubble.classList.remove('leaving', 'floating');
+        void bubble.offsetWidth;
+        bubble.classList.add('entering');
+        floatTimer = setTimeout(() => {
+            bubble.classList.remove('entering');
+            bubble.classList.add('floating');
+        }, 550);
     };
 
-    const observerCallback = (entries, observer) => {
+    const hide = () => {
+        clearTimeout(floatTimer);
+        bubble.classList.remove('entering', 'floating');
+        void bubble.offsetWidth;
+        bubble.classList.add('leaving');
+        setTimeout(() => bubble.classList.remove('leaving'), 350);
+    };
+
+    // Auto show on load, then hide only if not hovered
+    setTimeout(() => {
+        show();
+        setTimeout(() => { if (!hovered) hide(); }, 3400);
+    }, 1800);
+
+    container.addEventListener('mouseenter', () => { hovered = true;  show(); });
+    container.addEventListener('mouseleave', () => { hovered = false; hide(); });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CUSTOM CURSOR
+// ═══════════════════════════════════════════════════════════════
+
+function initCursor() {
+    const isFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!isFine || window.innerWidth <= 768) return;
+
+    const dot  = document.createElement('div'); dot.className  = 'cursor-dot';
+    const ring = document.createElement('div'); ring.className = 'cursor-ring';
+    document.body.append(dot, ring);
+
+    let mx = -999, my = -999, rx = -999, ry = -999;
+
+    document.addEventListener('mousemove', (e) => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+    });
+
+    (function animateRing() {
+        rx += (mx - rx) * 0.11;
+        ry += (my - ry) * 0.11;
+        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateRing);
+    })();
+
+    const hoverSel = 'a, button, [role="button"], label, input, textarea, .skill-tag, .scroll-to-top, .github-link, .theme-toggle';
+    document.querySelectorAll(hoverSel).forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CURSOR SPOTLIGHT
+// ═══════════════════════════════════════════════════════════════
+
+function initSpotlight() {
+    if (window.innerWidth <= 768) return;
+
+    const el = document.createElement('div');
+    el.className = 'cursor-spotlight';
+    document.body.appendChild(el);
+
+    let cx = -9999, cy = -9999, tx = -9999, ty = -9999;
+
+    document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+
+    (function loop() {
+        cx += (tx - cx) * 0.07;
+        cy += (ty - cy) * 0.07;
+        el.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+    })();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CARD SPOTLIGHT (mouse-position radial on card)
+// ═══════════════════════════════════════════════════════════════
+
+function initCardSpotlight() {
+    const cards = document.querySelectorAll(
+        '.skill-card, .honor-card, .education-card, .experience-card, .project-card'
+    );
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const r = card.getBoundingClientRect();
+            const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%';
+            const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%';
+            card.style.setProperty('--mx', x);
+            card.style.setProperty('--my', y);
+        });
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GSAP ANIMATIONS
+// ═══════════════════════════════════════════════════════════════
+
+function initGSAP() {
+    if (typeof gsap === 'undefined') {
+        // Fallback: simple IntersectionObserver reveal
+        initFallbackReveal();
+        return;
+    }
+
+    if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+    }
+
+    // ── Hero entrance sequence ──────────────────────────────
+    // Set initial states first, then animate
+    gsap.set('.hero-eyebrow',         { opacity: 0, y: 20 });
+    gsap.set('.hero-text h1',         { opacity: 0, y: 32 });
+    gsap.set('.hero-text .subtitle',  { opacity: 0, y: 20 });
+    gsap.set('.hero-cta',             { opacity: 0, y: 20 });
+    gsap.set('.hero-image-container', { opacity: 0, x: 40 });
+    gsap.set('.hero-scroll',          { opacity: 0 });
+
+    gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.15 })
+        .to('.hero-eyebrow',          { opacity: 1, y: 0, duration: 0.7 })
+        .to('.hero-text h1',          { opacity: 1, y: 0, duration: 0.85 }, '-=0.4')
+        .to('.hero-text .subtitle',   { opacity: 1, y: 0, duration: 0.7  }, '-=0.5')
+        .to('.hero-cta',              { opacity: 1, y: 0, duration: 0.7  }, '-=0.45')
+        .to('.hero-image-container',  { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, '-=0.8')
+        .to('.hero-scroll',           { opacity: 1, duration: 0.6 }, '-=0.3');
+
+    if (typeof ScrollTrigger === 'undefined') {
+        initFallbackReveal();
+        return;
+    }
+
+    // ── Section headings ────────────────────────────────────
+    document.querySelectorAll('section h2').forEach(heading => {
+        gsap.from(heading, {
+            scrollTrigger: { trigger: heading, start: 'top 88%', toggleActions: 'play none none none' },
+            opacity: 0, y: 22, duration: 0.75, ease: 'power2.out',
+        });
+    });
+
+    // ── About text ──────────────────────────────────────────
+    gsap.from('.about-text p', {
+        scrollTrigger: { trigger: '.about-text', start: 'top 85%' },
+        opacity: 0, y: 24, duration: 0.9, ease: 'power2.out',
+    });
+
+    // ── Timeline cards ──────────────────────────────────────
+    document.querySelectorAll('.timeline-item').forEach((item, i) => {
+        const card = item.querySelector('.experience-card');
+        const isLeft = item.classList.contains('timeline-left');
+        if (!card) return;
+
+        gsap.fromTo(card,
+            { opacity: 0, x: isLeft ? -30 : 30 },
+            {
+                scrollTrigger: { trigger: item, start: 'top 85%' },
+                opacity: 1, x: 0, duration: 0.8, ease: 'power2.out',
+                delay: (i % 2) * 0.1,
+                onComplete: () => card.classList.add('revealed'),
+            }
+        );
+    });
+
+    // ── Grid cards (stagger) ────────────────────────────────
+    ['.education-grid', '.honors-grid', '.skills-grid'].forEach(sel => {
+        const grid = document.querySelector(sel);
+        if (!grid) return;
+        const cards = grid.querySelectorAll('.education-card, .honor-card, .skill-card');
+
+        gsap.fromTo(cards,
+            { opacity: 0, y: 30 },
+            {
+                scrollTrigger: { trigger: grid, start: 'top 85%' },
+                opacity: 1, y: 0,
+                stagger: 0.1, duration: 0.7, ease: 'power2.out',
+                onComplete: () => cards.forEach(c => c.classList.add('revealed')),
+            }
+        );
+    });
+
+    // ── Project cards (stagger) ─────────────────────────────
+    const projectCards = document.querySelectorAll('.project-card');
+    gsap.fromTo(projectCards,
+        { opacity: 0, y: 32 },
+        {
+            scrollTrigger: { trigger: '.projects-grid', start: 'top 85%' },
+            opacity: 1, y: 0,
+            stagger: 0.12, duration: 0.75, ease: 'power2.out',
+            onComplete: () => projectCards.forEach(c => c.classList.add('revealed')),
+        }
+    );
+
+    // ── Contact ─────────────────────────────────────────────
+    gsap.from('.contact-content', {
+        scrollTrigger: { trigger: '.contact-content', start: 'top 88%' },
+        opacity: 0, y: 24, duration: 0.8, ease: 'power2.out',
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FALLBACK (no GSAP)
+// ═══════════════════════════════════════════════════════════════
+
+function initFallbackReveal() {
+    const opts = { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0 };
+    const obs  = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('revealed');
                 observer.unobserve(entry.target);
             }
         });
-    };
+    }, opts);
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    document.querySelectorAll(
+        '.skill-card, .honor-card, .education-card, .experience-card, .project-card'
+    ).forEach((el, i) => {
+        el.style.transitionDelay = `${(i % 4) * 0.1}s`;
+        obs.observe(el);
+    });
 
-    // Observe all main sections and their children
-    document.querySelectorAll('section').forEach(section => {
-        section.classList.add('reveal-section');
-        observer.observe(section);
-        
-        // Observe grid items within sections with staggered delay
-        section.querySelectorAll('.skill-card, .honor-card, .education-card, .experience-card').forEach((item, index) => {
-            item.classList.add('reveal-item');
-            item.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(item);
+    // Reveal hero elements immediately
+    ['.hero-eyebrow', '.hero-text h1', '.hero-text .subtitle', '.hero-cta', '.hero-image-container', '.hero-scroll']
+        .forEach(sel => {
+            const el = document.querySelector(sel);
+            if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+        });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DETAILS ANIMATION (smooth height for pursuing dropdowns)
+// ═══════════════════════════════════════════════════════════════
+
+function initDetailsAnimation() {
+    document.querySelectorAll('.education-details details').forEach(el => {
+        const summary = el.querySelector('summary');
+
+        summary.addEventListener('click', e => {
+            e.preventDefault();
+
+            if (el.open) {
+                // Closing
+                const start = el.scrollHeight;
+                el.style.height = start + 'px';
+                el.offsetHeight; // reflow
+                el.style.transition = 'height 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease';
+                el.style.height = summary.scrollHeight + 8 + 'px';
+                el.addEventListener('transitionend', function handler(ev) {
+                    if (ev.propertyName !== 'height') return;
+                    el.open = false;
+                    el.style.height = '';
+                    el.style.transition = '';
+                    el.removeEventListener('transitionend', handler);
+                });
+            } else {
+                // Opening
+                el.open = true;
+                const end = el.scrollHeight;
+                el.style.height = summary.scrollHeight + 8 + 'px';
+                el.offsetHeight; // reflow
+                el.style.transition = 'height 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease';
+                el.style.height = end + 'px';
+                el.addEventListener('transitionend', function handler(ev) {
+                    if (ev.propertyName !== 'height') return;
+                    el.style.height = '';
+                    el.style.transition = '';
+                    el.removeEventListener('transitionend', handler);
+                });
+            }
         });
     });
 }
 
-// =================================
-// Interactive Elements
-// =================================
+// ═══════════════════════════════════════════════════════════════
+// SKILLS CAROUSEL
+// ═══════════════════════════════════════════════════════════════
 
-/**
- * Detects if the current device is a mobile device
- * @returns {boolean} True if the device is a mobile device
- */
-function isMobileDevice() {
-    return (window.innerWidth <= 768) || 
-           ('ontouchstart' in window) || 
-           (navigator.maxTouchPoints > 0) ||
-           (navigator.msMaxTouchPoints > 0);
-}
+function initSkillsCarousel() {
+    const wrapper = document.querySelector('.skills-carousel-wrapper');
+    if (!wrapper) return;
 
-/**
- * Sets up speech bubble animation and interaction
- * Only activates on non-mobile devices
- */
-function setupSpeechBubble() {
-    // Skip on mobile devices
-    if (isMobileDevice()) return;
-    
-    const heroImage = document.querySelector('.hero-image-container');
-    const speechBubble = document.querySelector('.speech-bubble');
-    
-    if (heroImage && speechBubble) {
-        // Initial show on page load
-        setTimeout(() => {
-            speechBubble.style.opacity = '1';
-            speechBubble.style.transform = 'scale(1) translateY(0)';
-            
-            // Hide after 3 seconds
-            setTimeout(() => {
-                speechBubble.style.opacity = '0';
-                speechBubble.style.transform = 'scale(0.8) translateY(10px)';
-            }, 3000);
-        }, 1500);
-        
-        // Show on mouse enter
-        heroImage.addEventListener('mouseenter', () => {
-            speechBubble.style.transform = 'scale(1) translateY(0)';
-            speechBubble.style.opacity = '1';
+    const track   = wrapper.querySelector('.skills-track');
+    const cards   = [...track.querySelectorAll('.skill-card')];
+    const dots    = [...wrapper.querySelectorAll('.skills-dot')];
+    const total   = cards.length; // 4
+    let current   = 0;
+    let autoTimer = null;
+
+    // Reveal cards immediately — bypass GSAP entrance for carousel cards
+    cards.forEach(c => { c.style.opacity = '0'; c.style.transform = ''; });
+
+    function layout() {
+        const ww       = track.offsetWidth;
+        const cardW    = Math.round(ww * 0.36);
+        const gap      = Math.round(ww * 0.02);
+        const step     = cardW + gap;
+        const centerX  = Math.round((ww - cardW) / 2);
+        let maxH = 0;
+
+        cards.forEach(c => {
+            c.style.width = cardW + 'px';
+            c.style.left  = centerX + 'px';
+            maxH = Math.max(maxH, c.offsetHeight);
         });
-        
-        // Hide on mouse leave
-        heroImage.addEventListener('mouseleave', () => {
-            speechBubble.style.opacity = '0';
-            speechBubble.style.transform = 'scale(0.8) translateY(10px)';
+        track.style.height = maxH + 'px';
+
+        cards.forEach((card, i) => {
+            let offset = i - current;
+            // Wrap for infinite feel
+            if (offset > total / 2)  offset -= total;
+            if (offset < -total / 2) offset += total;
+
+            const x        = offset * step;
+            const isCenter = offset === 0;
+            const isSide   = Math.abs(offset) === 1;
+            const scale    = isCenter ? 1 : isSide ? 0.88 : 0.76;
+            const opacity  = isCenter ? 1 : isSide ? 0.5 : 0;
+            const rotateY  = isCenter ? 0 : offset * -12;
+            const zIndex   = isCenter ? 3 : isSide ? 2 : 0;
+            const shadow   = isCenter ? '0 20px 60px rgba(0,0,0,0.4)' : 'none';
+
+            card.style.transform    = `translateX(${x}px) scale(${scale}) rotateY(${rotateY}deg)`;
+            card.style.opacity      = opacity;
+            card.style.zIndex       = zIndex;
+            card.style.boxShadow    = shadow;
+            card.style.pointerEvents = (isCenter || isSide) ? 'auto' : 'none';
         });
     }
-}
 
-/**
- * Sets up hamburger menu functionality for mobile
- */
-function setupHamburgerMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const navLinksItems = document.querySelectorAll('.nav-links a');
-
-    if (!hamburger || !navLinks) return;
-
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking a link
-    navLinksItems.forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
+    function updateDots() {
+        dots.forEach((d, i) => {
+            // Force restart CSS animation by removing/re-adding active
+            d.classList.remove('active');
+            if (i === current) {
+                void d.offsetWidth; // reflow to restart transition
+                d.classList.add('active');
+            }
         });
+    }
+
+    function go(dir) {
+        current = (current + dir + total) % total;
+        layout();
+        updateDots();
+        resetAuto();
+    }
+
+    function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => go(1), 3600);
+    }
+
+    // Click dot to jump to card
+    dots.forEach((dot, i) => dot.addEventListener('click', () => {
+        current = i; layout(); updateDots(); resetAuto();
+    }));
+
+    // Click side cards to advance
+    cards.forEach((card, i) => card.addEventListener('click', () => {
+        if (i === current) return;
+        let offset = i - current;
+        if (offset > total / 2)  offset -= total;
+        if (offset < -total / 2) offset += total;
+        go(offset > 0 ? 1 : -1);
+    }));
+
+    // Touch / drag swipe
+    let startX = 0, dragging = false;
+    wrapper.addEventListener('pointerdown',  e => { startX = e.clientX; dragging = true; });
+    wrapper.addEventListener('pointerup',    e => {
+        if (!dragging) return;
+        dragging = false;
+        const diff = startX - e.clientX;
+        if (Math.abs(diff) > 40) go(diff > 0 ? 1 : -1);
+    });
+    wrapper.addEventListener('pointerleave', () => { dragging = false; });
+
+    // Pause bar + auto on hover, resume on leave
+    wrapper.addEventListener('mouseenter', () => {
+        clearInterval(autoTimer);
+        dots.forEach(d => d.style.setProperty('--bar-state', 'paused'));
+    });
+    wrapper.addEventListener('mouseleave', () => {
+        dots.forEach(d => d.style.removeProperty('--bar-state'));
+        resetAuto();
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-        }
-    });
+    window.addEventListener('resize', layout);
+
+    layout();
+    updateDots();
+    resetAuto();
 }
 
-/**
- * Sets up scroll-to-top button functionality
- */
-function setupScrollToTop() {
-    const scrollBtn = document.getElementById('scroll-top');
-    const githubBtn = document.querySelector('.github-link');
-    
-    if (!scrollBtn) return;
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-            scrollBtn.classList.add('visible');
-            if (githubBtn) githubBtn.classList.add('visible');
-        } else {
-            scrollBtn.classList.remove('visible');
-            if (githubBtn) githubBtn.classList.remove('visible');
-        }
-    });
-    
-    scrollBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
 
-// =================================
-// Initialization
-// =================================
-
-/**
- * Initializes all functionality when DOM is loaded
- */
 document.addEventListener('DOMContentLoaded', () => {
-    setupSmoothScroll();
-    setupNavbarScroll();
-    setupRevealAnimations();
-    setupHamburgerMenu();
-    setupScrollToTop();
-    setupSpeechBubble();
-    
-    // Force apply the correct transparent image in the current theme
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    updateHeroImageForTheme(currentTheme);
-});
+    initTheme();
 
+    const lenis = initLenis();
+
+    initSmoothScroll(lenis);
+    initNavbar();
+    initHamburger();
+    initScrollProgress();
+    initScrollTop(lenis);
+    initTypewriter();
+    initSpeechBubble();
+    initCursor();
+    initSpotlight();
+    initCardSpotlight();
+    initDetailsAnimation();
+    initSkillsCarousel();
+
+    // GSAP runs after libraries load (they are deferred)
+    // We use a small rAF loop until GSAP is ready
+    let attempts = 0;
+    function tryGSAP() {
+        if (typeof gsap !== 'undefined') {
+            initGSAP();
+        } else if (attempts++ < 40) {
+            requestAnimationFrame(tryGSAP);
+        } else {
+            // Libraries never loaded — fallback
+            initFallbackReveal();
+        }
+    }
+    tryGSAP();
+});

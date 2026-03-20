@@ -52,6 +52,10 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Static site — Node only used for build tooling
+package.json
+package-lock.json
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 

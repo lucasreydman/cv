@@ -1,543 +1,696 @@
 /**
- * Component Styles
- * Contains styles for cards, buttons, tooltips, and other reusable UI components
+ * Components — Cards, buttons, cursor, fixed UI
  */
 
-/* Card Styles (shared between skills, honors, education) */
-.skills-grid,
+/* ─── Card Grid Layouts ──────────────────────────────────── */
 .honors-grid,
-.education-grid,
-.experience-grid {
+.education-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-    perspective: 1000px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
 }
 
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 1.25rem;
+}
+
+/* ─── Base Card ──────────────────────────────────────────── */
 .skill-card,
 .honor-card,
 .education-card,
-.experience-card {
-    background-color: var(--card-bg);
+.experience-card,
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
     padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: var(--card-shadow);
-    transition: all 0.5s var(--ease-smooth);
-    opacity: 0;
-    transform: translateY(30px) rotateX(10deg);
-    transform-origin: top;
-    overflow: hidden;
     position: relative;
-    z-index: 1;
+    overflow: hidden;
+    isolation: isolate;
+    transition: border-color 0.35s var(--ease-smooth),
+                background 0.35s var(--ease-smooth),
+                transform 0.35s var(--ease-out),
+                box-shadow 0.35s var(--ease-smooth);
+
+    /* Entrance — driven by GSAP */
+    opacity: 0;
+    transform: translateY(28px);
 }
 
 .skill-card.revealed,
 .honor-card.revealed,
 .education-card.revealed,
-.experience-card.revealed {
+.experience-card.revealed,
+.project-card.revealed {
     opacity: 1;
-    transform: translateY(0) rotateX(0);
+    transform: translateY(0);
 }
 
-/* Card hover effects */
+/* Hover lift */
 .skill-card:hover,
 .honor-card:hover,
 .education-card:hover,
 .experience-card:hover {
-    transform: var(--hover-scale) translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--border-hover);
+    background: var(--card-bg-hover);
+    transform: translateY(-6px);
+    box-shadow: 0 0 0 1px var(--border-hover),
+                0 24px 48px rgba(0,0,0,0.35),
+                0 0 60px var(--accent-glow);
 }
 
-/* Dark mode card hover effect adjustment */
-[data-theme="dark"] .skill-card:hover,
-[data-theme="dark"] .honor-card:hover,
-[data-theme="dark"] .education-card:hover,
-[data-theme="dark"] .experience-card:hover {
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+/* Spotlight pseudo-element — JS drives --mx / --my via style attr */
+.skill-card::before,
+.honor-card::before,
+.education-card::before,
+.experience-card::before,
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        320px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(109, 90, 237, 0.06) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
 }
 
-/* Experience & Education card header styles */
+.skill-card:hover::before,
+.honor-card:hover::before,
+.education-card:hover::before,
+.experience-card:hover::before,
+.project-card:hover::before {
+    opacity: 1;
+}
+
+/* All card children above spotlight */
+.skill-card > *,
+.honor-card > *,
+.education-card > *,
+.experience-card > *,
+.project-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ─── Card Headers (experience / education) ──────────────── */
 .experience-header,
 .education-header {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1.5rem;
     position: relative;
 }
 
 .education-header {
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
 }
 
+/* Company / school logo */
 .company-logo,
 .education-header .company-logo {
     flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
     overflow: hidden;
-    background-color: var(--card-bg);
-    box-shadow: var(--card-shadow);
+    background: #fff;
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 0;
-    right: 0;
+    transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
+}
+
+.company-logo:not(.no-link):hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px var(--accent-glow);
+}
+
+.company-logo.no-link {
+    cursor: default;
+    pointer-events: none;
+}
+
+.company-logo a,
+.education-header .company-logo a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    overflow: hidden;
 }
 
 .company-logo img,
 .education-header .company-logo img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    padding: 0.5rem;
-    border-radius: 16px;
-    transition: transform 0.3s ease;
+    object-fit: cover;
+    clip-path: inset(0 round 11px);
 }
 
 .experience-title,
 .education-title {
-    flex-grow: 1;
-    padding-right: 100px;
+    flex: 1;
+    min-width: 0;
 }
 
 .experience-title h3,
 .education-title h3 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
-/* Theme toggle button */
-.theme-toggle {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
+/* ─── Skill Tags ─────────────────────────────────────────── */
+.project-skills {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
-    min-width: 45px;
-    border-radius: 50%;
-    color: var(--navbar-text);
-    transition: var(--transition);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.skill-tag {
+    background: rgba(109, 90, 237, 0.08);
+    color: var(--accent-2);
+    border: 1px solid rgba(109, 90, 237, 0.18);
+    padding: 0.28rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.25s var(--ease-smooth);
+    cursor: default;
     position: relative;
-    margin-left: 1rem;
-    background-color: rgba(37, 99, 235, 0.05);
+}
+
+.skill-tag:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* Tooltip */
+.skill-tag[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    background: var(--surface-3);
+    border: 1px solid var(--border-hover);
+    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 400;
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+    white-space: normal;
+    width: max-content;
+    max-width: 260px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.25s var(--ease-smooth);
+    z-index: 10;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.skill-tag:hover[data-tooltip]::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+[data-theme="light"] .skill-tag {
+    background: rgba(91, 77, 214, 0.07);
+    border-color: rgba(91, 77, 214, 0.18);
+}
+
+/* ─── Buttons ────────────────────────────────────────────── */
+.btn-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    transition: all 0.3s var(--ease-bounce);
+    box-shadow: 0 4px 20px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    margin-top: 2rem;
+    position: relative;
     overflow: hidden;
 }
 
-.theme-toggle:hover {
-    transform: scale(1.1) rotate(15deg);
-    color: var(--primary-color);
-    background-color: rgba(37, 99, 235, 0.1);
-}
-
-.theme-toggle i {
+.btn-resume::after {
+    content: '';
     position: absolute;
-    transition: transform 0.6s var(--ease-bounce), opacity 0.4s ease;
-    font-size: 1.4rem;
-    width: 100%;
-    height: 100%;
-    display: flex;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.btn-resume:hover {
+    background: var(--accent-2);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 35px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.btn-resume:active { transform: translateY(-1px) scale(1); }
+
+/* Demo / live site button */
+.project-links { margin-top: 1.25rem; }
+
+.project-demo-btn {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.25rem;
+    background: transparent;
+    color: var(--accent-2);
+    border: 1px solid var(--border-accent);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s var(--ease-smooth);
 }
 
-.theme-toggle .fa-sun,
-.theme-toggle .fa-moon {
-    color: #FFD700;
+.project-demo-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent-glow);
 }
 
-.theme-toggle .fa-sun {
-    opacity: 0;
-    transform: translateY(100%);
+/* Honor link */
+.honor-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+    color: var(--accent-2);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+    background: rgba(109, 90, 237, 0.08);
+    border: 1px solid var(--border-accent);
+    transition: all 0.3s var(--ease-bounce);
 }
 
-.theme-toggle .fa-moon {
-    opacity: 1;
-    transform: translateY(0);
+.honor-link i,
+.project-demo-btn i {
+    font-size: 0.6rem !important;
+    line-height: 1;
 }
 
-[data-theme="dark"] .theme-toggle .fa-sun {
-    opacity: 1;
-    transform: translateY(0);
+.honor-link:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px var(--accent-glow);
 }
 
-[data-theme="dark"] .theme-toggle .fa-moon {
-    opacity: 0;
-    transform: translateY(-100%);
+/* ─── Incoming badge ─────────────────────────────────────── */
+.incoming-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(109, 90, 237, 0.12);
+    border: 1px solid rgba(109, 90, 237, 0.3);
+    padding: 0.18rem 0.6rem;
+    border-radius: 50px;
+    margin-bottom: 0.4rem;
 }
 
-/* GitHub Button and its Tooltip */
+.experience-card--incoming {
+    border-style: dashed;
+}
+
+.coming-soon-text {
+    color: var(--text-3);
+    font-style: italic;
+    font-size: 0.92rem;
+}
+
+/* ─── Fixed UI: Scroll-to-top & GitHub ───────────────────── */
+.scroll-to-top,
 .github-link {
     position: fixed;
-    bottom: 30px;
-    left: 30px;
-    width: 50px;
-    height: 50px;
+    bottom: 28px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    color: white;
-    font-size: 1.5rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    transition: all 0.3s var(--ease-bounce);
-    background-color: #333333; /* GitHub signature dark gray */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    justify-content: center;
     text-decoration: none;
-    z-index: 100;
+    font-size: 1.1rem;
+    border: 1px solid var(--border);
+    transition: all 0.35s var(--ease-bounce);
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
+    z-index: 900;
+    cursor: pointer;
 }
 
+.scroll-to-top {
+    right: 28px;
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+.github-link {
+    left: 28px;
+    background: var(--card-bg);
+    color: var(--text-2);
+}
+
+.scroll-to-top.visible,
 .github-link.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
+.scroll-to-top:hover {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px var(--accent-glow);
+}
+
 .github-link:hover {
-    transform: translateY(-5px);
-    background-color: #4183c4; /* GitHub signature blue */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    color: var(--text);
+    border-color: var(--border-hover);
+    background: var(--card-bg-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 
-.github-link::after {
-    content: 'View the CV repository!';
-    position: absolute;
-    left: calc(100% + 20px);
-    top: 50%;
-    transform: translateY(-50%) scale(0.8);
-    background-color: #333333; /* Match GitHub button color */
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: white;
-    white-space: nowrap;
-    opacity: 0;
-    transition: all 0.3s var(--ease-smooth);
-    pointer-events: none;
-    font-family: 'Inter', sans-serif;
-    z-index: 1001;
-}
-
+/* Tooltip via pseudo-element */
+.scroll-to-top::before,
 .github-link::before {
-    content: '';
     position: absolute;
-    left: calc(100% + 16px);
-    top: 50%;
-    width: 8px;
-    height: 8px;
-    background-color: #333333; /* Match GitHub button color */
-    border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.4rem 0.9rem;
+    background: var(--surface-3);
+    border: 1px solid var(--border-hover);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    pointer-events: none;
     opacity: 0;
-    transition: all 0.3s var(--ease-smooth);
-    transform: translateY(-50%) rotate(45deg);
-    z-index: 1001;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    bottom: calc(100% + 10px);
+    transform: translateY(4px);
+    font-family: 'Inter', sans-serif;
 }
 
-.github-link:hover::after {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-    background-color: #4183c4; /* Match GitHub button hover color */
-}
+.scroll-to-top::before { content: 'Back to top'; right: 0; }
+.github-link::before   { content: 'View source'; left: 0; }
 
+.scroll-to-top:hover::before,
 .github-link:hover::before {
     opacity: 1;
-    background-color: #4183c4; /* Match GitHub button hover color */
-}
-
-/* Scroll to Top Button and its Tooltip */
-.scroll-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
-.scroll-to-top.visible {
-    opacity: 1;
-    visibility: visible;
     transform: translateY(0);
 }
 
-.scroll-to-top:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-5px);
+@media (max-width: 768px) {
+    .scroll-to-top, .github-link {
+        bottom: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    .scroll-to-top { right: 20px; }
+    .github-link   { left: 20px; }
+    .scroll-to-top::before,
+    .github-link::before { display: none; }
 }
 
-.scroll-to-top::after {
-    content: 'Go back to the top!';
-    position: absolute;
-    right: calc(100% + 20px);
-    top: 50%;
-    transform: translateY(-50%) scale(0.8);
-    background-color: var(--primary-color); /* Match scroll-to-top button color */
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: white;
-    white-space: nowrap;
-    opacity: 0;
-    transition: all 0.3s var(--ease-smooth);
+/* ─── Custom Cursor ──────────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+    *, *::before, *::after { cursor: none !important; }
+}
+
+.cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
     pointer-events: none;
-    font-family: 'Inter', sans-serif;
-    z-index: 1001;
+    z-index: 99999;
+    will-change: transform;
+    transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, background 0.2s ease;
 }
 
-.scroll-to-top::before {
-    content: '';
-    position: absolute;
-    right: calc(100% + 16px);
-    top: 50%;
-    width: 8px;
-    height: 8px;
-    background-color: var(--primary-color); /* Match scroll-to-top button color */
-    border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transition: all 0.3s var(--ease-smooth);
-    transform: translateY(-50%) rotate(45deg);
-    z-index: 1001;
+.cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 30px; height: 30px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    will-change: transform;
+    opacity: 0.45;
+    transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease,
+                border-color 0.2s ease, background 0.2s ease;
 }
 
-.scroll-to-top:hover::after {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-    background-color: var(--secondary-color); /* Match scroll-to-top button hover color */
+body.cursor-hover .cursor-ring {
+    width: 44px; height: 44px;
+    opacity: 0.8;
+    background: rgba(109, 90, 237, 0.08);
+    box-shadow: 0 0 12px var(--accent-glow);
 }
 
-.scroll-to-top:hover::before {
-    opacity: 1;
-    background-color: var(--secondary-color); /* Match scroll-to-top button hover color */
+body.cursor-hover .cursor-dot {
+    width: 3px; height: 3px;
+    opacity: 0.3;
 }
 
-/* Speech Bubble */
+@media (max-width: 768px) {
+    .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ─── Cursor Spotlight ───────────────────────────────────── */
+.cursor-spotlight {
+    position: fixed;
+    top: 0; left: 0;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(109, 90, 237, 0.05) 0%, transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+}
+
+[data-theme="light"] .cursor-spotlight {
+    background: radial-gradient(circle, rgba(91, 77, 214, 0.04) 0%, transparent 65%);
+}
+
+@media (max-width: 768px) { .cursor-spotlight { display: none; } }
+
+/* ─── Speech Bubble ──────────────────────────────────────── */
+@keyframes bubbleIn {
+    0%   { opacity: 0; transform: scale(0.72) translateY(16px); filter: blur(4px); }
+    60%  { opacity: 1; transform: scale(1.04) translateY(-3px); filter: blur(0); }
+    100% { opacity: 1; transform: scale(1) translateY(0);       filter: blur(0); }
+}
+
+@keyframes bubbleOut {
+    0%   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    100% { opacity: 0; transform: scale(0.82) translateY(10px); filter: blur(3px); }
+}
+
+@keyframes bubbleFloat {
+    0%, 100% { transform: scale(1) translateY(0px); }
+    50%       { transform: scale(1) translateY(-7px); }
+}
+
+@keyframes bubblePulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(109,90,237,0.25), 0 0 0 0px rgba(109,90,237,0); }
+    50%       { box-shadow: 0 12px 40px rgba(0,0,0,0.4),  0 0 0 1px rgba(109,90,237,0.5),  0 0 18px 4px rgba(109,90,237,0.12); }
+}
+
 .speech-bubble {
     position: absolute;
-    top: 30px;
-    right: -120px;
-    background-color: white;
-    padding: 15px;
+    top: 0;
+    right: -180px;
+    background: linear-gradient(135deg, rgba(30,27,60,0.92), rgba(20,18,48,0.96));
+    border: 1px solid rgba(109,90,237,0.3);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    padding: 14px 20px;
     border-radius: 18px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    max-width: 200px;
+    max-width: 210px;
     opacity: 0;
-    transform: scale(0.8) translateY(10px);
+    transform: scale(0.82) translateY(10px);
     transform-origin: bottom left;
-    transition: all 0.4s var(--ease-bounce);
     pointer-events: none;
-    z-index: 2;
+    z-index: 10;
     text-align: center;
-    border: 3px solid var(--primary-color);
-    outline: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(109,90,237,0.2);
+    transition: none;
+}
+
+.speech-bubble.entering {
+    animation: bubbleIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.speech-bubble.floating {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    animation: bubbleFloat 3.2s ease-in-out infinite, bubblePulse 3.2s ease-in-out infinite;
+}
+
+.speech-bubble.leaving {
+    animation: bubbleOut 0.35s ease-in forwards;
 }
 
 .speech-bubble p {
     margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    color: var(--text-color);
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--text);
     font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
-/* Speech Bubble Arrow */
+/* Light mode */
+[data-theme="light"] .speech-bubble {
+    background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(240,238,255,0.96));
+    border-color: rgba(109,90,237,0.25);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(109,90,237,0.15);
+}
+
+[data-theme="light"] .speech-bubble p {
+    color: var(--text);
+}
+
+[data-theme="light"] .speech-bubble::before {
+    background: rgba(245,243,255,0.95);
+    border-color: rgba(109,90,237,0.2);
+}
+
+/* Arrow */
 .speech-bubble::before {
     content: '';
     position: absolute;
-    bottom: 12px;
-    left: -12px;
-    width: 22px;
-    height: 22px;
-    background-color: white;
+    bottom: 18px;
+    left: -7px;
+    width: 13px; height: 13px;
+    background: rgba(25,22,55,0.95);
+    border-left: 1px solid rgba(109,90,237,0.3);
+    border-bottom: 1px solid rgba(109,90,237,0.3);
     transform: rotate(45deg);
-    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.05);
     z-index: -1;
-    border-left: 3px solid var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
 }
 
-/* Show Speech Bubble on Hover */
-.hero-image-container:hover .speech-bubble {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 0 0 5px rgba(37, 99, 235, 0.1);
+/* ─── Typewriter cursor blink ────────────────────────────── */
+.typewriter-cursor {
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 300;
+    animation: blink 0.75s step-end infinite;
+    margin-left: 1px;
 }
 
-/* Dark mode adjustments */
-[data-theme="dark"] .github-link {
-    background-color: #4183c4; /* GitHub signature blue for dark mode */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
 }
 
-[data-theme="dark"] .github-link:hover {
-    background-color: #6cc644; /* GitHub signature green for hover in dark mode */
+/* ─── Inline animated links (company, school names) ─────── */
+.experience-company a,
+.education-school a,
+.education-title h3 a {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.25s ease;
 }
 
-[data-theme="dark"] .github-link::after {
-    background-color: #4183c4; /* Match GitHub button dark mode color */
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+.experience-company a::after,
+.education-school a::after,
+.education-title h3 a::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease-smooth);
 }
 
-[data-theme="dark"] .github-link::before {
-    background-color: #4183c4; /* Match GitHub button dark mode color */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.experience-company a:hover,
+.education-school a:hover,
+.education-title h3 a:hover { color: var(--accent-2); }
+
+.experience-company a:hover::after,
+.education-school a:hover::after,
+.education-title h3 a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
-[data-theme="dark"] .github-link:hover::after {
-    background-color: #6cc644; /* Match GitHub button hover dark mode color */
-}
-
-[data-theme="dark"] .github-link:hover::before {
-    background-color: #6cc644; /* Match GitHub button hover dark mode color */
-}
-
-[data-theme="dark"] .scroll-to-top {
-    background-color: var(--primary-color);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-[data-theme="dark"] .scroll-to-top:hover {
-    background-color: var(--secondary-color);
-}
-
-[data-theme="dark"] .scroll-to-top::after {
-    background-color: var(--primary-color);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .scroll-to-top::before {
-    background-color: var(--primary-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="dark"] .scroll-to-top:hover::after {
-    background-color: var(--secondary-color);
-}
-
-[data-theme="dark"] .scroll-to-top:hover::before {
-    background-color: var(--secondary-color);
-}
-
-[data-theme="dark"] .speech-bubble {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    border: 3px solid var(--primary-color);
-    outline: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .speech-bubble::before {
-    background-color: var(--card-bg);
-    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.2);
-    border-left: 3px solid var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
-}
-
-[data-theme="dark"] .hero-image-container:hover .speech-bubble {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 0 5px rgba(96, 165, 250, 0.15);
-}
-
-/* Mobile Specific Adjustments - Hide all popups and interactive elements */
+/* ─── Mobile card adjustments ────────────────────────────── */
 @media (max-width: 768px) {
-    /* Hide all popups and tooltips on mobile */
-    .speech-bubble,
-    .github-link::after,
-    .github-link::before,
-    .scroll-to-top::after,
-    .scroll-to-top::before {
-        display: none !important;
-    }
-    
-    /* Adjust fixed buttons for better mobile experience */
-    .github-link,
-    .scroll-to-top {
-        bottom: 20px;
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-    
-    .github-link {
-        left: 20px;
-    }
-    
-    .scroll-to-top {
-        right: 20px;
-    }
-    
-    /* Adjust card layouts for mobile */
     .experience-header,
     .education-header {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 1rem;
-        padding-bottom: 1rem;
+        gap: 0.75rem;
     }
 
-    .company-logo,
-    .education-header .company-logo {
-        position: relative;
-        width: 60px;
-        height: 60px;
-        margin-bottom: 1rem;
-        top: unset;
-        right: unset;
+    .education-header {
+        padding-bottom: 1rem;
     }
 
     .experience-title,
     .education-title {
-        padding-right: 0;
         text-align: center;
         width: 100%;
     }
-}
 
-/* Even smaller mobile screens */
-@media (max-width: 480px) {    
-    .company-logo,
-    .education-header .company-logo {
-        width: 50px;
-        height: 50px;
+    .skills-grid,
+    .honors-grid,
+    .education-grid,
+    .experience-grid {
+        grid-template-columns: 1fr;
     }
 }
-
-/* Set all interactive elements to have appropriate cursors */
-a, button, .theme-toggle, .hamburger, .scroll-to-top, .github-link {
-    cursor: pointer;
-}
-
-input, textarea, select {
-    cursor: text;
-}
-
-.experience-card, .education-card, .honor-card, .skill-card {
-    cursor: default;
-} 

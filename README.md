@@ -1,215 +1,107 @@
-# Portfolio Website
+# Lucas Reydman. Portfolio
 
-A modern, responsive portfolio website for Lucas Reydman - Applied Computer Science & Management Student at Dalhousie University. Features smooth animations, light/dark theme toggle, and high-quality visual components.
+A premium, animated personal portfolio website. Dark-first design with cinematic motion, GSAP-powered scroll choreography, and Lenis smooth scroll.
+
+## Tech Stack
+
+- **HTML5 / CSS3 / Vanilla JS** — no framework
+- **GSAP 3.12.5 + ScrollTrigger** — hero entrance sequence, scroll-triggered stagger reveals
+- **Lenis 1.1.20** — smooth scroll, integrated with GSAP ticker
+- **Font Awesome 6** — icons
+- **Google Fonts** — Syne (display headings) + Inter (body)
 
 ## Features
 
-- **Responsive Design**: Fully responsive layout optimized for all devices from mobile to desktop
-- **Light/Dark Theme**: Toggle between themes with persistent user preference stored in localStorage
-- **Interactive UI Elements**: 
-  - Speech bubble animations in hero section (desktop only)
-  - Smooth scroll navigation between sections
-  - Reveal animations on scroll using Intersection Observer API
-  - Fixed scroll-to-top button with tooltip
-  - GitHub repository link with hover tooltip
-- **Section Organization**:
-  - **Hero**: Introduction with animated image and speech bubble
-  - **About**: Personal description with highlighted keywords
-  - **Experience**: 6 work experience cards with company logos
-  - **Education**: Academic background with institution logos
-  - **Honors**: Awards, certifications, and achievements
-  - **Skills**: Technical, Business, and Digital Tools expertise
-  - **Projects**: 4 featured projects with technology tags
-  - **Contact**: Email and LinkedIn contact information
-
-## Technologies Used
-
-- **HTML5**: Semantic markup for better accessibility and SEO
-- **CSS3**: 
-  - CSS variables for theming
-  - Flexbox and CSS Grid for layouts
-  - CSS animations and transitions
-  - Media queries for responsive design
-  - Modular CSS architecture
-- **JavaScript**: 
-  - Intersection Observer API for scroll animations
-  - Local Storage for theme persistence
-  - DOM manipulation for dynamic elements
-  - Mobile device detection
-- **External Resources**:
-  - Font Awesome 6.0 for icons
-  - Google Fonts (Inter) for typography
+- Dark-first design with full light-mode support (flash-prevention inline script)
+- Cinematic full-viewport hero with animated radial-gradient aura + blueprint grid
+- GSAP hero entrance timeline (staggered: eyebrow → name → subtitle → CTA → photo)
+- ScrollTrigger reveals — timeline cards slide from sides, grids stagger up
+- Lenis smooth scroll with GSAP ticker integration
+- Glass-morphism cards with mouse-position spotlight effect
+- Custom cursor (dot + lagging ring) and cursor spotlight
+- Floating glass navbar — transparent → frosted on scroll, active section indicator
+- Typewriter subtitle cycling 5 phrases
+- Experience alternating timeline with glowing pulsing dots
+- Scroll progress bar, scroll-to-top button, GitHub link
+- Speech bubble on hero photo hover (desktop only)
+- Grain overlay via CSS SVG filter
+- Full graceful fallback to IntersectionObserver if GSAP/Lenis fail to load
+- `prefers-reduced-motion` support
 
 ## File Structure
 
 ```
 cv/
 ├── assets/
-│   ├── favicon/              # Favicon files for various platforms
-│   └── images/               # Image assets
-│       ├── company-logos/    # Work experience company logos
-│       ├── education-logos/  # Education and project logos
-│       └── hero/             # Hero section images
-├── css/                      # CSS files (modular organization)
-│   ├── minified/             # Minified CSS files for production
-│   │   └── main.min.css
-│   ├── base.css              # Base styles, reset, variables, typography
-│   ├── components.css       # Reusable component styles
-│   ├── layout.css            # Layout and structure styles
-│   ├── main.css              # Imports all CSS modules
-│   └── sections.css          # Section-specific styles
-├── js/                       # JavaScript files
-│   ├── main.js               # Main JavaScript functionality
-│   └── main.min.js           # Minified JavaScript for production
-├── index.html                 # Main HTML file
-├── LICENSE                    # MIT License
-└── README.md                  # This file
+│   ├── favicon/
+│   │   ├── logo-1024x1024.png   # Source logo
+│   │   ├── favicon.ico          # 16/32/48 multi-size
+│   │   ├── favicon-16x16.png
+│   │   ├── favicon-32x32.png
+│   │   ├── apple-touch-icon.png # 180x180
+│   │   ├── android-192x192.png
+│   │   ├── android-512x512.png
+│   │   └── site.webmanifest
+│   ├── images/
+│   │   ├── logos/               # Company + education logos
+│   │   └── hero/
+│   └── resume.pdf
+├── css/
+│   ├── main.css        # @import aggregator
+│   ├── base.css        # Design tokens, reset, typography, grain
+│   ├── layout.css      # Navbar, sections, footer
+│   ├── components.css  # Cards, buttons, cursor, fixed UI
+│   └── sections.css    # Hero, timeline, projects, contact
+├── js/
+│   └── main.js         # Lenis + GSAP + all interactions
+├── index.html
+└── README.md
 ```
 
-## CSS Organization
+## Design System
 
-The CSS is organized in a modular fashion to improve maintainability:
+| Token | Value |
+|---|---|
+| `--bg` | `#07070f` |
+| `--accent` | `#6d5aed` |
+| `--accent-2` | `#a78bfa` |
+| `--accent-3` | `#38bdf8` |
+| `--text` | `#f0f0ff` |
+| Heading font | Syne 700/800 |
+| Body font | Inter 400/500/600 |
 
-- **base.css**: Reset styles, CSS variables for theming, typography, and basic elements
-- **layout.css**: Page structure, grid systems, navbar, footer, and section layouts
-- **components.css**: Reusable components like cards, buttons, tooltips, theme toggle, and speech bubble
-- **sections.css**: Specific styles for each section (hero, about, experience, education, skills, honors, projects, contact)
-- **main.css**: Central file that imports all other CSS modules using `@import`
-
-## JavaScript Features
-
-- **Theme switching**: Toggle between light and dark themes with persistence in localStorage
-- **Smooth scrolling**: Navigate between sections smoothly with animated scroll behavior
-- **Reveal animations**: Elements animate in as they enter the viewport using Intersection Observer
-- **Speech bubble**: Interactive speech bubble in the hero section (desktop only, hidden on mobile)
-- **Mobile menu**: Hamburger menu for mobile navigation with smooth slide-in animation
-- **Scroll to top**: Fixed button that appears after scrolling 500px, smoothly scrolls back to top
-- **GitHub link**: Fixed button linking to the repository with hover tooltip
-- **Navbar scroll effect**: Navbar background changes on scroll for better visibility
+Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
 
 ## Content Sections
 
-### Work Experience (6 positions)
-1. **RBC** - Operations Analyst (May 2025 - Aug 2025)
-2. **Torinit Technologies Inc.** - Digital Solutions Intern (May 2024 - Aug 2024)
-3. **Mirabella Development Corporation** - Research & Development Intern (Jun 2023 - Aug 2023)
-4. **Panther** - Founder & Head of Operations (Sep 2021 - Aug 2023)
-5. **Scale Hospitality** - Hospitality Assistant (Jun 2022 - Aug 2022)
-6. **Over the Rainbow Ltd.** - Sales Associate (Jun 2021 - Aug 2021)
+- **Hero** — name, typewriter role, resume download, floating photo
+- **About** — personal summary with highlighted keywords
+- **Experience** — 7 positions in alternating timeline (RBC incoming, RBC FSS, Torinit, Mirabella, Panther, Scale Hospitality, Over the Rainbow)
+- **Education** — Dalhousie University + Lawrence Park CI
+- **Honors & Awards** — 6 cards (Agile cert, GPT cert, Dean's List ×6, Community Leadership, Ontario Scholar, Bilingual)
+- **Skills** — carousel with 4 cards (Technical, AI & Productivity, Business & Leadership, Tools & Platforms), 10 items each, auto-advances every 3.6s with progress bar indicators
+- **Projects** — 4 cards (Pride STEM Canada, QuickCash, Tic Tec Toe, wdinomf?)
+- **Contact** — email + LinkedIn
 
-### Projects (4 projects)
-1. **QuickCash** - Android mobile application for job finding (Sep 2025 - Dec 2025)
-   - Technologies: Android Studio, Firebase, Java, GitLab, Agile, Figma, XP
-2. **Tic Tec Toe** - Social media platform for researchers (Jan 2025 - Apr 2025)
-   - Technologies: React Native, Node.js, Supabase, GitLab, Jira, Figma, LaTeX, Expo Go
-3. **wdinomf?** - Final grade calculator web app (Apr 2025)
-   - Technologies: HTML5, CSS3, JavaScript, Local Storage API
-4. **Fantasy Basketball Draft Lottery Simulator** - Web-based lottery simulator (Mar 2025)
-   - Technologies: HTML5, CSS3, JavaScript, Local Storage API
+## Responsiveness
 
-### Education
-- **Dalhousie University** - Bachelor of Applied Computer Science (Sep 2023 - Present)
-- **Lawrence Park Collegiate Institute** - Ontario Secondary School Diploma (Sep 2019 - Jun 2023)
-
-## Customization
-
-### Changing Colors
-
-Edit the CSS variables in `css/base.css`:
-
-```css
-:root {
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
-    --text-color: #1f2937;
-    --background: #ffffff;
-    /* other color variables */
-}
-
-[data-theme="dark"] {
-    --primary-color: #60a5fa;
-    --secondary-color: #3b82f6;
-    --text-color: #f3f4f6;
-    --background: #111827;
-    /* other dark theme color variables */
-}
-```
-
-### Adding New Sections
-
-1. Add the HTML markup in `index.html` within the `<main>` tag
-2. Add section-specific styles in `css/sections.css`
-3. Add navigation link in the navbar
-4. If needed, add JavaScript functionality in `js/main.js`
-
-### Modifying Animations
-
-Animation settings are in the CSS variables in `css/base.css`:
-
-```css
-:root {
-    --animation-short: 0.3s;
-    --animation-medium: 0.6s;
-    --animation-long: 1s;
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
-}
-```
-
-### Mobile Responsiveness
-
-The website is fully responsive with breakpoints at:
-- **1400px**: Large desktop adjustments
-- **1200px**: Desktop layout adjustments
-- **900px**: Tablet layout adjustments
-- **768px**: Mobile layout (hamburger menu, single column grids)
-- **480px**: Small mobile adjustments (reduced padding, font sizes)
-
-Mobile-specific optimizations:
-- Cards stack vertically on mobile
-- Hamburger menu replaces horizontal navigation
-- Speech bubble and tooltips hidden on mobile
-- Touch-friendly button sizes
-- Optimized spacing and padding
-- Word wrapping for long text content
+| Breakpoint | Changes |
+|---|---|
+| `< 1200px` | Reduced container padding |
+| `< 900px` | Timeline collapses to single column |
+| `< 768px` | Hero stacks vertically, hamburger nav, mobile card layouts |
+| `< 480px` | Further padding/font reductions |
 
 ## Browser Support
 
-The portfolio website is compatible with:
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Android Chrome)
-
-## Performance Optimizations
-
-- Minified CSS and JavaScript for production
-- Preload critical assets (CSS, JS, hero image)
-- Lazy loading for external resources (Font Awesome, Google Fonts)
-- Reduced motion support for accessibility
-- Optimized animations using CSS transforms
-- Efficient Intersection Observer usage
-
-## Accessibility Features
-
-- Semantic HTML5 elements
-- ARIA labels for interactive elements
-- Keyboard navigation support
-- Screen reader friendly
-- High contrast color schemes
-- Reduced motion support
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+Chrome 121+, Firefox, Safari, Edge, iOS Safari, Android Chrome.
+`scrollbar-width: none` handles Firefox; `-webkit-scrollbar` covers Chrome/Safari.
 
 ## Author
 
-**Lucas Reydman**
-- Applied Computer Science & Management Student
-- Dalhousie University
-- Email: lucas.reydman@dal.ca
-- LinkedIn: [lucasreydman](https://www.linkedin.com/in/lucasreydman)
-- GitHub: [lucasreydman](https://github.com/lucasreydman)
+**Lucas Reydman** | Applied Computer Science & Management, Dalhousie University
+[lucas.reydman@dal.ca](mailto:lucas.reydman@dal.ca) · [LinkedIn](https://www.linkedin.com/in/lucasreydman) · [GitHub](https://github.com/lucasreydman)
+
+## License
+
+MIT

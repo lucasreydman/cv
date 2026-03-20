@@ -1,10 +1,10 @@
 /**
- * Base Styles and Variables
- * Contains reset, typography, and CSS variables for theming
+ * Base Styles & Design System
+ * Variables, reset, typography
  */
 
-/* Reset and Base Styles */
-* {
+/* ─── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,180 +14,232 @@ html, body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    touch-action: manipulation;
-    
-    /* Hide scrollbars cross-browser */
-    -ms-overflow-style: none; /* IE and Edge */
+    -ms-overflow-style: none;
 }
 
-/* Hide WebKit scrollbars (Chrome, Safari, Opera) */
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
     display: none;
-    width: 0;
 }
 
+/* ─── Dark Theme (default) ───────────────────────────────── */
 :root {
-    /* Light theme variables */
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
-    --text-color: #1f2937;
-    --light-text: #6b7280;
-    --background: #ffffff;
-    --section-bg: #f3f4f6;
-    --card-bg: #ffffff;
-    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --navbar-bg: rgba(255, 255, 255, 0.95);
-    --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    --border-color: rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-    --navbar-text: #1f2937;
-    --navbar-text-hover: #2563eb;
-    --navbar-text-active: #1e40af;
-    
+    /* Backgrounds */
+    --bg:            #07070f;
+    --surface-1:     #0d0d1e;
+    --surface-2:     #12122a;
+    --surface-3:     #181830;
+    --card-bg:       rgba(255, 255, 255, 0.03);
+    --card-bg-hover: rgba(255, 255, 255, 0.05);
+
+    /* Borders */
+    --border:        rgba(150, 140, 255, 0.10);
+    --border-hover:  rgba(150, 140, 255, 0.28);
+    --border-accent: rgba(109, 90, 237, 0.45);
+
+    /* Accent */
+    --accent:        #6d5aed;
+    --accent-2:      #a78bfa;
+    --accent-3:      #38bdf8;
+    --accent-glow:   rgba(109, 90, 237, 0.30);
+    --accent-glow-2: rgba(167, 139, 250, 0.20);
+
+    /* Text */
+    --text:          #f0f0ff;
+    --text-2:        #9090c0;
+    --text-3:        #5a5a80;
+
+    /* Nav */
+    --navbar-bg:     rgba(7, 7, 15, 0.80);
+    --navbar-border: rgba(150, 140, 255, 0.12);
+
+    /* Legacy compatibility aliases */
+    --primary-color:   var(--accent);
+    --secondary-color: var(--accent-2);
+    --text-color:      var(--text);
+    --light-text:      var(--text-2);
+    --background:      var(--bg);
+    --section-bg:      var(--surface-1);
+    --card-shadow:     0 0 0 1px var(--border), 0 20px 40px rgba(0,0,0,0.5);
+    --navbar-text:     var(--text);
+    --navbar-text-hover: var(--accent-2);
+
     /* Animation */
-    --animation-short: 0.3s;
-    --animation-medium: 0.6s;
-    --animation-long: 1s;
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
-    
-    /* Transforms */
-    --hover-lift: translateY(-5px);
-    --hover-scale: scale(1.03);
+    --ease-smooth:  cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+    --transition:   all 0.3s var(--ease-smooth);
+
+    /* Spacing */
+    --section-pad:  7rem;
+    --container-max: 1300px;
+    --container-pad: 5rem;
 }
 
-[data-theme="dark"] {
-    /* Dark theme variables */
-    --primary-color: #60a5fa;
-    --secondary-color: #3b82f6;
-    --text-color: #f3f4f6;
-    --light-text: #9ca3af;
-    --background: #111827;
-    --section-bg: #1f2937;
-    --card-bg: #1f2937;
-    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    --navbar-bg: rgba(17, 24, 39, 0.95);
-    --navbar-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    --border-color: rgba(255, 255, 255, 0.1);
-    --navbar-text: #f3f4f6;
-    --navbar-text-hover: #60a5fa;
-    --navbar-text-active: #3b82f6;
+/* ─── Light Theme ────────────────────────────────────────── */
+[data-theme="light"] {
+    --bg:            #ffffff;
+    --surface-1:     #f5f4ff;
+    --surface-2:     #eeecff;
+    --surface-3:     #e6e3ff;
+    --card-bg:       rgba(109, 90, 237, 0.03);
+    --card-bg-hover: rgba(109, 90, 237, 0.06);
+
+    --border:        rgba(109, 90, 237, 0.12);
+    --border-hover:  rgba(109, 90, 237, 0.28);
+    --border-accent: rgba(109, 90, 237, 0.50);
+
+    --accent:        #5b4dd6;
+    --accent-2:      #7c6ef5;
+    --accent-3:      #0ea5e9;
+    --accent-glow:   rgba(91, 77, 214, 0.15);
+    --accent-glow-2: rgba(124, 110, 245, 0.10);
+
+    --text:          #0a0a20;
+    --text-2:        #4a4a70;
+    --text-3:        #8a8ab0;
+
+    --navbar-bg:     rgba(255, 255, 255, 0.85);
+    --navbar-border: rgba(109, 90, 237, 0.15);
+
+    --primary-color:   var(--accent);
+    --secondary-color: var(--accent-2);
+    --text-color:      var(--text);
+    --light-text:      var(--text-2);
+    --background:      var(--bg);
+    --section-bg:      var(--surface-1);
+    --card-shadow:     0 0 0 1px var(--border), 0 8px 30px rgba(0,0,0,0.08);
+    --navbar-text:     var(--text);
+    --navbar-text-hover: var(--accent);
 }
 
-/* Theme transition */
+/* ─── Body ───────────────────────────────────────────────── */
 body {
     font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg);
     transition: background-color 0.5s ease, color 0.5s ease;
     overflow-x: hidden;
     position: relative;
-    z-index: 1;
     min-height: 100vh;
     touch-action: pan-y;
 }
 
+/* Grain overlay */
+body::after {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.022;
+    pointer-events: none;
+    z-index: 9999;
+    animation: grainShift 0.8s steps(2) infinite;
+}
+
+[data-theme="light"] body::after {
+    opacity: 0.012;
+}
+
+@keyframes grainShift {
+    0%  { transform: translate(0, 0); }
+    25% { transform: translate(-3%, -5%); }
+    50% { transform: translate(3%, 3%); }
+    75% { transform: translate(-5%, 2%); }
+    100%{ transform: translate(4%, -3%); }
+}
+
+/* ─── Container ──────────────────────────────────────────── */
 .container {
-    max-width: 1600px;
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 5rem;
+    padding: 0 var(--container-pad);
 }
 
-/* Typography */
-h1, h2, h3 {
+/* ─── Typography ─────────────────────────────────────────── */
+h1, h2, h3, h4 {
+    font-family: 'Syne', 'Inter', sans-serif;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
 }
 
-h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-}
+h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); }
 
 h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    text-align: left;
+    margin-bottom: 3rem;
     position: relative;
-    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 h2::after {
     content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    border-radius: 3px;
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border-hover), transparent);
 }
 
-h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+h3 { font-size: 1.25rem; }
+
+/* ─── Section heading number labels ─────────────────────── */
+.section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
 }
 
-/* Common button styles */
+/* ─── Common Buttons ─────────────────────────────────────── */
 .btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.95rem;
     transition: var(--transition);
-    margin-right: 1rem;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn.primary {
-    background-color: var(--primary-color);
-    color: white;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 20px var(--accent-glow);
 }
 
 .btn.primary:hover {
-    background-color: var(--secondary-color);
+    background: var(--accent-2);
     transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
 }
 
-/* Media queries for base styles */
-@media (max-width: 1400px) {
-    .container {
-        max-width: 1200px;
-    }
+/* ─── Highlight text ─────────────────────────────────────── */
+.highlight {
+    color: var(--accent-2);
+    font-weight: 600;
 }
 
-@media (max-width: 768px) {
-    .container {
-        padding: 0 1.5rem;
-    }
-    
-    h1 {
-        font-size: 2.5rem;
-    }
-    
-    h2 {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 1rem;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    h2 {
-        font-size: 1.8rem;
-    }
-}
-
-/* Animation performance optimizations */
+/* ─── Reduced Motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -195,9 +247,21 @@ h3 {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-    
-    body::before, 
-    body::after {
-        display: none !important;
+    body::after { display: none; }
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1200px) {
+    :root { --container-pad: 3rem; }
+}
+@media (max-width: 768px) {
+    :root {
+        --container-pad: 1.5rem;
+        --section-pad: 5rem;
     }
-} 
+    h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
+    h2 { font-size: clamp(1.7rem, 5vw, 2.2rem); }
+}
+@media (max-width: 480px) {
+    :root { --container-pad: 1.25rem; }
+}
