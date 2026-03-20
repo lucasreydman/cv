@@ -458,7 +458,7 @@
 }
 
 /* ─── Custom Cursor ──────────────────────────────────────── */
-@media (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) and (min-width: 769px) {
     *, *::before, *::after { cursor: none !important; }
 }
 

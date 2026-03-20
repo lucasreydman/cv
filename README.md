@@ -109,8 +109,9 @@ Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
 | Breakpoint | Changes |
 |---|---|
 | `< 1200px` | Reduced container padding |
+| `< 1100px` | Hero image shrinks, speech bubble repositioned above image |
 | `< 900px` | Timeline collapses to single column |
-| `< 768px` | Hero stacks vertically, hamburger nav, mobile card layouts |
+| `< 768px` | Hero stacks vertically, hamburger nav, mobile card layouts, native cursor restored, speech bubble hidden |
 | `< 480px` | Further padding/font reductions |
 
 ## Browser Support

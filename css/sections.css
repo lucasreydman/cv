@@ -888,6 +888,22 @@
 @media (max-width: 1100px) {
     .hero-content { gap: clamp(2rem, 6vw, 5rem); }
     .hero-image-container { width: min(260px, 36vw); }
+
+    /* Reposition speech bubble above the image so it isn't clipped by hero overflow:hidden */
+    .speech-bubble {
+        right: -10px;
+        top: -80px;
+        max-width: 180px;
+        transform-origin: bottom right;
+    }
+    .speech-bubble::before {
+        top: auto;
+        bottom: -6px;
+        left: auto;
+        right: 28px;
+        border-left: none;
+        border-right: 1px solid rgba(109,90,237,0.3);
+    }
 }
 
 @media (max-width: 768px) {
