@@ -48,6 +48,7 @@ cv/
 │   └── resume.pdf
 ├── css/
 │   ├── main.css        # @import aggregator
+│   ├── main.min.css    # Minified bundle
 │   ├── base.css        # Design tokens, reset, typography, grain
 │   ├── layout.css      # Navbar, sections, footer
 │   ├── components.css  # Cards, buttons, cursor, fixed UI
