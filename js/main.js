@@ -622,6 +622,7 @@ function initSkillsCarousel() {
     });
     wrapper.addEventListener('mouseleave', () => {
         dots.forEach(d => d.style.removeProperty('--bar-state'));
+        updateDots();   // restart bar animation from 0 so it stays in sync
         resetAuto();
     });
 
