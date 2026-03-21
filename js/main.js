@@ -162,14 +162,11 @@ function initScrollProgress() {
 // ═══════════════════════════════════════════════════════════════
 
 function initScrollTop(lenis) {
-    const btn    = document.getElementById('scroll-top');
-    const ghLink = document.querySelector('.github-link');
+    const btn = document.getElementById('scroll-top');
     if (!btn) return;
 
     window.addEventListener('scroll', () => {
-        const show = window.scrollY > 500;
-        btn.classList.toggle('visible', show);
-        if (ghLink) ghLink.classList.toggle('visible', show);
+        btn.classList.toggle('visible', window.scrollY > 500);
     }, { passive: true });
 
     btn.addEventListener('click', () => {
@@ -284,7 +281,7 @@ function initCursor() {
         requestAnimationFrame(animateRing);
     })();
 
-    const hoverSel = 'a, button, [role="button"], label, input, textarea, .skill-tag, .scroll-to-top, .github-link, .theme-toggle';
+    const hoverSel = 'a, button, [role="button"], label, input, textarea, .skill-tag, .scroll-to-top, .theme-toggle';
     document.querySelectorAll(hoverSel).forEach(el => {
         el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
         el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -354,6 +351,7 @@ function initGSAP() {
     gsap.set('.hero-text h1',         { opacity: 0, y: 32 });
     gsap.set('.hero-text .subtitle',  { opacity: 0, y: 20 });
     gsap.set('.hero-cta',             { opacity: 0, y: 20 });
+    gsap.set('.hero-cv-note',         { opacity: 0, y: 12 });
     gsap.set('.hero-image-container', { opacity: 0, x: 40 });
     gsap.set('.hero-scroll',          { opacity: 0 });
 
@@ -362,7 +360,8 @@ function initGSAP() {
         .to('.hero-text h1',          { opacity: 1, y: 0, duration: 0.85 }, '-=0.4')
         .to('.hero-text .subtitle',   { opacity: 1, y: 0, duration: 0.7  }, '-=0.5')
         .to('.hero-cta',              { opacity: 1, y: 0, duration: 0.7  }, '-=0.45')
-        .to('.hero-image-container',  { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, '-=0.8')
+        .to('.hero-cv-note',          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
+        .to('.hero-image-container',  { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, '-=0.9')
         .to('.hero-scroll',           { opacity: 1, duration: 0.6 }, '-=0.3');
 
     if (typeof ScrollTrigger === 'undefined') {
@@ -382,6 +381,7 @@ function initGSAP() {
     gsap.from('.about-text p', {
         scrollTrigger: { trigger: '.about-text', start: 'top 85%' },
         opacity: 0, y: 24, duration: 0.9, ease: 'power2.out',
+        stagger: 0.15,
     });
 
     // ── Timeline cards ──────────────────────────────────────
@@ -460,7 +460,7 @@ function initFallbackReveal() {
     });
 
     // Reveal hero elements immediately
-    ['.hero-eyebrow', '.hero-text h1', '.hero-text .subtitle', '.hero-cta', '.hero-image-container', '.hero-scroll']
+    ['.hero-eyebrow', '.hero-text h1', '.hero-text .subtitle', '.hero-cta', '.hero-cv-note', '.hero-image-container', '.hero-scroll']
         .forEach(sel => {
             const el = document.querySelector(sel);
             if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
@@ -571,9 +571,11 @@ function initSkillsCarousel() {
         dots.forEach((d, i) => {
             // Force restart CSS animation by removing/re-adding active
             d.classList.remove('active');
+            d.setAttribute('aria-pressed', 'false');
             if (i === current) {
                 void d.offsetWidth; // reflow to restart transition
                 d.classList.add('active');
+                d.setAttribute('aria-pressed', 'true');
             }
         });
     }

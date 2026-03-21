@@ -143,8 +143,8 @@
 .social-links a {
     color: var(--text-2);
     font-size: 1.1rem;
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -165,8 +165,8 @@
 
 /* Theme toggle */
 .theme-toggle {
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 1px solid var(--border);
     background: var(--card-bg);
@@ -179,7 +179,11 @@
     transition: all 0.3s var(--ease-smooth);
     position: relative;
     overflow: hidden;
-    outline: none;
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 2px;
 }
 
 .theme-toggle:hover {
@@ -210,15 +214,19 @@
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
     border: 1px solid var(--border);
     border-radius: 8px;
     background: var(--card-bg);
     cursor: pointer;
-    outline: none;
-    padding: 0 9px;
+    padding: 0 10px;
     transition: border-color 0.25s ease;
+}
+
+.hamburger:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 2px;
 }
 
 .hamburger:hover { border-color: var(--border-hover); }
@@ -318,8 +326,8 @@ section .section-inner.revealed {
 
 @media (max-width: 480px) {
     .social-links a {
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
         font-size: 1rem;
     }
 }

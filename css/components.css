@@ -359,18 +359,17 @@
     font-size: 0.92rem;
 }
 
-/* ─── Fixed UI: Scroll-to-top & GitHub ───────────────────── */
-.scroll-to-top,
-.github-link {
+/* ─── Fixed UI: Scroll-to-top ────────────────────────────── */
+.scroll-to-top {
     position: fixed;
     bottom: 28px;
+    right: 28px;
     width: 44px;
     height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
     font-size: 1.1rem;
     border: 1px solid var(--border);
     transition: all 0.35s var(--ease-bounce);
@@ -378,24 +377,13 @@
     transform: translateY(16px);
     z-index: 900;
     cursor: pointer;
-}
-
-.scroll-to-top {
-    right: 28px;
     background: var(--accent);
     color: #fff;
     border-color: var(--accent);
     box-shadow: 0 4px 16px var(--accent-glow);
 }
 
-.github-link {
-    left: 28px;
-    background: var(--card-bg);
-    color: var(--text-2);
-}
-
-.scroll-to-top.visible,
-.github-link.visible {
+.scroll-to-top.visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -407,18 +395,11 @@
     box-shadow: 0 10px 28px var(--accent-glow);
 }
 
-.github-link:hover {
-    color: var(--text);
-    border-color: var(--border-hover);
-    background: var(--card-bg-hover);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-}
-
 /* Tooltip via pseudo-element */
-.scroll-to-top::before,
-.github-link::before {
+.scroll-to-top::before {
+    content: 'Back to top';
     position: absolute;
+    right: 0;
     padding: 0.4rem 0.9rem;
     background: var(--surface-3);
     border: 1px solid var(--border-hover);
@@ -435,26 +416,20 @@
     font-family: 'Inter', sans-serif;
 }
 
-.scroll-to-top::before { content: 'Back to top'; right: 0; }
-.github-link::before   { content: 'View source'; left: 0; }
-
-.scroll-to-top:hover::before,
-.github-link:hover::before {
+.scroll-to-top:hover::before {
     opacity: 1;
     transform: translateY(0);
 }
 
 @media (max-width: 768px) {
-    .scroll-to-top, .github-link {
+    .scroll-to-top {
         bottom: 20px;
-        width: 40px;
-        height: 40px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
         font-size: 1rem;
     }
-    .scroll-to-top { right: 20px; }
-    .github-link   { left: 20px; }
-    .scroll-to-top::before,
-    .github-link::before { display: none; }
+    .scroll-to-top::before { display: none; }
 }
 
 /* ─── Custom Cursor ──────────────────────────────────────── */

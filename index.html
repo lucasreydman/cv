@@ -39,6 +39,9 @@
 </head>
 <body>
 
+    <!-- Skip navigation -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <!-- Scroll progress -->
     <div class="scroll-progress" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
@@ -79,7 +82,7 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main">
 
         <!-- ═══ HERO ═══════════════════════════════════════════════ -->
         <section id="hero" class="hero">
@@ -97,6 +100,13 @@
                                 <i class="fas fa-download" aria-hidden="true"></i> Download Resume
                             </a>
                         </div>
+                        <p class="hero-cv-note" aria-label="curriculum vitae — Latin for course of life">
+                            <span class="cv-word">curriculum vitae</span>
+                            <span class="cv-sep">·</span>
+                            <span class="cv-phonetic">kʌrɪkyʊləm ˈviːtaɪ</span>
+                            <span class="cv-sep">·</span>
+                            <em>n. "course of life"</em>
+                        </p>
                     </div>
 
                     <div class="hero-image-container">
@@ -122,7 +132,10 @@
                 <h2><span>About Me</span></h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>I am a <span class="highlight">motivated and driven</span> individual with a strong interest in the evolving field of technology. Throughout my academic journey, I have consistently worked toward <span class="highlight">excellence</span>, earning academic distinction across high school and university. I am currently studying <span class="highlight">Applied Computer Science at Dalhousie University</span>, while also completing coursework and applied learning opportunities through the <span class="highlight">Faculty of Management</span> to strengthen my understanding of business, data, and organizational problem-solving. Through my experiences as both an <span class="highlight">entrepreneur</span> and an <span class="highlight">employee</span>, I have developed a strong foundation in technology and business, applying that knowledge to support <span class="highlight">business growth</span>, improve processes, and enhance customer experiences. I am a <span class="highlight">confident and engaged leader</span>, a thoughtful listener, and a dependable team player who thrives in <span class="highlight">agile, adaptive, and diverse teams</span>. I am deeply interested in how technology can create <span class="highlight">meaningful impact</span> for individuals, organizations, and communities. I actively embrace <span class="highlight">AI-assisted development</span>, leveraging tools like Claude Code, Cursor, and GitHub Copilot to build faster and smarter. My goal is to contribute to solutions that address real-world challenges through practical, well-designed technology. With a strong commitment to <span class="highlight">learning</span>, <span class="highlight">adaptability</span>, and <span class="highlight">collaboration</span>, I am eager to continue growing within the tech community and to take on new opportunities ahead.</p>
+                        <p>I am a <span class="highlight">motivated and driven</span> individual with a strong interest in the evolving field of technology. Throughout my academic journey, I have consistently worked toward <span class="highlight">excellence</span>, earning academic distinction across high school and university. I am currently studying <span class="highlight">Applied Computer Science at Dalhousie University</span>, while also completing coursework and applied learning opportunities through the <span class="highlight">Faculty of Management</span> to strengthen my understanding of business, data, and organizational problem-solving.</p>
+                        <p>Through my experiences as both an <span class="highlight">entrepreneur</span> and an <span class="highlight">employee</span>, I have developed a strong foundation in technology and business, applying that knowledge to support <span class="highlight">business growth</span>, improve processes, and enhance customer experiences.</p>
+                        <p>I am a <span class="highlight">confident and engaged leader</span>, a thoughtful listener, and a dependable team player who thrives in <span class="highlight">agile, adaptive, and diverse teams</span>.</p>
+                        <p>I am deeply interested in how technology can create <span class="highlight">meaningful impact</span> for individuals, organizations, and communities. I actively embrace <span class="highlight">AI-assisted development</span>, leveraging tools like Claude Code, Cursor, and GitHub Copilot to build faster and smarter. My goal is to contribute to solutions that address real-world challenges through practical, well-designed technology. With a strong commitment to <span class="highlight">learning</span>, <span class="highlight">adaptability</span>, and <span class="highlight">collaboration</span>, I am eager to continue growing within the tech community and to take on new opportunities ahead.</p>
                     </div>
                 </div>
             </div>
@@ -538,11 +551,11 @@
 
                     </div>
 
-                    <div class="skills-dots">
-                        <span class="skills-dot active" data-index="0"></span>
-                        <span class="skills-dot" data-index="1"></span>
-                        <span class="skills-dot" data-index="2"></span>
-                        <span class="skills-dot" data-index="3"></span>
+                    <div class="skills-dots" role="tablist" aria-label="Skills categories">
+                        <button class="skills-dot active" data-index="0" aria-label="Technical Skills" aria-pressed="true"></button>
+                        <button class="skills-dot" data-index="1" aria-label="AI &amp; Productivity" aria-pressed="false"></button>
+                        <button class="skills-dot" data-index="2" aria-label="Business &amp; Leadership" aria-pressed="false"></button>
+                        <button class="skills-dot" data-index="3" aria-label="Tools &amp; Platforms" aria-pressed="false"></button>
                     </div>
                 </div>
             </div>
