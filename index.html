@@ -660,6 +660,37 @@
                     <article class="project-card">
                         <header class="project-header">
                             <div class="project-logo">
+                                <a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" aria-label="MLB BvP">
+                                    <img src="assets/images/logos/bvp-betting.png" alt="MLB BvP Logo" width="54" height="54">
+                                </a>
+                            </div>
+                            <div class="project-title">
+                                <h3><a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" class="project-link">MLB BvP</a></h3>
+                                <p class="project-affiliation">Personal Project</p>
+                                <p class="project-period">Apr 2026</p>
+                            </div>
+                        </header>
+                        <div class="project-details">
+                            <p class="project-description">Sports analytics tool for researching the FanDuel Player Hits (1+) prop — also valid for Total Bases (1+) and Hits (1+) on Bet365 and theScore Bet — by surfacing historical career batter vs. pitcher matchups ranked by batting average weighted for sample size. For any given date, the app loads the MLB schedule and probable starters, builds each lineup using official batting order data from the boxscore when available or falling back to the top nine active players by career plate appearances, and fetches career BvP splits for every batter facing the opposing starter (minimum 10 AB). From each split it computes AVG, OPS, OBP, SLG, and extra-base hits. The UI divides games into Upcoming and In Progress after first pitch, with live refresh keeping the buckets current. A configurable filter panel (Min AB, Min AVG, optional OPS gate) narrows the table to statistically meaningful matchups, and a Top 5 Plays card ranks by AVG × min(AB/30, 1) to balance hit rate with sample reliability. A data quality pass strips team-level aggregate lines that the MLB Stats API occasionally returns in place of true individual BvP, dropping any raw stat line shared by five or more batters on the same team against the same pitcher. The full table is exportable as CSV. Fully responsive: mobile layout swaps the scrollable table for a vertical card list with sort chips, and all game times render in the viewer's local browser time zone. Built with Next.js App Router, React 19, and Tailwind CSS v4. Deployed on Vercel.</p>
+                            <div class="project-skills">
+                                <span class="skill-tag" data-tooltip="React framework with App Router for full-stack server and client components">Next.js</span>
+                                <span class="skill-tag" data-tooltip="JavaScript library for building component-driven user interfaces">React</span>
+                                <span class="skill-tag" data-tooltip="Utility-first CSS framework for rapid UI development">Tailwind CSS</span>
+                                <span class="skill-tag" data-tooltip="Statically typed superset of JavaScript for safer, more maintainable code">TypeScript</span>
+                                <span class="skill-tag" data-tooltip="Official MLB data source providing schedules, lineups, and career split statistics">MLB Stats API</span>
+                                <span class="skill-tag" data-tooltip="Cloud platform for deploying and hosting Next.js applications">Vercel</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" class="project-demo-btn">
+                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <header class="project-header">
+                            <div class="project-logo">
                                 <a href="https://lucasreydman.github.io/fantasy-draft-lottery-simulator/" target="_blank" rel="noopener" aria-label="Fantasy Draft Lottery Simulator">
                                     <img src="assets/images/logos/fantasy-draft-lottery-simulator.png" alt="Fantasy Draft Lottery Simulator Logo" width="54" height="54">
                                 </a>
@@ -682,40 +713,6 @@
                             <div class="project-links">
                                 <a href="https://lucasreydman.github.io/fantasy-draft-lottery-simulator/" target="_blank" rel="noopener" class="project-demo-btn">
                                     Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                <a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" aria-label="MLB BvP">
-                                    <img src="assets/images/logos/bvp-betting.png" alt="MLB BvP Logo" width="54" height="54">
-                                </a>
-                            </div>
-                            <div class="project-title">
-                                <h3><a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" class="project-link">MLB BvP</a></h3>
-                                <p class="project-affiliation">Personal Project</p>
-                                <p class="project-period">Mar 2026</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">Sports analytics tool for researching the FanDuel Player Hits (1+) prop — also valid for Total Bases (1+) and Hits (1+) on Bet365 and theScore Bet — by surfacing historical career batter vs. pitcher matchups ranked by batting average weighted for sample size. For any given date, the app loads the MLB schedule and probable starters, builds each lineup using official batting order data from the boxscore when available or falling back to the top nine active players by career plate appearances, and fetches career BvP splits for every batter facing the opposing starter (minimum 10 AB). From each split it computes AVG, OPS, OBP, SLG, and extra-base hits. The UI divides games into Upcoming and In Progress after first pitch, with live refresh keeping the buckets current. A configurable filter panel (Min AB, Min AVG, optional OPS gate) narrows the table to statistically meaningful matchups, and a Top 5 Plays card ranks by AVG × min(AB/30, 1) to balance hit rate with sample reliability. A data quality pass strips team-level aggregate lines that the MLB Stats API occasionally returns in place of true individual BvP, dropping any raw stat line shared by five or more batters on the same team against the same pitcher. The full table is exportable as CSV. Fully responsive: mobile layout swaps the scrollable table for a vertical card list with sort chips, and all game times render in the viewer's local browser time zone. Built with Next.js App Router, React 19, and Tailwind CSS v4. Deployed on Vercel.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" data-tooltip="React framework with App Router for full-stack server and client components">Next.js</span>
-                                <span class="skill-tag" data-tooltip="JavaScript library for building component-driven user interfaces">React</span>
-                                <span class="skill-tag" data-tooltip="Utility-first CSS framework for rapid UI development">Tailwind CSS</span>
-                                <span class="skill-tag" data-tooltip="Statically typed superset of JavaScript for safer, more maintainable code">TypeScript</span>
-                                <span class="skill-tag" data-tooltip="Official MLB data source providing schedules, lineups, and career split statistics">MLB Stats API</span>
-                                <span class="skill-tag" data-tooltip="Cloud platform for deploying and hosting Next.js applications">Vercel</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                                <a href="https://github.com/lucasreydman/bvp-betting" target="_blank" rel="noopener" class="project-demo-btn">
-                                    GitHub <i class="fab fa-github" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
