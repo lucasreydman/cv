@@ -62,8 +62,8 @@
     </noscript>
 
     <!-- Styles -->
-    <link rel="preload" href="css/main.css?v=4" as="style">
-    <link rel="stylesheet" href="css/main.css?v=4">
+    <link rel="preload" href="css/main.css?v=5" as="style">
+    <link rel="stylesheet" href="css/main.css?v=5">
 
     <!-- Prevent theme flash -->
     <script>
@@ -126,10 +126,6 @@
                 <div class="hero-content">
 
                     <div class="hero-text">
-                        <div class="hero-status">
-                            <span class="hero-status-dot" aria-hidden="true"></span>
-                            <span>Open to Summer 2026 opportunities</span>
-                        </div>
                         <span class="hero-eyebrow">Hello, world</span>
                         <h1>I'm<br><span class="highlight">Lucas Reydman</span></h1>
                         <p class="subtitle">
@@ -595,10 +591,10 @@
                     </div>
 
                     <div class="skills-dots" role="tablist" aria-label="Skills categories">
-                        <button class="skills-dot active" data-index="0" aria-label="Technical Skills" aria-pressed="true"></button>
-                        <button class="skills-dot" data-index="1" aria-label="AI &amp; Productivity" aria-pressed="false"></button>
-                        <button class="skills-dot" data-index="2" aria-label="Business &amp; Leadership" aria-pressed="false"></button>
-                        <button class="skills-dot" data-index="3" aria-label="Tools &amp; Platforms" aria-pressed="false"></button>
+                        <button type="button" class="skills-dot active" data-index="0" aria-label="Technical Skills" aria-pressed="true"></button>
+                        <button type="button" class="skills-dot" data-index="1" aria-label="AI &amp; Productivity" aria-pressed="false"></button>
+                        <button type="button" class="skills-dot" data-index="2" aria-label="Business &amp; Leadership" aria-pressed="false"></button>
+                        <button type="button" class="skills-dot" data-index="3" aria-label="Tools &amp; Platforms" aria-pressed="false"></button>
                     </div>
                 </div>
             </div>
@@ -858,7 +854,9 @@
                     </button>
                 </div>
             </div>
-            <iframe src="assets/resume.pdf" class="modal-pdf" title="Lucas Reydman Resume" loading="lazy"></iframe>
+            <object data="assets/resume.pdf" type="application/pdf" class="modal-pdf" aria-label="Lucas Reydman Resume">
+                <p class="modal-pdf-fallback">PDF preview unavailable. <a href="assets/resume.pdf" download class="modal-pdf-fallback-link">Download instead</a>.</p>
+            </object>
         </div>
     </div>
 
@@ -877,7 +875,7 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
 
     <!-- Main script -->
-    <script src="js/main.js?v=3" defer></script>
+    <script src="js/main.js?v=4" defer></script>
 
 </body>
 </html>

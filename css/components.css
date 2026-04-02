@@ -835,3 +835,10 @@ body.cursor-hover .cursor-dot {
     min-height: 70dvh;
     background: var(--surface-1);
 }
+
+.modal-pdf-fallback {
+    padding: 2rem;
+    color: var(--text-2);
+}
+
+.modal-pdf-fallback-link { color: var(--accent); }
