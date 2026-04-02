@@ -23,7 +23,7 @@ A premium, animated personal portfolio website. Dark-first design with cinematic
 - Typewriter subtitle cycling 5 phrases
 - Experience alternating timeline with glowing pulsing dots
 - Skills carousel with 3D perspective, auto-advance every 3.6s, progress bar dots, hover-to-pause
-- Scroll progress bar, scroll-to-top button, GitHub link
+- Scroll progress bar, scroll-to-top button
 - Speech bubble on hero photo hover (desktop only)
 - Grain overlay via CSS SVG filter
 - Full graceful fallback to IntersectionObserver if GSAP/Lenis fail to load
@@ -33,13 +33,13 @@ A premium, animated personal portfolio website. Dark-first design with cinematic
 
 ```
 cv/
-├── .github/
-│   └── workflows/
-│       └── static.yml              # GitHub Actions — auto-deploy to GitHub Pages on push to main
 ├── .gitignore                      # Git ignore rules
 ├── .hintrc                         # webhint config — suppresses scrollbar-width compat warning
 ├── LICENSE                         # MIT license
 ├── README.md
+├── vercel.json                     # Vercel config — www redirect, security headers, asset caching
+├── sitemap.xml                     # Search engine sitemap
+├── robots.txt                      # Crawler directives
 ├── index.html                      # Single-page portfolio — all sections, meta tags, OG tags, structured data
 ├── assets/
 │   ├── favicon/
@@ -73,7 +73,7 @@ cv/
 │   ├── main.css                    # @import aggregator — loads the four modules below in order
 │   ├── base.css                    # CSS custom properties, reset, typography, grain overlay, reduced-motion
 │   ├── layout.css                  # Navbar, hamburger, sections grid, footer, scroll progress bar
-│   ├── components.css              # Cards, buttons, custom cursor, spotlight, scroll-to-top, GitHub link
+│   ├── components.css              # Cards, buttons, custom cursor, spotlight, scroll-to-top
 │   └── sections.css                # Hero, about, experience timeline, education, honors, skills carousel, projects, contact
 └── js/
     └── main.js                     # All runtime logic — theme, Lenis, GSAP animations, typewriter, speech bubble, cursor, carousel, details animation
@@ -118,6 +118,10 @@ Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
 
 Chrome 121+, Firefox, Safari, Edge, iOS Safari, Android Chrome.
 `scrollbar-width: none` handles Firefox; `-webkit-scrollbar` covers Chrome/Safari.
+
+## Deployment
+
+Hosted on **Vercel** at [lucasreydman.xyz](https://lucasreydman.xyz). Push to `main` deploys automatically.
 
 ## Author
 
