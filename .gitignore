@@ -151,3 +151,4 @@ dist
 
 # Claude Code local settings
 .claude/
+.vercel
