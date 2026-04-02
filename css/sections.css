@@ -559,7 +559,7 @@
 
 .education-details summary {
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 0.88rem;
     color: var(--text);
     list-style: none;
