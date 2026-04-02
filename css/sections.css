@@ -1149,6 +1149,10 @@
 }
 
 @media (max-width: 768px) {
+    .skills-carousel-wrapper {
+        padding: 1rem 1rem 4rem;
+    }
+
     .hero {
         padding: 7rem 0 5rem;
         align-items: flex-start;

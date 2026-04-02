@@ -623,7 +623,8 @@ function initSkillsCarousel() {
 
     function layout() {
         const ww       = track.offsetWidth;
-        const cardW    = Math.round(ww * 0.36);
+        const mobile   = ww < 600;
+        const cardW    = Math.round(ww * (mobile ? 0.92 : 0.36));
         const gap      = Math.round(ww * 0.02);
         const step     = cardW + gap;
         const centerX  = Math.round((ww - cardW) / 2);
@@ -646,7 +647,7 @@ function initSkillsCarousel() {
             const isCenter = offset === 0;
             const isSide   = Math.abs(offset) === 1;
             const scale    = isCenter ? 1 : isSide ? 0.88 : 0.76;
-            const opacity  = isCenter ? 1 : isSide ? 0.5 : 0;
+            const opacity  = isCenter ? 1 : (isSide && !mobile) ? 0.5 : 0;
             const rotateY  = isCenter ? 0 : offset * -12;
             const zIndex   = isCenter ? 3 : isSide ? 2 : 0;
             const shadow   = isCenter ? '0 20px 60px rgba(0,0,0,0.4)' : 'none';
@@ -655,7 +656,7 @@ function initSkillsCarousel() {
             card.style.opacity      = opacity;
             card.style.zIndex       = zIndex;
             card.style.boxShadow    = shadow;
-            card.style.pointerEvents = (isCenter || isSide) ? 'auto' : 'none';
+            card.style.pointerEvents = isCenter ? 'auto' : (isSide && !mobile) ? 'auto' : 'none';
         });
     }
 
