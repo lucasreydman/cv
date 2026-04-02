@@ -4,6 +4,83 @@
  */
 
 // ═══════════════════════════════════════════════════════════════
+// PROJECT READ MORE / LESS
+// ═══════════════════════════════════════════════════════════════
+
+function initProjectToggle() {
+    document.querySelectorAll('.project-description').forEach(p => {
+        p.classList.add('truncated');
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'project-read-more';
+        btn.textContent = 'Read more';
+
+        btn.addEventListener('click', () => {
+            const expanded = !p.classList.contains('truncated');
+            p.classList.toggle('truncated', expanded);
+            btn.textContent = expanded ? 'Read more' : 'Read less';
+        });
+
+        p.insertAdjacentElement('afterend', btn);
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// COPY EMAIL
+// ═══════════════════════════════════════════════════════════════
+
+function initCopyEmail() {
+    const btn     = document.getElementById('copy-email-btn');
+    const confirm = document.querySelector('.copy-email-confirm');
+    if (!btn || !confirm) return;
+
+    btn.addEventListener('click', async () => {
+        const email = btn.querySelector('.copy-email-text').textContent.trim();
+        try {
+            await navigator.clipboard.writeText(email);
+            confirm.textContent = 'Copied!';
+            setTimeout(() => { confirm.textContent = ''; }, 2000);
+        } catch {
+            confirm.textContent = 'Failed';
+            setTimeout(() => { confirm.textContent = ''; }, 2000);
+        }
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RESUME MODAL
+// ═══════════════════════════════════════════════════════════════
+
+function initResumeModal() {
+    const modal    = document.getElementById('resume-modal');
+    const openBtn  = document.getElementById('resume-preview-btn');
+    const closeBtn = modal && modal.querySelector('.modal-close');
+    const backdrop = modal && modal.querySelector('.modal-backdrop');
+    if (!modal || !openBtn) return;
+
+    function open() {
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        closeBtn && closeBtn.focus();
+    }
+
+    function close() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', open);
+    closeBtn && closeBtn.addEventListener('click', close);
+    backdrop && backdrop.addEventListener('click', close);
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
 // CONTACT FORM
 // ═══════════════════════════════════════════════════════════════
 
@@ -394,6 +471,7 @@ function initGSAP() {
 
     // ── Hero entrance sequence ──────────────────────────────
     // Set initial states first, then animate
+    gsap.set('.hero-status',          { opacity: 0, y: 16 });
     gsap.set('.hero-eyebrow',         { opacity: 0, y: 20 });
     gsap.set('.hero-text h1',         { opacity: 0, y: 32 });
     gsap.set('.hero-text .subtitle',  { opacity: 0, y: 20 });
@@ -403,7 +481,8 @@ function initGSAP() {
     gsap.set('.hero-scroll',          { opacity: 0 });
 
     gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.15 })
-        .to('.hero-eyebrow',          { opacity: 1, y: 0, duration: 0.7 })
+        .to('.hero-status',           { opacity: 1, y: 0, duration: 0.6 })
+        .to('.hero-eyebrow',          { opacity: 1, y: 0, duration: 0.7 }, '-=0.3')
         .to('.hero-text h1',          { opacity: 1, y: 0, duration: 0.85 }, '-=0.4')
         .to('.hero-text .subtitle',   { opacity: 1, y: 0, duration: 0.7  }, '-=0.5')
         .to('.hero-cta',              { opacity: 1, y: 0, duration: 0.7  }, '-=0.45')
@@ -507,7 +586,7 @@ function initFallbackReveal() {
     });
 
     // Reveal hero elements immediately
-    ['.hero-eyebrow', '.hero-text h1', '.hero-text .subtitle', '.hero-cta', '.hero-cv-note', '.hero-image-container', '.hero-scroll']
+    ['.hero-status', '.hero-eyebrow', '.hero-text h1', '.hero-text .subtitle', '.hero-cta', '.hero-cv-note', '.hero-image-container', '.hero-scroll']
         .forEach(sel => {
             const el = document.querySelector(sel);
             if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
@@ -692,6 +771,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const lenis = initLenis();
 
     initContactForm();
+    initProjectToggle();
+    initCopyEmail();
+    initResumeModal();
     initSmoothScroll(lenis);
     initNavbar();
     initHamburger();

@@ -84,6 +84,37 @@
     max-width: 640px;
 }
 
+/* Status badge */
+.hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    background: rgba(109, 90, 237, 0.1);
+    border: 1px solid rgba(109, 90, 237, 0.25);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--accent-2);
+    margin-bottom: 1.25rem;
+    opacity: 0;
+}
+
+.hero-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    filter: drop-shadow(0 0 4px #4ade80);
+    animation: statusPulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+}
+
 /* Eyebrow line */
 .hero-eyebrow {
     display: inline-flex;
@@ -882,6 +913,29 @@
     line-height: 1.75;
     margin-bottom: 0.5rem;
 }
+
+.project-description.truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-read-more {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--accent-2);
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s ease;
+}
+
+.project-read-more:hover { color: var(--accent); }
+.project-read-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 
 /* ═══════════════════════════════════════════════════════════
    CONTACT

@@ -256,6 +256,19 @@ section:nth-child(even) {
     background: var(--surface-1);
 }
 
+/* Gradient divider between sections */
+section:not(.hero)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-glow), var(--accent-2), var(--accent-glow), transparent);
+    opacity: 0.4;
+    pointer-events: none;
+}
+
 /* Reveal state — set by GSAP */
 section .section-inner {
     opacity: 0;

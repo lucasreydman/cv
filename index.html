@@ -14,10 +14,35 @@
     <meta property="og:url" content="https://lucasreydman.xyz/">
     <meta property="og:title" content="Lucas Reydman | CV">
     <meta property="og:description" content="Lucas Reydman — Applied Computer Science & Management student at Dalhousie University. Portfolio featuring software development projects, work experience at RBC, Torinit, and Mirabella, AI & full-stack skills, and entrepreneurial ventures.">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://lucasreydman.xyz/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://lucasreydman.xyz/">
     <meta name="twitter:title" content="Lucas Reydman | CV">
     <meta name="twitter:description" content="Lucas Reydman — Applied Computer Science & Management student at Dalhousie University. Portfolio featuring software development projects, work experience at RBC, Torinit, and Mirabella, AI & full-stack skills, and entrepreneurial ventures.">
+    <meta name="twitter:image" content="https://lucasreydman.xyz/assets/og-image.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Lucas Reydman",
+      "url": "https://lucasreydman.xyz",
+      "email": "lucasreydman@gmail.com",
+      "jobTitle": "Software Developer",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Dalhousie University"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/lucasreydman",
+        "https://github.com/lucasreydman"
+      ],
+      "knowsAbout": ["JavaScript", "TypeScript", "React", "Next.js", "Java", "Python", "AI Development"]
+    }
+    </script>
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
@@ -37,8 +62,8 @@
     </noscript>
 
     <!-- Styles -->
-    <link rel="preload" href="css/main.css?v=3" as="style">
-    <link rel="stylesheet" href="css/main.css?v=3">
+    <link rel="preload" href="css/main.css?v=4" as="style">
+    <link rel="stylesheet" href="css/main.css?v=4">
 
     <!-- Prevent theme flash -->
     <script>
@@ -101,15 +126,19 @@
                 <div class="hero-content">
 
                     <div class="hero-text">
+                        <div class="hero-status">
+                            <span class="hero-status-dot" aria-hidden="true"></span>
+                            <span>Open to Summer 2026 opportunities</span>
+                        </div>
                         <span class="hero-eyebrow">Hello, world</span>
                         <h1>I'm<br><span class="highlight">Lucas Reydman</span></h1>
                         <p class="subtitle">
                             <span id="typewriter">Computer Science &amp; Management Student</span><span class="typewriter-cursor" aria-hidden="true">|</span>
                         </p>
                         <div class="hero-cta">
-                            <a href="assets/resume.pdf" download="Lucas_Reydman_Resume_2026.pdf" class="btn-resume">
-                                <i class="fas fa-download" aria-hidden="true"></i> Download Resume
-                            </a>
+                            <button type="button" id="resume-preview-btn" class="btn-resume">
+                                <i class="fas fa-file-pdf" aria-hidden="true"></i> View Resume
+                            </button>
                         </div>
                         <p class="hero-cv-note" aria-label="curriculum vitae — Latin for course of life">
                             <span class="cv-word">curriculum vitae</span>
@@ -121,7 +150,10 @@
                     </div>
 
                     <div class="hero-image-container">
-                        <img src="assets/images/hero/hero_transparent.png" alt="Lucas Reydman" class="hero-image" width="300" height="300">
+                        <picture>
+                            <source srcset="assets/images/hero/hero_transparent.webp" type="image/webp">
+                            <img src="assets/images/hero/hero_transparent.png" alt="Lucas Reydman" class="hero-image" width="300" height="300">
+                        </picture>
                         <div class="speech-bubble" aria-hidden="true">
                             <p>Welcome! Take a look around and get to know me better.</p>
                         </div>
@@ -792,6 +824,14 @@
                     </button>
                     <p class="contact-form-status" aria-live="polite"></p>
                 </form>
+
+                <div class="contact-copy-email">
+                    <button type="button" id="copy-email-btn" class="copy-email-btn" aria-label="Copy email address">
+                        <i class="fas fa-copy" aria-hidden="true"></i>
+                        <span class="copy-email-text">lucasreydman@gmail.com</span>
+                    </button>
+                    <span class="copy-email-confirm" aria-live="polite"></span>
+                </div>
             </div>
         </section>
 
@@ -803,8 +843,27 @@
         </div>
     </footer>
 
+    <!-- Resume Preview Modal -->
+    <div id="resume-modal" class="modal" role="dialog" aria-modal="true" aria-label="Resume Preview" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Resume</h3>
+                <div class="modal-header-actions">
+                    <a href="assets/resume.pdf" download="Lucas_Reydman_Resume_2026.pdf" class="modal-download-btn" aria-label="Download resume">
+                        <i class="fas fa-download" aria-hidden="true"></i> Download
+                    </a>
+                    <button type="button" class="modal-close" aria-label="Close preview">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <iframe src="assets/resume.pdf" class="modal-pdf" title="Lucas Reydman Resume" loading="lazy"></iframe>
+        </div>
+    </div>
+
     <!-- Fixed UI -->
-    <button id="scroll-top" class="scroll-to-top" aria-label="Scroll to top">
+    <button type="button" id="scroll-top" class="scroll-to-top" aria-label="Scroll to top">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
@@ -818,7 +877,7 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
 
     <!-- Main script -->
-    <script src="js/main.js?v=2" defer></script>
+    <script src="js/main.js?v=3" defer></script>
 
 </body>
 </html>
