@@ -10,7 +10,7 @@
     min-height: 100dvh;
     display: flex;
     align-items: center;
-    padding: 8rem 0 4rem;
+    padding: 8rem 0 8rem;
     position: relative;
     overflow: hidden;
     background: var(--bg);

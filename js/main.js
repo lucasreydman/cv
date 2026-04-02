@@ -280,7 +280,7 @@ function initTypewriter() {
         'Builder. Leader. Problem Solver.',
         'Bridging Business & Technology.',
         'Shipping Faster with AI.',
-        'Aspiring Software Developer.',
+        'Full-Stack Developer & AI Enthusiast.',
     ];
 
     let phraseIdx = 0, charIdx = 0, deleting = false;
