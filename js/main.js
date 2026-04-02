@@ -444,7 +444,6 @@ function initGSAP() {
     gsap.set('.hero-text h1',         { opacity: 0, y: 32 });
     gsap.set('.hero-text .subtitle',  { opacity: 0, y: 20 });
     gsap.set('.hero-cta',             { opacity: 0, y: 20 });
-    gsap.set('.hero-cv-note',         { opacity: 0, y: 12 });
     gsap.set('.hero-image-container', { opacity: 0, x: 40 });
     gsap.set('.hero-scroll',          { opacity: 0 });
 
@@ -454,7 +453,6 @@ function initGSAP() {
         .to('.hero-text h1',          { opacity: 1, y: 0, duration: 0.85 }, '-=0.4')
         .to('.hero-text .subtitle',   { opacity: 1, y: 0, duration: 0.7  }, '-=0.5')
         .to('.hero-cta',              { opacity: 1, y: 0, duration: 0.7  }, '-=0.45')
-        .to('.hero-cv-note',          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
         .to('.hero-image-container',  { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, '-=0.9')
         .to('.hero-scroll',           { opacity: 1, duration: 0.6 }, '-=0.3');
 
@@ -554,7 +552,7 @@ function initFallbackReveal() {
     });
 
     // Reveal hero elements immediately
-    ['.hero-status', '.hero-eyebrow', '.hero-text h1', '.hero-text .subtitle', '.hero-cta', '.hero-cv-note', '.hero-image-container', '.hero-scroll']
+    ['.hero-status', '.hero-eyebrow', '.hero-text h1', '.hero-text .subtitle', '.hero-cta', '.hero-image-container', '.hero-scroll']
         .forEach(sel => {
             const el = document.querySelector(sel);
             if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
