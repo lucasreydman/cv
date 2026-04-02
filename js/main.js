@@ -49,38 +49,6 @@ function initCopyEmail() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// RESUME MODAL
-// ═══════════════════════════════════════════════════════════════
-
-function initResumeModal() {
-    const modal    = document.getElementById('resume-modal');
-    const openBtn  = document.getElementById('resume-preview-btn');
-    const closeBtn = modal && modal.querySelector('.modal-close');
-    const backdrop = modal && modal.querySelector('.modal-backdrop');
-    if (!modal || !openBtn) return;
-
-    function open() {
-        modal.hidden = false;
-        document.body.style.overflow = 'hidden';
-        closeBtn && closeBtn.focus();
-    }
-
-    function close() {
-        modal.hidden = true;
-        document.body.style.overflow = '';
-        openBtn.focus();
-    }
-
-    openBtn.addEventListener('click', open);
-    closeBtn && closeBtn.addEventListener('click', close);
-    backdrop && backdrop.addEventListener('click', close);
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && !modal.hidden) close();
-    });
-}
-
-// ═══════════════════════════════════════════════════════════════
 // CONTACT FORM
 // ═══════════════════════════════════════════════════════════════
 
@@ -773,7 +741,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initProjectToggle();
     initCopyEmail();
-    initResumeModal();
     initSmoothScroll(lenis);
     initNavbar();
     initHamburger();
