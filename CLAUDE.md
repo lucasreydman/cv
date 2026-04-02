@@ -103,6 +103,13 @@ Vercel — push to `main` deploys automatically. Live at **https://lucasreydman.
 - **Update resume** — replace `assets/resume.pdf`
 - **Add a nav link** — add `<li><a href="#id">Label</a></li>` to `.nav-links` in `index.html`
 
+## SEO
+
+- **Title tag**: "Lucas Reydman — Software Developer & CS Student"
+- **JSON-LD Person schema** in `<head>`: includes `name`, `url`, `email`, `image`, `description`, `jobTitle`, `worksFor`, `alumniOf`, `sameAs` (LinkedIn, GitHub, site), `knowsAbout`
+- **`<link rel="me">`** tags for LinkedIn and GitHub — identity verification for Google Knowledge Graph
+- **Google Search Console**: domain verified via DNS TXT record (Vercel), sitemap submitted at `https://lucasreydman.xyz/sitemap.xml`
+
 ## Things That Don't Exist (don't add them back)
 
 - No `.github-link` — the fixed GitHub source button was intentionally removed; CSS and JS are already clean of it
