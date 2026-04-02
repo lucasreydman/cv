@@ -28,6 +28,8 @@ A premium, animated personal portfolio website. Dark-first design with cinematic
 - Grain overlay via CSS SVG filter
 - Full graceful fallback to IntersectionObserver if GSAP/Lenis fail to load
 - `prefers-reduced-motion` support
+- Contact form with serverless backend (Resend) — delivers to Gmail, reply-to set to sender
+- Vercel Analytics + Speed Insights
 
 ## File Structure
 
@@ -75,8 +77,10 @@ cv/
 │   ├── layout.css                  # Navbar, hamburger, sections grid, footer, scroll progress bar
 │   ├── components.css              # Cards, buttons, custom cursor, spotlight, scroll-to-top
 │   └── sections.css                # Hero, about, experience timeline, education, honors, skills carousel, projects, contact
+├── api/
+│   └── contact.js                  # Vercel serverless function — contact form handler (Resend)
 └── js/
-    └── main.js                     # All runtime logic — theme, Lenis, GSAP animations, typewriter, speech bubble, cursor, carousel, details animation
+    └── main.js                     # All runtime logic — theme, Lenis, GSAP animations, typewriter, speech bubble, cursor, carousel, details animation, contact form
 ```
 
 ## Design System
@@ -102,7 +106,7 @@ Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
 - **Honors & Awards** — 6 cards (Agile cert, GPT cert, Dean's List x6, Community Leadership, Ontario Scholar, Bilingual)
 - **Skills** — carousel with 4 cards (Technical, AI & Productivity, Business & Leadership, Tools & Platforms), 10 items each, auto-advances every 3.6s with progress bar indicators
 - **Projects** — 4 cards (Pride STEM Canada, QuickCash, Tic Tec Toe, wdinomf?)
-- **Contact** — email + LinkedIn
+- **Contact** — LinkedIn card, OR divider, contact form (name/email/message → Gmail via Resend)
 
 ## Responsiveness
 
@@ -126,7 +130,7 @@ Hosted on **Vercel** at [lucasreydman.xyz](https://lucasreydman.xyz). Push to `m
 ## Author
 
 **Lucas Reydman** | Applied Computer Science & Management, Dalhousie University
-[lucas.reydman@dal.ca](mailto:lucas.reydman@dal.ca) · [LinkedIn](https://www.linkedin.com/in/lucasreydman) · [GitHub](https://github.com/lucasreydman)
+[lucasreydman@gmail.com](mailto:lucasreydman@gmail.com) · [LinkedIn](https://www.linkedin.com/in/lucasreydman) · [GitHub](https://github.com/lucasreydman)
 
 ## License
 
