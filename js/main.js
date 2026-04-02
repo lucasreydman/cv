@@ -4,6 +4,53 @@
  */
 
 // ═══════════════════════════════════════════════════════════════
+// CONTACT FORM
+// ═══════════════════════════════════════════════════════════════
+
+function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn    = form.querySelector('.contact-submit-btn');
+        const status = form.querySelector('.contact-form-status');
+        const btnText = btn.querySelector('.btn-text');
+
+        btn.disabled = true;
+        btnText.textContent = 'Sending…';
+        status.textContent = '';
+        status.className = 'contact-form-status';
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name:    form.name.value.trim(),
+                    email:   form.email.value.trim(),
+                    message: form.message.value.trim(),
+                }),
+            });
+
+            if (res.ok) {
+                status.textContent = "Message sent! I'll get back to you soon.";
+                status.className = 'contact-form-status success';
+                form.reset();
+            } else {
+                throw new Error();
+            }
+        } catch {
+            status.textContent = 'Something went wrong. Try emailing me directly.';
+            status.className = 'contact-form-status error';
+        } finally {
+            btn.disabled = false;
+            btnText.textContent = 'Send Message';
+        }
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
 // THEME
 // ═══════════════════════════════════════════════════════════════
 
@@ -644,6 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const lenis = initLenis();
 
+    initContactForm();
     initSmoothScroll(lenis);
     initNavbar();
     initHamburger();
