@@ -10,7 +10,7 @@ A premium animated personal portfolio website. Dark-first, single-page, no build
 - **Font Awesome 6** — icons (CDN)
 - **Google Fonts** — Syne (headings) + Inter (body)
 
-No `package.json` (gitignored). No build step. Edit files directly.
+No build step. Edit files directly.
 
 ## File Map
 
@@ -30,8 +30,9 @@ assets/
   images/hero/      hero_transparent.png
   images/logos/     Company/school/project logos (PNG, 52×52 display)
   resume.pdf        Downloadable resume
-.github/workflows/
-  static.yml        GitHub Actions — auto-deploy to GitHub Pages on push to main
+vercel.json         Vercel config — www redirect, security headers, asset caching
+sitemap.xml         Search engine sitemap
+robots.txt          Crawler directives
 ```
 
 ## Design System
@@ -91,7 +92,7 @@ Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
 
 ## Deployment
 
-GitHub Pages via `.github/workflows/static.yml` — push to `main` deploys automatically.
+Vercel — push to `main` deploys automatically. Live at **https://lucasreydman.xyz**.
 
 ## Common Tasks
 
