@@ -281,6 +281,7 @@ function initTypewriter() {
         'Bridging Business & Technology.',
         'Shipping Faster with AI.',
         'Full-Stack Developer & AI Enthusiast.',
+        'Digital Product Creator.',
     ];
 
     let phraseIdx = 0, charIdx = 0, deleting = false;
