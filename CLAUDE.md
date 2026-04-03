@@ -10,7 +10,7 @@ A premium animated personal portfolio website. Dark-first, single-page, no build
 - **Font Awesome 6** — icons (CDN)
 - **Google Fonts** — Syne (headings) + Inter (body)
 
-No build step. Edit files directly.
+No `package.json` (gitignored). No build step. Edit files directly.
 
 ## File Map
 
@@ -30,9 +30,8 @@ assets/
   images/hero/      hero_transparent.png
   images/logos/     Company/school/project logos (PNG, 52×52 display)
   resume.pdf        Downloadable resume
-vercel.json         Vercel config — www redirect, security headers, asset caching
-sitemap.xml         Search engine sitemap
-robots.txt          Crawler directives
+.github/workflows/
+  static.yml        GitHub Actions — auto-deploy to GitHub Pages on push to main
 ```
 
 ## Design System
@@ -92,7 +91,7 @@ Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
 
 ## Deployment
 
-Vercel — push to `main` deploys automatically. Live at **https://lucasreydman.xyz**.
+Vercel — custom domain **lucasreydman.xyz**. Push to `main` triggers a production deployment automatically via Vercel's GitHub integration. Branch pushes and PRs get preview deployments. Config is in `vercel.json`. The `.github/workflows/static.yml` is a leftover from the old GitHub Pages setup and can be ignored or deleted.
 
 ## Common Tasks
 
@@ -102,13 +101,6 @@ Vercel — push to `main` deploys automatically. Live at **https://lucasreydman.
 - **Add a logo** — drop PNG into `assets/images/logos/` and reference it in `index.html`
 - **Update resume** — replace `assets/resume.pdf`
 - **Add a nav link** — add `<li><a href="#id">Label</a></li>` to `.nav-links` in `index.html`
-
-## SEO
-
-- **Title tag**: "Lucas Reydman — Software Developer & CS Student"
-- **JSON-LD Person schema** in `<head>`: includes `name`, `url`, `email`, `image`, `description`, `jobTitle`, `worksFor`, `alumniOf`, `sameAs` (LinkedIn, GitHub, site), `knowsAbout`
-- **`<link rel="me">`** tags for LinkedIn and GitHub — identity verification for Google Knowledge Graph
-- **Google Search Console**: domain verified via DNS TXT record (Vercel), sitemap submitted at `https://lucasreydman.xyz/sitemap.xml`
 
 ## Things That Don't Exist (don't add them back)
 
