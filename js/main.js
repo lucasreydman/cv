@@ -179,6 +179,63 @@ function initSmoothScroll(lenis) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// DYNAMIC PAGE TITLE
+// ═══════════════════════════════════════════════════════════════
+
+function initDynamicPageTitle() {
+    const defaultTitle = 'Lucas Reydman';
+    const titleBySection = new Map([
+        ['hero', 'Lucas Reydman | Welcome'],
+        ['about', 'Lucas Reydman | About'],
+        ['experience', 'Lucas Reydman | Experience'],
+        ['education', 'Lucas Reydman | Education'],
+        ['honors', 'Lucas Reydman | Honors'],
+        ['skills', 'Lucas Reydman | Skills'],
+        ['projects', 'Lucas Reydman | Projects'],
+        ['contact', 'Lucas Reydman | Contact'],
+    ]);
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+
+    if (!sections.length) return;
+
+    function getCurrentSectionId() {
+        const lastSection = sections[sections.length - 1];
+        const scrollBottom = window.scrollY + window.innerHeight;
+        const documentBottom = document.documentElement.scrollHeight;
+
+        if (scrollBottom >= documentBottom - 8) {
+            return lastSection.id;
+        }
+
+        const offset = window.scrollY + Math.min(window.innerHeight * 0.35, 220);
+        let currentSectionId = sections[0].id;
+
+        sections.forEach(section => {
+            if (offset >= section.offsetTop) {
+                currentSectionId = section.id;
+            }
+        });
+
+        return currentSectionId;
+    }
+
+    function updateTitle() {
+        const currentSectionId = getCurrentSectionId();
+        const nextTitle = titleBySection.get(currentSectionId) || defaultTitle;
+
+        if (document.title !== nextTitle) {
+            document.title = nextTitle;
+        }
+    }
+
+    window.addEventListener('scroll', updateTitle, { passive: true });
+    window.addEventListener('resize', updateTitle);
+    window.addEventListener('hashchange', updateTitle);
+
+    updateTitle();
+}
+
+// ═══════════════════════════════════════════════════════════════
 // NAVBAR
 // ═══════════════════════════════════════════════════════════════
 
@@ -743,6 +800,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectToggle();
     initCopyEmail();
     initSmoothScroll(lenis);
+    initDynamicPageTitle();
     initNavbar();
     initHamburger();
     initScrollProgress();
