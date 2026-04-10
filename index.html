@@ -704,6 +704,40 @@
                     <article class="project-card">
                         <header class="project-header">
                             <div class="project-logo">
+                                <a href="https://yrfi.vercel.app/" target="_blank" rel="noopener" aria-label="YRFI">
+                                    <img src="assets/images/logos/yrfi.png" alt="YRFI Logo" width="54" height="54">
+                                </a>
+                            </div>
+                            <div class="project-title">
+                                <h3><a href="https://yrfi.vercel.app/" target="_blank" rel="noopener" class="project-link">YRFI</a></h3>
+                                <p class="project-affiliation">Personal Project</p>
+                                <p class="project-period">Apr 2026</p>
+                            </div>
+                        </header>
+                        <div class="project-details">
+                            <p class="project-description">MLB betting research tool that calculates the probability of a run being scored in the first inning (YRFI — Yes Run First Inning) for every game on a selected slate. For each matchup, the model outputs a YRFI probability to one decimal place and the minimum American odds required at the user's sportsbook for a positive-expected-value bet — no sportsbook integration, just clean signal for manual comparison. The model uses a Poisson distribution to estimate expected first-inning runs (λ) per half-inning, derived from a weighted adjustment score built from stabilized pitcher FIP, strikeout rate, Baseball Savant barrel rate and hard-hit rate, team on-base percentage, confirmed top-of-order OBP, park factor, and real-time weather. Early-season inputs apply a stabilization taper that runs from 1.75× on March 15 down to 1.00× by July 1 to account for small sample noise. The model also applies a lineup-aware boost when confirmed batting orders are posted. Weather data comes from Open-Meteo per venue using hardcoded stadium coordinates, with roofed and retractable parks neutralized automatically. The slate auto-refreshes every five minutes, groups games into Upcoming, In Progress, and Settled states, and renders a ranked table on desktop with color-coded YRFI percentages (green ≥ 55%, yellow 45–54%, red &lt; 45%) and a card-based mobile layout. Preferences for temperature unit, wind unit, odds format, and timezone persist to localStorage.</p>
+                            <div class="project-skills">
+                                <span class="skill-tag" data-tooltip="React framework with App Router for full-stack server and client components">Next.js</span>
+                                <span class="skill-tag" data-tooltip="JavaScript library for building component-driven user interfaces">React</span>
+                                <span class="skill-tag" data-tooltip="Utility-first CSS framework for rapid UI development">Tailwind CSS</span>
+                                <span class="skill-tag" data-tooltip="Statically typed superset of JavaScript for safer, more maintainable code">TypeScript</span>
+                                <span class="skill-tag" data-tooltip="Official MLB data source providing schedules, starting pitchers, team OBP, and boxscore data">MLB Stats API</span>
+                                <span class="skill-tag" data-tooltip="MLB's advanced stats platform providing pitcher barrel rate and hard-hit rate via season CSV">Baseball Savant</span>
+                                <span class="skill-tag" data-tooltip="Free weather API providing temperature, wind speed, and direction per venue for forecast and historical games">Open-Meteo</span>
+                                <span class="skill-tag" data-tooltip="Vercel's Redis-compatible key-value store used for caching model output and Savant data">Vercel KV</span>
+                                <span class="skill-tag" data-tooltip="Cloud platform for deploying and hosting Next.js applications">Vercel</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://yrfi.vercel.app/" target="_blank" rel="noopener" class="project-demo-btn">
+                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <header class="project-header">
+                            <div class="project-logo">
                                 <a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" aria-label="MLB BvP">
                                     <img src="assets/images/logos/bvp-betting.png" alt="MLB BvP Logo" width="54" height="54">
                                 </a>
