@@ -278,7 +278,7 @@
 .btn-resume:active { transform: translateY(-1px) scale(1); }
 
 /* Demo / live site button */
-.project-links { margin-top: 1.25rem; }
+.project-links { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
 .project-demo-btn {
     display: inline-flex;
