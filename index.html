@@ -704,36 +704,34 @@
                     <article class="project-card">
                         <header class="project-header">
                             <div class="project-logo">
-                                    <a href="https://bet-nrfi.vercel.app/" target="_blank" rel="noopener" aria-label="BET-NRFI / BET-YRFI">
-                                        <img src="assets/images/logos/yrfi.png" alt="BET-NRFI / BET-YRFI Logo" width="54" height="54">
+                                    <a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" aria-label="SHARPRFI">
+                                        <img src="assets/images/logos/sharprfi.png" alt="SHARPRFI Logo" width="54" height="54">
                                     </a>
                             </div>
                             <div class="project-title">
-                                <h3><a href="https://bet-nrfi.vercel.app/" target="_blank" rel="noopener" class="project-link">BET-NRFI / BET-YRFI</a></h3>
+                                <h3><a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" class="project-link">SHARPRFI</a></h3>
                                 <p class="project-affiliation">Personal Project</p>
-                                <p class="project-period">Apr 2026</p>
+                                <p class="project-period">Apr 2026 – Present</p>
                             </div>
                         </header>
                         <div class="project-details">
-                            <p class="project-description">A pair of MLB first-inning betting research tools — BET-NRFI and BET-YRFI — built on the same Poisson model and data pipeline but targeting opposite sides of the same market. BET-NRFI evaluates the probability that the first inning is scoreless; BET-YRFI evaluates the probability that at least one run scores. Each outputs a probability for its target outcome and the minimum American odds needed for a positive-expected-value bet on that side, with color gradients and result semantics inverted between the two. The underlying model estimates expected first-inning runs (λ) per half-inning using a Poisson distribution, factoring in stabilized pitcher FIP, strikeout rate, Baseball Savant barrel and hard-hit rates, team on-base percentage, confirmed top-of-order OBP, park factor, and real-time weather from Open-Meteo. An early-season stabilization taper runs from 1.75× on March 15 down to 1.00× by July 1 to account for small sample noise. Tapping any matchup expands a full model breakdown showing top-5 projected batters per team with stabilized OBP and PA, per-factor multiplier chips for each pitcher and lineup, and venue and weather impact. The slate auto-refreshes every five minutes, groups games into Upcoming, In Progress, and Settled states, and renders a ranked table on desktop with a card-based mobile layout. Preferences for temperature unit, wind unit, odds format, and timezone persist to localStorage.</p>
+                            <p class="project-description">An MLB first-inning betting research tool covering both sides of the market — NRFI (scoreless first inning) and YRFI (at least one run) — behind a single header toggle that flips probabilities, break-even odds, sort order, color semantics, and methodology copy between the two views. Originally launched as two mirrored sites (BET-NRFI and BET-YRFI) and later merged and upgraded to a dual-engine model. Engine one estimates expected first-inning runs (λ) per half-inning with a Poisson distribution over stabilized pitcher FIP, strikeout rate, Baseball Savant barrel rate, team and confirmed top-of-order OBP, park factor, and real-time Open-Meteo weather, with an early-season stabilization taper for small-sample noise. Engine two — a batter-level Monte Carlo simulation developed in collaboration with Francisco Renteria Nevarez — replays the first inning 10,000 times per game from each confirmed batter's shrinkage-adjusted wOBA, platoon splits against the opposing starter's handedness, and the starter's OBP-allowed, using a deterministic per-game seed. The headline probability is a 50/50 blend of the two engines, selected by a 1,344-game backtest in which the blend beat either engine alone on Brier score. Tapping any matchup expands a full breakdown showing both engines side by side, per-factor multiplier chips, projected batters with stabilized OBP and PA, venue and weather impact, and a bet-value calculator that converts user-entered American odds into implied probability, expected value per unit, and a color-banded verdict. The slate auto-refreshes every five minutes, groups games into Upcoming, In Progress, and Settled states, and renders a ranked desktop table with a card-based mobile layout; preferences persist to localStorage.</p>
                             <div class="project-skills">
                                 <span class="skill-tag" data-tooltip="React framework with App Router for full-stack server and client components">Next.js</span>
                                 <span class="skill-tag" data-tooltip="JavaScript library for building component-driven user interfaces">React</span>
                                 <span class="skill-tag" data-tooltip="Utility-first CSS framework for rapid UI development">Tailwind CSS</span>
                                 <span class="skill-tag" data-tooltip="Statically typed superset of JavaScript for safer, more maintainable code">TypeScript</span>
                                 <span class="skill-tag" data-tooltip="Fast, client-side math rendering library used for the Poisson model formula blocks in the methodology view">KaTeX</span>
-                                <span class="skill-tag" data-tooltip="Official MLB data source providing schedules, starting pitchers, team OBP, and boxscore data">MLB Stats API</span>
+                                <span class="skill-tag" data-tooltip="Batter-level first-inning simulation (10,000 seeded iterations per game) blended 50/50 with the Poisson engine, validated by a 1,344-game backtest">Monte Carlo</span>
+                                <span class="skill-tag" data-tooltip="Official MLB data source providing schedules, starting pitchers, team OBP, per-batter stats, and handedness data">MLB Stats API</span>
                                 <span class="skill-tag" data-tooltip="MLB's advanced stats platform providing pitcher barrel rate and hard-hit rate via season CSV">Baseball Savant</span>
                                 <span class="skill-tag" data-tooltip="Free weather API providing temperature, wind speed, and direction per venue for forecast and historical games">Open-Meteo</span>
                                 <span class="skill-tag" data-tooltip="Vercel's Redis-compatible key-value store used for caching model output and Savant data">Vercel KV</span>
                                 <span class="skill-tag" data-tooltip="Cloud platform for deploying and hosting Next.js applications">Vercel</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://bet-nrfi.vercel.app/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    BET-NRFI <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                                <a href="https://bet-yrfi.vercel.app/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    BET-YRFI <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                <a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" class="project-demo-btn">
+                                    SHARPRFI <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
