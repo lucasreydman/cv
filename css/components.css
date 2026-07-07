@@ -114,29 +114,41 @@
 
 .index-row {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) auto auto;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.75fr) auto auto;
     align-items: baseline;
-    gap: 1.5rem;
-    padding: 1.4rem 0;
+    gap: 0.35rem 2.25rem;
+    padding: 1.9rem 0.5rem;
     border-top: 1px solid var(--border);
-    transition: opacity 0.25s ease;
+    /* no `opacity` transition here: GSAP owns opacity for the scroll reveal,
+       and a CSS transition on it poisons ScrollTrigger's refresh measurements */
+    transition: background 0.3s ease, filter 0.3s ease;
+}
+
+a.index-row:hover {
+    background: rgba(236, 234, 229, 0.035);
 }
 
 a.index-row:hover .index-name { color: var(--ember); }
-a.index-row:hover .index-go { transform: translate(3px, -3px); }
+a.index-row:hover .index-go {
+    transform: translate(4px, -4px);
+    color: var(--ember);
+}
 
-.index-list:hover .index-row:not(:hover) { opacity: 0.45; }
+.index-list:hover .index-row:not(:hover) { filter: brightness(0.55); }
 
 .index-name {
     font-family: var(--font-display);
-    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
     font-weight: 600;
+    line-height: 1.15;
     transition: color 0.25s ease;
 }
 
 .index-desc {
     color: var(--text-2);
-    font-size: 0.95rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    max-width: 52ch;
 }
 
 .index-year {
@@ -146,15 +158,17 @@ a.index-row:hover .index-go { transform: translate(3px, -3px); }
 }
 
 .index-go {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--text-2);
-    transition: transform 0.3s var(--ease-out);
+    transition: transform 0.3s var(--ease-out), color 0.25s ease;
+    min-width: 1.1rem;
 }
 
 @media (max-width: 767px) {
     .index-row {
-        grid-template-columns: 1fr auto;
-        row-gap: 0.25rem;
+        grid-template-columns: 1fr auto auto;
+        row-gap: 0.4rem;
+        padding: 1.5rem 0.25rem;
     }
     .index-desc { grid-column: 1 / -1; }
 }

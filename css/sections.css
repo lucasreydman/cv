@@ -53,7 +53,7 @@
 .work-intro { padding-bottom: 0; }
 
 .scene-work {
-    min-height: 86dvh;
+    min-height: 76dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -141,16 +141,44 @@
     white-space: nowrap;
 }
 
+.exp-org {
+    grid-column: 1;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 0.1rem;
+}
+
+.exp-org a {
+    border-bottom: 1px solid var(--border-strong);
+    transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.exp-org a:hover { color: var(--ember); border-color: var(--ember); }
+
 .exp-detail {
     grid-column: 1;
     color: var(--text-2);
-    max-width: 62ch;
+    max-width: 68ch;
     font-size: 0.98rem;
+    margin-top: 0.5rem;
 }
 
-.exp-detail .exp-company { color: var(--text); font-weight: 500; }
+.exp-detail li {
+    padding: 0.28rem 0 0.28rem 1.2rem;
+    position: relative;
+}
 
-.incoming-badge {
+.exp-detail li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--ember);
+}
+
+.role-badge {
     font-family: var(--font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.14em;
@@ -161,16 +189,6 @@
     white-space: nowrap;
 }
 
-.exp-earlier {
-    margin-top: 2.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    line-height: 2;
-    color: var(--text-3);
-    max-width: 70ch;
-}
-
-.exp-earlier .mono-stat { color: var(--text-2); }
 
 /* ── ABOUT ─────────────────────────────────────────────────── */
 
@@ -196,12 +214,8 @@
 }
 
 .about-photo img {
-    filter: grayscale(0.92) brightness(0.96)
-            drop-shadow(0 30px 70px rgba(255, 77, 0, 0.16));
-    transition: filter 0.6s ease;
+    filter: drop-shadow(0 30px 70px rgba(255, 77, 0, 0.16));
 }
-
-.about-photo:hover img { filter: grayscale(0) brightness(1); }
 
 .about-photo figcaption {
     margin-top: 1rem;

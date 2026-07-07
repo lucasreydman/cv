@@ -52,17 +52,23 @@ Script order in `index.html` matters: GSAP/ScrollTrigger/Lenis load as classic `
 
 Dark only — there is **no light theme and no theme toggle**. Radius 0 everywhere (sharp editorial system). Mono type for numbers/labels is the visual signature.
 
+## Positioning
+
+The site is **promotional for Lucas's freelance work as an agentic developer** — hero
+tagline, About, contact pitch, and all meta/OG copy carry that framing. FBI Basketball
+(client work, fbi-basketball.com) leads the projects section as the proof point.
+
 ## Scenes (in order)
 
 | Scene | Notes |
 |---|---|
-| Hero | Name at viewport scale (solid line 1, stroked line 2), mono status line, one identity sentence, resume CTA |
-| Selected work | SHARPRFI, Pride STEM Canada, QuickCash as ~86vh scenes (2-sentence copy + mono stat chips), then "More work" index rows |
-| Experience | Big-type list: 5 featured roles + one-line "Earlier" footnote |
-| About | First-person copy + duotone photo (grayscale, colors on hover) |
-| Credentials | Education + honors merged; GPA 3.91 and Dean's List ×6 as big stats |
-| Capabilities | Build / AI / Lead rows, 6 curated items each |
-| Contact | "Let's talk." + copy-email button + LinkedIn/GitHub + form |
+| Hero | Name at viewport scale (solid line 1, stroked line 2), status `Dalhousie Computer Science & Management`, freelance-agentic tagline, resume CTA |
+| Projects | FBI Basketball (client work, first), SHARPRFI, Pride STEM Canada as ~76vh scenes (fuller copy + factual chips only), then a 5-row "More projects" index (MLB BvP, Fantasy Draft Lottery Simulator, QuickCash, wdinomf?, Tic Tec Toe) |
+| Experience | Big-type list: RBC GFT (Current badge, bullets), RBC FSS, Torinit, Panther, Mirabella — each with 3-4 detail bullets and linked company names |
+| About | First-person copy (freelance framing) + full-color photo |
+| Credentials | Education + honors merged; GPA 3.91 and Dean's List ×6 as big stats; coursework detail line |
+| Capabilities | Build / AI / Lead / Tools rows, 8-10 items each |
+| Contact | "Let's talk." + freelance pitch line + copy-email + LinkedIn/GitHub + form |
 
 ## Key Behaviors
 
@@ -70,6 +76,11 @@ Dark only — there is **no light theme and no theme toggle**. Radius 0 everywhe
 - **Fallback ladder** — (1) no WebGL/CDN failure → `html.no-webgl` static CSS gradients; (2) `prefers-reduced-motion` → still shader frame, no GSAP animation; (3) mobile → cheaper shader; (4) no JS → semantic readable page. Content is never hidden by CSS — GSAP sets initial states, so a dead CDN degrades gracefully.
 - **ui.js proxy** — the scroll module receives a forwarding proxy for the atmosphere so OGL loading never blocks choreography or first paint.
 - **Contact form** — posts JSON to `/api/contact` (unchanged serverless handler).
+- **GSAP owns `opacity` on revealed elements** — never add a CSS `transition` that
+  includes `opacity` to anything animated by a scroll reveal. A lagging CSS transition
+  poisons ScrollTrigger's refresh (revert → measure → re-apply) cycle, and the from()
+  tween records ~0 as the element's natural opacity, leaving it invisible forever.
+  Use `filter: brightness()` for hover-dim effects instead (see `.index-row`).
 
 ## Accessibility (Lighthouse a11y = 1.0 — keep it there)
 
