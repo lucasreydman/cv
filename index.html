@@ -70,14 +70,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 
     <!-- Styles (parallel links; css/main.css remains as an aggregator for tooling) -->
-    <link rel="stylesheet" href="css/base.css?v=14">
-    <link rel="stylesheet" href="css/layout.css?v=14">
-    <link rel="stylesheet" href="css/components.css?v=14">
-    <link rel="stylesheet" href="css/sections.css?v=14">
+    <link rel="stylesheet" href="css/base.css?v=15">
+    <link rel="stylesheet" href="css/layout.css?v=15">
+    <link rel="stylesheet" href="css/components.css?v=15">
+    <link rel="stylesheet" href="css/sections.css?v=15">
 </head>
 <body>
 
@@ -115,7 +114,7 @@
 
         <!-- ═══ HERO ═══════════════════════════════════════════ -->
         <section id="hero" class="hero">
-            <p class="hero-status mono-label">Dalhousie Computer Science &amp; Management</p>
+            <p class="hero-status meta">Dalhousie Computer Science &amp; Management</p>
             <h1 class="hero-name">
                 <span class="line line-1">Lucas</span>
                 <span class="line line-2">Reydman</span>
@@ -137,56 +136,77 @@
 
             <!-- FBI Basketball -->
             <article class="scene scene-work">
-                <div class="work-meta">
-                    <img class="logo-mark" src="assets/images/logos/fbi_basketball.png" alt="" width="32" height="32" loading="lazy">
-                    <span class="mono-label">Client work · Live product</span>
-                </div>
-                <h3 class="work-name"><a href="https://fbi-basketball.com/" target="_blank" rel="noopener">FBI Basketball</a></h3>
-                <div class="work-body">
-                    <p class="work-desc">The subscription platform behind FBI Basketball, a fantasy hoops brand serving points and category leagues. Consensus redraft rankings blend expert boards into one list, a <strong>trade calculator</strong> evaluates any deal on demand, and managers import their <strong>Sleeper or Yahoo leagues</strong> for advice tailored to their actual rosters. Role-gated access runs on Supabase auth, <strong>Stripe</strong> handles subscriptions, and a Discord bot ties membership to the community. Built and shipped solo, agentic-first, from pitch artifact to production.</p>
-                    <div class="chips">
-                        <span class="chip"><strong>Built solo</strong>, pitch to production</span>
-                        <span class="chip"><strong>Stripe</strong> subscriptions</span>
-                        <span class="chip"><strong>Sleeper + Yahoo</strong> imports</span>
+                <div class="work-grid">
+                    <div class="work-text">
+                        <div class="work-meta">
+                            <img class="logo-mark" src="assets/images/logos/fbi_basketball.png" alt="" width="28" height="28" loading="lazy">
+                            <span class="meta">Client work, live product</span>
+                        </div>
+                        <h3 class="work-name"><a href="https://fbi-basketball.com/" target="_blank" rel="noopener">FBI Basketball</a></h3>
+                        <p class="work-desc">The subscription platform behind FBI Basketball, a fantasy hoops brand. Consensus redraft rankings blend expert boards into one list, a <strong>trade calculator</strong> evaluates any deal on demand, and managers import their <strong>Sleeper or Yahoo leagues</strong> for advice on their actual rosters. Supabase auth gates roles, <strong>Stripe</strong> handles subscriptions, and a Discord bot ties membership to the community. Built and shipped solo, from pitch artifact to production.</p>
+                        <div class="stats work-body-stats">
+                            <p class="stat"><b>Solo</b><span>pitch to production</span></p>
+                            <p class="stat"><b>Stripe</b><span>subscriptions</span></p>
+                            <p class="stat"><b>2</b><span>league imports</span></p>
+                        </div>
+                        <p class="tags">Next.js 16, React 19, TypeScript, Supabase, Stripe, Vercel</p>
+                        <a href="https://fbi-basketball.com/" target="_blank" rel="noopener" class="link">See it live <span class="arrow" aria-hidden="true">&#8599;</span></a>
                     </div>
-                    <p class="tags">Next.js 16 / React 19 / TypeScript / Supabase / Stripe / Tailwind / Vercel</p>
-                    <a href="https://fbi-basketball.com/" target="_blank" rel="noopener" class="arrow-link">See it live <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                    <figure class="work-media">
+                        <div class="shot">
+                            <img src="assets/images/screens/fbi.webp" alt="FBI Basketball landing page" width="1600" height="1000" loading="lazy">
+                        </div>
+                    </figure>
                 </div>
             </article>
 
             <!-- SHARPRFI -->
             <article class="scene scene-work alt">
-                <div class="work-meta">
-                    <img class="logo-mark" src="assets/images/logos/sharprfi.png" alt="" width="32" height="32" loading="lazy">
-                    <span class="mono-label">Personal project · 2026</span>
-                </div>
-                <h3 class="work-name"><a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener">SHARPRFI</a></h3>
-                <div class="work-body">
-                    <p class="work-desc">MLB first-inning betting research covering both sides of the NRFI and YRFI market behind a single toggle that flips probabilities, break-even odds, and methodology between views. One engine estimates expected first-inning runs with a <strong>Poisson model</strong> over stabilized pitcher and lineup stats, park factors, and live weather. A second replays the first inning 10,000 times per game with a batter-level <strong>Monte Carlo simulation</strong>. The headline number blends both engines, validated by a 1,344-game backtest, and a bet-value calculator turns any posted odds into implied probability and expected value.</p>
-                    <div class="chips">
-                        <span class="chip"><strong>10,000</strong> sims per game</span>
-                        <span class="chip"><strong>1,344-game</strong> backtest</span>
+                <div class="work-grid">
+                    <div class="work-text">
+                        <div class="work-meta">
+                            <img class="logo-mark" src="assets/images/logos/sharprfi.png" alt="" width="28" height="28" loading="lazy">
+                            <span class="meta">Personal project, 2026</span>
+                        </div>
+                        <h3 class="work-name"><a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener">SHARPRFI</a></h3>
+                        <p class="work-desc">MLB first-inning betting research covering both sides of the NRFI and YRFI market behind one toggle that flips probabilities, break-even odds, and methodology between views. One engine estimates expected first-inning runs with a <strong>Poisson model</strong> over stabilized pitcher and lineup stats, park factors, and live weather. A second replays the first inning 10,000 times per game with a batter-level <strong>Monte Carlo simulation</strong>. The headline number blends both, and a bet-value calculator turns posted odds into expected value.</p>
+                        <div class="stats work-body-stats">
+                            <p class="stat"><b>10,000</b><span>simulations per game</span></p>
+                            <p class="stat"><b>1,344</b><span>games backtested</span></p>
+                        </div>
+                        <p class="tags">Next.js, TypeScript, Tailwind, Vercel KV, MLB Stats API, Open-Meteo</p>
+                        <a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" class="link">See it live <span class="arrow" aria-hidden="true">&#8599;</span></a>
                     </div>
-                    <p class="tags">Next.js / TypeScript / Tailwind / Vercel KV / MLB Stats API / Open-Meteo</p>
-                    <a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" class="arrow-link">See it live <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                    <figure class="work-media">
+                        <div class="shot">
+                            <img src="assets/images/screens/sharprfi.webp" alt="SHARPRFI slate view with per-game YRFI probabilities" width="1600" height="1000" loading="lazy">
+                        </div>
+                    </figure>
                 </div>
             </article>
 
             <!-- Pride STEM Canada -->
             <article class="scene scene-work">
-                <div class="work-meta">
-                    <img class="logo-mark" src="assets/images/logos/pride_stem_canada.png" alt="" width="32" height="32" loading="lazy">
-                    <span class="mono-label">Senior developer · CSCI 3691</span>
-                </div>
-                <h3 class="work-name"><a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener">Pride STEM Canada</a></h3>
-                <div class="work-body">
-                    <p class="work-desc">The public home of Pride STEM Canada's national 2SLGBTQ+ in STEM conference: registration, event schedule, presentation submissions, sponsorship, and governance for delegates across the country. As senior developer on the team I led the architecture and owned the hardest paths, building <strong>Stripe-integrated registration</strong> across multiple delegate tiers, <strong>Firebase</strong> auth and real-time content management, and the Resend transactional email pipeline, all deployed through GitLab CI/CD.</p>
-                    <div class="chips">
-                        <span class="chip"><strong>250+</strong> delegates</span>
-                        <span class="chip"><strong>Multi-tier</strong> Stripe registration</span>
+                <div class="work-grid">
+                    <div class="work-text">
+                        <div class="work-meta">
+                            <img class="logo-mark" src="assets/images/logos/pride_stem_canada.png" alt="" width="28" height="28" loading="lazy">
+                            <span class="meta">Senior developer, team project</span>
+                        </div>
+                        <h3 class="work-name"><a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener">Pride STEM Canada</a></h3>
+                        <p class="work-desc">The public home of Pride STEM Canada's national 2SLGBTQ+ in STEM conference: registration, event schedule, presentation submissions, sponsorship, and governance for delegates across the country. As senior developer I led the architecture and owned the hardest paths, building <strong>Stripe-integrated registration</strong> across multiple delegate tiers, <strong>Firebase</strong> auth and real-time content management, and the Resend transactional email pipeline, all deployed through GitLab CI/CD.</p>
+                        <div class="stats work-body-stats">
+                            <p class="stat"><b>250+</b><span>delegates served</span></p>
+                            <p class="stat"><b>Multi-tier</b><span>Stripe registration</span></p>
+                        </div>
+                        <p class="tags">Next.js, React, Framer Motion, Firebase, Resend, GitLab CI/CD</p>
+                        <a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener" class="link">See it live <span class="arrow" aria-hidden="true">&#8599;</span></a>
                     </div>
-                    <p class="tags">Next.js / React / Framer Motion / Firebase / Resend / GitLab CI/CD</p>
-                    <a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener" class="arrow-link">See it live <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                    <figure class="work-media">
+                        <div class="shot">
+                            <img src="assets/images/screens/psc.webp" alt="Pride STEM Canada conference site" width="1600" height="1000" loading="lazy">
+                        </div>
+                    </figure>
                 </div>
             </article>
 
@@ -330,18 +350,18 @@
 
             <div class="cred-main">
                 <div class="cred-school">
-                    <span class="mono-label">Dalhousie University · 2023 to 2027</span>
+                    <span class="meta">Dalhousie University · 2023 to 2027</span>
                     <h3 class="cred-degree">Applied Computer Science</h3>
                     <p class="cred-inst">Bachelor's degree with a Certificate in Managing Data and Information. Coursework spans full-stack development, databases, UI/UX, security, and systems design, paired with management courses in project management, communications, and organizational leadership, with cross-year software teams shipping real projects for non-profit clients.</p>
                 </div>
                 <div class="cred-stats">
                     <div class="big-stat">
                         <span class="big-stat-num">3.91</span>
-                        <span class="mono-label">Cumulative GPA</span>
+                        <span class="meta">Cumulative GPA</span>
                     </div>
                     <div class="big-stat">
                         <span class="big-stat-num"><em>&times;</em>6</span>
-                        <span class="mono-label">Dean's List</span>
+                        <span class="meta">Dean's List</span>
                     </div>
                 </div>
             </div>
@@ -476,11 +496,13 @@
     </main>
 
     <footer class="footer">
+        <div class="footer-inner">
         <p class="cv-note"><span lang="la">curriculum vitae</span> · <em>n. &ldquo;course of life&rdquo;</em></p>
         <div class="footer-meta">
             <span>&copy; 2026 Lucas Reydman</span>
             <a href="https://github.com/lucasreydman" target="_blank" rel="noopener">GitHub</a>
             <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
         </div>
     </footer>
 
@@ -494,7 +516,7 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
 
     <!-- Main modules -->
-    <script type="module" src="js/ui.js?v=2"></script>
+    <script type="module" src="js/ui.js?v=3"></script>
 
 </body>
 </html>

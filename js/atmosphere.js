@@ -1,8 +1,12 @@
 /**
- * atmosphere.js — WebGL ink/smoke background (Ink & Ember)
+ * atmosphere.js — data-field background (Ink & Ember v2)
  *
- * One fullscreen domain-warped FBM shader on an OGL triangle.
- * Interface:
+ * 1,344 drifting points, one per game in the SHARPRFI backtest — a
+ * background derived from Lucas's actual work instead of generic smoke.
+ * Mostly faint steel; a small fraction burn ember. Points drift slowly,
+ * shy away from the cursor, and warm slightly as the page scrolls.
+ *
+ * Interface (unchanged):
  *   const atmo = await initAtmosphere(canvas);
  *   atmo.setScrollProgress(p);   // 0..1 page progress
  *   atmo.setPointer(x, y, v);    // client px + velocity px/frame
@@ -10,110 +14,90 @@
  * Returns null when WebGL or the OGL CDN is unavailable.
  */
 
-// jsDelivr's +esm endpoint serves OGL as a single pre-bundled module
-// (the raw src/index.js entry fans out into ~30 sequential sub-imports)
 const OGL_URL = 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/+esm';
 
+const POINT_COUNT = 1344; // the backtest
+
 const VERTEX = /* glsl */ `
-    attribute vec2 uv;
-    attribute vec2 position;
-    varying vec2 vUv;
+    attribute vec3 position;   // x, y in [-1,1] field space; z = depth 0..1
+    attribute vec4 seed;       // per-point drift phases + ember flag in w
+
+    uniform float uTime;
+    uniform vec2  uRes;
+    uniform float uScroll;
+    uniform vec2  uPointer;    // clip-ish space (-1..1, y up)
+    uniform float uPointerStrength;
+
+    varying float vEmber;
+    varying float vAlpha;
+
     void main() {
-        vUv = uv;
-        gl_Position = vec4(position, 0.0, 1.0);
+        float depth = position.z;              // 0 far .. 1 near
+        vec2 p = position.xy;
+
+        // Slow individual drift
+        float t = uTime * 0.05;
+        p.x += sin(t * seed.x + seed.y * 6.2831) * 0.035 * (0.4 + depth);
+        p.y += cos(t * seed.y + seed.x * 6.2831) * 0.035 * (0.4 + depth);
+
+        // The whole field rises very slowly with scroll (parallax by depth)
+        p.y += uScroll * (0.22 + depth * 0.5);
+        p.y = mod(p.y + 1.0, 2.0) - 1.0;
+
+        // Cursor: points within reach ease away
+        vec2 toPoint = p - uPointer;
+        float d = length(toPoint * vec2(uRes.x / uRes.y, 1.0));
+        float push = exp(-d * d * 14.0) * 0.09 * uPointerStrength;
+        p += normalize(toPoint + 0.0001) * push;
+
+        gl_Position = vec4(p, 0.0, 1.0);
+        gl_PointSize = (0.8 + depth * 1.8) * (uRes.y / 900.0);
+
+        vEmber = seed.w;
+        // Whisper-quiet: near points faintly brighter, ember slightly warmer
+        vAlpha = 0.03 + depth * 0.08 + seed.w * 0.12;
     }
 `;
 
 const FRAGMENT = /* glsl */ `
     precision highp float;
 
-    uniform float uTime;
-    uniform vec2  uRes;
     uniform float uScroll;
-    uniform vec2  uPointer;
-    uniform float uPointerStrength;
 
-    varying vec2 vUv;
-
-    float hash(vec2 p) {
-        p = fract(p * vec2(234.34, 435.345));
-        p += dot(p, p + 34.23);
-        return fract(p.x * p.y);
-    }
-
-    float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-        f = f * f * (3.0 - 2.0 * f);
-        float a = hash(i);
-        float b = hash(i + vec2(1.0, 0.0));
-        float c = hash(i + vec2(0.0, 1.0));
-        float d = hash(i + vec2(1.0, 1.0));
-        return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-    }
-
-    float fbm(vec2 p) {
-        float v = 0.0;
-        float amp = 0.55;
-        mat2 rot = mat2(0.8, 0.6, -0.6, 0.8);
-        for (int i = 0; i < 5; i++) {
-            v += amp * noise(p);
-            p = rot * p * 2.02;
-            amp *= 0.5;
-        }
-        return v;
-    }
+    varying float vEmber;
+    varying float vAlpha;
 
     void main() {
-        float aspect = uRes.x / uRes.y;
-        vec2 uv = vUv;
-        vec2 p = vec2(uv.x * aspect, uv.y) * 2.4;
+        // Round point with soft edge
+        vec2 c = gl_PointCoord - 0.5;
+        float r = length(c);
+        float disc = smoothstep(0.5, 0.28, r);
+        if (disc < 0.01) discard;
 
-        float t = uTime * 0.032;
+        vec3 steel = vec3(0.545, 0.608, 0.706);
+        vec3 ember = vec3(1.0, 0.36, 0.05);
 
-        // Pointer influence: local warp + glow
-        vec2 pointer = vec2(uPointer.x * aspect, uPointer.y);
-        float pd = distance(vec2(uv.x * aspect, uv.y), pointer);
-        float influence = exp(-pd * pd * 9.0) * uPointerStrength;
+        // Ember-flagged points are always warm; the rest warm slightly
+        // as the page progresses.
+        float warmth = max(vEmber, smoothstep(0.55, 1.0, uScroll) * 0.35);
+        vec3 color = mix(steel, ember, warmth);
 
-        // Domain warp (iq style)
-        vec2 q = vec2(fbm(p + vec2(0.0, 0.0) + t * 0.9),
-                      fbm(p + vec2(5.2, 1.3) - t * 0.6));
-        vec2 r = vec2(fbm(p + 2.6 * q + vec2(1.7, 9.2) + t * 0.5),
-                      fbm(p + 2.6 * q + vec2(8.3, 2.8) - t * 0.4));
-        r += influence * 0.7;
-
-        float f = fbm(p + 2.2 * r);
-        f = pow(smoothstep(0.18, 0.98, f), 1.55);
-
-        // Scroll-linked palette: steel blue -> ember
-        vec3 cold  = vec3(0.27, 0.35, 0.47);
-        vec3 ember = vec3(1.00, 0.30, 0.00);
-        vec3 tint  = mix(cold, ember, smoothstep(0.3, 0.95, uScroll));
-
-        float intensity = mix(0.55, 0.34, smoothstep(0.0, 0.45, uScroll));
-        intensity = mix(intensity, 0.48, smoothstep(0.55, 1.0, uScroll));
-
-        // Late in the page, gather the glow toward the bottom of the viewport
-        float gather = mix(1.0, 0.45 + smoothstep(1.0, 0.15, uv.y) * 0.6,
-                           smoothstep(0.6, 1.0, uScroll));
-
-        vec3 base = vec3(0.023, 0.023, 0.031);
-        vec3 color = base + tint * f * intensity * gather;
-
-        // Pointer glow
-        color += tint * influence * 0.35;
-
-        // Vignette
-        float vig = 1.0 - 0.4 * length(uv - vec2(0.5, 0.45));
-        color *= vig;
-
-        // Dither to kill banding
-        color += (hash(gl_FragCoord.xy) - 0.5) / 160.0;
-
-        gl_FragColor = vec4(color, 1.0);
+        // Canvas is premultiplied-alpha: multiply color by alpha or the
+        // compositor renders every point at full brightness.
+        float a = disc * vAlpha;
+        gl_FragColor = vec4(color * a, a);
     }
 `;
+
+// Deterministic pseudo-random (no Math.random needed, stable field)
+function mulberry(seed) {
+    return function () {
+        seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+        let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
 
 export async function initAtmosphere(canvas) {
     if (!canvas) return null;
@@ -125,18 +109,17 @@ export async function initAtmosphere(canvas) {
         return null;
     }
 
-    const { Renderer, Program, Mesh, Triangle, Vec2 } = ogl;
+    const { Renderer, Program, Mesh, Geometry, Vec2 } = ogl;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.innerWidth < 768;
-    const renderScale = isMobile ? 0.7 : 1;
 
     let renderer;
     try {
         renderer = new Renderer({
             canvas,
-            dpr: Math.min(window.devicePixelRatio || 1, 1.5) * renderScale,
-            alpha: false,
+            dpr: Math.min(window.devicePixelRatio || 1, 1.5),
+            alpha: true,
             antialias: false,
+            premultipliedAlpha: true,
             powerPreference: 'low-power',
         });
     } catch {
@@ -146,23 +129,46 @@ export async function initAtmosphere(canvas) {
     const gl = renderer.gl;
     if (!gl) return null;
 
-    const geometry = new Triangle(gl);
+    gl.clearColor(0, 0, 0, 0);
+
+    // Build the field
+    const rand = mulberry(1344);
+    const positions = new Float32Array(POINT_COUNT * 3);
+    const seeds = new Float32Array(POINT_COUNT * 4);
+    for (let i = 0; i < POINT_COUNT; i++) {
+        positions[i * 3 + 0] = rand() * 2 - 1;
+        positions[i * 3 + 1] = rand() * 2 - 1;
+        positions[i * 3 + 2] = rand();
+        seeds[i * 4 + 0] = 0.5 + rand() * 1.5;
+        seeds[i * 4 + 1] = 0.5 + rand() * 1.5;
+        seeds[i * 4 + 2] = rand();
+        seeds[i * 4 + 3] = rand() < 0.055 ? 1 : 0;   // ~74 ember points
+    }
+
+    const geometry = new Geometry(gl, {
+        position: { size: 3, data: positions },
+        seed: { size: 4, data: seeds },
+    });
+
     const program = new Program(gl, {
         vertex: VERTEX,
         fragment: FRAGMENT,
+        transparent: true,
+        depthTest: false,
         uniforms: {
             uTime:            { value: 0 },
             uRes:             { value: new Vec2(1, 1) },
             uScroll:          { value: 0 },
-            uPointer:         { value: new Vec2(0.5, 0.5) },
+            uPointer:         { value: new Vec2(0, 0) },
             uPointerStrength: { value: 0 },
         },
     });
-    const mesh = new Mesh(gl, { geometry, program });
+
+    const mesh = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
     // Smoothed state
     let scrollTarget = 0, scroll = 0;
-    let px = 0.5, py = 0.5, ptx = 0.5, pty = 0.5;
+    let px = 0, py = 0, ptx = 0, pty = 0;
     let strength = 0, strengthTarget = 0;
     let rafId = null;
     let running = false;
@@ -179,10 +185,10 @@ export async function initAtmosphere(canvas) {
         if (destroyed) return;
         rafId = requestAnimationFrame(frame);
 
-        scroll += (scrollTarget - scroll) * 0.045;
-        px += (ptx - px) * 0.06;
-        py += (pty - py) * 0.06;
-        strengthTarget *= 0.94;
+        scroll += (scrollTarget - scroll) * 0.05;
+        px += (ptx - px) * 0.08;
+        py += (pty - py) * 0.08;
+        strengthTarget *= 0.95;
         strength += (strengthTarget - strength) * 0.08;
 
         program.uniforms.uTime.value = now * 0.001;
@@ -206,9 +212,7 @@ export async function initAtmosphere(canvas) {
     }
 
     if (reducedMotion) {
-        // Render a single still frame; no animation loop.
-        program.uniforms.uTime.value = 40;
-        program.uniforms.uScroll.value = 0.3;
+        program.uniforms.uTime.value = 120;
         renderer.render({ scene: mesh });
     } else {
         start();
@@ -222,9 +226,9 @@ export async function initAtmosphere(canvas) {
             scrollTarget = Math.min(Math.max(p, 0), 1);
         },
         setPointer(clientX, clientY, velocity) {
-            ptx = clientX / window.innerWidth;
-            pty = 1 - clientY / window.innerHeight;
-            strengthTarget = Math.min(strengthTarget + velocity * 0.012, 1);
+            ptx = (clientX / window.innerWidth) * 2 - 1;
+            pty = -((clientY / window.innerHeight) * 2 - 1);
+            strengthTarget = Math.min(strengthTarget + velocity * 0.02, 1);
         },
         destroy() {
             destroyed = true;

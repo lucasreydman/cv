@@ -27,12 +27,12 @@
     height: var(--nav-h);
     display: flex;
     align-items: center;
-    transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+    transition: background 0.35s ease, border-color 0.35s ease;
     border-bottom: 1px solid transparent;
 }
 
 .navbar.scrolled {
-    background: rgba(6, 6, 8, 0.72);
+    background: rgba(6, 6, 8, 0.78);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom-color: var(--border);
@@ -40,17 +40,19 @@
 
 .navbar .nav-inner {
     width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 var(--gutter);
+    padding-inline: var(--pad-x);
 }
 
 .nav-brand {
-    font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.35rem;
-    letter-spacing: -0.02em;
+    font-stretch: 118%;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
     display: inline-flex;
     align-items: center;
     min-height: 44px;
@@ -61,14 +63,12 @@
 .nav-links {
     display: flex;
     align-items: center;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
+    gap: clamp(1.1rem, 2.6vw, 2.2rem);
 }
 
 .nav-links a {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 500;
     color: var(--text-2);
     display: inline-flex;
     align-items: center;
@@ -79,8 +79,20 @@
 .nav-links a:hover,
 .nav-links a.active { color: var(--text); }
 
-.nav-links a.nav-resume { color: var(--ember-soft); }
-.nav-links a.nav-resume:hover { color: var(--ember); }
+.nav-links a.nav-resume {
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 0.3rem 0.9rem;
+    min-height: 36px;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.nav-links a.nav-resume:hover {
+    background: var(--text);
+    color: #060608;
+    border-color: var(--text);
+}
 
 /* ── Hamburger (mobile) ────────────────────────────────────── */
 
@@ -97,7 +109,7 @@
 
 .nav-toggle span {
     display: block;
-    width: 24px;
+    width: 22px;
     height: 1.5px;
     background: var(--text);
     transition: transform 0.35s var(--ease-out), opacity 0.25s ease;
@@ -119,14 +131,12 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        gap: 2.25rem;
-        padding: 0 var(--gutter);
-        background: rgba(6, 6, 8, 0.96);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        gap: 1.9rem;
+        padding: 0 var(--pad-x);
+        background: rgba(6, 6, 8, 0.97);
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.35s ease, visibility 0.35s ease;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .nav-links.open {
@@ -135,65 +145,66 @@
     }
 
     .nav-links a {
-        font-family: var(--font-display);
-        font-size: clamp(2rem, 9vw, 2.75rem);
-        font-weight: 600;
-        letter-spacing: -0.01em;
-        text-transform: none;
+        font-size: clamp(1.8rem, 8vw, 2.4rem);
+        font-weight: 640;
+        font-stretch: 112%;
+        letter-spacing: -0.02em;
         color: var(--text);
     }
 
-    .nav-links a.nav-resume { color: var(--ember); }
+    .nav-links a.nav-resume {
+        border: none;
+        padding: 0;
+        color: var(--ember);
+    }
+    .nav-links a.nav-resume:hover { background: none; color: var(--ember-soft); }
 }
 
 /* ── Section shells ────────────────────────────────────────── */
 
 .scene {
-    padding: var(--section-gap) var(--gutter);
-    max-width: 1500px;
-    margin: 0 auto;
-}
-
-.scene-full {
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: clamp(4.5rem, 10vh, 8rem) var(--pad-x);
+    max-width: 1360px;
+    margin-inline: auto;
 }
 
 .scene-heading {
-    font-size: clamp(2.1rem, 4.6vw, 3.8rem);
-    margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
-    max-width: 18ch;
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    margin-bottom: clamp(2rem, 5vh, 3.5rem);
+    max-width: 20ch;
 }
 
 /* ── Footer ────────────────────────────────────────────────── */
 
 .footer {
     border-top: 1px solid var(--border);
-    padding: 3rem var(--gutter) 3.5rem;
+    padding-block: 2.5rem;
+}
+
+.footer .footer-inner {
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: var(--pad-x);
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .footer .cv-note {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.875rem;
     color: var(--text-3);
 }
 
-.footer .cv-note em { color: var(--text-2); font-style: italic; }
+.footer .cv-note em { color: var(--text-2); }
 
 .footer .footer-meta {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.875rem;
     color: var(--text-3);
     display: flex;
     align-items: baseline;
-    gap: 1.75rem;
+    gap: 1.6rem;
 }
 
 .footer .footer-meta a {

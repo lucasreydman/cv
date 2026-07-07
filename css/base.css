@@ -1,16 +1,18 @@
 /* ═══════════════════════════════════════════════════════════════
-   BASE — Ink & Ember design tokens, reset, typography
+   BASE — Ink & Ember v2 (de-slop pass)
+   One typeface: Archivo variable (width axis carries the voice).
+   Numbers are tabular. No mono-caps labels. 2px radius system.
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
     /* Surfaces */
     --bg:        #060608;
-    --ink-2:     #0c0c11;
-    --ink-3:     #121218;
+    --ink-2:     #0d0d12;
+    --ink-3:     #14141a;
 
     /* Type */
     --text:      #eceae5;
-    --text-2:    #a8a8b0;
+    --text-2:    #a9a9b2;
     --text-3:    #8b8b95;
 
     /* Accent */
@@ -20,17 +22,16 @@
 
     /* Lines */
     --border:        rgba(236, 234, 229, 0.10);
-    --border-strong: rgba(236, 234, 229, 0.22);
+    --border-strong: rgba(236, 234, 229, 0.24);
 
-    /* Fonts */
-    --font-display: 'Clash Display', 'Syne', sans-serif;
-    --font-body:    'Satoshi', 'Inter', system-ui, sans-serif;
-    --font-mono:    'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+    /* One family, two voices via the width axis */
+    --font: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
 
     /* Rhythm */
-    --nav-h: 68px;
-    --gutter: clamp(1.25rem, 5vw, 5rem);
-    --section-gap: clamp(7rem, 16vh, 12rem);
+    --nav-h: 64px;
+    --radius: 2px;
+    --radius-media: 6px;
+    --pad-x: clamp(20px, 4.5vw, 56px);
 
     /* Motion */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -63,9 +64,10 @@ html.lenis, html.lenis body { height: auto; }
 body {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font-body);
+    font-family: var(--font);
     font-size: 1.0625rem;
-    line-height: 1.7;
+    line-height: 1.65;
+    font-variant-numeric: tabular-nums;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
@@ -90,30 +92,44 @@ ul, ol { list-style: none; }
     color: #060608;
 }
 
-/* ── Focus ─────────────────────────────────────────────────── */
-
 :focus-visible {
     outline: 2px solid var(--ember);
     outline-offset: 3px;
 }
 
-/* ── Typography ────────────────────────────────────────────── */
+/* ── Type voices ───────────────────────────────────────────── */
 
 h1, h2, h3 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    line-height: 1.02;
-    letter-spacing: -0.015em;
+    font-weight: 640;
+    font-stretch: 112%;
+    line-height: 1.04;
+    letter-spacing: -0.022em;
     text-wrap: balance;
 }
 
-.mono-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+/* Small metadata line: sentence case, quiet, no tracking games */
+.meta {
+    font-size: 0.875rem;
     font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
     color: var(--text-2);
+    letter-spacing: 0.01em;
+}
+
+.meta a { border-bottom: 1px solid var(--border-strong); }
+.meta a:hover { color: var(--ember); border-color: var(--ember); }
+
+/* ── Grid ──────────────────────────────────────────────────── */
+
+.wrap {
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: var(--pad-x);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(16px, 2.2vw, 36px);
 }
 
 /* ── Atmosphere canvas + fallback ──────────────────────────── */
@@ -127,30 +143,15 @@ h1, h2, h3 {
     pointer-events: none;
 }
 
-/* WebGL unavailable: layered still gradient in the same mood */
 html.no-webgl #atmosphere { display: none; }
 html.no-webgl body {
     background:
-        radial-gradient(120% 90% at 78% -10%, rgba(139, 155, 180, 0.14), transparent 55%),
-        radial-gradient(90% 70% at 12% 110%, rgba(255, 77, 0, 0.10), transparent 60%),
+        radial-gradient(110% 80% at 80% -20%, rgba(139, 155, 180, 0.08), transparent 55%),
         var(--bg);
     background-attachment: fixed;
 }
 
-/* Page content sits above the canvas */
 main, .navbar, .footer { position: relative; z-index: 1; }
-
-/* ── Grain ─────────────────────────────────────────────────── */
-
-body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    pointer-events: none;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
 
 /* ── Skip link ─────────────────────────────────────────────── */
 
@@ -159,19 +160,16 @@ body::after {
     top: -100px;
     left: 1rem;
     z-index: 200;
-    padding: 0.75rem 1.25rem;
+    padding: 0.7rem 1.1rem;
     background: var(--ember);
     color: #060608;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius);
     transition: top 0.2s ease;
 }
 
 .skip-link:focus { top: 1rem; }
-
-/* ── Screen-reader only ────────────────────────────────────── */
 
 .sr-only {
     position: absolute;
@@ -194,5 +192,5 @@ body::after {
         transition-duration: 0.01ms !important;
     }
 
-    body::after { display: none; }
+    
 }

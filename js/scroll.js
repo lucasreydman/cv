@@ -95,36 +95,36 @@ export function initScroll(atmosphere) {
 
     // ── Work scenes ─────────────────────────────────────────
     document.querySelectorAll('.scene-work').forEach((scene) => {
-        const name = scene.querySelector('.work-name');
-        const meta = scene.querySelector('.work-meta');
-        const bodyEls = scene.querySelectorAll('.work-desc, .chips, .tags, .arrow-link');
+        const textEls = scene.querySelectorAll('.work-meta, .work-name, .work-desc, .stats, .tags, .link');
+        const media = scene.querySelector('.work-media');
 
-        // Name parallax: drifts against scroll for depth
-        gsap.fromTo(name,
-            { yPercent: 16 },
-            {
-                yPercent: -8,
-                ease: 'none',
-                scrollTrigger: { trigger: scene, start: 'top bottom', end: 'bottom top', scrub: true },
-            }
-        );
-
-        gsap.from(meta, {
+        gsap.from(textEls, {
             opacity: 0,
-            y: 16,
-            duration: 0.6,
+            y: 22,
+            duration: 0.7,
+            stagger: 0.07,
             ease: 'power2.out',
-            scrollTrigger: { trigger: scene, start: 'top 72%' },
+            scrollTrigger: { trigger: scene, start: 'top 70%' },
         });
 
-        gsap.from(bodyEls, {
-            opacity: 0,
-            y: 28,
-            duration: 0.8,
-            stagger: 0.09,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: scene, start: 'top 62%' },
-        });
+        if (media) {
+            gsap.from(media, {
+                opacity: 0,
+                y: 36,
+                duration: 0.9,
+                ease: 'power2.out',
+                scrollTrigger: { trigger: scene, start: 'top 70%' },
+            });
+            // Slight depth: the shot drifts a touch slower than the page
+            gsap.fromTo(media,
+                { yPercent: 4 },
+                {
+                    yPercent: -4,
+                    ease: 'none',
+                    scrollTrigger: { trigger: scene, start: 'top bottom', end: 'bottom top', scrub: true },
+                }
+            );
+        }
     });
 
     // ── Row / grid reveals ──────────────────────────────────
