@@ -13,3 +13,16 @@
 - **No invented-sounding stat chips.** "Team of 8", "TDD + CI", "2 engines one blend"
   read as filler to him. Chips must be facts a client would care about.
 - **The site is a freelance-agentic-developer pitch first, resume second.**
+
+## 2026-07-06 — De-slop pass (v2)
+
+- **"Tasteful defaults" can still be slop in aggregate.** Clash Display + Satoshi +
+  JetBrains Mono, mono-caps eyebrows, stroked-outline headlines, dark smoke + accent:
+  each individually fine, together they pattern-match to AI-generated portfolios.
+  The de-slop levers that actually worked: real product screenshots, ONE typeface
+  (Archivo variable, width axis as the display voice), a 12-col grid, sentence case
+  everywhere, and a background derived from real data (1,344 backtest points).
+- **Premultiplied-alpha canvases need premultiplied fragment output** (color * alpha),
+  or every transparent pixel renders at full brightness and alpha tuning does nothing.
+- **Film grain reads as static/starfield on flat dark backgrounds** — it only worked
+  over the smoke shader. Texture must match the ground it sits on.
