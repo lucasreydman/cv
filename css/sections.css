@@ -53,13 +53,13 @@
 .work-intro { padding-bottom: 0; }
 
 .scene-work {
-    min-height: 100dvh;
+    min-height: 86dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: clamp(1.75rem, 3.5vh, 2.75rem);
-    padding-top: clamp(4rem, 10vh, 7rem);
-    padding-bottom: clamp(4rem, 10vh, 7rem);
+    padding-top: clamp(2rem, 6vh, 4rem);
+    padding-bottom: clamp(2rem, 6vh, 4rem);
 }
 
 .work-meta {

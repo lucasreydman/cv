@@ -87,13 +87,13 @@ const FRAGMENT = /* glsl */ `
         // Scroll-linked palette: steel blue -> ember
         vec3 cold  = vec3(0.27, 0.35, 0.47);
         vec3 ember = vec3(1.00, 0.30, 0.00);
-        vec3 tint  = mix(cold, ember, smoothstep(0.15, 0.9, uScroll));
+        vec3 tint  = mix(cold, ember, smoothstep(0.3, 0.95, uScroll));
 
-        float intensity = mix(0.55, 0.40, smoothstep(0.0, 0.45, uScroll));
-        intensity = mix(intensity, 0.75, smoothstep(0.5, 1.0, uScroll));
+        float intensity = mix(0.55, 0.34, smoothstep(0.0, 0.45, uScroll));
+        intensity = mix(intensity, 0.48, smoothstep(0.55, 1.0, uScroll));
 
         // Late in the page, gather the glow toward the bottom of the viewport
-        float gather = mix(1.0, 0.3 + smoothstep(1.0, 0.05, uv.y) * 0.9,
+        float gather = mix(1.0, 0.45 + smoothstep(1.0, 0.15, uv.y) * 0.6,
                            smoothstep(0.6, 1.0, uScroll));
 
         vec3 base = vec3(0.023, 0.023, 0.031);
