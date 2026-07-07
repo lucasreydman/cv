@@ -10,7 +10,9 @@
  * Returns null when WebGL or the OGL CDN is unavailable.
  */
 
-const OGL_URL = 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/src/index.js';
+// jsDelivr's +esm endpoint serves OGL as a single pre-bundled module
+// (the raw src/index.js entry fans out into ~30 sequential sub-imports)
+const OGL_URL = 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/+esm';
 
 const VERTEX = /* glsl */ `
     attribute vec2 uv;

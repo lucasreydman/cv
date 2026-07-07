@@ -6,6 +6,7 @@
     <meta name="description" content="Lucas Reydman is an Applied Computer Science and Management student at Dalhousie University building data-driven products, AI-assisted software, and analytics tools. Incoming Analyst at RBC.">
     <meta name="keywords" content="Lucas Reydman, software developer, computer science, Dalhousie University, full-stack developer, React, JavaScript, TypeScript, Java, portfolio, RBC analyst, AI development, Claude Code, web development, Toronto developer, Halifax, applied computer science, entrepreneur">
     <meta name="author" content="Lucas Reydman">
+    <meta name="theme-color" content="#060608">
     <link rel="canonical" href="https://lucasreydman.xyz/">
     <title>Lucas Reydman</title>
 
@@ -63,16 +64,20 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
 
-    <!-- Fonts -->
+    <!-- CDN preconnects -->
     <link rel="preconnect" href="https://api.fontshare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
-    <link rel="preload" href="css/main.css?v=13" as="style">
-    <link rel="stylesheet" href="css/main.css?v=13">
+    <!-- Styles (parallel links; css/main.css remains as an aggregator for tooling) -->
+    <link rel="stylesheet" href="css/base.css?v=13">
+    <link rel="stylesheet" href="css/layout.css?v=13">
+    <link rel="stylesheet" href="css/components.css?v=13">
+    <link rel="stylesheet" href="css/sections.css?v=13">
 </head>
 <body>
 
@@ -133,7 +138,7 @@
             <!-- SHARPRFI -->
             <article class="scene scene-work">
                 <div class="work-meta">
-                    <img class="logo-mark" src="assets/images/logos/sharprfi.png" alt="" width="32" height="32">
+                    <img class="logo-mark" src="assets/images/logos/sharprfi.png" alt="" width="32" height="32" loading="lazy">
                     <span class="mono-label">Personal project · 2026</span>
                 </div>
                 <h3 class="work-name"><a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener">SHARPRFI</a></h3>
@@ -152,7 +157,7 @@
             <!-- Pride STEM Canada -->
             <article class="scene scene-work alt">
                 <div class="work-meta">
-                    <img class="logo-mark" src="assets/images/logos/pride_stem_canada.png" alt="" width="32" height="32">
+                    <img class="logo-mark" src="assets/images/logos/pride_stem_canada.png" alt="" width="32" height="32" loading="lazy">
                     <span class="mono-label">Senior developer · CSCI 3691</span>
                 </div>
                 <h3 class="work-name"><a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener">Pride STEM Canada</a></h3>
@@ -171,7 +176,7 @@
             <!-- QuickCash -->
             <article class="scene scene-work">
                 <div class="work-meta">
-                    <img class="logo-mark" src="assets/images/logos/quickcash.png" alt="" width="32" height="32">
+                    <img class="logo-mark" src="assets/images/logos/quickcash.png" alt="" width="32" height="32" loading="lazy">
                     <span class="mono-label">Team project · CSCI 3130</span>
                 </div>
                 <h3 class="work-name">QuickCash</h3>
@@ -398,7 +403,7 @@
                         </div>
                         <div class="form-field">
                             <label for="contact-email">Email</label>
-                            <input type="email" id="contact-email" name="email" placeholder="your@email.com" required autocomplete="email">
+                            <input type="email" id="contact-email" name="email" placeholder="your@email.com" required autocomplete="email" spellcheck="false">
                         </div>
                     </div>
                     <div class="form-field">
@@ -416,7 +421,7 @@
     </main>
 
     <footer class="footer">
-        <p class="cv-note"><span lang="la">curriculum vitae</span> · <em>n. "course of life"</em></p>
+        <p class="cv-note"><span lang="la">curriculum vitae</span> · <em>n. &ldquo;course of life&rdquo;</em></p>
         <div class="footer-meta">
             <span>&copy; 2026 Lucas Reydman</span>
             <a href="https://github.com/lucasreydman" target="_blank" rel="noopener">GitHub</a>

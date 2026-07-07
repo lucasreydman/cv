@@ -11,12 +11,21 @@ import { initAtmosphere } from './atmosphere.js';
 import { initScroll } from './scroll.js';
 
 // ── Atmosphere ─────────────────────────────────────────────
+// The shader must never block first paint or choreography, so the
+// scroll module gets a forwarding proxy and OGL loads in the background.
 
-const atmosphere = await initAtmosphere(document.getElementById('atmosphere'));
+let atmosphere = null;
+const atmosphereProxy = {
+    setScrollProgress(p) { atmosphere?.setScrollProgress(p); },
+    setPointer(x, y, v) { atmosphere?.setPointer(x, y, v); },
+};
 
-if (!atmosphere) {
-    document.documentElement.classList.add('no-webgl');
-} else {
+initAtmosphere(document.getElementById('atmosphere')).then((atmo) => {
+    if (!atmo) {
+        document.documentElement.classList.add('no-webgl');
+        return;
+    }
+    atmosphere = atmo;
     let lastX = null, lastY = null;
     window.addEventListener('pointermove', (e) => {
         if (lastX !== null) {
@@ -26,11 +35,11 @@ if (!atmosphere) {
         lastX = e.clientX;
         lastY = e.clientY;
     }, { passive: true });
-}
+});
 
 // ── Scroll choreography ────────────────────────────────────
 
-initScroll(atmosphere);
+initScroll(atmosphereProxy);
 
 // ── Mobile overlay menu ────────────────────────────────────
 
