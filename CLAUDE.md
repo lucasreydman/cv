@@ -38,7 +38,7 @@ docs/superpowers/   Design spec + implementation plan for the redesign
 
 Script order in `index.html` matters: GSAP/ScrollTrigger/Lenis load as classic `defer` scripts **before** the `type="module"` ui.js — the HTML spec guarantees document-order execution, so `window.gsap` is safe inside modules.
 
-## Design System — "Ink & Ember"
+## Design System — "Ink & Ember" v2 (post de-slop pass)
 
 | Token | Value |
 |---|---|
@@ -46,11 +46,22 @@ Script order in `index.html` matters: GSAP/ScrollTrigger/Lenis load as classic `
 | `--text` | `#eceae5` (warm off-white) |
 | `--ember` | `#ff4d00` (single accent, used sparingly) |
 | `--steel` | `#8b9bb4` (secondary tone) |
-| Display | Clash Display 600/700 |
-| Body | Satoshi 400/500 |
-| Data/labels | JetBrains Mono 400/500 (all dates, stats, tags) |
+| Typeface | **Archivo variable only** (Google Fonts, wdth+wght axes) |
+| Display voice | `font-stretch: 112–125%`, weight 640–780 |
+| Body voice | normal width, 400/500/600; `tabular-nums` everywhere |
 
-Dark only — there is **no light theme and no theme toggle**. Radius 0 everywhere (sharp editorial system). Mono type for numbers/labels is the visual signature.
+Dark only, no theme toggle. 2px radius system (6px on media). 12-col grid
+(`repeat(12, 1fr)`, max 1360px). **Sentence case everywhere** — no uppercase
+tracking labels, no mono font, no grain overlay, no stroked-outline text, no
+boxed stat chips. These were removed in the de-slop pass because they
+pattern-match to AI-generated portfolios; do not reintroduce them. Real product
+screenshots (`assets/images/screens/*.webp`, captured from the live sites) are
+the visual centerpiece of the projects section.
+
+**Background**: `atmosphere.js` renders 1,344 whisper-faint drifting points
+(one per SHARPRFI backtest game, ~6% ember) — data-derived, not decorative
+smoke. The canvas is premultiplied-alpha: fragment shaders must output
+`color * alpha` or opacity is ignored.
 
 ## Positioning
 
