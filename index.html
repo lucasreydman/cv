@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lucas Reydman — Applied Computer Science & Management student at Dalhousie University. Portfolio featuring software development projects, work experience at RBC, Torinit, and Mirabella, AI & full-stack skills, and entrepreneurial ventures.">
+    <meta name="description" content="Lucas Reydman is an Applied Computer Science and Management student at Dalhousie University building data-driven products, AI-assisted software, and analytics tools. Incoming Analyst at RBC.">
     <meta name="keywords" content="Lucas Reydman, software developer, computer science, Dalhousie University, full-stack developer, React, JavaScript, TypeScript, Java, portfolio, RBC analyst, AI development, Claude Code, web development, Toronto developer, Halifax, applied computer science, entrepreneur">
     <meta name="author" content="Lucas Reydman">
+    <meta name="theme-color" content="#060608">
     <link rel="canonical" href="https://lucasreydman.xyz/">
     <title>Lucas Reydman</title>
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lucasreydman.xyz/">
-    <meta property="og:title" content="Lucas Reydman - Agentic Developer & Digital Product Creator">
-    <meta property="og:description" content="Lucas Reydman — Applied Computer Science & Management student at Dalhousie University. Portfolio featuring software development projects, work experience at RBC, Torinit, and Mirabella, AI & full-stack skills, and entrepreneurial ventures.">
+    <meta property="og:title" content="Lucas Reydman - Software, Statistics & AI">
+    <meta property="og:description" content="Applied Computer Science and Management student at Dalhousie University building data-driven products and AI-assisted software. Incoming Analyst at RBC.">
     <meta property="og:image" content="https://lucasreydman.xyz/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://lucasreydman.xyz/">
-    <meta name="twitter:title" content="Lucas Reydman - Agentic Developer & Digital Product Creator">
-    <meta name="twitter:description" content="Lucas Reydman — Applied Computer Science & Management student at Dalhousie University. Portfolio featuring software development projects, work experience at RBC, Torinit, and Mirabella, AI & full-stack skills, and entrepreneurial ventures.">
+    <meta name="twitter:title" content="Lucas Reydman - Software, Statistics & AI">
+    <meta name="twitter:description" content="Applied Computer Science and Management student at Dalhousie University building data-driven products and AI-assisted software. Incoming Analyst at RBC.">
     <meta name="twitter:image" content="https://lucasreydman.xyz/assets/og-image.png">
 
     <!-- Identity verification for social profiles -->
@@ -36,7 +37,7 @@
       "url": "https://lucasreydman.xyz",
       "email": "lucasreydman@gmail.com",
       "image": "https://lucasreydman.xyz/assets/images/hero/hero_transparent.png",
-      "description": "Applied Computer Science & Management student at Dalhousie University and software developer with experience at RBC, Torinit, and Mirabella.",
+      "description": "Applied Computer Science and Management student at Dalhousie University and software developer with experience at RBC, Torinit, and Mirabella.",
       "jobTitle": "Software Developer",
       "worksFor": [
         {
@@ -53,7 +54,7 @@
         "https://github.com/lucasreydman",
         "https://lucasreydman.xyz"
       ],
-      "knowsAbout": ["JavaScript", "TypeScript", "React", "Next.js", "Java", "Python", "AI Development", "Full-Stack Development", "Software Engineering"]
+      "knowsAbout": ["JavaScript", "TypeScript", "React", "Next.js", "Java", "Python", "AI Development", "Agentic Workflows", "Full-Stack Development", "Software Engineering", "Statistics", "Monte Carlo Simulation"]
     }
     </script>
 
@@ -63,833 +64,370 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
 
-    <!-- Fonts -->
+    <!-- CDN preconnects -->
+    <link rel="preconnect" href="https://api.fontshare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </noscript>
-
-    <!-- Styles -->
-    <link rel="preload" href="css/main.css?v=12" as="style">
-    <link rel="stylesheet" href="css/main.css?v=12">
-
-    <!-- Prevent theme flash -->
-    <script>
-        (function(){
-            var t = localStorage.getItem('theme');
-            if (t) document.documentElement.setAttribute('data-theme', t);
-        })();
-    </script>
+    <!-- Styles (parallel links; css/main.css remains as an aggregator for tooling) -->
+    <link rel="stylesheet" href="css/base.css?v=13">
+    <link rel="stylesheet" href="css/layout.css?v=13">
+    <link rel="stylesheet" href="css/components.css?v=13">
+    <link rel="stylesheet" href="css/sections.css?v=13">
 </head>
 <body>
+
+    <!-- Atmosphere (decorative WebGL layer) -->
+    <canvas id="atmosphere" aria-hidden="true"></canvas>
 
     <!-- Skip navigation -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
     <!-- Scroll progress -->
-    <div class="scroll-progress" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
 
     <!-- Navigation -->
     <nav class="navbar" aria-label="Main navigation">
-        <div class="container">
+        <div class="nav-inner">
             <a href="#hero" class="nav-brand">LR<span>.</span></a>
 
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#honors">Honors</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
 
-            <div class="navbar-controls">
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener" aria-label="LinkedIn profile">
-                        <i class="fab fa-linkedin" aria-hidden="true"></i>
-                    </a>
-                    <a href="mailto:lucasreydman@gmail.com" aria-label="Email">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                    </a>
-                </div>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark theme">
-                    <i class="fas fa-sun"  aria-hidden="true"></i>
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-links">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </button>
-            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="assets/resume.pdf" download="Lucas_Reydman_Resume_2026.pdf" class="nav-resume">Resume</a></li>
+            </ul>
         </div>
     </nav>
 
     <main id="main">
 
-        <!-- ═══ HERO ═══════════════════════════════════════════════ -->
+        <!-- ═══ HERO ═══════════════════════════════════════════ -->
         <section id="hero" class="hero">
-            <div class="container">
-                <div class="hero-content">
-
-                    <div class="hero-text">
-                        <span class="hero-eyebrow">Hello, world</span>
-                        <h1>I'm<br><span class="highlight">Lucas Reydman</span></h1>
-                        <p class="subtitle">
-                            <span id="typewriter">Computer Science &amp; Management Student</span><span class="typewriter-cursor" aria-hidden="true">|</span>
-                        </p>
-                        <div class="hero-cta">
-                            <a href="assets/resume.pdf" download="Lucas_Reydman_Resume_2026.pdf" class="btn-resume">
-                                <i class="fas fa-download" aria-hidden="true"></i> Download Resume
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="hero-image-container">
-                        <picture>
-                            <source srcset="assets/images/hero/hero_transparent.webp" type="image/webp">
-                            <img src="assets/images/hero/hero_transparent.png" alt="Lucas Reydman" class="hero-image" width="300" height="300">
-                        </picture>
-                        <div class="speech-bubble" aria-hidden="true">
-                            <p>Welcome! Take a look around and get to know me better.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Scroll indicator -->
-            <div class="hero-scroll" aria-hidden="true">
-                <span>Scroll</span>
-                <div class="hero-scroll-line"></div>
+            <p class="hero-status mono-label">Dalhousie CS &amp; Management · Incoming RBC Analyst</p>
+            <h1 class="hero-name">
+                <span class="line line-1">Lucas</span>
+                <span class="line line-2">Reydman</span>
+            </h1>
+            <p class="hero-sub">I build products where <strong>software</strong>, <strong>statistics</strong>, and <strong>AI</strong> meet. Then I ship them.</p>
+            <div class="hero-cta">
+                <a href="assets/resume.pdf" download="Lucas_Reydman_Resume_2026.pdf" class="btn">
+                    Download resume <span class="btn-arrow" aria-hidden="true">&darr;</span>
+                </a>
             </div>
         </section>
 
-        <!-- ═══ ABOUT ════════════════════════════════════════════════ -->
-        <section id="about" class="about">
-            <div class="container">
-                <h2><span>About Me</span></h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>I am a <span class="highlight">motivated and driven</span> individual with a strong interest in the evolving field of technology. Throughout my academic journey, I have consistently worked toward <span class="highlight">excellence</span>, earning academic distinction across high school and university. I am currently studying <span class="highlight">Applied Computer Science at Dalhousie University</span>, while also completing coursework and applied learning opportunities through the <span class="highlight">Faculty of Management</span> to strengthen my understanding of business, data, and organizational problem-solving.</p>
-                        <p>Through my experiences as both an <span class="highlight">entrepreneur</span> and an <span class="highlight">employee</span>, I have developed a strong foundation in technology and business, applying that knowledge to support <span class="highlight">business growth</span>, improve processes, and enhance customer experiences. I am a <span class="highlight">confident and engaged leader</span>, a thoughtful listener, and a dependable team player who thrives in <span class="highlight">agile, adaptive, and diverse teams</span>.</p>
-                        <p>I am deeply interested in how technology can create <span class="highlight">meaningful impact</span> for individuals, organizations, and communities. I actively embrace <span class="highlight">AI-assisted development</span>, leveraging tools like Claude Code, Cursor, and GitHub Copilot to build faster and smarter. My goal is to contribute to solutions that address real-world challenges through practical, well-designed technology. With a strong commitment to <span class="highlight">learning</span>, <span class="highlight">adaptability</span>, and <span class="highlight">collaboration</span>, I am eager to continue growing within the tech community and to take on new opportunities ahead.</p>
-                    </div>
-                </div>
+        <!-- ═══ SELECTED WORK ══════════════════════════════════ -->
+        <section id="work" class="work">
+
+            <div class="scene work-intro">
+                <h2 class="scene-heading">Selected work</h2>
             </div>
-        </section>
 
-        <!-- ═══ EXPERIENCE ═══════════════════════════════════════════ -->
-        <section id="experience" class="experience">
-            <div class="container">
-                <h2><span>Work Experience</span></h2>
-                <div class="timeline">
-
-                    <div class="timeline-item timeline-left">
-                        <div class="timeline-dot"></div>
-                        <article class="experience-card experience-card--incoming">
-                            <header class="experience-header">
-                                <div class="company-logo">
-                                    <a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener" aria-label="RBC Tech">
-                                        <img src="assets/images/logos/rbc.png" alt="RBC Logo" width="52" height="52">
-                                    </a>
-                                </div>
-                                <div class="experience-title">
-                                    <span class="incoming-badge">Incoming</span>
-                                    <h3>Analyst – Global Functions Technology</h3>
-                                    <p class="experience-company"><a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">RBC</a></p>
-                                    <p class="experience-period">Starting May 2026</p>
-                                </div>
-                            </header>
-                            <div class="experience-details">
-                                <p class="coming-soon-text">Details coming soon.</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="timeline-item timeline-right">
-                        <div class="timeline-dot"></div>
-                        <article class="experience-card">
-                            <header class="experience-header">
-                                <div class="company-logo">
-                                    <a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener" aria-label="RBC Tech">
-                                        <img src="assets/images/logos/rbc.png" alt="RBC Logo" width="52" height="52">
-                                    </a>
-                                </div>
-                                <div class="experience-title">
-                                    <h3>Analyst – Financial Shared Services</h3>
-                                    <p class="experience-company"><a href="https://jobs.rbc.com/ca/en/rbctech" target="_blank" rel="noopener">RBC</a></p>
-                                    <p class="experience-period">May 2025 – Aug 2025</p>
-                                </div>
-                            </header>
-                            <div class="experience-details">
-                                <ul>
-                                    <li>Managed operational tasks and oversaw the invoice lifecycle for RBC's U.S. business units.</li>
-                                    <li>Used SAP to cross-reference vendor information, validate purchase orders, and monitor payments.</li>
-                                    <li>Leveraged Pega to route and track invoices through automated workflows, ensuring accuracy.</li>
-                                    <li>Utilized Microsoft Excel to index and stamp verified invoices and organizational documentation.</li>
-                                </ul>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="timeline-item timeline-left">
-                        <div class="timeline-dot"></div>
-                        <article class="experience-card">
-                            <header class="experience-header">
-                                <div class="company-logo">
-                                    <a href="https://www.torinit.com/" target="_blank" rel="noopener" aria-label="Torinit Technologies">
-                                        <img src="assets/images/logos/torinit_technologies_inc.png" alt="Torinit Technologies Logo" width="52" height="52">
-                                    </a>
-                                </div>
-                                <div class="experience-title">
-                                    <h3>Digital Solutions Intern</h3>
-                                    <p class="experience-company"><a href="https://www.torinit.com/" target="_blank" rel="noopener">Torinit Technologies Inc.</a></p>
-                                    <p class="experience-period">May 2024 – Aug 2024</p>
-                                </div>
-                            </header>
-                            <div class="experience-details">
-                                <ul>
-                                    <li>Utilized tools such as ZoomInfo, HubSpot, and LinkedIn Sales Navigator to drive client growth.</li>
-                                    <li>Created digital content for LinkedIn using Canva, developing social media schedules and strategies.</li>
-                                    <li>Applied design thinking strategies to create proof of concept (POC) for digital solutions.</li>
-                                    <li>Streamlined team collaboration through Microsoft Teams and Excel for data-driven decision-making.</li>
-                                </ul>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="timeline-item timeline-right">
-                        <div class="timeline-dot"></div>
-                        <article class="experience-card">
-                            <header class="experience-header">
-                                <div class="company-logo">
-                                    <a href="https://mirabellacorp.com/" target="_blank" rel="noopener" aria-label="Mirabella Development Corporation">
-                                        <img src="assets/images/logos/mirabella_development_corporation.png" alt="Mirabella Development Corporation Logo" width="52" height="52">
-                                    </a>
-                                </div>
-                                <div class="experience-title">
-                                    <h3>Research &amp; Development Intern</h3>
-                                    <p class="experience-company"><a href="https://mirabellacorp.com/" target="_blank" rel="noopener">Mirabella Development Corporation</a></p>
-                                    <p class="experience-period">Jun 2023 – Aug 2023</p>
-                                </div>
-                            </header>
-                            <div class="experience-details">
-                                <ul>
-                                    <li>Conducted market research on industry trends, consumer preferences, and competitive positioning.</li>
-                                    <li>Organized and facilitated meetings, driving cross-functional discussions and actionable outcomes.</li>
-                                    <li>Networked with industry professionals to gain insights into real estate development and investments.</li>
-                                    <li>Managed project tasks, resource allocation, and progress tracking across concurrent initiatives.</li>
-                                </ul>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="timeline-item timeline-left">
-                        <div class="timeline-dot"></div>
-                        <article class="experience-card">
-                            <header class="experience-header">
-                                <div class="company-logo no-link">
-                                    <img src="assets/images/logos/panther.png" alt="Panther Student Events Logo" width="52" height="52">
-                                </div>
-                                <div class="experience-title">
-                                    <h3>Founder &amp; Head of Operations</h3>
-                                    <p class="experience-company">Panther</p>
-                                    <p class="experience-period">Sep 2021 – Aug 2023</p>
-                                </div>
-                            </header>
-                            <div class="experience-details">
-                                <ul>
-                                    <li>Generated $40,000+ in revenue through innovative sales strategies and business process optimization.</li>
-                                    <li>Directed a sales team, managing strategic execution and personnel training to meet revenue targets.</li>
-                                    <li>Led social media marketing campaigns to boost visibility and engagement for student events.</li>
-                                    <li>Coordinated event logistics, venue bookings, contract negotiations, and budget adherence.</li>
-                                </ul>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="timeline-item timeline-right">
-                        <div class="timeline-dot"></div>
-                        <article class="experience-card">
-                            <header class="experience-header">
-                                <div class="company-logo">
-                                    <a href="https://scalehospitality.com/" target="_blank" rel="noopener" aria-label="Scale Hospitality">
-                                        <img src="assets/images/logos/scale_hospitality.png" alt="Scale Hospitality Logo" width="52" height="52">
-                                    </a>
-                                </div>
-                                <div class="experience-title">
-                                    <h3>Hospitality Assistant</h3>
-                                    <p class="experience-company"><a href="https://scalehospitality.com/" target="_blank" rel="noopener">Scale Hospitality</a></p>
-                                    <p class="experience-period">Jun 2022 – Aug 2022</p>
-                                </div>
-                            </header>
-                            <div class="experience-details">
-                                <ul>
-                                    <li>Collaborated with waitstaff, bartenders, and kitchen staff to deliver seamless fine-dining experiences.</li>
-                                    <li>Maintained high standards of cleanliness, table presentation, and venue aesthetics.</li>
-                                    <li>Delivered top-tier customer service in an upscale, high-profile hospitality environment.</li>
-                                    <li>Supported smooth restaurant operations during high-volume periods, adapting to fast-paced demands.</li>
-                                </ul>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="timeline-item timeline-left">
-                        <div class="timeline-dot"></div>
-                        <article class="experience-card">
-                            <header class="experience-header">
-                                <div class="company-logo">
-                                    <a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener" aria-label="Over the Rainbow Ltd.">
-                                        <img src="assets/images/logos/over_the_rainbow_ltd.png" alt="Over the Rainbow Ltd. Logo" width="52" height="52">
-                                    </a>
-                                </div>
-                                <div class="experience-title">
-                                    <h3>Sales Associate</h3>
-                                    <p class="experience-company"><a href="https://www.rainbowjeans.com/" target="_blank" rel="noopener">Over the Rainbow Ltd.</a></p>
-                                    <p class="experience-period">Jun 2021 – Aug 2021</p>
-                                </div>
-                            </header>
-                            <div class="experience-details">
-                                <ul>
-                                    <li>Managed and restocked inventory across the sales floor, ensuring optimal product availability.</li>
-                                    <li>Assisted clients with product information, styling advice, and personalized recommendations.</li>
-                                    <li>Fulfilled online and in-store orders promptly, coordinating shipping and pickup logistics.</li>
-                                    <li>Provided excellent customer service in an upscale retail environment, servicing high-profile clients.</li>
-                                </ul>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="timeline-item timeline-right">
-                        <div class="timeline-dot"></div>
-                        <article class="experience-card">
-                            <header class="experience-header">
-                                <div class="company-logo no-link">
-                                    <img src="assets/images/logos/sl_sports_camp.png" alt="S&L Sports Camp Logo" width="52" height="52">
-                                </div>
-                                <div class="experience-title">
-                                    <h3>Co-Founder & Lead Director</h3>
-                                    <p class="experience-company">S&L Sports Camp</p>
-                                    <p class="experience-period">May 2020 – Sep 2020</p>
-                                </div>
-                            </header>
-                            <div class="experience-details">
-                                <ul>
-                                    <li>Generated $15,000+ in revenue by co-founding and directing a youth sports camp.</li>
-                                    <li>Designed, produced, deployed, and maintained the company website.</li>
-                                    <li>Managed cash handling, online transactions, and financial record-keeping across multiple streams.</li>
-                                    <li>Created a positive, engaging environment for children to learn and play.</li>
-                                </ul>
-                            </div>
-                        </article>
-                    </div>
-
+            <!-- SHARPRFI -->
+            <article class="scene scene-work">
+                <div class="work-meta">
+                    <img class="logo-mark" src="assets/images/logos/sharprfi.png" alt="" width="32" height="32" loading="lazy">
+                    <span class="mono-label">Personal project · 2026</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- ═══ EDUCATION ════════════════════════════════════════════ -->
-        <section id="education" class="education">
-            <div class="container">
-                <h2><span>Education</span></h2>
-                <div class="education-grid">
-
-                    <article class="education-card">
-                        <header class="education-header">
-                            <div class="company-logo">
-                                <a href="https://www.dal.ca/" target="_blank" rel="noopener" aria-label="Dalhousie University">
-                                    <img src="assets/images/logos/dalhousie_university.png" alt="Dalhousie University Logo" width="52" height="52">
-                                </a>
-                            </div>
-                            <div class="education-title">
-                                <h3><a href="https://www.dal.ca/faculty/computerscience/undergraduate-programs/study-applied-computer-science.html" target="_blank" rel="noopener">Bachelor of Applied Computer Science</a></h3>
-                                <p class="education-school"><a href="https://www.dal.ca/" target="_blank" rel="noopener">Dalhousie University</a></p>
-                                <p class="education-period">Sep 2023 – <strong>May 2027 (Expected)</strong></p>
-                                <p class="education-grade">GPA: 3.91 (Cumulative)</p>
-                            </div>
-                        </header>
-                        <div class="education-details">
-                            <p class="education-subtitle">Currently pursuing:</p>
-                            <div class="pursuing-list">
-                                <div class="pursuing-item">
-                                    <details>
-                                        <summary><strong>Bachelor of Applied Computer Science</strong></summary>
-                                        <p>A four-year program bridging software development and business, built for students who want to build real things and lead teams doing it. Core technical areas include full-stack development, databases, UI/UX, security, and systems design, paired with business courses in project management, communications, and organizational leadership.</p>
-                                        <p>A defining feature of the program is hands-on delivery: students work in cross-year software teams on real projects for non-profit clients, taking on developer and project lead roles. The curriculum emphasizes Agile workflows, version control, and iterative development, mirroring the same practices used in professional engineering teams.</p>
-                                    </details>
-                                </div>
-                                <div class="pursuing-item">
-                                    <details>
-                                        <summary><strong>Certificate in Managing Data and Information</strong></summary>
-                                        <p>A focused credential covering data-driven decision making, information systems, and how organizations manage and leverage data at scale. Coursework spans Working with Data, Management Information Systems, and Information in a Networked World, building fluency in the intersection of data, business operations, and technology strategy.</p>
-                                    </details>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="education-card">
-                        <header class="education-header">
-                            <div class="company-logo">
-                                <a href="https://schoolweb.tdsb.on.ca/lawrenceparkci/" target="_blank" rel="noopener" aria-label="Lawrence Park CI">
-                                    <img src="assets/images/logos/lawrence_park_collegiate_institute.png" alt="Lawrence Park CI Logo" width="52" height="52">
-                                </a>
-                            </div>
-                            <div class="education-title">
-                                <h3><a href="https://www.ossd-requirements.ca/" target="_blank" rel="noopener">Ontario Secondary School Diploma</a></h3>
-                                <p class="education-school"><a href="https://schoolweb.tdsb.on.ca/lawrenceparkci/" target="_blank" rel="noopener">Lawrence Park Collegiate Institute</a></p>
-                                <p class="education-period">Sep 2019 – Jun 2023</p>
-                                <p class="education-grade">Average: 94% (Honor Roll)</p>
-                            </div>
-                        </header>
-                        <div class="education-details">
-                            <p class="education-subtitle">Activities &amp; Societies:</p>
-                            <ul>
-                                <li>Varsity Basketball &amp; Volleyball</li>
-                                <li>LPCI Buddies Program</li>
-                                <li>Giving Back Association</li>
-                                <li>Sports Management Club</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ═══ HONORS ═══════════════════════════════════════════════ -->
-        <section id="honors" class="honors">
-            <div class="container">
-                <h2><span>Honors &amp; Awards</span></h2>
-                <div class="honors-grid">
-
-                    <article class="honor-card">
-                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
-                        <h3>The Complete Agile &amp; Scrum Project Management Course</h3>
-                        <p class="honor-source">365 Careers &amp; Udemy, May 2025</p>
-                        <p class="honor-description">Certification in Agile methodologies and Scrum frameworks, enhancing skills in software project management, team collaboration, and efficient project delivery.</p>
-                        <a href="https://www.udemy.com/certificate/UC-2674b903-f212-4f1a-95d0-1a44c21bb7a4/" target="_blank" rel="noopener" class="honor-link">View Certificate <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-                    </article>
-
-                    <article class="honor-card">
-                        <i class="fas fa-brain" aria-hidden="true"></i>
-                        <h3>ChatGPT Prompt Engineering for Developers</h3>
-                        <p class="honor-source">DeepLearning.AI, May 2024</p>
-                        <p class="honor-description">Certification in prompt engineering techniques including summarizing, inferring, transforming, and expanding content with large language models.</p>
-                        <a href="https://learn.deeplearning.ai/accomplishments/19b773e3-6ff0-40f2-8915-dbe1a045f6b0?usp=sharing" target="_blank" rel="noopener" class="honor-link">View Certificate <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-                    </article>
-
-                    <article class="honor-card">
-                        <i class="fas fa-trophy" aria-hidden="true"></i>
-                        <h3>Dean's List (6×)</h3>
-                        <p class="honor-source">Dalhousie University, 2025</p>
-                        <p class="honor-description">Awarded to students that achieved a GPA of 3.70 or higher in a given term.</p>
-                    </article>
-
-                    <article class="honor-card">
-                        <i class="fas fa-hands-helping" aria-hidden="true"></i>
-                        <h3>Community Leadership Scholarship</h3>
-                        <p class="honor-source">Dalhousie University, 2023</p>
-                        <p class="honor-description">Awarded to students that demonstrated exemplary community leadership and engagement.</p>
-                    </article>
-
-                    <article class="honor-card">
-                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                        <h3>Ontario Scholar Designation</h3>
-                        <p class="honor-source">Ontario Ministry of Education, 2023</p>
-                        <p class="honor-description">Awarded to students that achieved an average of 80% or higher in their top six grade 12 courses.</p>
-                    </article>
-
-                    <article class="honor-card">
-                        <i class="fas fa-flag" aria-hidden="true"></i>
-                        <h3>Honours Certificate of Bilingual Studies</h3>
-                        <p class="honor-source">Lawrence Park C.I., 2023</p>
-                        <p class="honor-description">Awarded to students that completed the French Immersion program with an extra credit.</p>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ═══ SKILLS ═══════════════════════════════════════════════ -->
-        <section id="skills" class="skills">
-            <div class="container">
-                <h2><span>Skills &amp; Expertise</span></h2>
-                <div class="skills-carousel-wrapper">
-                    <div class="skills-track">
-
-                        <article class="skill-card">
-                            <i class="fas fa-code" aria-hidden="true"></i>
-                            <h3>Technical Skills</h3>
-                            <ul>
-                                <li>JavaScript &amp; TypeScript</li>
-                                <li>React &amp; Next.js</li>
-                                <li>HTML, CSS &amp; Framer Motion</li>
-                                <li>Node.js &amp; PHP</li>
-                                <li>SQL &amp; MySQL Workbench</li>
-                                <li>Java (OOP, Android, Gradle)</li>
-                                <li>Firebase (Auth, Firestore, Storage)</li>
-                                <li>Git, GitLab &amp; GitHub</li>
-                                <li>CI/CD &amp; Azure Static Web Apps</li>
-                                <li>REST APIs &amp; Integrations</li>
-                            </ul>
-                        </article>
-
-                        <article class="skill-card">
-                            <i class="fas fa-robot" aria-hidden="true"></i>
-                            <h3>AI &amp; Productivity</h3>
-                            <ul>
-                                <li>Prompt Engineering (ChatGPT)</li>
-                                <li>AI-Assisted Development (Claude Code)</li>
-                                <li>Claude API &amp; Anthropic SDK</li>
-                                <li>Agentic Workflows &amp; Tool Use</li>
-                                <li>GitHub Copilot</li>
-                                <li>Multi-Turn Context Management</li>
-                                <li>RAG &amp; Vector Search Concepts</li>
-                                <li>AI Code Review &amp; Debugging</li>
-                                <li>AI Workflow Automation</li>
-                                <li>LLM Evaluation &amp; Refinement</li>
-                            </ul>
-                        </article>
-
-                        <article class="skill-card">
-                            <i class="fas fa-chart-line" aria-hidden="true"></i>
-                            <h3>Business &amp; Leadership</h3>
-                            <ul>
-                                <li>Entrepreneurship &amp; Venture Building</li>
-                                <li>Team Leadership &amp; Mentorship</li>
-                                <li>Market &amp; Competitive Research</li>
-                                <li>Strategic Planning</li>
-                                <li>Budgeting &amp; Forecasting</li>
-                                <li>Business Management</li>
-                                <li>Customer Relationship Management</li>
-                                <li>Event Operations &amp; Logistics</li>
-                                <li>Agile / Scrum</li>
-                                <li>Cross-Functional Collaboration</li>
-                            </ul>
-                        </article>
-
-                        <article class="skill-card">
-                            <i class="fas fa-tools" aria-hidden="true"></i>
-                            <h3>Tools &amp; Platforms</h3>
-                            <ul>
-                                <li>Design (Figma, Canva, Photoshop)</li>
-                                <li>Testing (Mockito, JUnit)</li>
-                                <li>API Testing (Postman)</li>
-                                <li>Project Management (Jira, Notion)</li>
-                                <li>Slack &amp; Microsoft Teams</li>
-                                <li>CRM (HubSpot, ZoomInfo)</li>
-                                <li>Microsoft 365 &amp; Google Workspace</li>
-                                <li>VS Code, Cursor &amp; IntelliJ</li>
-                                <li>Cloud (Azure, Firebase, Stripe)</li>
-                                <li>GSAP, Lenis &amp; Framer Motion</li>
-                            </ul>
-                        </article>
-
+                <h3 class="work-name"><a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener">SHARPRFI</a></h3>
+                <div class="work-body">
+                    <p class="work-desc">MLB first-inning betting research covering both sides of the NRFI and YRFI market. Two probability engines, a <strong>Poisson model</strong> and a batter-level <strong>Monte Carlo simulation</strong>, blend into one calibrated number for every game on the slate.</p>
+                    <div class="chips">
+                        <span class="chip"><strong>10,000</strong> sims per game</span>
+                        <span class="chip"><strong>1,344-game</strong> backtest</span>
+                        <span class="chip"><strong>2</strong> engines, one blend</span>
                     </div>
+                    <p class="tags">Next.js / TypeScript / Tailwind / Vercel KV / MLB Stats API</p>
+                    <a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" class="arrow-link">See it live <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                </div>
+            </article>
 
-                    <div class="skills-dots" role="tablist" aria-label="Skills categories">
-                        <button type="button" class="skills-dot active" data-index="0" aria-label="Technical Skills" aria-pressed="true"></button>
-                        <button type="button" class="skills-dot" data-index="1" aria-label="AI &amp; Productivity" aria-pressed="false"></button>
-                        <button type="button" class="skills-dot" data-index="2" aria-label="Business &amp; Leadership" aria-pressed="false"></button>
-                        <button type="button" class="skills-dot" data-index="3" aria-label="Tools &amp; Platforms" aria-pressed="false"></button>
+            <!-- Pride STEM Canada -->
+            <article class="scene scene-work alt">
+                <div class="work-meta">
+                    <img class="logo-mark" src="assets/images/logos/pride_stem_canada.png" alt="" width="32" height="32" loading="lazy">
+                    <span class="mono-label">Senior developer · CSCI 3691</span>
+                </div>
+                <h3 class="work-name"><a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener">Pride STEM Canada</a></h3>
+                <div class="work-body">
+                    <p class="work-desc">The public home of a national 2SLGBTQ+ in STEM conference: registration, schedule, submissions, and sponsorship for delegates across Canada. I led the architecture and owned the hardest parts, from <strong>Stripe registration</strong> to <strong>Firebase auth</strong> and the transactional email pipeline.</p>
+                    <div class="chips">
+                        <span class="chip"><strong>250+</strong> delegates</span>
+                        <span class="chip"><strong>Stripe</strong> registration</span>
+                        <span class="chip"><strong>6th</strong> annual conference</span>
                     </div>
+                    <p class="tags">Next.js / React / Framer Motion / Firebase / GitLab CI/CD</p>
+                    <a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener" class="arrow-link">See it live <span class="arrow" aria-hidden="true">&#8599;</span></a>
                 </div>
-            </div>
-        </section>
+            </article>
 
-        <!-- ═══ PROJECTS ══════════════════════════════════════════════ -->
-        <section id="projects" class="projects">
-            <div class="container">
-                <h2><span>Projects</span></h2>
-                <div class="projects-grid">
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                <a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener" aria-label="Pride STEM Canada">
-                                    <img src="assets/images/logos/pride_stem_canada.png" alt="Pride STEM Canada Logo" width="54" height="54">
-                                </a>
-                            </div>
-                            <div class="project-title">
-                                <h3><a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener" class="project-link">Pride STEM Canada</a></h3>
-                                <p class="project-affiliation">CSCI 3691 · Intermediate Project · Senior Developer</p>
-                                <p class="project-period">January 2026 – April 2026</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">Full-stack conference website for Pride STEM Canada, a national nonprofit dedicated to celebrating and advancing the contributions of the 2SLGBTQ+ community in STEM. The organization hosts an annual nationwide conference, now in its sixth year, bringing together 250+ delegates from across Canada for keynote speakers, research presentations, networking events, and career development sessions. As senior developer on a team course project, I led core architectural decisions and owned implementation of the site's most complex features. Built on Next.js with the App Router for full-stack server and client rendering, with React and React Bootstrap powering the component-driven UI and Framer Motion handling smooth page and section animations. Conference registration is fully integrated with Stripe, supporting multiple delegate tiers with secure payment processing. Firebase handles user authentication and real-time data storage, enabling dynamic content management across the site. Resend powers the transactional email pipeline, sending confirmation and notification emails to registered delegates. CSS Modules enforce scoped, collision-free styling across components. The entire codebase is version controlled and deployed through a GitLab CI/CD pipeline. The site serves as the public-facing home for the conference, covering registration, the event schedule, presentation submissions, sponsorship and partnership opportunities, governance documentation, and organizational information. All of it is designed to reflect the mission of building a more inclusive and representative STEM community across Canada.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" data-tooltip="React framework with App Router for full-stack server and client components">Next.js</span>
-                                <span class="skill-tag" data-tooltip="JavaScript library for building component-driven user interfaces">React</span>
-                                <span class="skill-tag" data-tooltip="Animation library for React enabling smooth, declarative UI transitions">Framer Motion</span>
-                                <span class="skill-tag" data-tooltip="React component library built on Bootstrap for responsive layouts">React Bootstrap</span>
-                                <span class="skill-tag" data-tooltip="CSS scoping pattern for component-level styles without class name collisions">CSS Modules</span>
-                                <span class="skill-tag" data-tooltip="Google platform for authentication, real-time database, and cloud storage">Firebase</span>
-                                <span class="skill-tag" data-tooltip="Payment processing platform for secure online transactions">Stripe</span>
-                                <span class="skill-tag" data-tooltip="Email delivery API for transactional and notification emails">Resend</span>
-                                <span class="skill-tag" data-tooltip="DevOps platform for version control, CI/CD pipelines, and team collaboration">GitLab</span>
-                                <span class="skill-tag" data-tooltip="Automated build, test, and deployment pipelines for continuous integration and delivery">CI/CD</span>
-                                <span class="skill-tag" data-tooltip="Azure hosting for preview and production deployments, used to spin up test environments and deploy the live site">Azure Static Web Apps</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://www.psc-fsc.ca/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    Live Site <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                <img src="assets/images/logos/quickcash.png" alt="QuickCash Logo" width="54" height="54">
-                            </div>
-                            <div class="project-title">
-                                <h3>QuickCash</h3>
-                                <p class="project-affiliation">CSCI 3130 · Software Engineering · Developer</p>
-                                <p class="project-period">Sep 2025 – Dec 2025</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">Full-stack Android mobile application connecting students and part-time workers with short-term job opportunities. Built across two Agile iterations with a team of 8 using strict test-driven development, pair programming, and continuous integration through GitLab. Features role-based access for two user types, employees and employers, each with a tailored dashboard and feature set. Employees can search and filter jobs by salary range, job type, and location (with Google Maps integration), apply with a custom cover letter, track their submission statuses, and receive push notifications for nearby opportunities. Employers can create detailed job postings with requirements, location, employment type, and salary range, review incoming applicants, and accept or decline applications. Both dashboards surface performance insights and application statistics. Also integrates PayPal for payment processing. Firebase powers authentication, real-time data, and Firestore CRUD operations throughout. Code quality enforced through SonarQube refactoring across both iterations, reducing issues from 119 to zero. Architecture follows SOLID principles and applies Singleton, Facade, and Observer design patterns to keep the UI layer cleanly separated from data and auth logic.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" data-tooltip="Object-oriented programming language">Java</span>
-                                <span class="skill-tag" data-tooltip="IDE for Android app development">Android Studio</span>
-                                <span class="skill-tag" data-tooltip="Build automation tool for Android development">Gradle</span>
-                                <span class="skill-tag" data-tooltip="Google's platform for mobile and web apps with backend services">Firebase</span>
-                                <span class="skill-tag" data-tooltip="PayPal SDK mocked with Mockito for payment integration testing">PayPal (Mockito)</span>
-                                <span class="skill-tag" data-tooltip="Google Maps API for location-based job search">Google Maps SDK</span>
-                                <span class="skill-tag" data-tooltip="DevOps platform for version control and CI/CD">GitLab</span>
-                                <span class="skill-tag" data-tooltip="UI/UX design and prototyping tool">Figma</span>
-                                <span class="skill-tag" data-tooltip="Iterative software development methodology">Agile</span>
-                                <span class="skill-tag" data-tooltip="Extreme Programming methodology emphasizing pair programming">XP</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                <img src="assets/images/logos/tic_tec_toe.png" alt="Tic Tec Toe Logo" width="54" height="54">
-                            </div>
-                            <div class="project-title">
-                                <h3>Tic Tec Toe</h3>
-                                <p class="project-affiliation">CSCI 2691 · Introductory Project · Junior Developer</p>
-                                <p class="project-period">Jan 2025 – Apr 2025</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">Cross-platform mobile application built for the academic research community, addressing the core challenges researchers face today: information overload from the sheer volume of publications, time constraints that make reading every relevant paper impossible, fragmented discovery across scattered databases and repositories, and a lack of meaningful tools for peer collaboration on existing platforms. Built as a team introductory project over a full semester using React Native and Expo Go, with Supabase providing the backend database, Node.js handling server-side logic, and GitLab managing version control and CI/CD. The platform provides researchers with a centralized, personalized feed of relevant papers tailored to their fields and interests, allowing them to interact with content and peers through likes, comments, and shares. A standout feature is audio playback of research papers, enabling on-the-go consumption for researchers juggling experiments, grant writing, and teaching. The interface was designed iteratively in Figma, with documentation and project proposals written in LaTeX. Project coordination tracked through Jira across the full development lifecycle. The platform's overarching goal is to foster meaningful academic collaboration, accelerate knowledge dissemination across disciplines, and become the go-to space for researchers to stay current, engage with peers, and make significant contributions to their fields.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" data-tooltip="Framework for building native apps using React">React Native</span>
-                                <span class="skill-tag" data-tooltip="Tool for running React Native apps during development">Expo Go</span>
-                                <span class="skill-tag" data-tooltip="JavaScript runtime for server-side applications">Node.js</span>
-                                <span class="skill-tag" data-tooltip="Open source Firebase alternative with PostgreSQL database">Supabase</span>
-                                <span class="skill-tag" data-tooltip="DevOps platform for version control and CI/CD">GitLab</span>
-                                <span class="skill-tag" data-tooltip="Project management tool for agile teams">Jira</span>
-                                <span class="skill-tag" data-tooltip="UI/UX design and prototyping tool">Figma</span>
-                                <span class="skill-tag" data-tooltip="Document preparation system for high-quality typesetting">LaTeX</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                    <a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" aria-label="SHARPRFI">
-                                        <img src="assets/images/logos/sharprfi.png" alt="SHARPRFI Logo" width="54" height="54">
-                                    </a>
-                            </div>
-                            <div class="project-title">
-                                <h3><a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" class="project-link">SHARPRFI</a></h3>
-                                <p class="project-affiliation">Personal Project</p>
-                                <p class="project-period">Apr 2026 – Present</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">An MLB first-inning betting research tool covering both sides of the market — NRFI (scoreless first inning) and YRFI (at least one run) — behind a single header toggle that flips probabilities, break-even odds, sort order, color semantics, and methodology copy between the two views. Originally launched as two mirrored sites (BET-NRFI and BET-YRFI) and later merged and upgraded to a dual-engine model. Engine one estimates expected first-inning runs (λ) per half-inning with a Poisson distribution over stabilized pitcher FIP, strikeout rate, Baseball Savant barrel rate, team and confirmed top-of-order OBP, park factor, and real-time Open-Meteo weather, with an early-season stabilization taper for small-sample noise. Engine two — a batter-level Monte Carlo simulation developed in collaboration with Francisco Nevarez — replays the first inning 10,000 times per game from each confirmed batter's shrinkage-adjusted wOBA, platoon splits against the opposing starter's handedness, and the starter's OBP-allowed, using a deterministic per-game seed. The headline probability is a 50/50 blend of the two engines, selected by a 1,344-game backtest in which the blend beat either engine alone on Brier score. Tapping any matchup expands a full breakdown showing both engines side by side, per-factor multiplier chips, projected batters with stabilized OBP and PA, venue and weather impact, and a bet-value calculator that converts user-entered American odds into implied probability, expected value per unit, and a color-banded verdict. The slate auto-refreshes every five minutes, groups games into Upcoming, In Progress, and Settled states, and renders a ranked desktop table with a card-based mobile layout; preferences persist to localStorage.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" data-tooltip="React framework with App Router for full-stack server and client components">Next.js</span>
-                                <span class="skill-tag" data-tooltip="JavaScript library for building component-driven user interfaces">React</span>
-                                <span class="skill-tag" data-tooltip="Utility-first CSS framework for rapid UI development">Tailwind CSS</span>
-                                <span class="skill-tag" data-tooltip="Statically typed superset of JavaScript for safer, more maintainable code">TypeScript</span>
-                                <span class="skill-tag" data-tooltip="Fast, client-side math rendering library used for the Poisson model formula blocks in the methodology view">KaTeX</span>
-                                <span class="skill-tag" data-tooltip="Batter-level first-inning simulation (10,000 seeded iterations per game) blended 50/50 with the Poisson engine, validated by a 1,344-game backtest">Monte Carlo</span>
-                                <span class="skill-tag" data-tooltip="Official MLB data source providing schedules, starting pitchers, team OBP, per-batter stats, and handedness data">MLB Stats API</span>
-                                <span class="skill-tag" data-tooltip="MLB's advanced stats platform providing pitcher barrel rate and hard-hit rate via season CSV">Baseball Savant</span>
-                                <span class="skill-tag" data-tooltip="Free weather API providing temperature, wind speed, and direction per venue for forecast and historical games">Open-Meteo</span>
-                                <span class="skill-tag" data-tooltip="Vercel's Redis-compatible key-value store used for caching model output and Savant data">Vercel KV</span>
-                                <span class="skill-tag" data-tooltip="Cloud platform for deploying and hosting Next.js applications">Vercel</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://sharprfi.vercel.app/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    SHARPRFI <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                <a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" aria-label="MLB BvP">
-                                    <img src="assets/images/logos/bvp-betting.png" alt="MLB BvP Logo" width="54" height="54">
-                                </a>
-                            </div>
-                            <div class="project-title">
-                                <h3><a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" class="project-link">MLB BvP</a></h3>
-                                <p class="project-affiliation">Personal Project</p>
-                                <p class="project-period">Apr 2026</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">MLB BvP Betting is a responsive research tool for the Player to Record a Hit market, built around historical career batter-vs-pitcher matchup data. For any selected slate date, the app loads the MLB schedule and probable starters, builds projected lineups from official lineup data when available or estimated active-roster order when not, and pulls career BvP splits for each batter facing the opposing starter. It filters the board to meaningful samples, computes AVG, OPS, and estimated hit probability, and ranks the strongest upcoming matchups by career batting average weighted for sample size using AVG × min(AB / 30, 1). The interface separates games into Upcoming, In Progress, and Settled states, refreshes silently in the background, and lets users scan the slate through sortable tables on desktop or card-based mobile views. A Top 4 Plays module highlights the best edges and automatically builds a Daily Double, an optional Secondary Double when four plays qualify, and a Smash Double when a pair also clears stronger OPS and hit-history thresholds. The app also includes data-quality safeguards to remove suspicious team-level aggregate lines occasionally returned by the MLB Stats API, exports filtered results as CSV on desktop, uses the viewer’s local browser time for game times, and is built with Next.js App Router, React 19, Tailwind CSS v4, and Vercel.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" data-tooltip="React framework with App Router for full-stack server and client components">Next.js</span>
-                                <span class="skill-tag" data-tooltip="JavaScript library for building component-driven user interfaces">React</span>
-                                <span class="skill-tag" data-tooltip="Utility-first CSS framework for rapid UI development">Tailwind CSS</span>
-                                <span class="skill-tag" data-tooltip="Statically typed superset of JavaScript for safer, more maintainable code">TypeScript</span>
-                                <span class="skill-tag" data-tooltip="Official MLB data source providing schedules, lineups, and career split statistics">MLB Stats API</span>
-                                <span class="skill-tag" data-tooltip="Vercel's Redis-compatible key-value store used for caching BvP split data and compiled game results">Vercel KV</span>
-                                <span class="skill-tag" data-tooltip="Cloud platform for deploying and hosting Next.js applications">Vercel</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                <a href="https://lucasreydman.github.io/fantasy-draft-lottery-simulator/" target="_blank" rel="noopener" aria-label="Fantasy Draft Lottery Simulator">
-                                    <img src="assets/images/logos/fantasy-draft-lottery-simulator.png" alt="Fantasy Draft Lottery Simulator Logo" width="54" height="54">
-                                </a>
-                            </div>
-                            <div class="project-title">
-                                <h3><a href="https://lucasreydman.github.io/fantasy-draft-lottery-simulator/" target="_blank" rel="noopener" class="project-link">Fantasy Draft Lottery Simulator</a></h3>
-                                <p class="project-affiliation">Personal Project</p>
-                                <p class="project-period">Mar 2026</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">Fully configurable fantasy sports draft lottery simulator built with pure vanilla HTML, CSS, and JavaScript, with no frameworks or build step, running entirely in the browser. A six-step setup wizard guides commissioners through league configuration: name, team count, team names, lottery structure, combination weights, and draft rounds. The lottery engine uses recursive state enumeration to compute exact analytical odds for every team at every pick position, handling any number of drawn picks and by-record assignments. Commissioners assign any number of lottery combinations to each team, and the odds table updates instantly to reflect the precise probabilities. Draft pick trades are tracked through a full pick ownership system, so every pick in every round can be reassigned to any team before the lottery runs. The reveal experience is a full-screen animated sequence: quick iterations burn through run 1 through N-1, then the final official result unfolds with a countdown timer, automatic pick reveals from the bottom up, a dynamic podium for the top lottery picks, and upset alerts when a team jumps or falls out of their expected seed range. Results and the complete multi-round draft order can be downloaded as text files. All data persists to localStorage, and league configurations can be reconfigured at any time via the setup wizard. Deployed to GitHub Pages.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" data-tooltip="HyperText Markup Language for structuring web content">HTML5</span>
-                                <span class="skill-tag" data-tooltip="Cascading Style Sheets for styling web pages">CSS3</span>
-                                <span class="skill-tag" data-tooltip="Programming language for interactive web functionality">JavaScript</span>
-                                <span class="skill-tag" data-tooltip="Browser API for storing data locally">Local Storage API</span>
-                                <span class="skill-tag" data-tooltip="Static site hosting and deployment via GitHub">GitHub Pages</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://lucasreydman.github.io/fantasy-draft-lottery-simulator/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <header class="project-header">
-                            <div class="project-logo">
-                                <a href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener" aria-label="wdinomf?">
-                                    <img src="assets/images/logos/wdinomf.png" alt="Final Grade Calculator Logo" width="54" height="54">
-                                </a>
-                            </div>
-                            <div class="project-title">
-                                <h3><a href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener" class="project-link">wdinomf?</a></h3>
-                                <p class="project-affiliation">Personal Project</p>
-                                <p class="project-period">Apr 2025</p>
-                            </div>
-                        </header>
-                        <div class="project-details">
-                            <p class="project-description">Vanilla web app that answers the question every student asks at the end of term: what do I need on my final? Enter your course name, final exam weight, and target grade, then log each completed assessment (midterms, quizzes, labs, assignments, essays, and more) with its weight and grade received. The app calculates your current overall grade, remaining course completion percentage, best possible final grade, and the exact score needed on your final to hit your goal. All entries auto-save to local storage so nothing is lost on page refresh, and the layout is fully responsive across desktop and mobile.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag" data-tooltip="HyperText Markup Language for structuring web content">HTML5</span>
-                                <span class="skill-tag" data-tooltip="Cascading Style Sheets for styling web pages">CSS3</span>
-                                <span class="skill-tag" data-tooltip="Programming language for interactive web functionality">JavaScript</span>
-                                <span class="skill-tag" data-tooltip="Browser API for storing data locally">Local Storage API</span>
-                                <span class="skill-tag" data-tooltip="Static site hosting and deployment via GitHub">GitHub Pages</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener" class="project-demo-btn">
-                                    Live Demo <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
+            <!-- QuickCash -->
+            <article class="scene scene-work">
+                <div class="work-meta">
+                    <img class="logo-mark" src="assets/images/logos/quickcash.png" alt="" width="32" height="32" loading="lazy">
+                    <span class="mono-label">Team project · CSCI 3130</span>
                 </div>
-            </div>
-        </section>
+                <h3 class="work-name">QuickCash</h3>
+                <div class="work-body">
+                    <p class="work-desc">An Android job marketplace connecting students with short-term work: role-based dashboards, location-aware search, applications, and <strong>PayPal payments</strong>. Built in a team of eight under strict <strong>test-driven development</strong>, refactored until static analysis had nothing left to say.</p>
+                    <div class="chips">
+                        <span class="chip"><strong>119 &rarr; 0</strong> SonarQube issues</span>
+                        <span class="chip"><strong>Team of 8</strong></span>
+                        <span class="chip"><strong>TDD</strong> + CI</span>
+                    </div>
+                    <p class="tags">Java / Android / Firebase / Gradle / Google Maps SDK</p>
+                </div>
+            </article>
 
-        <!-- ═══ CONTACT ═══════════════════════════════════════════════ -->
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2><span>Get in Touch</span></h2>
-                <p class="contact-tagline">Open to opportunities, collaborations, and conversations.</p>
-                <div class="contact-cards">
-                    <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener" class="contact-card">
-                        <i class="fab fa-linkedin" aria-hidden="true"></i>
-                        <span>linkedin.com/in/lucasreydman</span>
+            <!-- More work -->
+            <div class="scene more-work">
+                <h3>More work</h3>
+                <div class="index-list">
+                    <a class="index-row" href="https://bvp-betting.vercel.app/" target="_blank" rel="noopener">
+                        <span class="index-name">MLB BvP</span>
+                        <span class="index-desc">Batter-vs-pitcher hit research for every MLB slate</span>
+                        <span class="index-year">2026</span>
+                        <span class="index-go" aria-hidden="true">&#8599;</span>
                     </a>
-                    <button type="button" id="copy-email-btn" class="contact-card copy-email-btn" aria-label="Copy email address">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                        <span class="copy-email-text">lucasreydman@gmail.com</span>
-                        <span class="copy-email-confirm" aria-live="polite"></span>
-                    </button>
+                    <a class="index-row" href="https://lucasreydman.github.io/fantasy-draft-lottery-simulator/" target="_blank" rel="noopener">
+                        <span class="index-name">Fantasy Draft Lottery Simulator</span>
+                        <span class="index-desc">Exact-odds lottery engine with a cinematic reveal</span>
+                        <span class="index-year">2026</span>
+                        <span class="index-go" aria-hidden="true">&#8599;</span>
+                    </a>
+                    <a class="index-row" href="https://lucasreydman.github.io/what-do-i-need-on-my-final/" target="_blank" rel="noopener">
+                        <span class="index-name">wdinomf?</span>
+                        <span class="index-desc">The final-grade calculator every student opens in April</span>
+                        <span class="index-year">2025</span>
+                        <span class="index-go" aria-hidden="true">&#8599;</span>
+                    </a>
+                    <div class="index-row">
+                        <span class="index-name">Tic Tec Toe</span>
+                        <span class="index-desc">A research-paper feed with audio playback for academics</span>
+                        <span class="index-year">2025</span>
+                        <span class="index-go" aria-hidden="true"></span>
+                    </div>
                 </div>
+            </div>
 
-                <div class="contact-divider"><span>or</span></div>
+        </section>
+
+        <!-- ═══ EXPERIENCE ═════════════════════════════════════ -->
+        <section id="experience" class="scene">
+            <h2 class="scene-heading">Experience</h2>
+
+            <div class="exp-list">
+                <article class="exp-row">
+                    <div class="exp-head">
+                        <h3 class="exp-role">Analyst, Global Functions Technology</h3>
+                        <span class="incoming-badge">Incoming</span>
+                    </div>
+                    <span class="exp-period">May 2026</span>
+                    <p class="exp-detail"><span class="exp-company">RBC.</span> Details soon.</p>
+                </article>
+
+                <article class="exp-row">
+                    <div class="exp-head">
+                        <h3 class="exp-role">Analyst, Financial Shared Services</h3>
+                    </div>
+                    <span class="exp-period">May 2025 to Aug 2025</span>
+                    <p class="exp-detail"><span class="exp-company">RBC.</span> Owned the invoice lifecycle for RBC's U.S. business units across SAP and Pega workflows.</p>
+                </article>
+
+                <article class="exp-row">
+                    <div class="exp-head">
+                        <h3 class="exp-role">Digital Solutions Intern</h3>
+                    </div>
+                    <span class="exp-period">May 2024 to Aug 2024</span>
+                    <p class="exp-detail"><span class="exp-company">Torinit Technologies.</span> Design-thinking proofs of concept and data-backed digital strategy for client growth.</p>
+                </article>
+
+                <article class="exp-row">
+                    <div class="exp-head">
+                        <h3 class="exp-role">Founder &amp; Head of Operations</h3>
+                    </div>
+                    <span class="exp-period">Sep 2021 to Aug 2023</span>
+                    <p class="exp-detail"><span class="exp-company">Panther.</span> Built a student-events company to $40K+ in revenue, leading sales, marketing, and operations.</p>
+                </article>
+
+                <article class="exp-row">
+                    <div class="exp-head">
+                        <h3 class="exp-role">Research &amp; Development Intern</h3>
+                    </div>
+                    <span class="exp-period">Jun 2023 to Aug 2023</span>
+                    <p class="exp-detail"><span class="exp-company">Mirabella Development.</span> Market research and cross-functional coordination for a Toronto real-estate developer.</p>
+                </article>
+            </div>
+
+            <p class="exp-earlier">Earlier: co-founded S&amp;L Sports Camp (<span class="mono-stat">$15K+</span> revenue), fine dining with Scale Hospitality, retail at Over the Rainbow Ltd.</p>
+        </section>
+
+        <!-- ═══ ABOUT ══════════════════════════════════════════ -->
+        <section id="about" class="scene">
+            <div class="about-grid">
+                <div class="about-copy">
+                    <h2 class="scene-heading">Builder first, developer second</h2>
+                    <p>I'm an Applied Computer Science student at <strong>Dalhousie</strong> with one foot in the Faculty of Management. I like building software, and I like knowing why it should exist. Before I wrote much code I was running businesses: a student-events company that cleared $40K, a sports camp before that. That instinct, ship something real and make it better, is still how I build.</p>
+                    <p>Most of my work now happens alongside AI. I run agentic workflows with <strong>Claude Code</strong> daily and care about the craft of it: prompt design, tool use, knowing when to trust the machine and when not to. In May 2026 I join <strong>RBC's Global Functions Technology</strong> team.</p>
+                </div>
+                <figure class="about-photo">
+                    <picture>
+                        <source srcset="assets/images/hero/hero_transparent.webp" type="image/webp">
+                        <img src="assets/images/hero/hero_transparent.png" alt="Lucas Reydman" width="300" height="300" loading="lazy">
+                    </picture>
+                    <figcaption>Halifax / Toronto</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- ═══ CREDENTIALS ════════════════════════════════════ -->
+        <section id="credentials" class="scene">
+            <h2 class="scene-heading">Education &amp; honors</h2>
+
+            <div class="cred-main">
+                <div class="cred-school">
+                    <span class="mono-label">Dalhousie University · 2023 to 2027</span>
+                    <h3 class="cred-degree">Applied Computer Science</h3>
+                    <p class="cred-inst">Bachelor's degree with a Certificate in Managing Data and Information.</p>
+                </div>
+                <div class="cred-stats">
+                    <div class="big-stat">
+                        <span class="big-stat-num">3.91</span>
+                        <span class="mono-label">Cumulative GPA</span>
+                    </div>
+                    <div class="big-stat">
+                        <span class="big-stat-num"><em>&times;</em>6</span>
+                        <span class="mono-label">Dean's List</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cred-lines">
+                <div class="cred-line">
+                    <span class="cred-what">Community Leadership Scholarship</span>
+                    <span class="cred-where">Dalhousie University</span>
+                    <span class="cred-mark">2023</span>
+                </div>
+                <div class="cred-line">
+                    <span class="cred-what">Ontario Scholar</span>
+                    <span class="cred-where">Ontario Ministry of Education</span>
+                    <span class="cred-mark">2023</span>
+                </div>
+                <div class="cred-line">
+                    <span class="cred-what">Lawrence Park Collegiate Institute</span>
+                    <span class="cred-where">Honor Roll, Bilingual Studies</span>
+                    <span class="cred-mark">94% avg</span>
+                </div>
+                <div class="cred-line">
+                    <span class="cred-what">Certified</span>
+                    <span class="cred-where"><a href="https://www.udemy.com/certificate/UC-2674b903-f212-4f1a-95d0-1a44c21bb7a4/" target="_blank" rel="noopener">Agile &amp; Scrum</a> and <a href="https://learn.deeplearning.ai/accomplishments/19b773e3-6ff0-40f2-8915-dbe1a045f6b0?usp=sharing" target="_blank" rel="noopener">Prompt Engineering for Developers</a></span>
+                    <span class="cred-mark">2024 / 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CAPABILITIES ═══════════════════════════════════ -->
+        <section id="capabilities" class="scene">
+            <h2 class="scene-heading">What I work with</h2>
+
+            <div class="cap-rows">
+                <div class="cap-row">
+                    <h3 class="cap-name">Build</h3>
+                    <ul class="cap-items">
+                        <li>TypeScript, React &amp; Next.js</li>
+                        <li>Java &amp; Android</li>
+                        <li>Node.js &amp; REST APIs</li>
+                        <li>SQL &amp; Firebase</li>
+                        <li>GSAP &amp; modern CSS</li>
+                        <li>Git, GitLab &amp; CI/CD</li>
+                    </ul>
+                </div>
+                <div class="cap-row">
+                    <h3 class="cap-name"><em>AI</em></h3>
+                    <ul class="cap-items">
+                        <li>Claude Code &amp; agentic workflows</li>
+                        <li>Claude API &amp; Anthropic SDK</li>
+                        <li>Prompt engineering</li>
+                        <li>AI code review &amp; debugging</li>
+                        <li>RAG &amp; vector search</li>
+                        <li>LLM evaluation</li>
+                    </ul>
+                </div>
+                <div class="cap-row">
+                    <h3 class="cap-name">Lead</h3>
+                    <ul class="cap-items">
+                        <li>Entrepreneurship &amp; venture building</li>
+                        <li>Team leadership</li>
+                        <li>Agile &amp; Scrum</li>
+                        <li>Strategic planning</li>
+                        <li>Market &amp; competitive research</li>
+                        <li>Cross-functional collaboration</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CONTACT ════════════════════════════════════════ -->
+        <section id="contact" class="scene contact">
+            <h2 class="contact-heading">Let's talk<em>.</em></h2>
+            <p class="contact-sub">Open to opportunities, collaborations, and good conversations. I read everything that comes through.</p>
+
+            <div class="contact-grid">
+                <div class="contact-channels">
+                    <button type="button" id="copy-email-btn" class="copy-email" aria-label="Copy email address to clipboard">
+                        <span class="copy-email-text">lucasreydman@gmail.com</span>
+                        <span class="copy-hint" aria-hidden="true">Copy</span>
+                        <span class="copy-confirm" aria-live="polite"></span>
+                    </button>
+                    <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener" class="arrow-link">LinkedIn <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                    <a href="https://github.com/lucasreydman" target="_blank" rel="noopener" class="arrow-link">GitHub <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                </div>
 
                 <form id="contact-form" class="contact-form" novalidate>
-                    <div class="contact-form-row">
-                        <label class="sr-only" for="contact-name">Name</label>
-                        <input type="text" id="contact-name" name="name" placeholder="Your name" required autocomplete="name">
-                        <label class="sr-only" for="contact-email">Email</label>
-                        <input type="email" id="contact-email" name="email" placeholder="your@email.com" required autocomplete="email">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="contact-name">Name</label>
+                            <input type="text" id="contact-name" name="name" placeholder="Your name" required autocomplete="name">
+                        </div>
+                        <div class="form-field">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" name="email" placeholder="your@email.com" required autocomplete="email" spellcheck="false">
+                        </div>
                     </div>
-                    <label class="sr-only" for="contact-message">Message</label>
-                    <textarea id="contact-message" name="message" placeholder="What's on your mind?" rows="5" required></textarea>
-                    <button type="submit" class="contact-submit-btn">
-                        <span class="btn-text">Send Message</span>
-                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    <div class="form-field">
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" placeholder="What's on your mind?" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-solid contact-submit-btn">
+                        <span class="btn-text">Send message</span>
                     </button>
                     <p class="contact-form-status" aria-live="polite"></p>
                 </form>
-
             </div>
         </section>
 
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p class="hero-cv-note" aria-label="curriculum vitae — Latin for course of life">
-                <span class="cv-word">curriculum vitae</span>
-                <span class="cv-sep">·</span>
-                <span class="cv-phonetic">kʌrɪkyʊləm ˈviːtaɪ</span>
-                <span class="cv-sep">·</span>
-                <em>n. "course of life"</em>
-            </p>
-            <p>&copy; 2026 Lucas Reydman. All rights reserved.</p>
+        <p class="cv-note"><span lang="la">curriculum vitae</span> · <em>n. &ldquo;course of life&rdquo;</em></p>
+        <div class="footer-meta">
+            <span>&copy; 2026 Lucas Reydman</span>
+            <a href="https://github.com/lucasreydman" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/lucasreydman" target="_blank" rel="noopener">LinkedIn</a>
         </div>
     </footer>
-
-    <!-- Fixed UI -->
-    <button type="button" id="scroll-top" class="scroll-to-top" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up" aria-hidden="true"></i>
-    </button>
 
     <!-- Vercel Analytics & Speed Insights -->
     <script defer src="/_vercel/insights/script.js"></script>
@@ -900,11 +438,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
 
-    <!-- Main script -->
-    <script src="js/main.js?v=7" defer></script>
-
-    <!-- Vercel Analytics -->
-    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Main modules -->
+    <script type="module" src="js/ui.js?v=1"></script>
 
 </body>
 </html>

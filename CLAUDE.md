@@ -1,107 +1,114 @@
 # Lucas Reydman — Portfolio (cv)
 
-A premium animated personal portfolio website. Dark-first, single-page, no build step — pure HTML/CSS/JS with CDN dependencies.
+An immersive, dark-only, single-page portfolio ("Ink & Ember" design). No build step — pure HTML/CSS/JS with CDN dependencies. A persistent WebGL ink/smoke shader lives behind the whole page and evolves with scroll.
 
 ## Tech Stack
 
-- **Vanilla HTML5 / CSS3 / JS** — no framework, no bundler
+- **Vanilla HTML5 / CSS3 / JS (ES modules)** — no framework, no bundler
+- **OGL 1.0.11** — WebGL atmosphere shader (jsDelivr `+esm` single-bundle import)
 - **GSAP 3.12.5 + ScrollTrigger** — scroll choreography and hero entrance
 - **Lenis 1.1.20** — smooth scroll, wired into GSAP ticker
-- **Font Awesome 6** — icons (CDN)
-- **Google Fonts** — Syne (headings) + Inter (body)
+- **Fontshare** — Clash Display (display) + Satoshi (body); **Google Fonts** — JetBrains Mono (data)
 
 No `package.json` (gitignored). No build step. Edit files directly.
 
 ## File Map
 
 ```
-index.html          Single-page portfolio — all sections, meta/OG tags
+index.html          Single page — 7 scenes, meta/OG tags, JSON-LD
 css/
-  main.css          @import aggregator (loads the four modules below in order)
-  base.css          CSS variables, reset, typography, grain overlay, skip-link, reduced-motion
-  layout.css        Navbar, hamburger, sections grid, footer, scroll progress bar
-  components.css    Cards, buttons, custom cursor, spotlight, scroll-to-top
-  sections.css      Hero, timeline, education, honors, skills carousel, projects, contact
+  main.css          @import aggregator (kept for tooling; index.html links the
+                    four modules below directly in parallel for performance)
+  base.css          Tokens, reset, typography, grain, atmosphere canvas + no-webgl
+                    fallback, skip-link, reduced-motion
+  layout.css        Navbar, mobile overlay menu, scene shells, footer, progress bar
+  components.css    Buttons, chips, tags, index rows, copy-email, contact form
+  sections.css      Hero, work scenes, experience list, about, credentials,
+                    capabilities, contact
 js/
-  main.js           All runtime logic — theme, Lenis, GSAP, typewriter,
-                    speech bubble, cursor, skills carousel, details animation
-assets/
-  favicon/          Favicons + site.webmanifest (PWA)
-  images/hero/      hero_transparent.png
-  images/logos/     Company/school/project logos (PNG, 52×52 display)
-  resume.pdf        Downloadable resume
-.github/workflows/
-  static.yml        GitHub Actions — auto-deploy to GitHub Pages on push to main
+  ui.js             Entry module — wires atmosphere (via non-blocking proxy),
+                    scroll, overlay menu, copy email, contact form (/api/contact)
+  atmosphere.js     WebGL scene — initAtmosphere(canvas) -> { setScrollProgress,
+                    setPointer, destroy } | null (null -> html.no-webgl gradient)
+  scroll.js         Lenis + all GSAP choreography, nav state, progress bar
+api/contact.js      Serverless contact-form handler (Vercel)
+assets/             resume.pdf, favicons, images/logos, images/hero
+docs/superpowers/   Design spec + implementation plan for the redesign
 ```
 
-## Design System
+Script order in `index.html` matters: GSAP/ScrollTrigger/Lenis load as classic `defer` scripts **before** the `type="module"` ui.js — the HTML spec guarantees document-order execution, so `window.gsap` is safe inside modules.
+
+## Design System — "Ink & Ember"
 
 | Token | Value |
 |---|---|
-| `--bg` | `#07070f` |
-| `--accent` | `#6d5aed` |
-| `--accent-2` | `#a78bfa` |
-| `--accent-3` | `#38bdf8` |
-| `--text` | `#f0f0ff` |
-| Heading | Syne 700/800 |
-| Body | Inter 400/500/600 |
+| `--bg` | `#060608` (ink) |
+| `--text` | `#eceae5` (warm off-white) |
+| `--ember` | `#ff4d00` (single accent, used sparingly) |
+| `--steel` | `#8b9bb4` (secondary tone) |
+| Display | Clash Display 600/700 |
+| Body | Satoshi 400/500 |
+| Data/labels | JetBrains Mono 400/500 (all dates, stats, tags) |
 
-Light mode overrides all tokens via `[data-theme="light"]` on `<html>`.
+Dark only — there is **no light theme and no theme toggle**. Radius 0 everywhere (sharp editorial system). Mono type for numbers/labels is the visual signature.
 
-## Key Behaviors in main.js
+## Scenes (in order)
 
-- **Theme** — persisted in `localStorage`, flash-prevention inline script in `<head>`
-- **Lenis + GSAP** — Lenis RAF wired into `gsap.ticker`; `ScrollTrigger.scroller` set to Lenis instance
-- **Typewriter** — cycles 5 role phrases with typing/deleting animation
-- **Skills carousel** — auto-advances every 3.6s, progress bar dots, pauses on hover; dots are `<button>` elements with `aria-pressed` synced in `updateDots()`
-- **Custom cursor** — dot + lagging ring; disabled at `< 768px`
-- **Speech bubble** — hero photo hover, desktop only (`< 768px` hidden)
-- **Graceful fallback** — IntersectionObserver used if GSAP/Lenis CDN fails
-
-## Accessibility
-
-- All interactive elements use `:focus-visible` rings — never `outline: none` without a replacement
-- Touch targets are ≥ 44×44px (nav controls, fixed buttons)
-- Skip navigation link (`<a class="skip-link" href="#main">`) at top of `<body>`; styled in `base.css`
-- Skills carousel dots are `<button>` elements with `aria-label` and `aria-pressed`
-- `prefers-reduced-motion` respected — disables all animations including grain overlay
-
-## Sections
-
-| Section | Notes |
+| Scene | Notes |
 |---|---|
-| Hero | GSAP entrance sequence; `hero-cv-note` fades in last (Latin definition of CV) |
-| About | 4 paragraphs, staggered GSAP reveal (`stagger: 0.15`) |
-| Experience | 7-item alternating timeline; slide-in from left/right |
-| Education | Expandable `<details>` with smooth height animation in `initDetailsAnimation()` |
-| Honors | 6 cards in auto-fit grid |
-| Skills | 3D carousel, 4 cards, swipe/click/dot navigation |
-| Projects | Full-width stacked cards with skill tags (tooltips via `data-tooltip`) |
-| Contact | Centered pill-style link cards |
+| Hero | Name at viewport scale (solid line 1, stroked line 2), mono status line, one identity sentence, resume CTA |
+| Selected work | SHARPRFI, Pride STEM Canada, QuickCash as ~86vh scenes (2-sentence copy + mono stat chips), then "More work" index rows |
+| Experience | Big-type list: 5 featured roles + one-line "Earlier" footnote |
+| About | First-person copy + duotone photo (grayscale, colors on hover) |
+| Credentials | Education + honors merged; GPA 3.91 and Dean's List ×6 as big stats |
+| Capabilities | Build / AI / Lead rows, 6 curated items each |
+| Contact | "Let's talk." + copy-email button + LinkedIn/GitHub + form |
 
-## Responsiveness Breakpoints
+## Key Behaviors
+
+- **Atmosphere** — `atmosphere.js` renders a domain-warped FBM ink shader; scroll progress shifts palette steel-blue → ember (checkpoints in the fragment shader); pointer velocity injects turbulence. DPR capped at 1.5, reduced resolution < 768px, pauses when tab hidden.
+- **Fallback ladder** — (1) no WebGL/CDN failure → `html.no-webgl` static CSS gradients; (2) `prefers-reduced-motion` → still shader frame, no GSAP animation; (3) mobile → cheaper shader; (4) no JS → semantic readable page. Content is never hidden by CSS — GSAP sets initial states, so a dead CDN degrades gracefully.
+- **ui.js proxy** — the scroll module receives a forwarding proxy for the atmosphere so OGL loading never blocks choreography or first paint.
+- **Contact form** — posts JSON to `/api/contact` (unchanged serverless handler).
+
+## Accessibility (Lighthouse a11y = 1.0 — keep it there)
+
+- `:focus-visible` rings everywhere; never remove an outline without a replacement
+- ≥ 44px touch targets; skip link; DOM order = visual order
+- Overlay menu: `aria-expanded`, Esc closes, focus restored
+- `aria-live` on form status and copy-email confirmation
+- `prefers-reduced-motion` disables shader animation, pinning, and grain
+
+## Copy rules (from design skills — enforced)
+
+- **Zero em-dashes anywhere in visible copy** (use commas, colons, periods)
+- Max one `·` separator per line; no decorative status dots
+- No scroll-cue labels, no section-number eyebrows, minimal mono eyebrows (≤ 3 per page)
+- Numbers/stats are real (10,000 sims, 1,344-game backtest, 119→0 SonarQube, $40K+)
+
+## Responsiveness
 
 | Breakpoint | Change |
 |---|---|
-| `< 1200px` | Reduced container padding |
-| `< 1100px` | Hero image shrinks, speech bubble repositioned above image |
-| `< 900px` | Timeline collapses to single column |
-| `< 768px` | Vertical hero stack, hamburger nav, native cursor, speech bubble hidden |
-| `< 480px` | Further font/padding reductions |
+| `< 1100px` | About grid stacks |
+| `< 900px` | Credentials/capabilities/contact grids stack; experience period moves above role |
+| `< 768px` | Overlay menu; cheaper shader; alt work scenes lose right alignment at 600px |
+| `< 600px` | Capabilities single column, form rows stack |
 
 ## Deployment
 
-Vercel — custom domain **lucasreydman.xyz**. Push to `main` triggers a production deployment automatically via Vercel's GitHub integration. Branch pushes and PRs get preview deployments. Config is in `vercel.json`. The `.github/workflows/static.yml` is a leftover from the old GitHub Pages setup and can be ignored or deleted.
+Vercel — custom domain **lucasreydman.xyz**. Push to `main` = production deploy; branches/PRs get previews. Config in `vercel.json` (also sets the resume `Content-Disposition` filename). `.github/workflows/static.yml` is a dead leftover from GitHub Pages.
 
 ## Common Tasks
 
-- **Add/update content** — edit `index.html` directly (all sections are inline)
-- **Style changes** — edit the relevant CSS module (`sections.css` for section-specific, `components.css` for reusable UI)
-- **Animation changes** — edit `js/main.js`; GSAP timelines are self-contained functions
-- **Add a logo** — drop PNG into `assets/images/logos/` and reference it in `index.html`
-- **Update resume** — replace `assets/resume.pdf`
-- **Add a nav link** — add `<li><a href="#id">Label</a></li>` to `.nav-links` in `index.html`
+- **Content** — edit `index.html` (all copy inline; respect the copy rules above)
+- **Styling** — edit the relevant CSS module; bump the `?v=` query on the four CSS links in `index.html`
+- **Animation** — `js/scroll.js` (choreography) or `js/atmosphere.js` (shader)
+- **Shader palette** — the scroll checkpoints live in the fragment shader in `atmosphere.js`
+- **Resume** — replace `assets/resume.pdf`
 
 ## Things That Don't Exist (don't add them back)
 
-- No `.github-link` — the fixed GitHub source button was intentionally removed; CSS and JS are already clean of it
+- No light theme / theme toggle, no typewriter, no speech bubble, no skills carousel,
+  no custom cursor, no scroll-to-top button, no Font Awesome, no `.github-link`,
+  no card-grid layouts — these were all removed intentionally in the 2026-07 redesign
